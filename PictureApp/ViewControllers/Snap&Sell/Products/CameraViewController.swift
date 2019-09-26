@@ -1,23 +1,34 @@
 //
 //  CameraViewController.swift
-//  PictureApp
+//  SnapToSell
 //
-//  Created by Apple on 6/26/19.
+//  Created by Apple on 8/24/19.
 //  Copyright © 2019 Apple. All rights reserved.
 //
 
+
 import UIKit
 import AVFoundation
+import AssetsLibrary
+import ImageIO
+import CoreImage
+import Photos
+import MobileCoreServices
 
 
-class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGestureRecognizerDelegate {
+class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGestureRecognizerDelegate  {
     
-//    @IBOutlet weak var previewCamera: UIView!
+    //    @IBOutlet weak var previewCamera: UIView!
     @IBOutlet weak var captureBtn: UIButton!
     @IBOutlet var backBtn: UIBarButtonItem!
     @IBOutlet weak var gridView: GridView!
     
     @IBOutlet weak var previewCamera: UIImageView!
+    
+    @IBOutlet weak var photoImg: UIImageView!
+    
+    //    @IBOutlet weak var photoBtn: UIButton!
+    
     
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
@@ -28,16 +39,39 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
     let minimumZoom: CGFloat = 1.0
     let maximumZoom: CGFloat = 3.0
     var lastZoomFactor: CGFloat = 1.0
-    var homeViewController = HomeViewController()
+    var productDetailViewController = ProductDetailViewController()
+    var pendingProductDetailViewController = PendingProductDetailViewController()
+    
+    var contactDetailsViewController = ContactDetailsViewController()
+//    var dekitiewController = De_KittingViewController()
+    var orientationValue = 1
+    var orientaionArray = [Int]()
+    var type = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print(self.getCaptureResolution())
+        //        print(self.getCaptureResolution())
+        self.photoImg.isHidden = true
         
-        let a = self.navigationController?.viewControllers[0] as! HomeViewController
-        homeViewController = a
+        if self.type == "pending"{
+            let a = self.navigationController?.viewControllers[1] as! PendingProductDetailViewController
+            pendingProductDetailViewController = a
+            
+        }else if self.type == "recycle"{
+            let a = self.navigationController?.viewControllers[0] as! ContactDetailsViewController
+            contactDetailsViewController = a
+            
+        }else{
+            let a = self.navigationController?.viewControllers[0] as! ProductDetailViewController
+            productDetailViewController = a
+            
+            
+        }
+
+       
         self.navigationItem.leftBarButtonItem = self.backBtn
-        self.gridView.isHidden = true
+        //        self.gridView.isHidden = true
     }
     
     
@@ -46,9 +80,9 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         
         
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .medium
+        captureSession.sessionPreset = .high
         
-        self.captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        self.captureSession.sessionPreset = AVCaptureSession.Preset.high
         
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
             else {
@@ -84,25 +118,76 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //        AppUtility.lockOrientation(.portrait)
+        // Or to rotate and lock
+        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        
+    }
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
+//        AppUtility.lockOrientation(.all)
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setCameraOrientation()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if UIApplication.shared.statusBarOrientation.isLandscape {
+            // activate landscape changes
+            self.orientationValue = 1
+        } else {
+            // activate portrait changes
+            self.orientationValue = 0
+        }
+        setCameraOrientation()
+    }
+    
+    @objc func setCameraOrientation() {
+        if let connection =  self.videoPreviewLayer?.connection  {
+            let currentDevice: UIDevice = UIDevice.current
+            let orientation: UIDeviceOrientation = currentDevice.orientation
+            let previewLayerConnection : AVCaptureConnection = connection
+            if previewLayerConnection.isVideoOrientationSupported {
+                let o: AVCaptureVideoOrientation
+                switch (orientation) {
+                case .portrait: o = .portrait
+                case .landscapeRight: o = .landscapeLeft
+                case .landscapeLeft: o = .landscapeRight
+                case .portraitUpsideDown: o = .portraitUpsideDown
+                default: o = .portrait
+                }
+                print(o)
+                previewLayerConnection.videoOrientation = o
+                videoPreviewLayer!.frame = self.view.bounds
+            }
+        }
+    }
     
     private func getCaptureResolution() -> CGSize {
         
         var resolution = CGSize(width: 0, height: 0)
-         let device = AVCaptureDevice.default(for: AVMediaType.video)
+        let device = AVCaptureDevice.default(for: AVMediaType.video)
         
         
-   
+        
         if let formatDescription = device?.activeFormat.formatDescription {
             let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
             resolution = CGSize(width: CGFloat(dimensions.width), height: CGFloat(dimensions.height))
-
-                resolution = CGSize(width: resolution.height, height: resolution.width)
-
+            
+            resolution = CGSize(width: resolution.height, height: resolution.width)
+            
         }
         
         return resolution
@@ -157,27 +242,27 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
             }
             
             
-                do {
-                    try device.lockForConfiguration()
-                    
-                    device.focusPointOfInterest = focusPoint
-                    //device.focusMode = .ContinuousAutoFocus
-                    device.focusMode = .autoFocus
-                    //device.focusMode = .Locked
-                    device.exposurePointOfInterest = focusPoint
-                    device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
-                    device.unlockForConfiguration()
-                }
-                catch {
-                    // just ignore
-                }
+            do {
+                try device.lockForConfiguration()
+                
+                device.focusPointOfInterest = focusPoint
+                //device.focusMode = .ContinuousAutoFocus
+                device.focusMode = .autoFocus
+                //device.focusMode = .Locked
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                device.unlockForConfiguration()
+            }
+            catch {
+                // just ignore
+            }
             
         }
-
+        
     }
     
     @IBAction func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
-
+        
         guard let device = AVCaptureDevice.default(for: AVMediaType.video)
             else {
                 print("Unable to access back camera!")
@@ -226,41 +311,89 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
     @IBAction func captureImage(_ sender: Any) {
         
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+//        settings.flashMode = .auto
+        
+        
         stillImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
-
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
+        //        photo.metadata = ["orientation" : "landscape"]
         guard let imageData = photo.fileDataRepresentation()
             else { return }
         
-        let image = UIImage(data: imageData)
-        self.img.append(image!)
         
+        self.orientaionArray.append(self.orientationValue)
         
-        if homeViewController.pictures.count < 12{
+        var image = UIImage(data: imageData)
+        
+        image = image?.fixOrientation()
+        image = image?.fixedOrientation()
+        
+        self.photoImg.isHidden = false
+        self.photoImg.image = image
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
             
-//            for im in img {
-                homeViewController.pictures.append(image!)
-//            }
+            self.photoImg.isHidden = true
             
-        }else{
-            self.navigationController?.popToViewController(homeViewController, animated: true)
-//            self.navigationController!.popToRootViewController(animated: true)
         }
+        
+        if type == "pending"{
+            pendingProductDetailViewController.images.append(image!)
+        }else if type == "recycle" {
+            contactDetailsViewController.images.append(image!)
+            if self.contactDetailsViewController.images.count >= 10{
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        }else {
+             productDetailViewController.images.append(image!)
+            if self.productDetailViewController.images.count >= 20{
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        }
+        
         
     }
     
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func saveToPhotoAlbumWithMetadata(_ image: CGImage, filePath: String) {
+        
+        let cfPath = CFURLCreateWithFileSystemPath(nil, filePath as CFString, CFURLPathStyle.cfurlposixPathStyle, false)
+        
+        // You can change your exif type here.
+        let destination = CGImageDestinationCreateWithURL(cfPath!, kUTTypeJPEG, 1, nil)
+        
+        // Place your metadata here.
+        // Keep in mind that metadata follows a standard. You can not use custom property names here.
+        let tiffProperties = [
+            kCGImagePropertyTIFFMake as String: "Your camera vendor",
+            kCGImagePropertyTIFFModel as String: "Your camera model"
+            ] as CFDictionary
+        
+        let properties = [
+            kCGImagePropertyExifDictionary as String: tiffProperties
+            ] as CFDictionary
+        
+        CGImageDestinationAddImage(destination!, image, properties)
+        CGImageDestinationFinalize(destination!)
+        
+        try? PHPhotoLibrary.shared().performChangesAndWait {
+            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
+        }
+    }
     
     @IBAction func backBtn(_ sender: Any) {
-//        let a = self.navigationController?.viewControllers[0] as! HomeViewController
-//        for im in img {
-//            a.pictures.append(im)
-//        }
         
-        self.navigationController!.popToRootViewController(animated: true)
-        
+            self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -277,6 +410,8 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
             try device.lockForConfiguration()
             if device.torchMode == .on{
                 device.torchMode = .off
+//                device.torchMode = .auto
+                
             }else{
                 device.torchMode = .on
             }
