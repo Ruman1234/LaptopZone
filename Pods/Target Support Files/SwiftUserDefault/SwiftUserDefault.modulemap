@@ -1,6 +1,0 @@
-framework module SwiftUserDefault {
-  umbrella header "SwiftUserDefault-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Barcodes" representedClassName="Barcodes" syncable="YES" codeGenerationType="class">
+        <attribute name="barcode" optional="YES" attributeType="Transformable" customClassName="BarcodeDBModel" syncable="YES"/>
+    </entity>
+    <entity name="Conditions" representedClassName="Conditions" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
+        <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pictures" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Barcodes" positionX="-63" positionY="0" width="128" height="60"/>
+        <element name="Conditions" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Login" positionX="-63" positionY="0" width="128" height="75"/>
+        <element name="History" positionX="-63" positionY="9" width="128" height="120"/>
+    </elements>
+</model>

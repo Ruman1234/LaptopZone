@@ -1,6 +1,0 @@
-framework module Pods_SnapToSellTests {
-  umbrella header "Pods-SnapToSellTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
