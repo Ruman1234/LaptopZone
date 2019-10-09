@@ -42,12 +42,18 @@ class CodeVerificationViewController: UIViewController {
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.OtpVerify(email: email, otp: self.number.text!, success: { (res) in
             SVProgressHUD.dismiss()
-            let main = self.storyboard?.instantiateViewController(identifier: "ResetYourPasswordViewController") as ResetYourPasswordViewController
             
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ResetYourPasswordViewController") as! ResetYourPasswordViewController
+            main.otp = self.number.text!
+            main.email = self.email
             self.navigationController?.pushViewController(main, animated: true)
+
+            
+            
+            
         }) { (err) in
             SVProgressHUD.dismiss()
-            Utilites.ShowAlert(title: "Error!!!", message: "Enter a vail OTP", view: self)
+            Utilites.ShowAlert(title: "Error!!!", message: "Enter a vaild OTP", view: self)
         }
         
     }

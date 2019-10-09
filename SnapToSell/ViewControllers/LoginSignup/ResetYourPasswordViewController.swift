@@ -40,21 +40,34 @@ class ResetYourPasswordViewController: UIViewController {
            var flag = true
            if self.newPassword.text == "" {
                flag = false
-               self.showToast(message: "Kindly enter Password")
+//               self.showToast(message: "Kindly enter Password")
+            Utilites.ShowAlert(title: "Error!!!", message: "Kindly enter Password", view: self)
            }else if self.confimPassword.text == "" {
                flag = false
-               self.showToast(message: "Kindly enter confirm Password")
-           }else if self.confimPassword.text == self.confimPassword.text {
+//               self.showToast(message: "Kindly enter confirm Password")
+             Utilites.ShowAlert(title: "Error!!!", message: "Kindly enter confirm Password", view: self)
+           }else if self.newPassword.text!.count < 6{
+//                self.showToast(message: "Password should be six digit")
+             Utilites.ShowAlert(title: "Error!!!", message: "Password should be six digit", view: self)
                flag = false
-               self.showToast(message: "Kindly confirm Password")
+
+           }else if self.confimPassword.text != self.newPassword.text {
+               flag = false
+//               self.showToast(message: "Password and confirm password should be same")
+                Utilites.ShowAlert(title: "Error!!!", message: "Password and confirm password should be same", view: self)
            }
            return flag
     }
-
+    
     func reset()  {
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.ResetPasswordWithOTP(Email: self.email, password: self.newPassword.text!, otp: otp, success: { (res) in
             SVProgressHUD.dismiss()
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            self.navigationController?.pushViewController(main, animated: true)
+
+            
         }) { (err) in
             SVProgressHUD.dismiss()
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)

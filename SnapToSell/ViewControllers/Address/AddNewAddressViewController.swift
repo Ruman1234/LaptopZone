@@ -41,7 +41,7 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.addBG()
         self.hideKeyboardWhenTappedAround()
         
         self.locationManager.requestAlwaysAuthorization()

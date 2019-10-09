@@ -10,6 +10,8 @@ import UIKit
 import SkyFloatingLabelTextField
 import SVProgressHUD
 import GoogleSignIn
+import SocketIO
+
 
 
 class eee: UIViewController {
@@ -18,7 +20,7 @@ class eee: UIViewController {
     }
 }
 
-class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
+class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthroughViewControllerDelegate{
     
     
     @IBOutlet weak var userName: UITextField!
@@ -46,10 +48,25 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
     @IBOutlet weak var teitter: UIButton!
     
     let userdefaults = UserDefaults.standard
-   
+    let manager = SocketManager(socketURL: URL(string: "http://71.78.236.22:6001")!, config: [.log(true), .compress])
+          
+    
+    var socket : SocketIOClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+//        UIApplication.shared.statusBarView?.backgroundColor = UIColor.red
+        
+
+        if !userdefaults.bool(forKey: "walkthroughPresented") {
+           
+           showWalkthrough()
+           
+           userdefaults.set(true, forKey: "walkthroughPresented")
+           userdefaults.synchronize()
+        }
         
         tickImg.layer.cornerRadius = 2
         rememberMe.layer.borderWidth = 0.5
@@ -65,31 +82,86 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
         userName.setIcon(UIImage(named: "emalImg")!)
         password.setIcon(UIImage(named: "passwordimg")!)
         
-        if self.userdefaults.bool(forKey: "islogin") {
+        if self.userdefaults.bool(forKey: "islogin") &&  CustomUserDefaults.Token.value! != "" {
             let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
             
             self.navigationController?.pushViewController(main, animated: true)
         }
+        
+        DispatchQueue.main.async {
+            GIDSignIn.sharedInstance().delegate = self
+            GIDSignIn.sharedInstance().uiDelegate = self
+            self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+        }
        
+
+        
     }
 
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.navigationController?.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
         self.hideKeyboardWhenTappedAround()
         
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
     }
+//
+//    override var preferredStatusBarStyle: UIStatusBarStyle{
+//           .lightContent
+//    }
+//
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         self.signinBtn.setGradient()
     }
+    
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+           return UIStatusBarStyle.lightContent
+    }
+    
+    func showWalkthrough(){
+        
+        // Get view controllers and build the walkthrough
+        let stb = UIStoryboard(name: "Walkthrough", bundle: nil)
+        let walkthrough = stb.instantiateViewController(withIdentifier: "walk") as! BWWalkthroughViewController
+        
+        let page_one = stb.instantiateViewController(withIdentifier: "walk1")
+        let page_two = stb.instantiateViewController(withIdentifier: "walk2")
+//        let page_zero = stb.instantiateViewController(withIdentifier: "walk0")
+        let page_three = stb.instantiateViewController(withIdentifier: "walk3")
+        
+        // Attach the pages to the master
+        walkthrough.delegate = self
+//        walkthrough.add(viewController:page_zero)
+        walkthrough.add(viewController:page_one)
+        walkthrough.add(viewController:page_two)
+        walkthrough.add(viewController:page_three)
+        
+        
+//        self.present(walkthrough, animated: true, completion: nil)
+        self.navigationController?.pushViewController(walkthrough, animated: true)
+    }
+    
+    
+    // MARK: - Walkthrough delegate -
+    
+    func walkthroughPageDidChange(_ pageNumber: Int) {
+        print("Current Page \(pageNumber)")
+    }
+    
+    func walkthroughCloseButtonPressed() {
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
@@ -108,19 +180,19 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
             return
         }
         
-        let userId = user.userID
+//        let userId = user.userID
         let idToken = user.authentication.idToken
         let fullName = user.profile.name
-        let givenName = user.profile.givenName
-        let familyName = user.profile.familyName
-        let email = user.profile.email
-        let accesstoken = user.authentication.accessToken
-        let refreshToken = user.authentication.refreshToken
+//        let givenName = user.profile.givenName
+//        let familyName = user.profile.familyName
+//        let email = user.profile.email
+//        let accesstoken = user.authentication.accessToken
+//        let refreshToken = user.authentication.refreshToken
         
-        
-        print(idToken)
-        print(accesstoken)
-        print(refreshToken)
+//
+//        print(idToken)
+//        print(accesstoken)
+//        print(refreshToken)
         SVProgressHUD.show(withStatus: "Loading....")
         
         NetworkManager.SharedInstance.socalLogin(Token: idToken!, success: { (response) in
@@ -176,7 +248,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
                 
                 self.userdefaults.setValue(response.access_token, forKey: "Token")
                 
-                self.userdefaults.set(true, forKey: "islogin")
+               
                 
                 AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
                 
@@ -189,6 +261,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
                     CustomUserDefaults.email.value = res.email
                     CustomUserDefaults.userName.value = res.name
                     CustomUserDefaults.VerifyPaypal.value = res.paypal
+                    CustomUserDefaults.userId.value = "\(res.id!)"
                 }, failure: { (err) in
                     print("Error!!!")
                 })
@@ -226,6 +299,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
     
     
     @IBAction func login(_ sender: Any) {
+//        print(socket.status)
         if validInput(){
             Login()
         }
@@ -247,8 +321,38 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate {
     
     
     @IBAction func rememberMeBtn(_ sender: Any) {
+        
+        if self.rememberMe.image ==  UIImage(named: "tickImg"){
+            self.rememberMe.image = UIImage(named: "Box")
+        }else{
+            self.rememberMe.image =  UIImage(named: "tickImg")
+        }
+        
+        if self.rememberMe.image == UIImage(named: "tickImg"){
+            self.userdefaults.set(true, forKey: "islogin")
+        }else{
+            self.userdefaults.set(false, forKey: "islogin")
+        }
+            
     }
     
+    @IBAction func forgotBtn(_ sender: Any) {
+        
+//        if #available(iOS 13.0, *) {
+//            let main = self.storyboard?.instantiateViewController(identifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+//            self.navigationController?.pushViewController(main, animated: true)
+//        } else {
+//            // Fallback on earlier versions
+//        }
+        
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+//        self.tabBarController?.navigationController?.pushViewController(main, animated: true)
+        self.navigationController?.pushViewController(main, animated: true)
+            
+        
+        
+        
+    }
     
 }
 

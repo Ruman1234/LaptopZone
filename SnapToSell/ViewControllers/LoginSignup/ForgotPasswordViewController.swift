@@ -32,7 +32,10 @@ class ForgotPasswordViewController: UIViewController {
         NetworkManager.SharedInstance.RequestOTP(Email: self.emailText.text!, success: { (res) in
             SVProgressHUD.dismiss()
             self.showToast(message: "kindly check your mail")
-            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "CodeVerificationViewController") as! CodeVerificationViewController
+            main.email = self.emailText.text!
+            self.navigationController?.pushViewController(main, animated: true)
+               
         }) { (err) in
             SVProgressHUD.dismiss()
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
@@ -51,6 +54,9 @@ class ForgotPasswordViewController: UIViewController {
         if self.emailText.text == "" {
             flag = false
             self.showToast(message: "Kindly enter email")
+        }else if Utilites.isValid(email: self.emailText!.text! as NSString) == false {
+            flag = false
+            self.showToast(message: "Please enter a valid Email")
         }
         return flag
     }
