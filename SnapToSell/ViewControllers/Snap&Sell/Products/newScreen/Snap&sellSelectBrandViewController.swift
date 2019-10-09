@@ -19,7 +19,9 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
         
         self.addBG()
         self.addPAger(totalPage: 7, currentPage: 0)
+        self.backBtn()
         self.cancleBtn()
+        
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
         layout.minimumLineSpacing = spacing
@@ -37,6 +39,15 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! RepairingBrandCollectionViewCell
 
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    
+       let main = self.storyboard?.instantiateViewController(withIdentifier: "snap_sellSelectModelViewController") as! snap_sellSelectModelViewController
+     
+       self.navigationController?.pushViewController(main, animated: true)
         
     }
     
@@ -60,6 +71,8 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
     
    }
        
+    
+    
            
 
 }

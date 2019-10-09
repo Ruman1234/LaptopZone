@@ -36,7 +36,7 @@ class ShipmentSetupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.addBG()
         
         let firstVC = storyboard?.instantiateViewController(withIdentifier: "PackageDetailsViewController") as! PackageDetailsViewController
         let secondVC = storyboard?.instantiateViewController(withIdentifier: "ShipmentRatesViewController") as! ShipmentRatesViewController

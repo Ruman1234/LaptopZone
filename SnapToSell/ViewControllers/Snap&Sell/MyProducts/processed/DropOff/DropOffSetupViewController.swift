@@ -36,6 +36,7 @@ class DropOffSetupViewController: UIViewController {
         super.viewDidLoad()
         setupControllers()
         NotificationCenter.default.addObserver(self, selector: #selector(self.backButtonDidPress), name: Notification.Name("backStepdropoff"), object: nil)
+        self.addBG()
         // Do any additional setup after loading the view.
     }
     

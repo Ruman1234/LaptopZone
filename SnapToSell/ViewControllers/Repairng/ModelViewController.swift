@@ -11,24 +11,46 @@ import Alamofire
 import SwiftyJSON
 import ObjectMapper
 import SVProgressHUD
-
-class ModelViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
+//
+class ModelViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout, AddotherViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var otherBtn: UIButton!
+    
     var itemsArray = [Ljw_Model]()
     var id = String()
+    private let spacing:CGFloat = 10.0
+    
+    var addotherView : AddotherView!
+     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.addPAger(totalPage: 7, currentPage: 4)
+        self.otherBtn.setGradient()
+        self.addBG()
         fetchDetails(id: id)
         
-        self.tableView.tableFooterView = UIView()
+      let layout = UICollectionViewFlowLayout()
+      layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
+      layout.minimumLineSpacing = spacing
+      layout.minimumInteritemSpacing = spacing
+      self.collectionView?.collectionViewLayout = layout
+               
+        self.cancleBtn()
+        self.backBtn()
+//        self.tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+    }
 
     
     func fetchDetails(id :String) {
@@ -49,7 +71,8 @@ class ModelViewController: UIViewController , UITableViewDataSource, UITableView
                         return
                     }
                     self.itemsArray = arr
-                    self.tableView.reloadData()
+//                    self.tableView.reloadData()
+                    self.collectionView.reloadData()
                 }
             }else{
                 SVProgressHUD.dismiss()
@@ -58,25 +81,112 @@ class ModelViewController: UIViewController , UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsArray.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "modelCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = self.itemsArray[indexPath.row].dESCRIPTION
-        return cell
-    }
-    
+      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+               return itemsArray.count
+
+           }
+
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "modelCell", for: indexPath) as! RepairingBrandCollectionViewCell
+//            cell.textLabel?.text = self.itemsArray[indexPath.row].dESCRIPTION
+            if #available(iOS 13.0, *) {
+                cell.imageView?.tintColor = UIColor.red
+                cell.imageView.image = UIImage(systemName: "circle")
+            } else {
+                // Fallback on earlier versions
+            }
+            cell.brandName.text = self.itemsArray[indexPath.row].dESCRIPTION
+            return cell
+
+        }
+
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            
+            
+            let currentCell = collectionView.cellForItem(at: indexPath) as! RepairingBrandCollectionViewCell
+
+            
+                 if #available(iOS 13.0, *) {
+                     currentCell.imageView?.tintColor = UIColor.red
+                     currentCell.imageView.image = UIImage(systemName: "largecircle.fill.circle")
+                 } else {
+                     // Fallback on earlier versions
+                 }
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
+             main.id = self.itemsArray[indexPath.row].mODEL_DT_ID!
+             Constants.modelId = self.itemsArray[indexPath.row].mODEL_DT_ID!
+             self.navigationController?.pushViewController(main, animated: true)
+
+        }
+        
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+               let numberOfItemsPerRow:CGFloat = 2
+               let spacingBetweenCells:CGFloat = 10
 
 
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
-        main.id = self.itemsArray[indexPath.row].mODEL_DT_ID!
-        Constants.modelId = self.itemsArray[indexPath.row].mODEL_DT_ID!
-        self.navigationController?.pushViewController(main, animated: true)
-    }
+               let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
 
+               if let collection = self.collectionView{
+                   let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+                   return CGSize(width: width, height: 69)
+               }else{
+                   return CGSize(width: 0, height: 0)
+               }
+
+    //        return CGSize(width: self.collectionView.bounds.width / 2.4 , height: 69)
+           }
+    
+    
+    
+    @IBAction func otherBtn(_ sender: Any) {
+        addView()
+    }
+    
+    
+    
+    
+       func didClose(text: String) {
+           self.otherBtn.setTitle(text, for: .normal)
+           self.addotherView.removeFromSuperview()
+                  
+          UIView.animate(withDuration: 0.3) {
+
+              self.addotherView.alpha = 0
+              self.addotherView = nil
+          }
+        
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+                      
+              //        print("asdfadf")
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
+              //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
+              //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
+            self.navigationController?.pushViewController(main, animated: true)
+                      
+        }
+        
+       }
+       
+       
+       func addView()  {
+           if self.addotherView == nil {
+               self.addotherView = nil
+               self.addotherView = (Bundle.main.loadNibNamed("AddotherView", owner: self, options: nil)![0] as!  AddotherView)
+               
+               self.addotherView.delegate = self
+               self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+                          
+              self.view.addSubview(addotherView)
+              UIView.animate(withDuration: 0.3) {
+
+                  self.addotherView.alpha = 1
+              }
+           }
+       }
+       
     
 }

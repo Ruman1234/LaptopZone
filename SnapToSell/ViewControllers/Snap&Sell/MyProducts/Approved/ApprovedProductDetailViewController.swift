@@ -27,7 +27,7 @@ class ApprovedProductDetailViewController: UIViewController , UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.addBG()
         getBarcode()
         
         self.titleProduct.text = self.detail?.title

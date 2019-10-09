@@ -91,6 +91,7 @@ class SideMenuViewController: UIViewController ,UITableViewDelegate , UITableVie
             let userdefaults = UserDefaults.standard
             userdefaults.set(false, forKey: "islogin")
             userdefaults.removeObject(forKey: "Token")
+             CustomUserDefaults.Token.value = ""
             let add = AddressesModel()
             Constants.address = add
 //            let front = UINavigationController.init(rootViewController: main)

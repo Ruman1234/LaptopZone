@@ -9,7 +9,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 import GoogleSignIn
-
 import Firebase
 import UserNotifications
 import Firebase
@@ -17,21 +16,27 @@ import FirebaseInstanceID
 import FirebaseMessaging
 
 
+@available(iOS 13.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate, MessagingDelegate {
     
    
 
     var window: UIWindow?
-
+    var ss :UIStatusBarManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
         
 //        GIDSignIn.sharedInstance().clientID = "477867186230-8k2j681ktpvav5hl4ehf4ajscbai8moi.apps.googleusercontent.com"
 //        GIDSignIn.sharedInstance().delegate = self
 
         
+        
+        
+
         IQKeyboardManager.shared.enable = true
 //        IQKeyboardManager.shared.toolbarTintColor = Constants.APP_THEAME_COLOR
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
@@ -65,6 +70,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         Messaging.messaging().isAutoInitEnabled = true
         
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        // Sets shadow (line below the bar) to a blank image
+        UINavigationBar.appearance().shadowImage = UIImage()
+        // Sets the translucent background color
+        UINavigationBar.appearance().backgroundColor = .clear
+        // Set translucent. (Default value is already true, so this can be removed if desired.)
+        
+//        navigationController?.navigationItem.backBarButtonItem?.image = UIImage(named: "backImg")
+        
+        
+        let backImage = UIImage(named: "back")!.withRenderingMode(.alwaysOriginal)
+        
+        UINavigationBar.appearance().backIndicatorImage = backImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -80.0), for: .default)
+        
+        
+        
+        UINavigationBar.appearance().isTranslucent = true
         
         
         return true

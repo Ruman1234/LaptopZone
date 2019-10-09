@@ -16,7 +16,7 @@ class TabBarViewController:  ButtonBarPagerTabStripViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.addBG()
         self.navigationController?.navigationItem.hidesBackButton = false
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.hidesBackButton = true

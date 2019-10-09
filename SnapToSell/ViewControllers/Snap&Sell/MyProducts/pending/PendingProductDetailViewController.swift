@@ -39,6 +39,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
         sendBtn.isHidden = true
         sendBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = cameraButton
+        self.addBG()
         // Do any additional setup after loading the view.
     }
     

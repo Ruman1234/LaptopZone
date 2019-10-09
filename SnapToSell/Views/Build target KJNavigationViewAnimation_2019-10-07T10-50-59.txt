@@ -1,0 +1,6 @@
+
+Showing All Messages
+
+Build target KJNavigationViewAnimation of project Pods with configuration Debug
+error: SWIFT_VERSION '3.0' is unsupported, supported versions are: 4.0, 4.2, 5.0. (in target 'KJNavigationViewAnimation' from project 'Pods')
+

@@ -11,10 +11,9 @@ import Accelerate
 import Foundation
 import SystemConfiguration
 import SwiftUserDefault
-
-var MaxEmailLength = 245
 import UIKit
 
+var MaxEmailLength = 245
 
 class Utilites {
     
@@ -132,6 +131,122 @@ class GridView: UIView
 }
 
 extension UIViewController {
+    
+    
+    func setRedStatusBar()  {
+         if #available(iOS 13.0, *) {
+             let app = UIApplication.shared
+             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+             
+             let statusbarView = UIView()
+             statusbarView.backgroundColor = UIColor.red
+             view.addSubview(statusbarView)
+           
+             statusbarView.translatesAutoresizingMaskIntoConstraints = false
+             statusbarView.heightAnchor
+                 .constraint(equalToConstant: statusBarHeight).isActive = true
+             statusbarView.widthAnchor
+                 .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+             statusbarView.topAnchor
+                 .constraint(equalTo: view.topAnchor).isActive = true
+             statusbarView.centerXAnchor
+                 .constraint(equalTo: view.centerXAnchor).isActive = true
+           
+         } else {
+             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+             statusBar?.backgroundColor = UIColor.red
+         }
+    }
+    
+    
+    func setGragientBar() {
+         let gradientLayer = CAGradientLayer()
+
+            gradientLayer.frame = CGRect(x:0, y:-20, width:375, height:64)
+        let colorTop = UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor
+        
+        let colorBottom = UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
+            gradientLayer.colors = [ colorTop, colorBottom]
+    //        gradientLayer.locations = [ 0.0, 1.0]
+            
+    //                gradientLayer.locations = [0.12, 1]
+            
+            
+            gradientLayer.startPoint = CGPoint(x: 0.25, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 0.75, y: 0.5)
+            
+            
+            gradientLayer.frame = CGRect(x:0, y:-20, width:375, height:self.view.frame.height * 0.06)
+            
+            let window: UIWindow? = UIApplication.shared.keyWindow
+            let view = UIView()
+            view.backgroundColor = UIColor.clear
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.frame = CGRect(x: 0, y: 0, width: (window?.frame.width)!, height: self.view.frame.height * 0.07)
+            view.layer.addSublayer(gradientLayer)
+            window?.addSubview(view)
+                
+    }
+    
+    func addPAger(totalPage : Int , currentPage : Int) {
+        
+        let pager = UIPageControl()
+        pager.numberOfPages = totalPage
+        pager.tintColor = UIColor.gray
+        pager.pageIndicatorTintColor = UIColor.gray
+        pager.currentPageIndicatorTintColor = .red
+        pager.currentPage = currentPage
+        let x = (self.view.frame.width / 2) - 75
+        pager.frame = CGRect(x: x, y: 50, width: 130, height: 10)
+        self.view.addSubview(pager)
+        
+                                        
+    }
+    
+    
+    
+    func cancleBtn()  {
+        
+        let x = self.view.frame.width - 75
+        
+        let button = UIButton(frame: CGRect(x: x, y: 45, width: 60, height: 20))
+//        button.backgroundColor = .green
+        button.setTitleColor(.red, for: .normal)
+        button.setTitle("Cancle", for: .normal)
+        button.setFont(size: 15)
+        button.addTarget(self, action: #selector(logoutUser), for: .touchUpInside)
+        self.view.addSubview(button)
+    }
+    
+     func backBtn()  {
+            
+            let x = 20
+            
+            let button = UIButton(frame: CGRect(x: x, y: 46, width: 25, height: 15))
+    //        button.backgroundColor = .green
+            button.setTitleColor(.red, for: .normal)
+//            button.setTitle("Cancle", for: .normal)
+            button.setImage(UIImage(named: "backImg"), for: .normal)
+            
+            button.addTarget(self, action: #selector(back), for: .touchUpInside)
+            self.view.addSubview(button)
+        }
+        
+    @objc func back(){
+           
+           
+        self.navigationController?.popViewController(animated: true)
+            
+    }
+    
+    @objc func logoutUser(){
+        
+         let a = self.navigationController?.viewControllers[1] as! mainViewController
+         self.navigationController?.popToViewController(a, animated: true)
+         
+    }
+    
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -144,8 +259,9 @@ extension UIViewController {
     
     
     func showToast(message : String) {
-        
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: self.view.frame.size.height-100, width: 200, height: 35))
+//        label.intrinsicContentSize.width
+//        label.sizeToFit()
+        let toastLabel = UILabel(frame: CGRect(x: 0, y: self.view.frame.size.height-100, width: self.view.frame.size.width, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = .center;
@@ -164,6 +280,9 @@ extension UIViewController {
     
     
     func addBG()  {
+        self.setRedStatusBar()
+    
+        
         let imageOnTop = UIImageView()
         imageOnTop.image = UIImage(named: "bgtop")
         
@@ -198,12 +317,11 @@ extension UIViewController {
         self.view.addConstraint(bottomConstaint)
         self.view.addConstraint(hieghtConstaint)
         self.view.addConstraint(weightConstaint)
-        
-        
-        
         self.view.addSubview(imageOnTop)
         
     }
+    
+    
     
 }
 
@@ -315,6 +433,7 @@ struct CustomUserDefaults {
     static let email = UserDefaultsItem<String>("email")
     static let VerifyPaypal = UserDefaultsItem<String>("paypal")
     static let fcm_token = UserDefaultsItem<String>("fcm_token")
+    static let userId = UserDefaultsItem<String>("Userid")
     
 }
 
@@ -410,4 +529,28 @@ extension UIView {
         self.layer.insertSublayer(gradient, at: 0)
         
     }
+    
+    
+    func addDashedBorder() {
+       let color = UIColor.red.cgColor
+
+       let shapeLayer:CAShapeLayer = CAShapeLayer()
+       let frameSize = self.frame.size
+       let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
+
+       shapeLayer.bounds = shapeRect
+       shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
+       shapeLayer.fillColor = UIColor.clear.cgColor
+       shapeLayer.strokeColor = color
+       shapeLayer.lineWidth = 2
+       shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+       shapeLayer.lineDashPattern = [6,3]
+       shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
+
+       self.layer.addSublayer(shapeLayer)
+    }
+    
+    
+  
 }
+

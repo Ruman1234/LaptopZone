@@ -37,7 +37,7 @@ class DefaultAddressViewController: UIViewController {
             self.checkAvailbility.isHidden = true
         }
         
-        
+        self.addBG()
         
         // Do any additional setup after loading the view.
     }

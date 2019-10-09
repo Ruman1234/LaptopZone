@@ -34,22 +34,28 @@ struct RepairModel : Mappable {
 }
 
 
-struct Ljw_getobject : Mappable {
+class Ljw_getobject : Mappable {
     var bRAND_DT_ID : String?
     var bRAND_URL : String?
     var bRAND_NAME : String?
     var pRODUCT : String?
+    var image : String?
     
-    init?(map: Map) {
+    init() {
+        
+    }
+    required init?(map: Map) {
         
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         
         bRAND_DT_ID <- map["BRAND_DT_ID"]
         bRAND_URL <- map["BRAND_URL"]
         bRAND_NAME <- map["BRAND_NAME"]
         pRODUCT <- map["PRODUCT"]
+        image <- map["BRAND_URL_FULL"]
+        
     }
     
 }

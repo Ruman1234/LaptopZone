@@ -10,6 +10,16 @@ import UIKit
 
 class SelectModelTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var imageViwe: UIImageView!
+    
+    @IBOutlet weak var modelName: UILabel!
+    
+    @IBOutlet weak var servicename: UILabel!
+    
+    
+    @IBOutlet weak var getofferBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

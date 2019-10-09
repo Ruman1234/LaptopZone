@@ -53,8 +53,10 @@ class mainViewController: UIViewController {
     }
     
     @IBAction func sellDevice(_ sender: Any) {
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailViewController") as! ProductDetailViewController
-//        self.tabBarController?.navigationController?.pushViewController(main, animated: true)
+//        let main = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailViewController") as! ProductDetailViewController
+        
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "Snap_sellSelectBrandViewController") as! Snap_sellSelectBrandViewController
+
         self.navigationController?.pushViewController(main, animated: true)
               
     }

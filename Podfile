@@ -24,8 +24,8 @@ pod 'Firebase/Storage'
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
-pod 'JSQMessagesViewController'
 
+pod 'Socket.IO-Client-Swift', '~> 15.1.0'
 
 pod 'XLPagerTabStrip'
 
@@ -35,7 +35,7 @@ pod 'SwiftUserDefault'
 
 pod 'GoogleSignIn'
 
-
+pod 'KJNavigationViewAnimation'
   # Pods for SnapToSell
 
   target 'SnapToSellTests' do

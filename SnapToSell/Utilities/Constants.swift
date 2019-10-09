@@ -56,19 +56,22 @@ class Constants {
     static var width = String()
     static var length = String()
     
+    static var productId = String()
     static var brandId = String()
     static var seriesId = String()
     static var modelId = String()
     static var issuesId = String()
     
+    static var UploadImage = [UIImage]()
     
+    static let APP_THEME_COLOR = UIColor(red: 252.0 / 255.0, green: 43.0 / 255.0, blue: 8.0 / 255.0, alpha: 1)
 }
 
 
-struct Constant{
-    struct refs
-    {
-        static let databaseRoot = Database.database().reference()
-        static let databaseChats = databaseRoot.child("chats")
-    }
-}
+//struct Constant{
+//    struct refs
+//    {
+//        static let databaseRoot = Database.database().reference()
+//        static let databaseChats = databaseRoot.child("chats")
+//    }
+//}

@@ -13,11 +13,12 @@ import OpalImagePicker
 import Photos
 import FirebaseStorage
 import SVProgressHUD
+import SocketIO
 
 
 class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource, UINavigationControllerDelegate , UIImagePickerControllerDelegate,OpalImagePickerControllerDelegate,PreviewViewControllerDelegate {
     
-   
+    
     
     @IBOutlet weak var titleProduct: SkyFloatingLabelTextField!
     @IBOutlet weak var lotPrice: SkyFloatingLabelTextField!
@@ -30,10 +31,14 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     
     
     var imagePicker: UIImagePickerController!
-    
     var images = [UIImage]()
+    
     var address = AddressesModel()
     let storage = Storage.storage()
+    
+    let manager = SocketManager(socketURL: URL(string: "http://71.78.236.22:6001")!, config: [.log(true), .compress])
+    var socket : SocketIOClient!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,28 +48,79 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
-         
+        self.navigationController?.navigationItem.rightBarButtonItem = camera
+        
+//        self.navigationController?.navigationItem.rightBarButtonItem = menubtn
+        self.addBG()
+        
     }
     
+    
+    func SocketData()   {
+        
+        socket = manager.defaultSocket
+
+        socket.connect()
+        print(socket.status)
+        print("ASfda")
+        
+        
+        let json = [
+            "channel" : "private-App.User.\(CustomUserDefaults.userId.value!)",
+            "name"    : "subscribe",
+            "auth"    : [
+                "headers" : [
+                    "Authorization"  : "Bearer " + CustomUserDefaults.Token.value! ,
+                    "Accept"         : "application/json",
+                    "client_id"      : "21",
+                    "client_secret"  : "4KPwfKtXjuaQlFuU69B4dHvFHGblYQ5GsurdbHqM",
+                ]
+            ]
+
+        ] as [String : Any]
+        
+        print(json)
+        
+        
+        socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected")
+            self.socket.emit("subscribe", json)
+
+        }
+        
+        
+        socket.on("MessagePushed") { (dataArray, socketAck) -> Void in
+            
+            print(dataArray)
+            print(socketAck)
+            
+        }
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
         
         if self.images.count != 0 {
             self.collectionView.reloadData()
+            
         }
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
        
         self.navigationItem.rightBarButtonItem = camera
-        self.navigationItem.leftBarButtonItem = menubtn
+//        self.navigationItem.leftBarButtonItem = menubtn
 
-        self.menubtn.target = self.revealViewController()
-        self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        self.menubtn.target = self.revealViewController()
+//        self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        self.tabBarController?.tabBar.isHidden = false
+        
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count

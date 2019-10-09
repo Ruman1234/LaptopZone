@@ -791,7 +791,7 @@ extension NetworkManager{
         failure : @escaping(NSError) -> Void)  {
         
         
-        self.request(url: Constants.REQUESTOTP , method: .post, parameters:["email":Email], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.REQUESTOTP , method: .post, parameters:["email":Email], encoding: JSONEncoding.default, header: nil) { (response) in
             print(response)
             guard (response.response?.statusCode) != nil else{
                 failure(NSError())
@@ -820,7 +820,7 @@ extension NetworkManager{
         failure : @escaping(NSError) -> Void)  {
         
         
-        self.request(url: Constants.RESETPASSWORDWITHOTP , method: .post, parameters:["email":Email,"password":password,"otp":otp], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.RESETPASSWORDWITHOTP , method: .post, parameters:["email":Email,"password":password,"otp":otp], encoding: JSONEncoding.default, header: nil) { (response) in
             print(response)
             guard (response.response?.statusCode) != nil else{
                 failure(NSError())
@@ -875,7 +875,7 @@ extension NetworkManager{
           failure : @escaping(NSError) -> Void)  {
           
           
-          self.request(url: Constants.FORGOTPASSWORDVERIFY , method: .post, parameters:["email":email,"otp":otp], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+          self.request(url: Constants.FORGOTPASSWORDVERIFY , method: .post, parameters:["email":email,"otp":otp], encoding: JSONEncoding.default, header: nil) { (response) in
               print(response)
               guard (response.response?.statusCode) != nil else{
                   failure(NSError())

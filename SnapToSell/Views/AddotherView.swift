@@ -7,24 +7,34 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
-class AddotherView: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+protocol AddotherViewDelegate {
+//    func didAdd()
+//    func didClose(barcode:String, weight: String, condition:String , remarks:String , conditin_Id:String)
+    func didClose(text : String)
+}
+
+
+
+class AddotherView: UIView {
+    
+  var delegate : AddotherViewDelegate?
+    @IBOutlet weak var nameLbl: UILabel!
+    
+    @IBOutlet weak var doneBtn: UIButton!
+    @IBOutlet weak var textfield: SkyFloatingLabelTextField!
+    override func awakeFromNib() {
+        doneBtn.setFont(size: 19)
+        doneBtn.setGradient()
+        
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func doneBtn(_ sender: Any) {
+        
+        self.delegate?.didClose(text: self.textfield.text!)
     }
-    */
-
+    
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,6 +39,21 @@
 		18721C4023168EB900C3AAAC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C3E23168EB900C3AAAC /* Images.swift */; };
 		18721C4123168EB900C3AAAC /* RequestStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C3F23168EB900C3AAAC /* RequestStatusModel.swift */; };
 		18721C472316920800C3AAAC /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C462316920800C3AAAC /* ProductsListViewController.swift */; };
+		187E6F7C2344AD5600DF78BE /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187E6F7B2344AD5600DF78BE /* Walkthrough.storyboard */; };
+		187E6F802344ADEE00DF78BE /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E6F7E2344ADED00DF78BE /* BWWalkthroughPageViewController.swift */; };
+		187E6F812344ADEE00DF78BE /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E6F7F2344ADEE00DF78BE /* BWWalkthroughViewController.swift */; };
+		187E6F832344ADF800DF78BE /* CustomPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E6F822344ADF800DF78BE /* CustomPageViewController.swift */; };
+		188A49E4234C9982003F995C /* Snap&sellSelectBrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A49E3234C9982003F995C /* Snap&sellSelectBrandViewController.swift */; };
+		188A49E7234C9EDD003F995C /* snap&sellSelectModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A49E6234C9EDD003F995C /* snap&sellSelectModelViewController.swift */; };
+		188A49E9234CA1AE003F995C /* CarierServisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A49E8234CA1AE003F995C /* CarierServisesViewController.swift */; };
+		188A49EB234CA793003F995C /* SelectPhoneModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A49EA234CA793003F995C /* SelectPhoneModelViewController.swift */; };
+		188A49ED234CA847003F995C /* SelectModelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A49EC234CA847003F995C /* SelectModelTableViewCell.swift */; };
+		188B009823486E7E007B832F /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B009723486E7E007B832F /* UploadViewController.swift */; };
+		188B00A0234888D9007B832F /* AddotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B009E234888D9007B832F /* AddotherView.swift */; };
+		188B00A1234888D9007B832F /* AddotherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188B009F234888D9007B832F /* AddotherView.xib */; };
+		18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FB2345C1F400282904 /* HomeViewController.swift */; };
+		18A7B2FE2345D37000282904 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FD2345D37000282904 /* mainViewController.swift */; };
+		18A7B30023460F7000282904 /* RepairingBrandCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FF23460F7000282904 /* RepairingBrandCollectionViewCell.swift */; };
 		18E849572317B39C00A52C62 /* PendingProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */; };
 		18E849592317C89A00A52C62 /* ApprovedProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */; };
 		18E8495B2317D48D00A52C62 /* ProcessedProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */; };
@@ -98,7 +113,7 @@
 		182A416E233B7F9F008286BE /* CodeVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerificationViewController.swift; sourceTree = "<group>"; };
 		182A4170233B7FB9008286BE /* ResetYourPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetYourPasswordViewController.swift; sourceTree = "<group>"; };
 		182B297B230FB399003E10CD /* SnapToSell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapToSell.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		182B297E230FB399003E10CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		182B297E230FB399003E10CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		182B2980230FB399003E10CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		182B2983230FB399003E10CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		182B2985230FB39A003E10CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +147,21 @@
 		18721C3E23168EB900C3AAAC /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		18721C3F23168EB900C3AAAC /* RequestStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestStatusModel.swift; sourceTree = "<group>"; };
 		18721C462316920800C3AAAC /* ProductsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
+		187E6F7B2344AD5600DF78BE /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
+		187E6F7E2344ADED00DF78BE /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		187E6F7F2344ADEE00DF78BE /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
+		187E6F822344ADF800DF78BE /* CustomPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageViewController.swift; sourceTree = "<group>"; };
+		188A49E3234C9982003F995C /* Snap&sellSelectBrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snap&sellSelectBrandViewController.swift"; sourceTree = "<group>"; };
+		188A49E6234C9EDD003F995C /* snap&sellSelectModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "snap&sellSelectModelViewController.swift"; sourceTree = "<group>"; };
+		188A49E8234CA1AE003F995C /* CarierServisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarierServisesViewController.swift; sourceTree = "<group>"; };
+		188A49EA234CA793003F995C /* SelectPhoneModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhoneModelViewController.swift; sourceTree = "<group>"; };
+		188A49EC234CA847003F995C /* SelectModelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelTableViewCell.swift; sourceTree = "<group>"; };
+		188B009723486E7E007B832F /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		188B009E234888D9007B832F /* AddotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddotherView.swift; sourceTree = "<group>"; };
+		188B009F234888D9007B832F /* AddotherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddotherView.xib; sourceTree = "<group>"; };
+		18A7B2FB2345C1F400282904 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		18A7B2FD2345D37000282904 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
+		18A7B2FF23460F7000282904 /* RepairingBrandCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairingBrandCollectionViewCell.swift; sourceTree = "<group>"; };
 		18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovedProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedProductsViewController.swift; sourceTree = "<group>"; };
@@ -195,22 +225,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		181037792338DADA00BD8DDD /* New Group */ = {
+		181037792338DADA00BD8DDD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				1810377D2338DAEE00BD8DDD /* New Group */,
+				1810377D2338DAEE00BD8DDD /* Eina */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		1810377D2338DAEE00BD8DDD /* Eina */ = {
+			isa = PBXGroup;
+			children = (
 				1810377C2338DAEB00BD8DDD /* Eina-Bold.otf */,
 				1810377A2338DAEB00BD8DDD /* Eina-Regular.otf */,
 				1810377B2338DAEB00BD8DDD /* Eina-SemiBold.otf */,
 			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		1810377D2338DAEE00BD8DDD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
+			path = Eina;
 			sourceTree = "<group>";
 		};
 		182B2972230FB399003E10CD = {
@@ -238,7 +268,8 @@
 		182B297D230FB399003E10CD /* SnapToSell */ = {
 			isa = PBXGroup;
 			children = (
-				181037792338DADA00BD8DDD /* New Group */,
+				188B009923488885007B832F /* Views */,
+				181037792338DADA00BD8DDD /* Fonts */,
 				18628C0323360BD400B7A110 /* SnapToSell.entitlements */,
 				18721C322316634C00C3AAAC /* ThiredParty */,
 				18EC2E7823110B6C00870A48 /* CollectionViewCells */,
@@ -251,10 +282,10 @@
 				182B2982230FB399003E10CD /* Main.storyboard */,
 				182B2985230FB39A003E10CD /* Assets.xcassets */,
 				182B2987230FB39A003E10CD /* LaunchScreen.storyboard */,
+				187E6F7B2344AD5600DF78BE /* Walkthrough.storyboard */,
 				182B298A230FB39A003E10CD /* Info.plist */,
 				18EC2E7F2311509500870A48 /* GoogleService-Info.plist */,
 				1808B605231F91FA00243B9C /* client_477867186230-tumr6302i75gnmm6576e3rl7a5rcjuv1.apps.googleusercontent.com.plist */,
-				18721C392316668D00C3AAAC /* SideMenuTableViewCell.swift */,
 			);
 			path = SnapToSell;
 			sourceTree = "<group>";
@@ -310,7 +341,10 @@
 			isa = PBXGroup;
 			children = (
 				18721C372316663700C3AAAC /* SideMenuViewController.swift */,
+				187E6F7D2344ADD800DF78BE /* WalkThrough */,
 				18721C432316911D00C3AAAC /* LoginSignup */,
+				18721C442316913800C3AAAC /* Address */,
+				18A7B2FA2345C1CF00282904 /* Home&TabBar */,
 				1847D6652328BCFF00B04692 /* Snap&Sell */,
 				1847D6662328BD2000B04692 /* Repairng */,
 			);
@@ -320,8 +354,10 @@
 		182B29BE231001D2003E10CD /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				18721C392316668D00C3AAAC /* SideMenuTableViewCell.swift */,
 				182B29BF231001EC003E10CD /* AddressTableViewCell.swift */,
 				18F0726D2319434800E8F8CB /* ShipmentRatesTableViewCell.swift */,
+				188A49EC234CA847003F995C /* SelectModelTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -330,7 +366,6 @@
 			isa = PBXGroup;
 			children = (
 				18721C452316914E00C3AAAC /* Products */,
-				18721C442316913800C3AAAC /* Address */,
 				18721C422316910700C3AAAC /* MyProducts */,
 			);
 			path = "Snap&Sell";
@@ -339,6 +374,7 @@
 		1847D6662328BD2000B04692 /* Repairng */ = {
 			isa = PBXGroup;
 			children = (
+				188B009723486E7E007B832F /* UploadViewController.swift */,
 				1847D6672328BF7400B04692 /* SelectYourProductViewController.swift */,
 				18E8D43C232A0F3200CD8110 /* RepairBrandViewController.swift */,
 				18E8D442232A24BF00CD8110 /* SeriesViewController.swift */,
@@ -403,11 +439,51 @@
 		18721C452316914E00C3AAAC /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				188A49E5234C9EBD003F995C /* newScreen */,
 				18EC2E7623110AD800870A48 /* ProductDetailViewController.swift */,
 				18EC2E7B23111E4F00870A48 /* CameraViewController.swift */,
 				18EC2E7D231145A800870A48 /* PreviewViewController.swift */,
 			);
 			path = Products;
+			sourceTree = "<group>";
+		};
+		187E6F7D2344ADD800DF78BE /* WalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				187E6F822344ADF800DF78BE /* CustomPageViewController.swift */,
+				187E6F7E2344ADED00DF78BE /* BWWalkthroughPageViewController.swift */,
+				187E6F7F2344ADEE00DF78BE /* BWWalkthroughViewController.swift */,
+			);
+			path = WalkThrough;
+			sourceTree = "<group>";
+		};
+		188A49E5234C9EBD003F995C /* newScreen */ = {
+			isa = PBXGroup;
+			children = (
+				188A49E3234C9982003F995C /* Snap&sellSelectBrandViewController.swift */,
+				188A49E6234C9EDD003F995C /* snap&sellSelectModelViewController.swift */,
+				188A49E8234CA1AE003F995C /* CarierServisesViewController.swift */,
+				188A49EA234CA793003F995C /* SelectPhoneModelViewController.swift */,
+			);
+			path = newScreen;
+			sourceTree = "<group>";
+		};
+		188B009923488885007B832F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				188B009E234888D9007B832F /* AddotherView.swift */,
+				188B009F234888D9007B832F /* AddotherView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		18A7B2FA2345C1CF00282904 /* Home&TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				18A7B2FB2345C1F400282904 /* HomeViewController.swift */,
+				18A7B2FD2345D37000282904 /* mainViewController.swift */,
+			);
+			path = "Home&TabBar";
 			sourceTree = "<group>";
 		};
 		18E849622317E74D00A52C62 /* pending */ = {
@@ -472,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				18EC2E7923110B8B00870A48 /* ProductImageCollectionViewCell.swift */,
+				18A7B2FF23460F7000282904 /* RepairingBrandCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -637,6 +714,8 @@
 				18EC2E802311509600870A48 /* GoogleService-Info.plist in Resources */,
 				182B2989230FB39A003E10CD /* LaunchScreen.storyboard in Resources */,
 				182B2986230FB39A003E10CD /* Assets.xcassets in Resources */,
+				187E6F7C2344AD5600DF78BE /* Walkthrough.storyboard in Resources */,
+				188B00A1234888D9007B832F /* AddotherView.xib in Resources */,
 				1808B606231F91FB00243B9C /* client_477867186230-tumr6302i75gnmm6576e3rl7a5rcjuv1.apps.googleusercontent.com.plist in Resources */,
 				182B2984230FB399003E10CD /* Main.storyboard in Resources */,
 			);
@@ -687,16 +766,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -753,54 +827,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/OpalImagePicker/OpalImagePicker.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/StepView/StepView.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftUserDefault/SwiftUserDefault.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpalImagePicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftUserDefault.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SnapToSell/Pods-SnapToSell-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -816,15 +847,24 @@
 			files = (
 				18E849612317E64800A52C62 /* DefaultAddressViewController.swift in Sources */,
 				18E8D440232A115A00CD8110 /* RepairDetail.swift in Sources */,
+				18A7B2FE2345D37000282904 /* mainViewController.swift in Sources */,
+				188A49EB234CA793003F995C /* SelectPhoneModelViewController.swift in Sources */,
+				188A49ED234CA847003F995C /* SelectModelTableViewCell.swift in Sources */,
+				188A49E7234C9EDD003F995C /* snap&sellSelectModelViewController.swift in Sources */,
 				18EC2E7A23110B8B00870A48 /* ProductImageCollectionViewCell.swift in Sources */,
 				18E8495D2317D50800A52C62 /* OffersModel.swift in Sources */,
 				182B29B3230FB626003E10CD /* LoginModel.swift in Sources */,
 				182B2981230FB399003E10CD /* ViewController.swift in Sources */,
 				18E8495B2317D48D00A52C62 /* ProcessedProductsViewController.swift in Sources */,
+				18A7B30023460F7000282904 /* RepairingBrandCollectionViewCell.swift in Sources */,
 				182B29C22310021A003E10CD /* AllAddresViewController.swift in Sources */,
+				188B009823486E7E007B832F /* UploadViewController.swift in Sources */,
+				187E6F812344ADEE00DF78BE /* BWWalkthroughViewController.swift in Sources */,
 				182B29C0231001EC003E10CD /* AddressTableViewCell.swift in Sources */,
+				187E6F832344ADF800DF78BE /* CustomPageViewController.swift in Sources */,
 				18E8495F2317E13F00A52C62 /* processedSetupIndicatorViewController.swift in Sources */,
 				18EC2E7723110AD800870A48 /* ProductDetailViewController.swift in Sources */,
+				188A49E9234CA1AE003F995C /* CarierServisesViewController.swift in Sources */,
 				18F0725F2318FD0D00E8F8CB /* DropOffSetupViewController.swift in Sources */,
 				18721C472316920800C3AAAC /* ProductsListViewController.swift in Sources */,
 				18E8D443232A24BF00CD8110 /* SeriesViewController.swift in Sources */,
@@ -832,6 +872,7 @@
 				18721C4023168EB900C3AAAC /* Images.swift in Sources */,
 				18EC2E7E231145A800870A48 /* PreviewViewController.swift in Sources */,
 				18721C3D2316898800C3AAAC /* TabBarViewController.swift in Sources */,
+				188A49E4234C9982003F995C /* Snap&sellSelectBrandViewController.swift in Sources */,
 				182A4171233B7FB9008286BE /* ResetYourPasswordViewController.swift in Sources */,
 				18E849572317B39C00A52C62 /* PendingProductDetailViewController.swift in Sources */,
 				182B29C4231003AA003E10CD /* AddressesModel.swift in Sources */,
@@ -841,8 +882,10 @@
 				18E8D43D232A0F3200CD8110 /* RepairBrandViewController.swift in Sources */,
 				182B29BB230FC9B3003E10CD /* RegisterViewController.swift in Sources */,
 				185F83D0231E402E002FAF1F /* ChatViewController.swift in Sources */,
+				187E6F802344ADEE00DF78BE /* BWWalkthroughPageViewController.swift in Sources */,
 				182A416F233B7F9F008286BE /* CodeVerificationViewController.swift in Sources */,
 				1847D6682328BF7400B04692 /* SelectYourProductViewController.swift in Sources */,
+				188B00A0234888D9007B832F /* AddotherView.swift in Sources */,
 				18F072612318FD9900E8F8CB /* DropOffDescriptionViewController.swift in Sources */,
 				18E8D445232A250B00CD8110 /* ModelViewController.swift in Sources */,
 				18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */,
@@ -852,6 +895,7 @@
 				18EC2E7C23111E4F00870A48 /* CameraViewController.swift in Sources */,
 				18E849662317E91300A52C62 /* processedDescriptionViewController.swift in Sources */,
 				18E8D447232A253C00CD8110 /* ProblemViewController.swift in Sources */,
+				18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */,
 				18F0726E2319434800E8F8CB /* ShipmentRatesTableViewCell.swift in Sources */,
 				1809DA5E232F6DBF002D260D /* ProfileModel.swift in Sources */,
 				18E8D449232A32D600CD8110 /* ContactDetailsViewController.swift in Sources */,
@@ -969,7 +1013,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1024,7 +1068,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

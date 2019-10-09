@@ -98,9 +98,7 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.2)
   - IQKeyboardManagerSwift (6.4.0)
-  - JSQMessagesViewController (7.3.5):
-    - JSQSystemSoundPlayer (~> 2.0.1)
-  - JSQSystemSoundPlayer (2.0.1)
+  - KJNavigationViewAnimation (0.1.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -115,6 +113,9 @@ PODS:
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
   - SkyFloatingLabelTextField (3.7.0)
+  - Socket.IO-Client-Swift (15.1.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.0)
   - StepView (1.0.5)
   - SVProgressHUD (2.2.5)
   - SwiftUserDefault (0.0.2)
@@ -131,12 +132,13 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - IQKeyboardManagerSwift
-  - JSQMessagesViewController
+  - KJNavigationViewAnimation
   - ObjectMapper
   - OpalImagePicker
   - ReachabilitySwift (~> 3)
   - SDWebImage
   - SkyFloatingLabelTextField (~> 3.0)
+  - Socket.IO-Client-Swift (~> 15.1.0)
   - StepView
   - SVProgressHUD
   - SwiftUserDefault
@@ -144,7 +146,7 @@ DEPENDENCIES:
   - XLPagerTabStrip
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Firebase
     - FirebaseAnalytics
@@ -162,8 +164,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
-    - JSQMessagesViewController
-    - JSQSystemSoundPlayer
     - leveldb-library
     - nanopb
     - ObjectMapper
@@ -177,6 +177,10 @@ SPEC REPOS:
     - SwiftUserDefault
     - SwiftyJSON
     - XLPagerTabStrip
+  trunk:
+    - KJNavigationViewAnimation
+    - Socket.IO-Client-Swift
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -196,8 +200,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   IQKeyboardManagerSwift: ed9b04ee0e3067ffba543283462d619f944b05e5
-  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
-  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  KJNavigationViewAnimation: 0473485c433c20bdcd4f575ef2244ed25f9a0266
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
@@ -206,12 +209,14 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
+  Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
+  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   StepView: e69413ca377b42c5777d446854bb036ff8e988fd
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftUserDefault: 275689abccc87735ca0344adc0fddef11528dfbd
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 248f43cdddfc4cc9c69d0f50c775b9a92eb5b6ae
+PODFILE CHECKSUM: 4025c9895a98d8cb3b31f0872160c7b5308b230e
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.8.1

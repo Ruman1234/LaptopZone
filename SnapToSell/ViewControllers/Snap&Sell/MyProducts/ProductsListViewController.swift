@@ -20,7 +20,7 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.addBG()
         self.navigationItem.leftBarButtonItem = menubtn
         self.menubtn.target = self.revealViewController()
         self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))

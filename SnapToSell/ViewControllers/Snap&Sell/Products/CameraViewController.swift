@@ -43,6 +43,8 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
     var pendingProductDetailViewController = PendingProductDetailViewController()
     
     var contactDetailsViewController = ContactDetailsViewController()
+    var uploadViewController = UploadViewController()
+    
 //    var dekitiewController = De_KittingViewController()
     var orientationValue = 1
     var orientaionArray = [Int]()
@@ -53,17 +55,24 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         
         //        print(self.getCaptureResolution())
         self.photoImg.isHidden = true
-        
+        self.captureBtn.setGradient()
+        self.backBtn()
+        self.tabBarController?.tabBar.isHidden = true
+//        self.captureBtn.setFont(size: 19)
         if self.type == "pending"{
             let a = self.navigationController?.viewControllers[1] as! PendingProductDetailViewController
             pendingProductDetailViewController = a
             
         }else if self.type == "recycle"{
-            let a = self.navigationController?.viewControllers[0] as! ContactDetailsViewController
+            let a = self.navigationController?.viewControllers[2] as! ContactDetailsViewController
             contactDetailsViewController = a
             
+        }else if self.type == "repair"{
+            let a = self.navigationController?.viewControllers[2] as! UploadViewController
+            uploadViewController = a
+            
         }else{
-            let a = self.navigationController?.viewControllers[0] as! ProductDetailViewController
+            let a = self.navigationController?.viewControllers[2] as! ProductDetailViewController
             productDetailViewController = a
             
             
@@ -346,6 +355,12 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         }else if type == "recycle" {
             contactDetailsViewController.images.append(image!)
             if self.contactDetailsViewController.images.count >= 10{
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        }else if type == "repair" {
+            uploadViewController.images.append(image!)
+            if self.uploadViewController.images.count >= 10{
                 self.navigationController?.popViewController(animated: true)
             }
             

@@ -22,6 +22,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
         super.viewDidLoad()
         self.offers(id: id)
         Constants.requestId = id
+        self.addBG()
         // Do any additional setup after loading the view.
     }
     
@@ -195,8 +196,8 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     }
     
     @IBAction func chat(_ sender: Any) {
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        self.navigationController?.pushViewController(main, animated: true)
+//        let main = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+//        self.navigationController?.pushViewController(main, animated: true)
 
     }
     

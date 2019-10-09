@@ -12,7 +12,7 @@ class DropOffDescriptionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+self.addBG()
         // Do any additional setup after loading the view.
     }
     

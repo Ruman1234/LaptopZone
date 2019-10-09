@@ -22,14 +22,19 @@ class SelectYourProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.leftBarButtonItem = menubtn
-        self.menubtn.target = self.revealViewController()
-        self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        self.addPAger(totalPage: 7, currentPage: 1)
+        
+        self.addBG()
+//        self.navigationItem.leftBarButtonItem = menubtn
+//        self.menubtn.target = self.revealViewController()
+//        self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         self.btn(btn: destopPc)
         self.btn(btn: LAptop)
+        self.cancleBtn()
+        self.backBtn()
         // Do any additional setup after loading the view.
     }
     
@@ -45,6 +50,7 @@ class SelectYourProductViewController: UIViewController {
         
         let main = self.storyboard?.instantiateViewController(withIdentifier: "RepairBrandViewController") as! RepairBrandViewController
         main.id = "1"
+        Constants.productId = "1"
         self.navigationController?.pushViewController(main, animated: true)
         
     }
@@ -53,6 +59,7 @@ class SelectYourProductViewController: UIViewController {
         
         let main = self.storyboard?.instantiateViewController(withIdentifier: "RepairBrandViewController") as! RepairBrandViewController
         main.id = "2"
+        Constants.productId = "2"
         self.navigationController?.pushViewController(main, animated: true)
         
         

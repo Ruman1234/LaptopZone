@@ -41,7 +41,7 @@ class processedSetupIndicatorViewController: UIViewController {
        
          NotificationCenter.default.addObserver(self, selector: #selector(self.backButtonDidPress), name: Notification.Name("backStepPickup"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeBtn), name: Notification.Name("changeBtn"), object: nil)
-        
+        self.addBG()
         Constants.CheckAvailbility = true
         // Do any additional setup after loading the view.
     }
