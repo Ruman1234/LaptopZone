@@ -16,13 +16,13 @@ import SkyFloatingLabelTextField
 import OpalImagePicker
 
 class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDelegate {
-
     
     
-    @IBOutlet weak var firstname: SkyFloatingLabelTextField!
-    @IBOutlet weak var lastname: SkyFloatingLabelTextField!
-    @IBOutlet weak var email: SkyFloatingLabelTextField!
-    @IBOutlet weak var phone: SkyFloatingLabelTextField!
+    
+    @IBOutlet weak var firstname: UITextField!
+//    @IBOutlet weak var lastname: SkyFloatingLabelTextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var phone: UITextField!
     
     
     @IBOutlet var cameraBtn: UIBarButtonItem!
@@ -31,16 +31,19 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     
     @IBOutlet var menuBtn: UIBarButtonItem!
     
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var savebtn: UIButton!
     var type = String()
     var images = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
-       
         
-        message.layer.cornerRadius = 5
-        message.layer.borderColor = UIColor.gray.cgColor
+       
+        self.savebtn.setGradient()
+        //message.layer.cornerRadius = 5
+        message.layer.borderColor = UIColor.lightGray.cgColor
         message.layer.borderWidth = 1
         if type == "recycle"{
 //            self.navigationItem.rightBarButtonItem = cameraBtn
@@ -125,7 +128,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
                     {
                         SVProgressHUD.dismiss()
                         let json = response.result.value as? NSDictionary
-                        print(json)
+//                        print(json)
                         
                         self.showToast(message: "Product Send successfully")
                        
@@ -212,14 +215,14 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     func validInput() -> Bool {
         var flag = true
         let firstname = self.firstname.text?.trimmingCharacters(in: .whitespaces)
-        let lastname = self.lastname.text?.trimmingCharacters(in: .whitespaces)
+//        let lastname = self.lastname.text?.trimmingCharacters(in: .whitespaces)
         let email = self.email.text?.trimmingCharacters(in: .whitespaces)
         let phone = self.phone.text?.trimmingCharacters(in: .whitespaces)
         
-        print(firstname)
-        print(lastname)
-        print(email)
-        print(phone)
+//        print(firstname)
+//        print(lastname)
+//        print(email)
+//        print(phone)
         
         
         if self.email.text == "" {
@@ -254,9 +257,9 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     @IBAction func saveBtn(_ sender: Any) {
         if validInput(){
             if self.type == "recycle" {
-                self.Recycle(email: self.email.text!, phone: self.phone.text!, remarks: self.message.text!, full_name: self.firstname.text! + (self.lastname.text ?? ""), images: self.images)
+                self.Recycle(email: self.email.text!, phone: self.phone.text!, remarks: self.message.text!, full_name: self.firstname.text! , images: self.images)
             }else{
-                self.SaveRepairInfo(brand_name: Constants.brandId, product_name: Constants.productId, series_name: Constants.seriesId, model_name: Constants.modelId, issues_name: Constants.issuesId, emailNumb: self.email.text!, phoneNumb: self.phone.text!, LastName: self.lastname.text!, yourName: self.firstname.text!, enterComents: self.message.text ?? "", images: Constants.UploadImage)
+                self.SaveRepairInfo(brand_name: Constants.brandId, product_name: Constants.productId, series_name: Constants.seriesId, model_name: Constants.modelId, issues_name: Constants.issuesId, emailNumb: self.email.text!, phoneNumb: self.phone.text!, LastName:"", yourName: self.firstname.text!, enterComents: self.message.text ?? "", images: Constants.UploadImage)
             }
             
         }
@@ -264,7 +267,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     
     func Reset()  {
         self.firstname.text = ""
-        self.lastname.text = ""
+//        self.lastname.text = ""
         self.phone.text = ""
         self.email.text = ""
         self.message.text = ""

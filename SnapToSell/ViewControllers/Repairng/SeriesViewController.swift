@@ -13,6 +13,7 @@ import ObjectMapper
 import SVProgressHUD
 
 class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate , AddotherViewDelegate{
+   
     
 
     
@@ -143,7 +144,7 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
           self.addotherView = nil
       }
 
-      Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+      Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
         
 //        print("asdfadf")
         let main = self.storyboard?.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
@@ -154,6 +155,17 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
       }
     
    }
+       
+    
+    func didClose() {
+           self.addotherView.removeFromSuperview()
+                   
+           UIView.animate(withDuration: 0.3) {
+
+               self.addotherView.alpha = 0
+               self.addotherView = nil
+           }
+       }
        
        
        func addView()  {

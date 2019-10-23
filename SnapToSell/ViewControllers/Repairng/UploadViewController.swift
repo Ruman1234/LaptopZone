@@ -12,7 +12,7 @@ import OpalImagePicker
 class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayout , UICollectionViewDelegate , UICollectionViewDataSource, OpalImagePickerControllerDelegate{
     
     
-
+    
     
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var collectionview: UICollectionView!
@@ -31,7 +31,7 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         nextBtn.setFont(size: 19.5)
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         self.collectionview?.collectionViewLayout = layout
@@ -58,26 +58,26 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         
         return cell
     }
-   
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let numberOfItemsPerRow:CGFloat = 3
-            let spacingBetweenCells:CGFloat = 10
+        let numberOfItemsPerRow:CGFloat = 3
+        let spacingBetweenCells:CGFloat = 10
+        
+        
+        let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+        
+        if let collection = self.collectionview{
+            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+//            self.height.constant = width
+//            self.width.constant = width
             
+            return CGSize(width: width, height: width)
             
-            let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-            
-            if let collection = self.collectionview{
-                let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
-    //            self.height.constant = width
-    //            self.width.constant = width
-                
-                return CGSize(width: width, height: width)
-                
-            }else{
-                return CGSize(width: 0, height: 0)
-            }
+        }else{
+            return CGSize(width: 0, height: 0)
         }
+    }
         
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

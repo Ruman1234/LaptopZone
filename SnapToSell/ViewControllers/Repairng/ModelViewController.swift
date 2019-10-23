@@ -37,7 +37,7 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
         fetchDetails(id: id)
         
       let layout = UICollectionViewFlowLayout()
-      layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
+       layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
       layout.minimumLineSpacing = spacing
       layout.minimumInteritemSpacing = spacing
       self.collectionView?.collectionViewLayout = layout
@@ -147,6 +147,15 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
     }
     
     
+    func didClose() {
+        self.addotherView.removeFromSuperview()
+                
+        UIView.animate(withDuration: 0.3) {
+
+            self.addotherView.alpha = 0
+            self.addotherView = nil
+        }
+    }
     
     
        func didClose(text: String) {
@@ -159,7 +168,7 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
               self.addotherView = nil
           }
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
                       
               //        print("asdfadf")
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController

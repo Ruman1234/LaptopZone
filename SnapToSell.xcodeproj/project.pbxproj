@@ -10,6 +10,7 @@
 		0FE5FBEDDDDA0137777B8D1E /* Pods_SnapToSell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32B29B84E9AF569EE7CC12FF /* Pods_SnapToSell.framework */; };
 		1808B606231F91FB00243B9C /* client_477867186230-tumr6302i75gnmm6576e3rl7a5rcjuv1.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1808B605231F91FA00243B9C /* client_477867186230-tumr6302i75gnmm6576e3rl7a5rcjuv1.apps.googleusercontent.com.plist */; };
 		1809DA5E232F6DBF002D260D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809DA5D232F6DBF002D260D /* ProfileModel.swift */; };
+		18204EF62358DAE4007A8A91 /* accountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18204EF52358DAE4007A8A91 /* accountViewController.swift */; };
 		182A416D233B7F7B008286BE /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A416C233B7F7B008286BE /* ForgotPasswordViewController.swift */; };
 		182A416F233B7F9F008286BE /* CodeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A416E233B7F9F008286BE /* CodeVerificationViewController.swift */; };
 		182A4171233B7FB9008286BE /* ResetYourPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A4170233B7FB9008286BE /* ResetYourPasswordViewController.swift */; };
@@ -30,7 +31,12 @@
 		182B29C0231001EC003E10CD /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B29BF231001EC003E10CD /* AddressTableViewCell.swift */; };
 		182B29C22310021A003E10CD /* AllAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B29C12310021A003E10CD /* AllAddresViewController.swift */; };
 		182B29C4231003AA003E10CD /* AddressesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B29C3231003AA003E10CD /* AddressesModel.swift */; };
+		182DD03C235F5DDF009C79BA /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DD03A235F5DDF009C79BA /* ShowImageView.swift */; };
+		182DD03D235F5DDF009C79BA /* ShowImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182DD03B235F5DDF009C79BA /* ShowImageView.xib */; };
 		1847D6682328BF7400B04692 /* SelectYourProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847D6672328BF7400B04692 /* SelectYourProductViewController.swift */; };
+		185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD5032354509C0011FA0A /* Buy&Sell.swift */; };
+		185AD506235466CE0011FA0A /* SelectSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */; };
+		185AD508235467010011FA0A /* SelectModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD507235467010011FA0A /* SelectModelViewController.swift */; };
 		185F83D0231E402E002FAF1F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F83CF231E402E002FAF1F /* ChatViewController.swift */; };
 		18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18721C342316636900C3AAAC /* SWRevealViewController.m */; };
 		18721C382316663700C3AAAC /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C372316663700C3AAAC /* SideMenuViewController.swift */; };
@@ -54,6 +60,10 @@
 		18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FB2345C1F400282904 /* HomeViewController.swift */; };
 		18A7B2FE2345D37000282904 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FD2345D37000282904 /* mainViewController.swift */; };
 		18A7B30023460F7000282904 /* RepairingBrandCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B2FF23460F7000282904 /* RepairingBrandCollectionViewCell.swift */; };
+		18C5A5BF2356E7120011FDAA /* SelectdeliveryMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5A5BE2356E7120011FDAA /* SelectdeliveryMethodViewController.swift */; };
+		18CCCF5D234DED700049742D /* GiveOfferScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCCF5C234DED700049742D /* GiveOfferScreenViewController.swift */; };
+		18CCCF5F234DEE030049742D /* OffertableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCCF5E234DEE030049742D /* OffertableViewCell.swift */; };
+		18D5F85B235599F000A167B8 /* SelectPaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5F85A235599F000A167B8 /* SelectPaymentMethodViewController.swift */; };
 		18E849572317B39C00A52C62 /* PendingProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */; };
 		18E849592317C89A00A52C62 /* ApprovedProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */; };
 		18E8495B2317D48D00A52C62 /* ProcessedProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */; };
@@ -80,6 +90,10 @@
 		18F0726A2319331C00E8F8CB /* ShipmentRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F072692319331B00E8F8CB /* ShipmentRatesViewController.swift */; };
 		18F0726C2319381B00E8F8CB /* ShipmentRatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F0726B2319381B00E8F8CB /* ShipmentRatesModel.swift */; };
 		18F0726E2319434800E8F8CB /* ShipmentRatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F0726D2319434800E8F8CB /* ShipmentRatesTableViewCell.swift */; };
+		18F8D75C235D8A1C00E4E1C4 /* SelectShipmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8D75A235D8A1C00E4E1C4 /* SelectShipmentViewController.swift */; };
+		18F8D75D235D8A1C00E4E1C4 /* SelectShipmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F8D75B235D8A1C00E4E1C4 /* SelectShipmentViewController.xib */; };
+		18F8D761235DA35F00E4E1C4 /* shipmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8D75F235DA35F00E4E1C4 /* shipmentTableViewCell.swift */; };
+		18F8D762235DA35F00E4E1C4 /* shipmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F8D760235DA35F00E4E1C4 /* shipmentTableViewCell.xib */; };
 		7B1747470F434C7F805030A9 /* Pods_SnapToSellUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2EBF153BE3FBC74533DE15 /* Pods_SnapToSellUITests.framework */; };
 		D719E8C72B68DB566BB8B18A /* Pods_SnapToSellTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A4C5F5BF68481936F3B45D /* Pods_SnapToSellTests.framework */; };
 /* End PBXBuildFile section */
@@ -109,6 +123,7 @@
 		1810377A2338DAEB00BD8DDD /* Eina-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Eina-Regular.otf"; sourceTree = "<group>"; };
 		1810377B2338DAEB00BD8DDD /* Eina-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Eina-SemiBold.otf"; sourceTree = "<group>"; };
 		1810377C2338DAEB00BD8DDD /* Eina-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Eina-Bold.otf"; sourceTree = "<group>"; };
+		18204EF52358DAE4007A8A91 /* accountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accountViewController.swift; sourceTree = "<group>"; };
 		182A416C233B7F7B008286BE /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		182A416E233B7F9F008286BE /* CodeVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerificationViewController.swift; sourceTree = "<group>"; };
 		182A4170233B7FB9008286BE /* ResetYourPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetYourPasswordViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +150,12 @@
 		182B29BF231001EC003E10CD /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		182B29C12310021A003E10CD /* AllAddresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAddresViewController.swift; sourceTree = "<group>"; };
 		182B29C3231003AA003E10CD /* AddressesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesModel.swift; sourceTree = "<group>"; };
+		182DD03A235F5DDF009C79BA /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
+		182DD03B235F5DDF009C79BA /* ShowImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageView.xib; sourceTree = "<group>"; };
 		1847D6672328BF7400B04692 /* SelectYourProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYourProductViewController.swift; sourceTree = "<group>"; };
+		185AD5032354509C0011FA0A /* Buy&Sell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buy&Sell.swift"; sourceTree = "<group>"; };
+		185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSeriesViewController.swift; sourceTree = "<group>"; };
+		185AD507235467010011FA0A /* SelectModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelViewController.swift; sourceTree = "<group>"; };
 		185F83CF231E402E002FAF1F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		18628C0323360BD400B7A110 /* SnapToSell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnapToSell.entitlements; sourceTree = "<group>"; };
 		18721C332316636900C3AAAC /* SnapToSell-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SnapToSell-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -162,6 +182,10 @@
 		18A7B2FB2345C1F400282904 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18A7B2FD2345D37000282904 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		18A7B2FF23460F7000282904 /* RepairingBrandCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairingBrandCollectionViewCell.swift; sourceTree = "<group>"; };
+		18C5A5BE2356E7120011FDAA /* SelectdeliveryMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectdeliveryMethodViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		18CCCF5C234DED700049742D /* GiveOfferScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveOfferScreenViewController.swift; sourceTree = "<group>"; };
+		18CCCF5E234DEE030049742D /* OffertableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffertableViewCell.swift; sourceTree = "<group>"; };
+		18D5F85A235599F000A167B8 /* SelectPaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodViewController.swift; sourceTree = "<group>"; };
 		18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovedProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedProductsViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +212,10 @@
 		18F072692319331B00E8F8CB /* ShipmentRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipmentRatesViewController.swift; sourceTree = "<group>"; };
 		18F0726B2319381B00E8F8CB /* ShipmentRatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipmentRatesModel.swift; sourceTree = "<group>"; };
 		18F0726D2319434800E8F8CB /* ShipmentRatesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipmentRatesTableViewCell.swift; sourceTree = "<group>"; };
+		18F8D75A235D8A1C00E4E1C4 /* SelectShipmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShipmentViewController.swift; sourceTree = "<group>"; };
+		18F8D75B235D8A1C00E4E1C4 /* SelectShipmentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectShipmentViewController.xib; sourceTree = "<group>"; };
+		18F8D75F235DA35F00E4E1C4 /* shipmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shipmentTableViewCell.swift; sourceTree = "<group>"; };
+		18F8D760235DA35F00E4E1C4 /* shipmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = shipmentTableViewCell.xib; sourceTree = "<group>"; };
 		2A5A10375A2FAA9579047814 /* Pods-SnapToSellTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapToSellTests.release.xcconfig"; path = "Target Support Files/Pods-SnapToSellTests/Pods-SnapToSellTests.release.xcconfig"; sourceTree = "<group>"; };
 		32B29B84E9AF569EE7CC12FF /* Pods_SnapToSell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapToSell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		633F700434C2AAAE5FD2F9F8 /* Pods-SnapToSell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapToSell.debug.xcconfig"; path = "Target Support Files/Pods-SnapToSell/Pods-SnapToSell.debug.xcconfig"; sourceTree = "<group>"; };
@@ -322,6 +350,7 @@
 			children = (
 				182B29B2230FB626003E10CD /* LoginModel.swift */,
 				1809DA5D232F6DBF002D260D /* ProfileModel.swift */,
+				185AD502235450800011FA0A /* Buy&Sell */,
 				18E8D441232A117700CD8110 /* Snap&Sell */,
 				18E8D43E232A114200CD8110 /* Repairing */,
 			);
@@ -354,12 +383,23 @@
 		182B29BE231001D2003E10CD /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				18F8D75E235DA34600E4E1C4 /* shipmentCEll */,
 				18721C392316668D00C3AAAC /* SideMenuTableViewCell.swift */,
 				182B29BF231001EC003E10CD /* AddressTableViewCell.swift */,
 				18F0726D2319434800E8F8CB /* ShipmentRatesTableViewCell.swift */,
 				188A49EC234CA847003F995C /* SelectModelTableViewCell.swift */,
+				18CCCF5E234DEE030049742D /* OffertableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		182DD039235F5DB7009C79BA /* ShowImage */ = {
+			isa = PBXGroup;
+			children = (
+				182DD03A235F5DDF009C79BA /* ShowImageView.swift */,
+				182DD03B235F5DDF009C79BA /* ShowImageView.xib */,
+			);
+			path = ShowImage;
 			sourceTree = "<group>";
 		};
 		1847D6652328BCFF00B04692 /* Snap&Sell */ = {
@@ -383,6 +423,14 @@
 				18E8D448232A32D600CD8110 /* ContactDetailsViewController.swift */,
 			);
 			path = Repairng;
+			sourceTree = "<group>";
+		};
+		185AD502235450800011FA0A /* Buy&Sell */ = {
+			isa = PBXGroup;
+			children = (
+				185AD5032354509C0011FA0A /* Buy&Sell.swift */,
+			);
+			path = "Buy&Sell";
 			sourceTree = "<group>";
 		};
 		185F83CE231E4008002FAF1F /* Chat */ = {
@@ -460,10 +508,16 @@
 		188A49E5234C9EBD003F995C /* newScreen */ = {
 			isa = PBXGroup;
 			children = (
+				18204EF52358DAE4007A8A91 /* accountViewController.swift */,
 				188A49E3234C9982003F995C /* Snap&sellSelectBrandViewController.swift */,
 				188A49E6234C9EDD003F995C /* snap&sellSelectModelViewController.swift */,
+				185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */,
+				185AD507235467010011FA0A /* SelectModelViewController.swift */,
 				188A49E8234CA1AE003F995C /* CarierServisesViewController.swift */,
 				188A49EA234CA793003F995C /* SelectPhoneModelViewController.swift */,
+				18CCCF5C234DED700049742D /* GiveOfferScreenViewController.swift */,
+				18D5F85A235599F000A167B8 /* SelectPaymentMethodViewController.swift */,
+				18C5A5BE2356E7120011FDAA /* SelectdeliveryMethodViewController.swift */,
 			);
 			path = newScreen;
 			sourceTree = "<group>";
@@ -471,8 +525,9 @@
 		188B009923488885007B832F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				188B009E234888D9007B832F /* AddotherView.swift */,
-				188B009F234888D9007B832F /* AddotherView.xib */,
+				182DD039235F5DB7009C79BA /* ShowImage */,
+				18F8D759235D89ED00E4E1C4 /* SelectShipment */,
+				18F8D758235D89DC00E4E1C4 /* AnotherView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -571,6 +626,33 @@
 				18F072692319331B00E8F8CB /* ShipmentRatesViewController.swift */,
 			);
 			path = Shipment;
+			sourceTree = "<group>";
+		};
+		18F8D758235D89DC00E4E1C4 /* AnotherView */ = {
+			isa = PBXGroup;
+			children = (
+				188B009E234888D9007B832F /* AddotherView.swift */,
+				188B009F234888D9007B832F /* AddotherView.xib */,
+			);
+			path = AnotherView;
+			sourceTree = "<group>";
+		};
+		18F8D759235D89ED00E4E1C4 /* SelectShipment */ = {
+			isa = PBXGroup;
+			children = (
+				18F8D75A235D8A1C00E4E1C4 /* SelectShipmentViewController.swift */,
+				18F8D75B235D8A1C00E4E1C4 /* SelectShipmentViewController.xib */,
+			);
+			path = SelectShipment;
+			sourceTree = "<group>";
+		};
+		18F8D75E235DA34600E4E1C4 /* shipmentCEll */ = {
+			isa = PBXGroup;
+			children = (
+				18F8D75F235DA35F00E4E1C4 /* shipmentTableViewCell.swift */,
+				18F8D760235DA35F00E4E1C4 /* shipmentTableViewCell.xib */,
+			);
+			path = shipmentCEll;
 			sourceTree = "<group>";
 		};
 		8EC474B298CD52945D0F9678 /* Frameworks */ = {
@@ -711,7 +793,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F8D75D235D8A1C00E4E1C4 /* SelectShipmentViewController.xib in Resources */,
+				18F8D762235DA35F00E4E1C4 /* shipmentTableViewCell.xib in Resources */,
 				18EC2E802311509600870A48 /* GoogleService-Info.plist in Resources */,
+				182DD03D235F5DDF009C79BA /* ShowImageView.xib in Resources */,
 				182B2989230FB39A003E10CD /* LaunchScreen.storyboard in Resources */,
 				182B2986230FB39A003E10CD /* Assets.xcassets in Resources */,
 				187E6F7C2344AD5600DF78BE /* Walkthrough.storyboard in Resources */,
@@ -849,6 +934,7 @@
 				18E8D440232A115A00CD8110 /* RepairDetail.swift in Sources */,
 				18A7B2FE2345D37000282904 /* mainViewController.swift in Sources */,
 				188A49EB234CA793003F995C /* SelectPhoneModelViewController.swift in Sources */,
+				18F8D75C235D8A1C00E4E1C4 /* SelectShipmentViewController.swift in Sources */,
 				188A49ED234CA847003F995C /* SelectModelTableViewCell.swift in Sources */,
 				188A49E7234C9EDD003F995C /* snap&sellSelectModelViewController.swift in Sources */,
 				18EC2E7A23110B8B00870A48 /* ProductImageCollectionViewCell.swift in Sources */,
@@ -863,10 +949,12 @@
 				182B29C0231001EC003E10CD /* AddressTableViewCell.swift in Sources */,
 				187E6F832344ADF800DF78BE /* CustomPageViewController.swift in Sources */,
 				18E8495F2317E13F00A52C62 /* processedSetupIndicatorViewController.swift in Sources */,
+				18D5F85B235599F000A167B8 /* SelectPaymentMethodViewController.swift in Sources */,
 				18EC2E7723110AD800870A48 /* ProductDetailViewController.swift in Sources */,
 				188A49E9234CA1AE003F995C /* CarierServisesViewController.swift in Sources */,
 				18F0725F2318FD0D00E8F8CB /* DropOffSetupViewController.swift in Sources */,
 				18721C472316920800C3AAAC /* ProductsListViewController.swift in Sources */,
+				185AD508235467010011FA0A /* SelectModelViewController.swift in Sources */,
 				18E8D443232A24BF00CD8110 /* SeriesViewController.swift in Sources */,
 				182B29BD230FEBC8003E10CD /* AddNewAddressViewController.swift in Sources */,
 				18721C4023168EB900C3AAAC /* Images.swift in Sources */,
@@ -879,6 +967,7 @@
 				18F0726823190E2300E8F8CB /* PackageDetailsViewController.swift in Sources */,
 				18F072662319092800E8F8CB /* ShipmentSetupViewController.swift in Sources */,
 				182B29B8230FBBFA003E10CD /* Utilities.swift in Sources */,
+				182DD03C235F5DDF009C79BA /* ShowImageView.swift in Sources */,
 				18E8D43D232A0F3200CD8110 /* RepairBrandViewController.swift in Sources */,
 				182B29BB230FC9B3003E10CD /* RegisterViewController.swift in Sources */,
 				185F83D0231E402E002FAF1F /* ChatViewController.swift in Sources */,
@@ -886,24 +975,31 @@
 				182A416F233B7F9F008286BE /* CodeVerificationViewController.swift in Sources */,
 				1847D6682328BF7400B04692 /* SelectYourProductViewController.swift in Sources */,
 				188B00A0234888D9007B832F /* AddotherView.swift in Sources */,
+				185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */,
 				18F072612318FD9900E8F8CB /* DropOffDescriptionViewController.swift in Sources */,
+				18CCCF5D234DED700049742D /* GiveOfferScreenViewController.swift in Sources */,
 				18E8D445232A250B00CD8110 /* ModelViewController.swift in Sources */,
 				18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */,
 				18F072632319045200E8F8CB /* MapViewController.swift in Sources */,
 				182B29AD230FB438003E10CD /* Manager.swift in Sources */,
+				18204EF62358DAE4007A8A91 /* accountViewController.swift in Sources */,
 				182A416D233B7F7B008286BE /* ForgotPasswordViewController.swift in Sources */,
+				18F8D761235DA35F00E4E1C4 /* shipmentTableViewCell.swift in Sources */,
 				18EC2E7C23111E4F00870A48 /* CameraViewController.swift in Sources */,
 				18E849662317E91300A52C62 /* processedDescriptionViewController.swift in Sources */,
 				18E8D447232A253C00CD8110 /* ProblemViewController.swift in Sources */,
 				18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */,
 				18F0726E2319434800E8F8CB /* ShipmentRatesTableViewCell.swift in Sources */,
 				1809DA5E232F6DBF002D260D /* ProfileModel.swift in Sources */,
+				18C5A5BF2356E7120011FDAA /* SelectdeliveryMethodViewController.swift in Sources */,
 				18E8D449232A32D600CD8110 /* ContactDetailsViewController.swift in Sources */,
+				185AD506235466CE0011FA0A /* SelectSeriesViewController.swift in Sources */,
 				18E849592317C89A00A52C62 /* ApprovedProductDetailViewController.swift in Sources */,
 				182B297F230FB399003E10CD /* AppDelegate.swift in Sources */,
 				18F0726C2319381B00E8F8CB /* ShipmentRatesModel.swift in Sources */,
 				18721C3A2316668D00C3AAAC /* SideMenuTableViewCell.swift in Sources */,
 				182B29B0230FB4A4003E10CD /* SnapToSellNetworkMAnager.swift in Sources */,
+				18CCCF5F234DEE030049742D /* OffertableViewCell.swift in Sources */,
 				18721C382316663700C3AAAC /* SideMenuViewController.swift in Sources */,
 				182B29B6230FB722003E10CD /* Constants.swift in Sources */,
 				18F0726A2319331C00E8F8CB /* ShipmentRatesViewController.swift in Sources */,

@@ -918,5 +918,366 @@ extension NetworkManager{
         
     }
     
+    func getBrnad(
+        Id : String,
+        
+        success : @escaping(Buy_Sell) -> Void ,
+        failure : @escaping(NSError) -> Void)  {
+        
+        
+        Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_Brands")!, method: .post, parameters: ["get_product_name" : Id]).responseJSON { (response) in
+                   
+                   print(response)
+            
+            
+       guard (response.response?.statusCode) != nil else{
+                failure(NSError())
+                return
+            }
+            print(response.response!.statusCode)
+            if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                print(response)
+                if let value = response.result.value{
+                    success(Mapper<Buy_Sell>().map(JSON: value as! [String : Any])!)
+                }
+            }else{
+                failure(NSError())
+            }
+        }
+        
+    }
+    
+    
+    func getSeries(
+          Id : String,
+          
+          success : @escaping(Buy_Sell) -> Void ,
+          failure : @escaping(NSError) -> Void)  {
+        
+         
+         Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_Series")!, method: .post, parameters: ["get_brand_name" : Id]).responseJSON { (response) in
+                    
+                    print(response)
+             
+             
+        guard (response.response?.statusCode) != nil else{
+                 failure(NSError())
+                 return
+             }
+             print(response.response!.statusCode)
+             if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                 print(response)
+                 if let value = response.result.value{
+                     success(Mapper<Buy_Sell>().map(JSON: value as! [String : Any])!)
+                 }
+             }else{
+                 failure(NSError())
+             }
+         }
+          
+      }
+      
+    func getModel(
+             Id : String,
+             
+             success : @escaping(Buy_Sell) -> Void ,
+             failure : @escaping(NSError) -> Void)  {
+             
+             
+               Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_Model")!, method: .post, parameters: ["get_series_name" : Id]).responseJSON { (response) in
+                          
+                          print(response)
+                   
+                   
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+                   }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                           success(Mapper<Buy_Sell>().map(JSON: value as! [String : Any])!)
+                       }
+                   }else{
+                       failure(NSError())
+                   }
+               }
+        
+         }
+    
+
+        func getCarier(
+                 Id : String,
+                 
+                 success : @escaping(Buy_Sell) -> Void ,
+                 failure : @escaping(NSError) -> Void)  {
+            
+            
+                   Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_Carrier")!, method: .post, parameters: ["model_dt_id" : Id]).responseJSON { (response) in
+                              
+                              print(response)
+                       
+                       
+                  guard (response.response?.statusCode) != nil else{
+                           failure(NSError())
+                           return
+                       }
+                       print(response.response!.statusCode)
+                       if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                           print(response)
+                           if let value = response.result.value{
+                               success(Mapper<Buy_Sell>().map(JSON: value as! [String : Any])!)
+                           }
+                       }else{
+                           failure(NSError())
+                       }
+                   }
+            
+             }
+    
+    
+        func getStorage(
+                        Id : String,
+                        
+                        success : @escaping(Buy_Sell) -> Void ,
+                        failure : @escaping(NSError) -> Void)  {
+                   
+                   
+                          Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_Storage")!, method: .post, parameters: ["carrier_id" : Id]).responseJSON { (response) in
+                                     
+                                     print(response)
+                              
+                              
+                         guard (response.response?.statusCode) != nil else{
+                                  failure(NSError())
+                                  return
+                              }
+                              print(response.response!.statusCode)
+                              if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                                  print(response)
+                                  if let value = response.result.value{
+                                      success(Mapper<Buy_Sell>().map(JSON: value as! [String : Any])!)
+                                  }
+                              }else{
+                                  failure(NSError())
+                              }
+                          }
+                   
+                    }
+               
+    
+    func getQuestions(
+                   Id : String,
+                   
+                   success : @escaping([Buy_Sell_Questions]) -> Void ,
+                   failure : @escaping(NSError) -> Void)  {
+                      
+                      
+         Alamofire.request(URL(string: Constants.BASE_URL2 + "ljw_getAnOfferMobile")!, method: .post, parameters: ["object_id" : Id]).responseJSON { (response) in
+
+            
+            print(response)
+
+            guard (response.response?.statusCode) != nil else{
+                     failure(NSError())
+                     return
+            }
+                 print(response.response!.statusCode)
+                 if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                     print(response)
+                     if let value = response.result.value{
+                        success(Mapper<Buy_Sell_Questions>().mapArray(JSONObject: value)!)
+                     }
+                 }else{
+                     failure(NSError())
+                 }
+         }
+      
+    }
+    
+//    func dropOff(
+//                      product_name : String,
+//                      brand_name : String,
+//                      series_name : String,
+//                      model_name : String,
+//                      carrier_name : String,
+//                      storage_name : String,
+//                      answer_ids : String,
+//                      gevin_offer : String,
+//                      available_offer : String,
+//                      select_option : String,
+//                      payment_mode : String,
+//                      paypalEmail : String,
+//                      payable_to : String,
+//                      checkEmail : String,
+//                      address1 : String,
+//                      address2 : String,
+//                      cityName : String,
+//                      stateName : String,
+//                      zipCode : String,
+//                      countryName : String,
+//                      pick_address : String,
+//                      pick_area : String,
+//                      pick_city : String,
+//                      pick_state : String,
+//                      pick_zipcode : String,
+//                      success : @escaping(LoginModel) -> Void ,
+//                      failure : @escaping(NSError) -> Void)  {
+////                         let ur = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_saveBuySell")!
+////                         print(ur)
+//
+//         let BASE_URL = URL(string: Constants.BASE_URL2 + "ljw_saveBuySell")
+//            Alamofire.request(BASE_URL!, method: .post,
+//
+//                              parameters: ["product_name" : product_name,
+//                             "brand_name" : brand_name,
+//                             "series_name" : series_name,
+//                             "model_name" : model_name,
+//                             "carrier_name" : carrier_name,
+//                             "storage_name" : storage_name,
+//                             "answer_ids" : answer_ids,
+//                             "gevin_offer" : gevin_offer,
+//                             "available_offer" : available_offer,
+//                             "select_option" : select_option,
+//                             "paypalEmail" : paypalEmail,
+//                             "address1" : address1,
+//                             "address2" : address2,
+//                             "cityName" : cityName,
+//                             "stateName" : stateName,
+//                             "zipCode" : zipCode,
+//
+//                             "countryName" : countryName,
+//                             "pick_address" : pick_address,
+//                             "pick_area" : pick_area,
+//                             "pick_city" : pick_city,
+//                             "pick_state" : pick_state,
+//                             "pick_zipcode" : pick_zipcode]
+//).responseJSON { (response) in
+//
+//
+//               print(response)
+//
+//               guard (response.response?.statusCode) != nil else{
+//                        failure(NSError())
+//                        return
+//               }
+//                    print(response.response!.statusCode)
+//                    if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+//                        print(response)
+//                        if let value = response.result.value{
+//                           success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+//                        }
+//                    }else{
+//                        failure(NSError())
+//                    }
+//            }
+//
+//       }
+    
+        func dropOff(
+            pra :Parameters,
+                          success : @escaping(LoginModel) -> Void ,
+                          failure : @escaping(NSError) -> Void)  {
+    //                         let ur = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_saveBuySell")!
+    //                         print(ur)
+
+             let BASE_URL = URL(string: Constants.BASE_URL2 + "ljw_saveBuySell")
+                Alamofire.request(BASE_URL!, method: .post,
+                                  
+                                  parameters: pra
+                ).responseJSON { (response) in
+
+                   
+                   print(response)
+
+                   guard (response.response?.statusCode) != nil else{
+                            failure(NSError())
+                            return
+                   }
+                        print(response.response!.statusCode)
+                        if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                            print(response)
+                            if let value = response.result.value{
+                               success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                            }
+                        }else{
+                            failure(NSError())
+                        }
+                }
+             
+           }
+    
+    
+    func getShipmentRates(
+        pra :Parameters,
+                     success : @escaping(ShipmentRates) -> Void ,
+                     failure : @escaping(NSError) -> Void)  {
+//                         let ur = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_saveBuySell")!
+//                         print(ur)
+
+        let BASE_URL = URL(string: "http://71.78.236.22/laptop-zone-stage/public/api/dummy/shipment-rates")
+           Alamofire.request(BASE_URL!, method: .post,
+                             
+                             parameters: pra
+                ).responseJSON { (response) in
+
+              
+              print(response)
+
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+              }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                          success(Mapper<ShipmentRates>().map(JSON: value as! [String : Any])!)
+                       }
+                   }else{
+                       failure(NSError())
+                   }
+           }
+        
+      }
+    
+    
+    
+
+    func getShipmentImage(
+        pra :Parameters,
+                     success : @escaping(ShipmentRates) -> Void ,
+                     failure : @escaping(NSError) -> Void)  {
+//                         let ur = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_saveBuySell")!
+//                         print(ur)
+
+        let BASE_URL = URL(string: "http://71.78.236.22/laptop-zone-stage/public/api/dummy/register")
+           Alamofire.request(BASE_URL!, method: .post,
+                             
+                             parameters: pra
+                ).responseJSON { (response) in
+
+              
+              print(response)
+
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+              }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                          success(Mapper<ShipmentRates>().map(JSON: value as! [String : Any])!)
+                       }
+                   }else{
+                       failure(NSError())
+                   }
+           }
+        
+      }
+    
+    
     
 }

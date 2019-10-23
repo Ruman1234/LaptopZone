@@ -8,7 +8,11 @@ struct LoginModel : Mappable {
 	var expires_at : String?
 	var user_id : Int?
     var message : String?
-
+// shipment
+    var create : String?
+    var data : String?
+    
+   
 	init?(map: Map) {
 
 	}
@@ -20,6 +24,10 @@ struct LoginModel : Mappable {
 		expires_at <- map["expires_at"]
 		user_id <- map["user_id"]
         message <- map["message"]
+        
+        create <- map["create"]
+        data <- map["data"]
+        
 	}
 
 }

@@ -24,7 +24,7 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     @IBOutlet weak var lotPrice: SkyFloatingLabelTextField!
     @IBOutlet weak var remarks: SkyFloatingLabelTextField!
     @IBOutlet weak var senfProduct: UIButton!
-    @IBOutlet var camera: UIBarButtonItem!
+//    @IBOutlet var camera: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var menubtn: UIBarButtonItem!
     
@@ -45,10 +45,10 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
 
         _ = UserDefaults.standard.value(forKey: "Token")
         
-        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-
-        self.navigationController?.navigationItem.rightBarButtonItem = camera
+//        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//
+//        self.navigationController?.navigationItem.rightBarButtonItem = camera
         
 //        self.navigationController?.navigationItem.rightBarButtonItem = menubtn
         self.addBG()
@@ -110,7 +110,7 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     
     override func viewDidAppear(_ animated: Bool) {
        
-        self.navigationItem.rightBarButtonItem = camera
+//        self.navigationItem.rightBarButtonItem = camera
 //        self.navigationItem.leftBarButtonItem = menubtn
 
 //        self.menubtn.target = self.revealViewController()

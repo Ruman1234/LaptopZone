@@ -8,11 +8,22 @@
 
 import UIKit
 
+struct selectProduct {
+    var name : String!
+    var id : String!
+    var image : UIImage?
+}
+
 class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
    
 
     @IBOutlet weak var collectionView: UICollectionView!
     private let spacing:CGFloat = 10.0
+//    let arr = ["Phones" , "Ipad/Tablet" , "Laptop"]
+    let arr = [selectProduct(name: "Phones", id: "6", image: nil),
+               selectProduct(name: "Ipad/Tablet", id: "5", image: nil),
+               selectProduct(name: "Laptop", id: "2", image: nil)]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +34,7 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
         self.cancleBtn()
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         self.collectionView?.collectionViewLayout = layout
@@ -32,12 +43,14 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
  
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return 10
+        return arr.count
     }
        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! RepairingBrandCollectionViewCell
-
+        
+        cell.brandName.text = arr[indexPath.row].name
+        
         return cell
         
     }
@@ -46,7 +59,9 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
         
     
        let main = self.storyboard?.instantiateViewController(withIdentifier: "snap_sellSelectModelViewController") as! snap_sellSelectModelViewController
-     
+        
+        main.id = arr[indexPath.row].id
+        Constants.productName = arr[indexPath.row].id
        self.navigationController?.pushViewController(main, animated: true)
         
     }

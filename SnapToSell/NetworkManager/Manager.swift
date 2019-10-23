@@ -42,6 +42,40 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    
+    
+      func request2(url:String ,
+                   method : Alamofire.HTTPMethod ,
+                   parameters : Parameters ,
+                   encoding : ParameterEncoding = URLEncoding.default,
+                   header : [String : String]? = nil,
+                   completionHandler :@escaping (DataResponse<Any>) -> Void
+          )  {
+
+          let url = Constants.BASE_URL2 + url
+          
+        print(url)
+        print(method)
+        print(parameters)
+        
+        
+          Alamofire.request(url, method: method, parameters: parameters, encoding: encoding, headers: header).responseJSON { (response) in
+            
+            print(response)
+              if let value = response.result.value {
+                  let json = JSON(value)
+                  if json["success"].intValue == -1 {
+                      
+                  }else{
+                      completionHandler(response)
+                  }
+              }else{
+                  completionHandler(response)
+              }
+          }
+      }
 }
 
 

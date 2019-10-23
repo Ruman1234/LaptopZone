@@ -26,20 +26,23 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     
     private let spacing:CGFloat = 10.0
     var addotherView : AddotherView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.addBG()
         self.otherBtn.setGradient()
         self.addPAger(totalPage: 7, currentPage: 5)
         fetchDetails(id: id)
         
         let layout = UICollectionViewFlowLayout()
-                           layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
-                           layout.minimumLineSpacing = spacing
-                           layout.minimumInteritemSpacing = spacing
-                           self.collectionView?.collectionViewLayout = layout
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        self.collectionView?.collectionViewLayout = layout
                     
-             self.cancleBtn()
+        self.cancleBtn()
         self.backBtn()
 //        self.tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
@@ -130,7 +133,7 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
               self.addotherView.alpha = 0
               self.addotherView = nil
           }
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
                              
                      
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
@@ -141,7 +144,18 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
         
     }
        
-       
+    
+    func didClose() {
+        self.addotherView.removeFromSuperview()
+                
+        UIView.animate(withDuration: 0.3) {
+
+            self.addotherView.alpha = 0
+            self.addotherView = nil
+        }
+    }
+    
+    
        func addView()  {
            if self.addotherView == nil {
                self.addotherView = nil

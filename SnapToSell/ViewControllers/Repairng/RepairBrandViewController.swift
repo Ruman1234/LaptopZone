@@ -22,7 +22,7 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
     var itemsArray = [Ljw_getobject]()
     private let spacing:CGFloat = 10.0
     
-    @IBOutlet weak var otherBtn: UIButton!
+//    @IBOutlet weak var otherBtn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var height: NSLayoutConstraint!
@@ -39,12 +39,12 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
         self.addPAger(totalPage: 7, currentPage: 2)
         // Do any additional setup after loading the view.
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
+         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         self.collectionView?.collectionViewLayout = layout
         self.addBG()
-        self.otherBtn.addDashedBorder()
+//        self.otherBtn.addDashedBorder()
         fetchDetails(id: id)
         self.cancleBtn()
         self.backBtn()
@@ -196,7 +196,7 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
         
         self.otherText = text
         self.collectionView.reloadData()
-        self.otherBtn.setTitle(text, for: .normal)
+//        self.otherBtn.setTitle(text, for: .normal)
         self.addotherView.removeFromSuperview()
                
        UIView.animate(withDuration: 0.3) {
@@ -205,7 +205,7 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
            self.addotherView = nil
         }
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
                 
         //        print("asdfadf")
             let main = self.storyboard?.instantiateViewController(withIdentifier: "SeriesViewController") as! SeriesViewController
@@ -215,6 +215,16 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
             
         }
         
+    }
+    
+    func didClose() {
+        self.addotherView.removeFromSuperview()
+                
+        UIView.animate(withDuration: 0.3) {
+
+            self.addotherView.alpha = 0
+            self.addotherView = nil
+        }
     }
     
     

@@ -13,7 +13,11 @@ class Constants {
     
     static let BASE_URL = "http://71.78.236.22/laptop-zone-stage/public/api/"
     
-//    static let BASE_URL = "http://192.168.100.54/sts-laravel/public/api/"
+    static let BASE_URL2 = "http://71.78.236.20/laptopzone/reactcontroller/c_react/"
+    
+//    static let BASE_URL = "http://192.168.100.28/sts-laravel/public/api/"
+//    static let BASE_URL2 = "http://192.168.100.33/laptopzone/reactcontroller/c_react/"
+    
     static let LOGIN = "auth/login"
     static let REGISTER = "auth/signup"
     static let SOCIAL_LOGIN = "auth/google"
@@ -44,6 +48,13 @@ class Constants {
     static let FORGOTPASSWORDVERIFY = "auth/forgot-password/verify"
     static let UPDATETOKEN = "customer/devices"
     
+    
+    static let SELECT_BRAND = "ljw_Brands"
+    static let SELECT_SERIES = "ljw_Series"
+    static let SELECT_MODEL = "ljw_Model"
+    
+    
+    
     static var address = AddressesModel()
     static var CheckAvailbility = Bool()
     static var addressId = String()
@@ -63,6 +74,17 @@ class Constants {
     static var issuesId = String()
     
     static var UploadImage = [UIImage]()
+    
+    static var productName = String()
+    static var brand_name = String()
+    static var series_name = String()
+    static var model_name = String()
+    static var carrier_name = String()
+    static var storage_name = String()
+    static var answer_ids = String()
+    static var gevin_offer = String()
+    static var available_offer = String()
+    
     
     static let APP_THEME_COLOR = UIColor(red: 252.0 / 255.0, green: 43.0 / 255.0, blue: 8.0 / 255.0, alpha: 1)
 }

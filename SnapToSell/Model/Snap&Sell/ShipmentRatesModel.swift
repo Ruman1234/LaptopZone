@@ -15,6 +15,10 @@ struct ShipmentRates : Mappable {
     var message : String?
     var rates : [Rates]?
     
+    var label_remote_url : String?
+    
+    
+    
     init?(map: Map) {
         
     }
@@ -24,27 +28,36 @@ struct ShipmentRates : Mappable {
         id <- map["id"]
         rates <- map["rates"]
         message <- map["message"]
+        label_remote_url <- map["label_remote_url"]
     }
     
 }
 
 
 struct Rates : Mappable {
+    var id : String?
+    var shipment_id : String?
     var carrier : String?
     var service : String?
     var rate : String?
-    var id : String?
+    var currency : String?
+    
+    
+    
+   
     
     init?(map: Map) {
         
     }
     
     mutating func mapping(map: Map) {
-        
+        id <- map["id"]
+        shipment_id <- map["shipment_id"]
         carrier <- map["carrier"]
         service <- map["service"]
         rate <- map["rate"]
-        id <- map["id"]
+        currency <- map["currency"]
+        
     }
     
 }

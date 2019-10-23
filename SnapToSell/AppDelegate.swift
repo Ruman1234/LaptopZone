@@ -14,6 +14,8 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import GoogleMaps
+import GooglePlaces
 
 
 @available(iOS 13.0, *)
@@ -34,8 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        GIDSignIn.sharedInstance().delegate = self
 
         
+//        UITabBar.appearance().tintColor.add
         
-        
+        GMSServices.provideAPIKey("AIzaSyDnKuPE0DGd4OFFzkJtsbh970OCXyRJ4wg")
+        GMSPlacesClient.provideAPIKey("AIzaSyDnKuPE0DGd4OFFzkJtsbh970OCXyRJ4wg")
+
 
         IQKeyboardManager.shared.enable = true
 //        IQKeyboardManager.shared.toolbarTintColor = Constants.APP_THEAME_COLOR

@@ -267,10 +267,3 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
         
     }
 }
-
-
-extension Double {
-    var dollarString:String {
-        return String(format: "$%.2f", self)
-    }
-}

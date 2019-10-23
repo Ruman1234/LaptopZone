@@ -25,6 +25,12 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 
+
+pod 'GoogleMaps'
+pod 'GooglePlacePicker'
+pod 'GooglePlaces'
+
+
 pod 'Socket.IO-Client-Swift', '~> 15.1.0'
 
 pod 'XLPagerTabStrip'

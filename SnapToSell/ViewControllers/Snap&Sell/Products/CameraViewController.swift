@@ -64,15 +64,15 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
             pendingProductDetailViewController = a
             
         }else if self.type == "recycle"{
-            let a = self.navigationController?.viewControllers[2] as! ContactDetailsViewController
+            let a = self.navigationController?.viewControllers[1] as! ContactDetailsViewController
             contactDetailsViewController = a
             
         }else if self.type == "repair"{
-            let a = self.navigationController?.viewControllers[2] as! UploadViewController
+            let a = self.navigationController?.viewControllers[1] as! UploadViewController
             uploadViewController = a
             
         }else{
-            let a = self.navigationController?.viewControllers[2] as! ProductDetailViewController
+            let a = self.navigationController?.viewControllers[1] as! ProductDetailViewController
             productDetailViewController = a
             
             

@@ -241,7 +241,7 @@ extension UIViewController {
     
     @objc func logoutUser(){
         
-         let a = self.navigationController?.viewControllers[1] as! mainViewController
+         let a = self.navigationController?.viewControllers[0] as! HomeViewController
          self.navigationController?.popToViewController(a, animated: true)
          
     }
@@ -514,6 +514,30 @@ extension UIButton {
 
 
 extension UIView {
+    
+    
+    
+    func showToast(message : String) {
+    //        label.intrinsicContentSize.width
+    //        label.sizeToFit()
+            let toastLabel = UILabel(frame: CGRect(x: 0, y: self.frame.size.height-100, width: self.frame.size.width, height: 35))
+            toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            toastLabel.textColor = UIColor.white
+            toastLabel.textAlignment = .center;
+            toastLabel.font = UIFont(name: "Montserrat-Light", size: 10.0)
+            toastLabel.text = message
+            toastLabel.alpha = 1.0
+            toastLabel.layer.cornerRadius = 10;
+            toastLabel.clipsToBounds  =  true
+            self.addSubview(toastLabel)
+            UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+                toastLabel.alpha = 0.0
+            }, completion: {(isCompleted) in
+                toastLabel.removeFromSuperview()
+            })
+    }
+    
+    
     func applyGradient(colours: [UIColor]) -> Void {
 
         self.applyGradient(colours: colours, locations: nil, startPoint: nil, endPoint: nil)
@@ -554,3 +578,22 @@ extension UIView {
   
 }
 
+class Colors {
+    var gl:CAGradientLayer!
+
+    init() {
+        let colorTop = UIColor(red: 192.0 / 255.0, green: 38.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 35.0 / 255.0, green: 2.0 / 255.0, blue: 2.0 / 255.0, alpha: 1.0).cgColor
+
+        self.gl = CAGradientLayer()
+        self.gl.colors = [colorTop, colorBottom]
+        self.gl.locations = [0.0, 1.0]
+    }
+}
+
+
+extension Double {
+    var dollarString:String {
+        return String(format: "$%.2f", self)
+    }
+}

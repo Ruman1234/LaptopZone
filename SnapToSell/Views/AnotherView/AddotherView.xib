@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Eina-Regular.otf">
+            <string>Eina03-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AddotherView" customModule="SnapToSell" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZt-iC-Fdi">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="closeBtn:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="ceX-qB-VPO"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34J-JD-AK9">
+                    <rect key="frame" x="27.5" y="237" width="320" height="193"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter model number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLu-VD-9De">
+                            <rect key="frame" x="63" y="28" width="194" height="27.5"/>
+                            <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OPq-bi-PoN" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <rect key="frame" x="29" y="79.5" width="262" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="262" id="WBx-cy-5fX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TvY-CX-qmn">
+                            <rect key="frame" x="98.5" y="129.5" width="123" height="50"/>
+                            <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="FGW-3o-7aa"/>
+                                <constraint firstAttribute="width" constant="123" id="lDR-vT-dxF"/>
+                            </constraints>
+                            <state key="normal" title="Done">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="doneBtn:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="gwY-lq-mTd"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="TvY-CX-qmn" firstAttribute="top" secondItem="OPq-bi-PoN" secondAttribute="bottom" constant="16" id="EEW-OV-XVm"/>
+                        <constraint firstItem="tLu-VD-9De" firstAttribute="centerX" secondItem="OPq-bi-PoN" secondAttribute="centerX" id="GhK-UT-uGf"/>
+                        <constraint firstAttribute="height" constant="193" id="Jlt-Lb-S1w"/>
+                        <constraint firstItem="TvY-CX-qmn" firstAttribute="centerX" secondItem="OPq-bi-PoN" secondAttribute="centerX" id="WYN-mJ-8EK"/>
+                        <constraint firstAttribute="width" constant="320" id="WeZ-4c-lYS"/>
+                        <constraint firstItem="tLu-VD-9De" firstAttribute="centerX" secondItem="34J-JD-AK9" secondAttribute="centerX" id="fsZ-FH-JKx"/>
+                        <constraint firstItem="OPq-bi-PoN" firstAttribute="centerY" secondItem="34J-JD-AK9" secondAttribute="centerY" id="jIZ-UZ-LyZ"/>
+                        <constraint firstItem="OPq-bi-PoN" firstAttribute="top" secondItem="tLu-VD-9De" secondAttribute="bottom" constant="24" id="pL9-BY-eTq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.54738334760273977" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="UZt-iC-Fdi" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Amx-6f-R4i"/>
+                <constraint firstItem="34J-JD-AK9" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="C08-e4-vkd"/>
+                <constraint firstItem="UZt-iC-Fdi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="H2y-Hl-kXY"/>
+                <constraint firstItem="UZt-iC-Fdi" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="WHe-7j-SEx"/>
+                <constraint firstItem="34J-JD-AK9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="qbm-tg-apq"/>
+                <constraint firstItem="UZt-iC-Fdi" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="z1L-Es-ceD"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <connections>
+                <outlet property="closeBtn" destination="UZt-iC-Fdi" id="g2v-Vg-f6b"/>
+                <outlet property="doneBtn" destination="TvY-CX-qmn" id="WQO-BB-W36"/>
+                <outlet property="nameLbl" destination="tLu-VD-9De" id="9fc-BW-L6R"/>
+                <outlet property="textfield" destination="OPq-bi-PoN" id="AeJ-tg-fjg"/>
+            </connections>
+            <point key="canvasLocation" x="136.80000000000001" y="87.706146926536732"/>
+        </view>
+    </objects>
+</document>
