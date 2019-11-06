@@ -29,15 +29,18 @@ class AddotherView: UIView {
     @IBOutlet weak var doneBtn: UIButton!
     @IBOutlet weak var textfield: SkyFloatingLabelTextField!
     
+    var titleName = String()
     
     override func awakeFromNib() {
         doneBtn.setFont(size: 19)
         doneBtn.setGradient()
+        print(titleName)
+        self.nameLbl.text = titleName   
         
     }
     
     @IBAction func doneBtn(_ sender: Any) {
-        
+        self.textfield.text = self.textfield.text?.trimmingCharacters(in: .whitespaces)
         self.delegate?.didClose(text: self.textfield.text!)
     }
     

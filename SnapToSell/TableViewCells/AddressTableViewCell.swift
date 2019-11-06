@@ -15,7 +15,8 @@ class AddressTableViewCell: UITableViewCell {
     
     @IBOutlet weak var city: UILabel!
     
-    @IBOutlet weak var state: UILabel!
+    @IBOutlet weak var defaultLbl: UILabel!
+    
     
     @IBOutlet weak var zip: UILabel!
     

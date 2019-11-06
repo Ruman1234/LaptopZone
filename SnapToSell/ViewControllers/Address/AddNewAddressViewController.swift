@@ -18,13 +18,13 @@ import MapKit
 class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate ,UITextFieldDelegate{
 
     
-    @IBOutlet weak var contactName: SkyFloatingLabelTextField!
-    @IBOutlet weak var street: SkyFloatingLabelTextField!
-    @IBOutlet weak var apt: SkyFloatingLabelTextField!
-    @IBOutlet weak var city: SkyFloatingLabelTextField!
-    @IBOutlet weak var zip: SkyFloatingLabelTextField!
-    @IBOutlet weak var state: SkyFloatingLabelTextField!
-    @IBOutlet weak var phones: SkyFloatingLabelTextField!
+    @IBOutlet weak var contactName: UITextField!
+    @IBOutlet weak var street: UITextField!
+    @IBOutlet weak var apt: UITextField!
+    @IBOutlet weak var city: UITextField!
+    @IBOutlet weak var zip: UITextField!
+    @IBOutlet weak var state: UITextField!
+    @IBOutlet weak var phones: UITextField!
 //    @IBOutlet weak var latitude: SkyFloatingLabelTextField!
 //    @IBOutlet weak var longitude: SkyFloatingLabelTextField!
     
@@ -42,6 +42,7 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
+//        self.backBtn()
         self.hideKeyboardWhenTappedAround()
         
         self.locationManager.requestAlwaysAuthorization()
@@ -74,10 +75,26 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
             
         }
         
+        
+        self.designTextField(textField: self.contactName)
+        self.designTextField(textField: self.street)
+        self.designTextField(textField: self.apt)
+        self.designTextField(textField: self.city)
+        self.designTextField(textField: self.zip)
+        self.designTextField(textField: self.state)
+        self.designTextField(textField: self.phones)
+        
         phones.delegate = self
         
 //        PlaygroundPage.current.needsIndefiniteExecution = true
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func designTextField(textField : UITextField)  {
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.addShadow()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -227,8 +244,8 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
                      Utilites.ShowAlert(title: "Success", message: "Address updated Successfully", view: self)
                     
                 }
-                self.navigationController?.popViewController(animated: true)
-               
+//                self.navigationController?.popViewController(animated: true)
+                
                 
                 
         }) { (error) in
@@ -317,7 +334,11 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     }
     
     
-
+    @IBAction func backBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     
 }
 
@@ -337,4 +358,8 @@ extension String {
         
         return String(self[substringStartIndex ..< substringEndIndex])
     }
+    
+    
+    
+    
 }

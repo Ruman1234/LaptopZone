@@ -12,7 +12,7 @@ import ObjectMapper
 
 class OffersModel : Mappable {
     var id : Int?
-    var request_id : Int?
+    var request_id : String?
     var title : String?
     var price : String?
     var remarks : String?
@@ -21,8 +21,11 @@ class OffersModel : Mappable {
     var brand : String?
     var cond : String?
     var created_at : String?
+    var conversation_id : Int?
     var updated_at : String?
     var images : [Images]?
+    var status : String?
+    
     
     init?() {
         
@@ -45,6 +48,9 @@ class OffersModel : Mappable {
         created_at <- map["created_at"]
         updated_at <- map["updated_at"]
         images <- map["images"]
+        conversation_id <- map["conversation_id"]
+        status <- map["status"]
+        
     }
     
 }

@@ -135,7 +135,7 @@ class RegisterViewController: UIViewController {
                 
                 self.userdefaults.setValue(response.access_token, forKey: "Token")
                 
-                self.userdefaults.set(true, forKey: "islogin")
+//                self.userdefaults.set(true, forKey: "islogin")
                 
                 AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
                 
@@ -144,20 +144,24 @@ class RegisterViewController: UIViewController {
                 CustomUserDefaults.Token.value = response.access_token
                 
                 NetworkManager.SharedInstance.Profile(success: { (res) in
-                    print(res)
-                    CustomUserDefaults.email.value = res.email
-                    CustomUserDefaults.userName.value = res.name
-                    CustomUserDefaults.VerifyPaypal.value = res.paypal
-                }, failure: { (err) in
-                    print("Error!!!")
-                })
-                
-                
-                
-                let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                
-                self.navigationController?.pushViewController(main, animated: true)
-                
+                   print(res)
+                   SVProgressHUD.dismiss()
+                   CustomUserDefaults.email.value = res.email
+                   CustomUserDefaults.userName.value = res.name
+                   CustomUserDefaults.VerifyPaypal.value = res.paypal
+                   CustomUserDefaults.userId.value = "\(res.id!)"
+                   CustomUserDefaults.password.value = self.password.text!
+                   print(CustomUserDefaults.userId.value!)
+
+                   let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                   
+                   self.navigationController?.pushViewController(main, animated: true)
+
+                   
+               }, failure: { (err) in
+                   print("Error!!!")
+               })
+                               
                 
             }
             

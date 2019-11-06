@@ -44,7 +44,10 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
     override func viewWillAppear(_ animated: Bool) {
         self.collectionview.reloadData()
         self.tabBarController?.tabBar.isHidden = false
-        self.images.append(UIImage(named: "addimage")!)
+        if self.images.last != UIImage(named: "addimage"){
+            self.images.append(UIImage(named: "addimage")!)
+        }
+        
     }
     
     
@@ -56,9 +59,55 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "uploadCell", for: indexPath) as! RepairingBrandCollectionViewCell
         cell.imageView.image = images[indexPath.row]
         
+        if indexPath.row == self.images.count - 1 {
+                    cell.cancleBtn.isHidden = true
+                }else{
+                    cell.cancleBtn.isHidden = false
+                    cell.cancleBtn.setGradient()
+                }
+        //        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        //
+        //
+        //        cell.productImage.addGestureRecognizer(tap)
+                
+                cell.cancleBtn.tag = indexPath.row
+       
+        
+        
         return cell
     }
     
+    
+    
+    func remove(_ i: Int) {
+       
+       self.images.remove(at: i)
+       let indexPath = IndexPath(row: i, section: 0)
+//        self.collectionview
+       self.collectionview.performBatchUpdates({
+           self.collectionview.deleteItems(at: [indexPath])
+       }) { (finished) in
+           self.collectionview.reloadItems(at: self.collectionview.indexPathsForVisibleItems)
+       }
+       
+    }
+
+
+           
+    @IBAction func cancleBtn(_ sender: AnyObject) {
+       
+       let alert = UIAlertController(title: "!!!", message: "Are you sure you want to delete", preferredStyle: .alert)
+       alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+           self.remove(sender.tag)
+           
+       }))
+       
+       alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+       
+       self.present(alert, animated: true, completion: nil)
+       
+    }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsPerRow:CGFloat = 3
@@ -82,7 +131,7 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == self.images.count - 1{
+        if (indexPath.row == self.images.count - 1) && indexPath.row <= 20{
             openCamer()
         }
     }
@@ -94,10 +143,17 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
         
         let camera = UIAlertAction(title: "Take Picture", style: .default) { (ale) in
-            self.images.removeLast()
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
-            main.type = "repair"
-            self.navigationController?.pushViewController(main, animated: true)
+            
+            if self.images.count < 21 {
+                self.images.removeLast()
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+                main.type = "repair"
+                self.navigationController?.pushViewController(main, animated: true)
+                
+            }else{
+              Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos are 20", view: self)
+            }
+                      
             
         }
         let media = UIAlertAction(title: "Media", style: .default) { (ale) in
@@ -105,24 +161,25 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
                 //Show error to user?
                 return
             }
-            self.images.removeLast()
+//            self.images.removeLast()
             //Example Instantiating OpalImagePickerController with Closures
             let imagePicker = OpalImagePickerController()
             imagePicker.imagePickerDelegate = self
-            let max = 20 - self.images.count
+            imagePicker.allowedMediaTypes = Set([.image ])
+            let max = 21 - self.images.count
             imagePicker.maximumSelectionsAllowed = max
             
-            if self.images.count <= 20 {
+            if self.images.count < 21 {
                 self.present(imagePicker, animated: true, completion: nil)
             }else{
-                Utilites.ShowAlert(title: "Alert!!!", message: "MAx num of photos in 20", view: self)
+                Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos in 20", view: self)
             }
             
             
             
          
         }
-        let cancle = UIAlertAction(title: "Cancle", style: .cancel ) { (ale) in
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
             
         }
         imagesource.addAction(camera)
@@ -142,7 +199,7 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
     
     func imagePicker(_ picker: OpalImagePickerController, didFinishPickingImages images: [UIImage]) {
     
-        
+        self.images.removeLast()
         print(images.count)
         for img in images{
             self.images.append(img)

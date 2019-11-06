@@ -47,7 +47,8 @@ class ShipmentRatesViewController: UIViewController, PackageDetailsViewControlle
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
         }
         
-        self.addBG()
+//        self.addBG()
+//        self.backBtn()
         // Do any additional setup after loading the view.
     }
     

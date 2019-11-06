@@ -42,6 +42,7 @@ class processedSetupIndicatorViewController: UIViewController {
          NotificationCenter.default.addObserver(self, selector: #selector(self.backButtonDidPress), name: Notification.Name("backStepPickup"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeBtn), name: Notification.Name("changeBtn"), object: nil)
         self.addBG()
+        self.backBtn()
         Constants.CheckAvailbility = true
         // Do any additional setup after loading the view.
     }
@@ -123,9 +124,14 @@ class processedSetupIndicatorViewController: UIViewController {
     
     @objc private func backButtonDidPress() {
 //        self.navigationController?.popViewController(animated: true)
-        let a = self.navigationController?.viewControllers[0] as! NewProductsListViewController
+        if #available(iOS 13.0, *) {
+            let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
+            self.navigationController?.popToViewController(a, animated: true)
+        } else {
+            // Fallback on earlier versions
+        }
         
-        self.navigationController?.popToViewController(a, animated: true)
+        
 
         if setupView.selectedStep == 1 {
             self.navigationController?.popViewController(animated: true)

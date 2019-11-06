@@ -13,6 +13,7 @@ class RepairingBrandCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandName: UILabel!
     
     
+    @IBOutlet weak var cancleBtn: UIButton!
     @IBOutlet weak var bdView: UIView!
     @IBOutlet weak var imageView: UIImageView!
 }

@@ -10,36 +10,44 @@ import UIKit
 import SDWebImage
 import XLPagerTabStrip
 import SVProgressHUD
+
+
 class NewProductsListViewController: UIViewController , UITableViewDelegate , UITableViewDataSource,IndicatorInfoProvider {
     
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var menubtn: UIBarButtonItem!
     
+    @IBOutlet weak var norequestView: UIView!
+    
+    @IBOutlet weak var createRequestBtn: UIButton!
     var AllProducts = [RequestStatusModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addBG()
-        self.navigationItem.leftBarButtonItem = menubtn
-        self.menubtn.target = self.revealViewController()
-        self.menubtn.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        // Do any additional setup after loading the view.
+//        self.addBG()
+        self.createRequestBtn.setGradient()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
 //        getProductList()
-        getAllProductList()
+        getProductList()
     }
     
     
     func getProductList() {
         SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.RequestStatus(status: "NEW", success: { (response) in
+        NetworkManager.SharedInstance.RequestStatus(searcInput: "rep", success: { (response) in
            SVProgressHUD.dismiss()
             self.AllProducts = response
+            if  self.AllProducts.count != 0 {
+                self.tableView.isHidden = false
+                self.norequestView.isHidden = true
+            }else{
+                self.tableView.isHidden = true
+                self.norequestView.isHidden = false
+            }
+            
             self.tableView.reloadData()
         }) { (err) in
             SVProgressHUD.dismiss()
@@ -60,7 +68,7 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Pending")
+        return IndicatorInfo(title: "Repairing")
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,43 +79,50 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         
         let product = self.AllProducts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
-        cell.productName.text = product.title
-        if (product.cover != nil) {
-            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
-        }else{
-            cell.productImage.image = UIImage(named: "placeholder.png")
-        }
-        cell.statusLbl.text = product.status
-       
+        cell.productName.text = product.MODEL_NAME
+        cell.priceLbl.text = Double(product.OFFER!)?.dollarString
+//        if (product.cover != nil) {
+//            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
+//        }else{
+//            cell.productImage.image = UIImage(named: "placeholder.png")
+//        }
+        cell.statusLbl.text = product.STATUS
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return 95
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let product = self.AllProducts[indexPath.row]
-        if product.status == "NEW" {
+        if product.STATUS == "PENDING" {
             
             
             let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
+            main.type = "rep"
             main.detail = self.AllProducts[indexPath.row]
             self.navigationController?.pushViewController(main, animated: true)
             
             
-        }else if product.status == "PROCESSED" {
+        }else if product.STATUS == "PROCESSED" || product.STATUS == "DELIVERED" || product.STATUS == "CANCELLED" {
             
             
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
             
             main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
+            if self.AllProducts[indexPath.row].conversation_id != nil {
+                main.conversation_id = "\(String(describing: self.AllProducts[indexPath.row].conversation_id!))"
+            }else{
+                 main.conversation_id = ""
+            }
+            
             self.navigationController?.pushViewController(main, animated: true)
             
             
-        }else if product.status == "APPROVED" {
+        }else if product.STATUS == "APPROVED" {
             
             
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
@@ -118,42 +133,74 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         }
        
     }
+     
     
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-      
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
-            
-            var reason = ""
-            
-            alert.addTextField {  (textField : UITextField!) -> Void  in
-                //             searchTextField?.delegate = self
-                reason = textField.text!
-                
-            }
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[indexPath.row].id!)", reason: reason, success: { (res) in
-                    print(res)
-                    self.AllProducts.remove(at:indexPath.row)
-                    self.tableView.reloadData()
-                }, failure: { (err) in
-                    Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
-                })
-            }))
-            
-            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
-                
-            }))
-            self.present(alert, animated: true, completion: nil)
-            
-        })
-        
-        return [deleteAction]
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let product = self.AllProducts[indexPath.row]
+//        if product.status == "NEW" {
+//
+//
+//            let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
+//            main.detail = self.AllProducts[indexPath.row]
+//            self.navigationController?.pushViewController(main, animated: true)
+//
+//
+//        }else if product.status == "PROCESSED" {
+//
+//
+//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+//
+//            main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
+//            self.navigationController?.pushViewController(main, animated: true)
+//
+//
+//        }else if product.status == "APPROVED" {
+//
+//
+//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
+//            main.detail = self.AllProducts[indexPath.row]
+//            self.navigationController?.pushViewController(main, animated: true)
+//
+//
+//        }
+//
+//    }
+//
+//     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+//            let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
+//
+//            var reason = ""
+//
+//            alert.addTextField {  (textField : UITextField!) -> Void  in
+//                //             searchTextField?.delegate = self
+//                reason = textField.text!
+//
+//            }
+//            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//                NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[indexPath.row].id!)", reason: reason, success: { (res) in
+//                    print(res)
+//                    self.AllProducts.remove(at:indexPath.row)
+//                    self.tableView.reloadData()
+//                }, failure: { (err) in
+//                    Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
+//                })
+//            }))
+//
+//            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+//
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//
+//        })
+//
+//        return [deleteAction]
+//    }
     
     @IBAction func deleteBtn(_ sender: AnyObject) {
         let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
@@ -183,6 +230,14 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     }
     
     
+    
+    @IBAction func createRequestBtn(_ sender: Any) {
+        
+        
+    }
+    
+    
+    
 }
 
 
@@ -190,13 +245,15 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
 class PendingProductsListViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,IndicatorInfoProvider {
     
     
+    @IBOutlet weak var norequestView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var createRequestBtn: UIButton!
+      
     var AllProducts = [RequestStatusModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.createRequestBtn.setGradient()
         // Do any additional setup after loading the view.
     }
     
@@ -206,9 +263,16 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
     
     func getProductList() {
         SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.RequestStatus(status: "PROCESSED", success: { (response) in
+        NetworkManager.SharedInstance.RequestStatus(searcInput: "rec", success: { (response) in
             SVProgressHUD.dismiss()
             self.AllProducts = response
+            if  self.AllProducts.count != 0 {
+               self.tableView.isHidden = false
+               self.norequestView.isHidden = true
+           }else{
+               self.tableView.isHidden = true
+               self.norequestView.isHidden = false
+           }
             self.tableView.reloadData()
         }) { (err) in
             SVProgressHUD.dismiss()
@@ -217,7 +281,7 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "PROCESSED")
+        return IndicatorInfo(title: "Recycling")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -226,13 +290,19 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let product = self.AllProducts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
-        cell.productName.text = product.title
-        if product.images!.count > 0 {
-            cell.productImage.sd_setImage(with: URL(string: product.images![0].url!), placeholderImage: UIImage(named: "placeholder.png"))
-        }
-        cell.delBTn.tag = indexPath.row
+        cell.productName.text = product.MODEL_NAME
+        cell.priceLbl.text = Double(product.OFFER!)?.dollarString
+//        if (product.cover != nil) {
+//            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
+//        }else{
+//            cell.productImage.image = UIImage(named: "placeholder.png")
+//        }
+        cell.statusLbl.text = product.STATUS
+        cell.selectionStyle = .none
+//        cell.delBTn.tag = indexPath.row
         return cell
     }
     
@@ -240,12 +310,12 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
         return 85
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
-//        main.detail = self.AllProducts[indexPath.row]
-        main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
-        self.navigationController?.pushViewController(main, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+////        main.detail = self.AllProducts[indexPath.row]
+//        main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
+//        self.navigationController?.pushViewController(main, animated: true)
+//    }
     
     @IBAction func deleteBtn(_ sender: AnyObject) {
         let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
@@ -272,7 +342,10 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
         
     }
     
-    
+    @IBAction func createRequestBtn(_ sender: Any) {
+              
+              
+    }
     
   
 }
@@ -282,13 +355,18 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
 class ApprovedProductsListViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,IndicatorInfoProvider{
     
     
+    @IBOutlet weak var norequestView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var createRequestBtn: UIButton!
+     
+      
+    
     
     var AllProducts = [RequestStatusModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.createRequestBtn.setGradient()
         // Do any additional setup after loading the view.
     }
     
@@ -299,9 +377,17 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
     
     func getProductList() {
         SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.RequestStatus(status: "APPROVED", success: { (response) in
+        NetworkManager.SharedInstance.RequestStatus(searcInput: "sell", success: { (response) in
             SVProgressHUD.dismiss()
             self.AllProducts = response
+            
+            if  self.AllProducts.count != 0 {
+               self.tableView.isHidden = false
+               self.norequestView.isHidden = true
+           }else{
+               self.tableView.isHidden = true
+               self.norequestView.isHidden = false
+           }
             self.tableView.reloadData()
         }) { (err) in
             SVProgressHUD.dismiss()
@@ -310,7 +396,7 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Approved")
+        return IndicatorInfo(title: "Sell Device")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -321,11 +407,16 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
         
         let product = self.AllProducts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
-        cell.productName.text = product.title
-        if product.images!.count > 0 {
-            cell.productImage.sd_setImage(with: URL(string: product.images![0].url!), placeholderImage: UIImage(named: "placeholder.png"))
-        }
-        cell.delBTn.tag = indexPath.row
+        cell.productName.text = product.MODEL_NAME
+        cell.priceLbl.text = Double(product.OFFER!)?.dollarString
+//        if (product.cover != nil) {
+//            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
+//        }else{
+//            cell.productImage.image = UIImage(named: "placeholder.png")
+//        }
+        cell.statusLbl.text = product.STATUS
+        cell.selectionStyle = .none
+//        cell.delBTn.tag = indexPath.row
         return cell
     }
     
@@ -333,11 +424,11 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
         return 85
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
-        main.detail = self.AllProducts[indexPath.row]
-        self.navigationController?.pushViewController(main, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
+//        main.detail = self.AllProducts[indexPath.row]
+//        self.navigationController?.pushViewController(main, animated: true)
+//    }
     
     @IBAction func deleteBtn(_ sender: AnyObject) {
         let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
@@ -365,5 +456,209 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
         
     }
     
+    
+      @IBAction func createRequestBtn(_ sender: Any) {
+                
+                
+      }
+      
 
+}
+
+
+
+
+class Snap_SellListViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,IndicatorInfoProvider{
+    
+    @IBOutlet weak var norequestView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var createRequestBtn: UIButton!
+  
+    
+    var AllProducts = [RequestStatusModel]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.createRequestBtn.setGradient()
+//        self.addBG()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        getProductList()
+        getAllProductList()
+    }
+    
+    
+    
+    
+    func getAllProductList() {
+        SVProgressHUD.show(withStatus: "Loading..")
+        NetworkManager.SharedInstance.AllProductsRequest( success: { (response) in
+            SVProgressHUD.dismiss()
+            self.AllProducts = response
+            
+            if  self.AllProducts.count != 0 {
+               self.tableView.isHidden = false
+               self.norequestView.isHidden = true
+            }else{
+               self.tableView.isHidden = true
+               self.norequestView.isHidden = false
+            }
+               
+                
+            self.tableView.reloadData()
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
+        }
+    }
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Snap2Sell")
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.AllProducts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let product = self.AllProducts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
+        cell.productName.text = product.title
+        if (product.cover != nil) {
+            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            cell.productImage.image = UIImage(named: "placeholder.png")
+        }
+        cell.statusLbl.text = product.status
+        
+        if product.status == "NEW" {
+            cell.priceLbl.text = Double(product.asking_price ?? "0")?.dollarString
+        }else if product.status == "PROCESSED" {
+            cell.priceLbl.text = Double(product.offered_price ?? "0")?.dollarString
+        }else if product.status == "APPROVED" {
+            cell.priceLbl.text = Double(product.offered_price ?? "0")?.dollarString
+        }
+        
+        
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 95
+    }
+    
+     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let product = self.AllProducts[indexPath.row]
+        if product.status == "NEW" {
+            
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
+            
+            main.detail = self.AllProducts[indexPath.row]
+            self.navigationController?.pushViewController(main, animated: true)
+            
+            
+        }else if product.status == "PROCESSED" || product.status == "DELIVERED" || product.status == "CANCELLED" {
+            
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+            
+            main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
+            if self.AllProducts[indexPath.row].conversation_id != nil {
+                main.conversation_id = "\(String(describing: self.AllProducts[indexPath.row].conversation_id!))"
+            }else{
+                 main.conversation_id = "" 
+            }
+            
+            self.navigationController?.pushViewController(main, animated: true)
+            
+            
+        }else if product.status == "APPROVED" {
+            
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
+            main.detail = self.AllProducts[indexPath.row]
+            self.navigationController?.pushViewController(main, animated: true)
+            
+            
+        }
+       
+    }
+//
+//     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+//            let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
+//
+//            var reason = ""
+//
+//            alert.addTextField {  (textField : UITextField!) -> Void  in
+//                //             searchTextField?.delegate = self
+//                reason = textField.text!
+//
+//            }
+//            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//                NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[indexPath.row].id!)", reason: reason, success: { (res) in
+//                    print(res)
+//                    self.AllProducts.remove(at:indexPath.row)
+//                    self.tableView.reloadData()
+//                }, failure: { (err) in
+//                    Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
+//                })
+//            }))
+//
+//            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+//
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//
+//        })
+//
+//        return [deleteAction]
+//    }
+    
+    @IBAction func deleteBtn(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
+        
+        var reason = ""
+       
+        alert.addTextField {  (textField : UITextField!) -> Void  in
+//             searchTextField?.delegate = self
+            reason = textField.text!
+            
+        }
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[sender.tag].id!)", reason: reason, success: { (res) in
+                print(res)
+                self.AllProducts.remove(at:sender.tag)
+                self.tableView.reloadData()
+            }, failure: { (err) in
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
+            })
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+           
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+      @IBAction func createRequestBtn(_ sender: Any) {
+                
+                
+      }
+      
+    
 }

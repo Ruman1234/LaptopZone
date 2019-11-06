@@ -29,6 +29,16 @@ class Utilites {
         
     }
     
+    static func ShowAlert (title:String , message :String, view : UIViewController, finished: ((UIAlertAction) -> Void)?){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: finished))
+        view.present(alert, animated: true)
+        
+    }
+    
     static func isInternetAvailable() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
@@ -207,12 +217,12 @@ extension UIViewController {
     
     func cancleBtn()  {
         
-        let x = self.view.frame.width - 75
+        let x = self.view.frame.width - 85 
         
-        let button = UIButton(frame: CGRect(x: x, y: 45, width: 60, height: 20))
+        let button = UIButton(frame: CGRect(x: x, y: 45, width: 70, height: 20))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
-        button.setTitle("Cancle", for: .normal)
+        button.setTitle("Cancel", for: .normal)
         button.setFont(size: 15)
         button.addTarget(self, action: #selector(logoutUser), for: .touchUpInside)
         self.view.addSubview(button)
@@ -221,14 +231,19 @@ extension UIViewController {
      func backBtn()  {
             
             let x = 20
-            
-            let button = UIButton(frame: CGRect(x: x, y: 46, width: 25, height: 15))
+            let imageview = UIImageView(frame: CGRect(x: x, y: 46, width: 25, height: 15))
+            imageview.image = UIImage(named: "back")
+        
+            let button = UIButton(frame: CGRect(x: x, y: 46, width: 70, height: 70))
     //        button.backgroundColor = .green
             button.setTitleColor(.red, for: .normal)
 //            button.setTitle("Cancle", for: .normal)
-            button.setImage(UIImage(named: "backImg"), for: .normal)
+//            button.setImage(UIImage(named: "back"), for: .normal)
             
             button.addTarget(self, action: #selector(back), for: .touchUpInside)
+        
+            self.view.addSubview(imageview)
+        
             self.view.addSubview(button)
         }
         
@@ -241,8 +256,13 @@ extension UIViewController {
     
     @objc func logoutUser(){
         
-         let a = self.navigationController?.viewControllers[0] as! HomeViewController
-         self.navigationController?.popToViewController(a, animated: true)
+        if #available(iOS 13.0, *) {
+            let a = self.navigationController?.viewControllers[0] as! HomeViewController
+            self.navigationController?.popToViewController(a, animated: true)
+        } else {
+            // Fallback on earlier versions
+        }
+         
          
     }
     
@@ -265,13 +285,13 @@ extension UIViewController {
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = .center;
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 10.0)
+        toastLabel.font = UIFont(name: "Eina-Regular", size: 10.0)
         toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
         self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 6.0, delay: 0.1, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
@@ -434,6 +454,7 @@ struct CustomUserDefaults {
     static let VerifyPaypal = UserDefaultsItem<String>("paypal")
     static let fcm_token = UserDefaultsItem<String>("fcm_token")
     static let userId = UserDefaultsItem<String>("Userid")
+    static let password = UserDefaultsItem<String>("password")
     
 }
 
@@ -500,8 +521,113 @@ extension UILabel {
 extension UIButton {
     
     func setGradient()  {
+//        layer1.locations = [0, 0.5, 1]
+//        self.applyGradient(colours: [UIColor.init(rgb: 0xFC2B08) , UIColor.init(rgb: 0xFF3000) , UIColor.init(rgb: 0xFF7C00)], locations: [0, 0.5, 1], startPoint: CGPoint(x: 0.25, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.5))
         
-        self.applyGradient(colours: [UIColor.init(rgb: 0xFC2B08) , UIColor.init(rgb: 0xFF3000) , UIColor.init(rgb: 0xFF7C00)], locations: nil, startPoint: CGPoint(x: 0.25, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.5))
+        self.applyGradient(colours: [
+//            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+
+          UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+
+          UIColor(red: 1, green: 0.19, blue: 0, alpha: 1),
+
+          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+
+        ], locations: [0, 0.5, 1], startPoint: CGPoint(x: 0.00, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.09))
+
+        
+//        func ccc (){
+//                let view = UIView()
+//
+//        view.frame = self.frame
+//
+//                view.backgroundColor = .white
+//
+////                view
+////         = view
+//
+//
+//
+//
+//                let shadows = UIView()
+//
+//                shadows.frame = view.frame
+//
+//                shadows.clipsToBounds = false
+//
+//                view.addSubview(shadows)
+//
+//
+//                let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 50)
+//
+//                let layer0 = CALayer()
+//
+//                layer0.shadowPath = shadowPath0.cgPath
+//
+//                layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+//
+//                layer0.shadowOpacity = 1
+//
+//                layer0.shadowRadius = 20
+//
+//                layer0.shadowOffset = CGSize(width: 0, height: 10)
+//
+//                layer0.bounds = shadows.bounds
+//
+//                layer0.position = shadows.center
+//
+//                shadows.layer.addSublayer(layer0)
+//
+//
+//                let shapes = UIView()
+//
+//                shapes.frame = view.frame
+//
+//                shapes.clipsToBounds = true
+//
+//                view.addSubview(shapes)
+//
+//
+//                let layer1 = CAGradientLayer()
+//
+//                layer1.colors = [
+//
+//                  UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor,
+//
+//                  UIColor(red: 1, green: 0.19, blue: 0, alpha: 1).cgColor,
+//
+//                  UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
+//
+//                ]
+//
+//                layer1.locations = [0, 0.5, 1]
+//
+//        layer1.startPoint = CGPoint(x: 0., y: 0.5)
+//
+//                layer1.endPoint = CGPoint(x: 0.75, y: 0.5)
+//
+//                layer1.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
+//
+//                layer1.bounds = shapes.bounds.insetBy(dx: -0.5*shapes.bounds.size.width, dy: -0.5*shapes.bounds.size.height)
+//
+//                layer1.position = shapes.center
+//
+//                shapes.layer.addSublayer(layer1)
+//
+//
+//                shapes.layer.cornerRadius = 50
+//
+//
+//            let parent = self
+//
+//                parent.addSubview(view)
+//
+//                view.translatesAutoresizingMaskIntoConstraints = false
+
+
+//            }
+        
+        
         self.titleLabel?.font = UIFont(name: "Eina03-Regular", size: 17.0)
         self.layer.cornerRadius =  self.frame.height / 2.041
     }
@@ -516,7 +642,53 @@ extension UIButton {
 extension UIView {
     
     
-    
+    func blink() {
+        self.alpha = 0.2
+        UIView.animate(withDuration: 1, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.alpha = 1.0}, completion: nil)
+    }
+    func addShadow(shadowColor: CGColor = UIColor.black.cgColor,
+                   shadowOffset: CGSize = CGSize(width: 0, height: 1.0),
+                   shadowOpacity: Float = 0.4,
+                   shadowRadius: CGFloat = 4.0) {
+        layer.shadowColor = shadowColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowRadius = shadowRadius
+        layer.masksToBounds = false
+    }
+    func giveShadow()  {
+        
+//        let shadows = UIView()
+//        let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 0)
+//
+//        let layer0 = CALayer()
+//
+//        layer0.shadowPath = shadowPath0.cgPath
+//
+//        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05).cgColor
+//
+//        layer0.shadowOpacity = 1
+//
+//        layer0.shadowRadius = 4
+//
+//        layer0.shadowOffset = CGSize(width: 0, height: 1)
+//
+//        layer0.bounds = shadows.bounds
+//
+//        layer0.position = shadows.center
+//
+//        shadows.layer.addSublayer(layer0)
+        
+        self.layer.shadowOpacity = 0.2
+        
+//        self.clipsToBounds = false
+        
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 1)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.masksToBounds = false
+
+    }
     func showToast(message : String) {
     //        label.intrinsicContentSize.width
     //        label.sizeToFit()
@@ -544,15 +716,113 @@ extension UIView {
     }
     
     func applyGradient(colours: [UIColor], locations: [NSNumber]? , startPoint : CGPoint? , endPoint : CGPoint?) -> Void {
+        
+        
+        
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
         gradient.startPoint = startPoint!
         gradient.endPoint = endPoint!
+        gradient.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
+
+//        gradient.bounds = self.bounds.insetBy(dx: -0.5*self.bounds.size.width, dy: -0.5*self.bounds.size.height)
+//
+//        gradient.position = self.center
+
+        
         self.layer.insertSublayer(gradient, at: 0)
         
     }
+    
+//    func ccc (){
+//            let view = UILabel()
+//
+//            view.frame = CGRect(x: 0, y: 0, width: 190, height: 49)
+//
+//            view.backgroundColor = .white
+//
+//    //        self.view
+//
+//
+//            let shadows = UIView()
+//
+//            shadows.frame = view.frame
+//
+//            shadows.clipsToBounds = false
+//
+//            view.addSubview(shadows)
+//
+//
+//            let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 50)
+//
+//    //        let layer0 = CALayer()
+//    //
+//    //        layer0.shadowPath = shadowPath0.cgPath
+//    //
+//    //        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+//    //
+//    //        layer0.shadowOpacity = 1
+//    //
+//    //        layer0.shadowRadius = 20
+//    //
+//    //        layer0.shadowOffset = CGSize(width: 0, height: 10)
+//    //
+//    //        layer0.bounds = shadows.bounds
+//    //
+//    //        layer0.position = shadows.center
+//    //
+//    //        shadows.layer.addSublayer(layer0)
+//
+//
+//            let shapes = UIView()
+//
+//            shapes.frame = view.frame
+//
+//            shapes.clipsToBounds = true
+//
+//            view.addSubview(shapes)
+//
+//
+//            let layer1 = CAGradientLayer()
+//
+//            layer1.colors = [
+//
+//              UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor,
+//
+//              UIColor(red: 1, green: 0.19, blue: 0, alpha: 1).cgColor,
+//
+//              UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
+//
+//            ]
+//
+//            layer1.locations = [0, 0.5, 1]
+//
+//            layer1.startPoint = CGPoint(x: 0.25, y: 0.5)
+//
+//            layer1.endPoint = CGPoint(x: 0.75, y: 0.5)
+//
+//            layer1.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
+//
+//            layer1.bounds = shapes.bounds.insetBy(dx: -0.5*shapes.bounds.size.width, dy: -0.5*shapes.bounds.size.height)
+//
+//            layer1.position = shapes.center
+//
+//            shapes.layer.addSublayer(layer1)
+//
+//
+//            shapes.layer.cornerRadius = 50
+//
+//
+//        let parent = self.view
+//
+//            parent.addSubview(view)
+//
+//            view.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//        }
     
     
     func addDashedBorder() {
@@ -595,5 +865,17 @@ class Colors {
 extension Double {
     var dollarString:String {
         return String(format: "$%.2f", self)
+    }
+}
+
+extension UITableView {
+    func scrollToBottom(animated: Bool = true) {
+        let section = self.numberOfSections
+        if section > 0 {
+            let row = self.numberOfRows(inSection: section - 1)
+            if row > 0 {
+                self.scrollToRow(at: NSIndexPath(row: row - 1, section: section - 1) as IndexPath, at: .bottom, animated: animated)
+            }
+        }
     }
 }

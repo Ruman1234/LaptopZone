@@ -23,6 +23,7 @@ struct ProfileModel : Mappable {
     var role : String?
     var created_at : Int?
     var updated_at : String?
+    var requests_count : Int?
     
     init?(map: Map) {
         
@@ -40,6 +41,7 @@ struct ProfileModel : Mappable {
         role <- map["role"]
         created_at <- map["created_at"]
         updated_at <- map["updated_at"]
+        requests_count <- map["requests_count"]
     }
     
 }

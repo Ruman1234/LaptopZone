@@ -30,6 +30,7 @@ class Constants {
     static let ADD_NEW_ORDER = "customer/sell-requests"
     static let PRODUCT_STATUS = "customer/products/productsByStatus"
     static let OFFERS = "customer/sell-requests/"
+    static let UPDATE_DROPOFF = "customer/sell-requests/update-drop-off"
     static let CHECK_AVAILBILITY = "customer/profile/address/"
     static let PICKUP = "customer/sell-requests/request-pickup"
     static let DROPOFF = "customer/sell-requests/schedule-drop-off"
@@ -72,6 +73,8 @@ class Constants {
     static var seriesId = String()
     static var modelId = String()
     static var issuesId = String()
+    
+    static var seriesName = String()
     
     static var UploadImage = [UIImage]()
     

@@ -22,6 +22,9 @@ class OffertableViewCell: UITableViewCell {
     @IBOutlet weak var flawLess: UIButton!
     @IBOutlet weak var brokenBtn: UIButton!
     
+    @IBOutlet weak var productName: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

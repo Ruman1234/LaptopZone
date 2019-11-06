@@ -55,7 +55,7 @@ class SelectShipmentView: UIView , UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "shipmentCell", for: indexPath) as! shipmentTableViewCell
         let price = Double(rates[indexPath.row].rate!)?.dollarString
-        cell.nameLbl.text = rates[indexPath.row].carrier! + "     " + price!
+        cell.nameLbl.text = rates[indexPath.row].carrier! + "     " + price!  + "     " + rates[indexPath.row].service!
         if self.check[indexPath.row] == 0{
 
             if #available(iOS 13.0, *) {
@@ -104,7 +104,11 @@ class SelectShipmentView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     
     @IBAction func doneBtn(_ sender: Any) {
-        delegate?.didClose(text: self.rateId, id: self.id)
+        if self.rateId != "" &&  self.id != ""{
+            delegate?.didClose(text: self.rateId, id: self.id)
+        }else{
+            self.showToast(message: "Please select carier")
+        }
 //        delegate?.didClose(text: self.rateId)
     }
     

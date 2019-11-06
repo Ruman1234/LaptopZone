@@ -402,6 +402,30 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         textField.layer.borderWidth = 1
     }
     
+    func pickpValidInput() -> Bool {
+        var flag = true
+        
+        if self.pickupSearchAddress.text == "" {
+            flag = false
+            self.showToast(message: "Please enter Address")
+        }else if self.pickupStreetAddress.text == "" {
+            flag = false
+            self.showToast(message: "Please enter Street Address")
+        }else if self.pickupCity.text == "" {
+            flag = false
+            self.showToast(message: "Please enter City")
+        }else if self.pickupState.text == "" {
+            flag = false
+            self.showToast(message: "Please enter State Address")
+        }else if self.pickUpzipcode.text == "" {
+            flag = false
+            self.showToast(message: "Please enter Zipcode Address")
+        }
+        
+        
+        return flag
+    }
+    
     @IBAction func dropoffbtn(_ sender: Any) {
         self.selectOption = "1"
         self.countryName = "United States"
@@ -447,8 +471,13 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
            
             
             if self.selectOption != "3" {
-                 let a = self.navigationController?.viewControllers[0] as! HomeViewController
-                self.navigationController?.popToViewController(a, animated: true)
+                if #available(iOS 13.0, *) {
+                    let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                    self.navigationController?.popToViewController(a, animated: true)
+                } else {
+                    // Fallback on earlier versions
+                }
+//                self.navigationController?.popToViewController(a, animated: true)
                        
                 Utilites.ShowAlert(title: "Success!!", message: "Product Send successdully", view: self)
             }else{
@@ -485,8 +514,13 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
 
             self.imgView.alpha = 0
             self.imgView = nil
-            let a = self.navigationController?.viewControllers[0] as! HomeViewController
-            self.navigationController?.popToViewController(a, animated: true)
+            if #available(iOS 13.0, *) {
+                let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                self.navigationController?.popToViewController(a, animated: true)
+            } else {
+                // Fallback on earlier versions
+            }
+            
 
         }
         
@@ -572,8 +606,13 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             present(ac, animated: true)
         } else {
             
-            let a = self.navigationController?.viewControllers[0] as! HomeViewController
-                      self.navigationController?.popToViewController(a, animated: true)
+            if #available(iOS 13.0, *) {
+                let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                self.navigationController?.popToViewController(a, animated: true)
+
+            } else {
+                // Fallback on earlier versions
+            }
                       
             
             let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
@@ -608,44 +647,69 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
           }
       }
     
-    
-    
-    @IBAction func sipmentNextBtn(_ sender: Any) {
-        SVProgressHUD.show(withStatus: "Loading...")
-        self.selectOption = "3"
-//        self.countryName = "United States"
-//        let parameters = ["weight" : self.shipmentWeight.text!,
-//                               "length" : self.shipmentLength.text!,
-//                               "width" : self.shipmentWidth.text!,
-//                               "height" : self.shipmentHeight.text!,
-//                               "city" : self.shipmentCity,
-//                               "zip" : self.shipmentZip,
-//                               "street" : self.shipmentStreet,
-//                               "state" : self.shipmentState,
-//                               "phone" : "+1539888550"]
+    func shipmentValidInput() -> Bool {
+        var flag = true
         
-        let parameters = ["weight" : self.shipmentWeight.text!,
-        "length" : self.shipmentLength.text!,
-        "width" : self.shipmentWidth.text!,
-        "height" : self.shipmentHeight.text!,
-        "city" : self.shipmentCity,
-        "zip" : self.shipmentZip,
-        "street" : self.shipmentStreet,
-        "state" : self.shipmentState,
-        "phone" : "+1539888550"]
-        
-        NetworkManager.SharedInstance.getShipmentRates(pra: parameters, success: { (res) in
-            SVProgressHUD.dismiss()
-            print(res)
-            self.rates = res.rates!
-            self.sendRequest()
-            
-        }) { (err) in
-            SVProgressHUD.dismiss()
-            Utilites.ShowAlert(title: "Error!!", message: "Something went wrong", view: self)
+        if self.shipmentAdsres.text == "" {
+            flag = false
+            self.showToast(message: "Please add shipment address")
+        }else if self.shipmentLength.text == "" {
+            flag = false
+            self.showToast(message: "Please add shipment length")
+        }else if self.shipmentWidth.text == "" {
+            flag = false
+            self.showToast(message: "Please add shipment width")
+        }else if self.shipmentHeight.text == "" {
+            flag = false
+            self.showToast(message: "Please add shipment height")
+        }else if self.shipmentWeight.text == "" {
+            flag = false
+            self.showToast(message: "Please add shipment weight")
         }
         
+        return flag
+    }
+    
+    @IBAction func sipmentNextBtn(_ sender: Any) {
         
+        if self.shipmentValidInput(){
+            
+            SVProgressHUD.show(withStatus: "Loading...")
+            
+            self.selectOption = "3"
+    //        self.countryName = "United States"
+    //        let parameters = ["weight" : self.shipmentWeight.text!,
+    //                               "length" : self.shipmentLength.text!,
+    //                               "width" : self.shipmentWidth.text!,
+    //                               "height" : self.shipmentHeight.text!,
+    //                               "city" : self.shipmentCity,
+    //                               "zip" : self.shipmentZip,
+    //                               "street" : self.shipmentStreet,
+    //                               "state" : self.shipmentState,
+    //                               "phone" : "+1539888550"]
+            
+            let parameters = ["weight" : self.shipmentWeight.text!,
+            "length" : self.shipmentLength.text!,
+            "width" : self.shipmentWidth.text!,
+            "height" : self.shipmentHeight.text!,
+            "city" : self.shipmentCity,
+            "zip" : self.shipmentZip,
+            "street" : self.shipmentStreet,
+            "state" : self.shipmentState,
+            "phone" : "+1539888550"]
+            
+            NetworkManager.SharedInstance.getShipmentRates(pra: parameters, success: { (res) in
+                SVProgressHUD.dismiss()
+                print(res)
+                self.rates = res.rates!
+                self.sendRequest()
+                
+            }) { (err) in
+                SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!", message: "Something went wrong", view: self)
+            }
+           
+        }
         
     }
     
@@ -692,8 +756,11 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     
     
     @IBAction func pickUpNextBtn(_ sender: Any) {
-        self.countryName = "United States"
-        self.sendRequest()
+        if pickpValidInput(){
+            self.countryName = "United States"
+            self.sendRequest()
+
+        }
     }
     
     
@@ -882,15 +949,16 @@ extension SelectdeliveryMethodViewController: UITableViewDelegate, UITableViewDa
              print(placeMark?.postalCode)
              print(placeMark?.subThoroughfare)
             
-            self.shipmentCity = placeMark!.locality!
-            self.shipmentZip = placeMark!.postalCode!
-            self.shipmentState = placeMark!.administrativeArea!
-            
-            self.shipmentStreet = "\(String(describing: placeMark!.subThoroughfare!)) \(String(describing: placeMark!.thoroughfare!)), \(String(describing: placeMark!.locality!)), \(String(describing: placeMark!.administrativeArea!)), \(String(describing: placeMark!.postalCode!)), \(String(describing: placeMark!.country!))"
+            self.shipmentCity = placeMark!.locality ?? ""
+            self.shipmentZip = placeMark!.postalCode ?? ""
+            self.shipmentState = placeMark!.administrativeArea ?? ""
+            print(self.shipmentZip)
+            self.shipmentStreet = "\(String(describing: placeMark!.subThoroughfare ?? "")) \(String(describing: placeMark!.thoroughfare ?? "")), \(String(describing: placeMark!.locality ?? "")), \(String(describing: placeMark!.administrativeArea ?? "")), \(String(describing: placeMark!.postalCode ?? "")), \(String(describing: placeMark!.country ?? ""))"
             
             print(self.shipmentStreet)
             
-            self.pickupStreetAddress.text = "\(String(describing: placeMark!.subThoroughfare!)) \(String(describing: placeMark!.thoroughfare!))"
+            self.pickupStreetAddress.text = "\(String(describing: placeMark!.subThoroughfare ?? "")) \(String(describing: placeMark!.thoroughfare ?? ""))"
+            print(self.pickupStreetAddress.text!)
             self.pickupCity.text = self.shipmentCity
             self.pickupState.text = self.shipmentState
             self.pickUpzipcode.text = self.shipmentZip

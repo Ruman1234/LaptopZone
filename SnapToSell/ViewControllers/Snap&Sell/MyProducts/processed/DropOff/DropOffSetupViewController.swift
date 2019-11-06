@@ -35,6 +35,8 @@ class DropOffSetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
+       
+       self.backBtn()
         NotificationCenter.default.addObserver(self, selector: #selector(self.backButtonDidPress), name: Notification.Name("backStepdropoff"), object: nil)
         self.addBG()
         // Do any additional setup after loading the view.
@@ -86,7 +88,7 @@ class DropOffSetupViewController: UIViewController {
 //                self.navigationController?.popViewController(animated: true)
                 
                
-                let a = self.navigationController?.viewControllers[0] as! NewProductsListViewController
+                let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
                 
                 self.navigationController?.popToViewController(a, animated: true)
 

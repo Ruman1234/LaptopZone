@@ -15,6 +15,7 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
     @IBOutlet var addBtn: UIBarButtonItem!
     @IBOutlet var menuBtn: UIBarButtonItem!
     
+    @IBOutlet weak var addNewAddressBtn: UIButton!
     var addresses = [AddressesModel]()
     var type = String()
     var defaultAddressViewController = DefaultAddressViewController()
@@ -58,10 +59,22 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
             self.addresses = response
             print(self.addresses.count)
             self.tableView.reloadData()
-            if self.addresses.count < 5 {
-                self.navigationItem.rightBarButtonItem = self.addBtn
+            if self.addresses.count == 0 {
+                Utilites.ShowAlert(title: "Ooops", message: "You don't have any address kindly add a new address", view: self) { (res) in
+                      let main = self.storyboard?.instantiateViewController(withIdentifier: "AddNewAddressViewController") as! AddNewAddressViewController
+                        main.type = "add"
+                        self.navigationController?.pushViewController(main, animated: true)
+
+                }
+              
+            }
+            
+            if self.addresses.count >= 5 {
+//                self.navigationItem.rightBarButtonItem = self.addBtn
+                self.addNewAddressBtn.isHidden = true
             }else{
-                self.navigationItem.rightBarButtonItem = nil
+//                self.navigationItem.rightBarButtonItem = nil
+                self.addNewAddressBtn.isHidden = false
             }
         }) { (error) in
             
@@ -79,19 +92,32 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let addres = self.addresses[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
+        
+        if addres.is_default! {
+            cell.defaultLbl.text = "Default"
+            cell.defaultLbl.textColor = UIColor.red
+        }else{
+            cell.defaultLbl.text = "Make Default"
+            cell.defaultLbl.textColor = UIColor.darkGray
+        }
+        
+        
         cell.name.text = addres.contact_name
         cell.aptStreet.text = (addres.apartment ?? "") + "," + (addres.street ?? "")
-        cell.city.text = addres.city
-        cell.state.text = addres.state
+        cell.city.text = addres.city! + addres.state!
+//        cell.state.text = addres.state
         cell.zip.text = addres.zip
         cell.number.text = addres.phone
+        
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 155
+        return 181
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -110,17 +136,18 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
             let edit = UIAlertAction(title: "Edit", style: .default) { (alert) in
                 let main = self.storyboard?.instantiateViewController(withIdentifier: "AddNewAddressViewController") as! AddNewAddressViewController
                 main.type = "update"
+                
                 main.address = self.addresses[indexPath.row]
                 self.navigationController?.pushViewController(main, animated: true)
             }
             
-            let delete = UIAlertAction(title: "delete", style: .destructive) { (alert) in
+            let delete = UIAlertAction(title: "Delete", style: .destructive) { (alert) in
                 
                 
                 self.deleteAddress(id: "\(self.addresses[indexPath.row].id!)", indexpath: indexPath)
             }
             
-            let cancle = UIAlertAction(title: "Cancle", style: .cancel) { (res) in
+            let cancle = UIAlertAction(title: "Cancel", style: .cancel) { (res) in
                 
             }
             
@@ -142,8 +169,12 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
             SVProgressHUD.dismiss()
             self.addresses.remove(at: indexpath.row)
             self.tableView.deleteRows(at: [indexpath], with: .automatic)
-            if self.addresses.count < 5 {
-                self.navigationItem.rightBarButtonItem = self.addBtn
+           if self.addresses.count >= 5 {
+            //                self.navigationItem.rightBarButtonItem = self.addBtn
+                self.addNewAddressBtn.isHidden = true
+            }else{
+//                self.navigationItem.rightBarButtonItem = nil
+                self.addNewAddressBtn.isHidden = false
             }
         }) { (error) in
             SVProgressHUD.dismiss()
@@ -159,6 +190,18 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
         self.navigationController?.pushViewController(main, animated: true)
     }
     
+    
+    
+    @IBAction func addNewAddress(_ sender: Any) {
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "AddNewAddressViewController") as! AddNewAddressViewController
+              main.type = "add"
+              self.navigationController?.pushViewController(main, animated: true)
+    }
+    
+    
+    @IBAction func backbtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
 }

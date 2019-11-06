@@ -37,7 +37,7 @@ class DefaultAddressViewController: UIViewController {
             self.checkAvailbility.isHidden = true
         }
         
-        self.addBG()
+//        self.addBG()
         
         // Do any additional setup after loading the view.
     }
@@ -144,7 +144,7 @@ class DefaultAddressViewController: UIViewController {
                 
                 Constants.addressId = "\(String(describing: self.address.id!))"
             }else{
-                Utilites.ShowAlert(title: "Oppsss!!", message: "We are not availble in this area", view: self)
+                Utilites.ShowAlert(title: "Oppsss!!", message: "We are not available in this area", view: self)
             }
             
         }) { (err) in

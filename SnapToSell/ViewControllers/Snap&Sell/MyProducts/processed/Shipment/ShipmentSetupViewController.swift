@@ -37,7 +37,7 @@ class ShipmentSetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
-        
+        self.backBtn()
         let firstVC = storyboard?.instantiateViewController(withIdentifier: "PackageDetailsViewController") as! PackageDetailsViewController
         let secondVC = storyboard?.instantiateViewController(withIdentifier: "ShipmentRatesViewController") as! ShipmentRatesViewController
         
@@ -129,7 +129,7 @@ class ShipmentSetupViewController: UIViewController {
     
     @objc private func backButtonDidPress() {
         
-        let a = self.navigationController?.viewControllers[0] as! NewProductsListViewController
+        let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
         
         self.navigationController?.popToViewController(a, animated: true)
 

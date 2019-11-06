@@ -37,7 +37,14 @@
 		185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD5032354509C0011FA0A /* Buy&Sell.swift */; };
 		185AD506235466CE0011FA0A /* SelectSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */; };
 		185AD508235467010011FA0A /* SelectModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD507235467010011FA0A /* SelectModelViewController.swift */; };
-		185F83D0231E402E002FAF1F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F83CF231E402E002FAF1F /* ChatViewController.swift */; };
+		185F458E2362CA3000A7B25F /* newTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F458D2362CA3000A7B25F /* newTabBarViewController.swift */; };
+		185F45902362E48300A7B25F /* Message_NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F458F2362E48300A7B25F /* Message_NotificationTableViewCell.swift */; };
+		185F45932362E68500A7B25F /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F45922362E68500A7B25F /* MessageViewController.swift */; };
+		185F45952362E75600A7B25F /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F45942362E75600A7B25F /* NotificationViewController.swift */; };
+		185F45982363042C00A7B25F /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F45972363042C00A7B25F /* MessageModel.swift */; };
+		185F459A236332C300A7B25F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185F4599236332C300A7B25F /* ChatViewController.swift */; };
+		186ED48D236AD28100916E5C /* AddDropOffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186ED48B236AD28100916E5C /* AddDropOffView.swift */; };
+		186ED48E236AD28100916E5C /* AddDropOffView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186ED48C236AD28100916E5C /* AddDropOffView.xib */; };
 		18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18721C342316636900C3AAAC /* SWRevealViewController.m */; };
 		18721C382316663700C3AAAC /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C372316663700C3AAAC /* SideMenuViewController.swift */; };
 		18721C3A2316668D00C3AAAC /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18721C392316668D00C3AAAC /* SideMenuTableViewCell.swift */; };
@@ -64,6 +71,7 @@
 		18CCCF5D234DED700049742D /* GiveOfferScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCCF5C234DED700049742D /* GiveOfferScreenViewController.swift */; };
 		18CCCF5F234DEE030049742D /* OffertableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCCF5E234DEE030049742D /* OffertableViewCell.swift */; };
 		18D5F85B235599F000A167B8 /* SelectPaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5F85A235599F000A167B8 /* SelectPaymentMethodViewController.swift */; };
+		18E0F00A236C5A0D00871199 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0F009236C5A0D00871199 /* ProfileViewController.swift */; };
 		18E849572317B39C00A52C62 /* PendingProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */; };
 		18E849592317C89A00A52C62 /* ApprovedProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */; };
 		18E8495B2317D48D00A52C62 /* ProcessedProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */; };
@@ -156,8 +164,15 @@
 		185AD5032354509C0011FA0A /* Buy&Sell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buy&Sell.swift"; sourceTree = "<group>"; };
 		185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSeriesViewController.swift; sourceTree = "<group>"; };
 		185AD507235467010011FA0A /* SelectModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelViewController.swift; sourceTree = "<group>"; };
-		185F83CF231E402E002FAF1F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		185F458D2362CA3000A7B25F /* newTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newTabBarViewController.swift; sourceTree = "<group>"; };
+		185F458F2362E48300A7B25F /* Message_NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message_NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		185F45922362E68500A7B25F /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		185F45942362E75600A7B25F /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		185F45972363042C00A7B25F /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		185F4599236332C300A7B25F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		18628C0323360BD400B7A110 /* SnapToSell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnapToSell.entitlements; sourceTree = "<group>"; };
+		186ED48B236AD28100916E5C /* AddDropOffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDropOffView.swift; sourceTree = "<group>"; };
+		186ED48C236AD28100916E5C /* AddDropOffView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDropOffView.xib; sourceTree = "<group>"; };
 		18721C332316636900C3AAAC /* SnapToSell-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SnapToSell-Bridging-Header.h"; sourceTree = "<group>"; };
 		18721C342316636900C3AAAC /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = SnapToSell/SWRevealViewController.m; sourceTree = SOURCE_ROOT; };
 		18721C352316636A00C3AAAC /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = SnapToSell/SWRevealViewController.h; sourceTree = SOURCE_ROOT; };
@@ -186,6 +201,7 @@
 		18CCCF5C234DED700049742D /* GiveOfferScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveOfferScreenViewController.swift; sourceTree = "<group>"; };
 		18CCCF5E234DEE030049742D /* OffertableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffertableViewCell.swift; sourceTree = "<group>"; };
 		18D5F85A235599F000A167B8 /* SelectPaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodViewController.swift; sourceTree = "<group>"; };
+		18E0F009236C5A0D00871199 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		18E849562317B39C00A52C62 /* PendingProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E849582317C89A00A52C62 /* ApprovedProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovedProductDetailViewController.swift; sourceTree = "<group>"; };
 		18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedProductsViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +364,7 @@
 		182B29B1230FB611003E10CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				185F45962363041900A7B25F /* Message&Notification */,
 				182B29B2230FB626003E10CD /* LoginModel.swift */,
 				1809DA5D232F6DBF002D260D /* ProfileModel.swift */,
 				185AD502235450800011FA0A /* Buy&Sell */,
@@ -369,6 +386,8 @@
 		182B29B9230FC99F003E10CD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18E0F00B236C7B3A00871199 /* AccountsAndProfile */,
+				185F45912362E66700A7B25F /* Notification&Message */,
 				18721C372316663700C3AAAC /* SideMenuViewController.swift */,
 				187E6F7D2344ADD800DF78BE /* WalkThrough */,
 				18721C432316911D00C3AAAC /* LoginSignup */,
@@ -389,6 +408,7 @@
 				18F0726D2319434800E8F8CB /* ShipmentRatesTableViewCell.swift */,
 				188A49EC234CA847003F995C /* SelectModelTableViewCell.swift */,
 				18CCCF5E234DEE030049742D /* OffertableViewCell.swift */,
+				185F458F2362E48300A7B25F /* Message_NotificationTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -407,6 +427,7 @@
 			children = (
 				18721C452316914E00C3AAAC /* Products */,
 				18721C422316910700C3AAAC /* MyProducts */,
+				18E849642317E79600A52C62 /* Approved */,
 			);
 			path = "Snap&Sell";
 			sourceTree = "<group>";
@@ -433,12 +454,38 @@
 			path = "Buy&Sell";
 			sourceTree = "<group>";
 		};
+		185F45912362E66700A7B25F /* Notification&Message */ = {
+			isa = PBXGroup;
+			children = (
+				185F45922362E68500A7B25F /* MessageViewController.swift */,
+				185F45942362E75600A7B25F /* NotificationViewController.swift */,
+				185F4599236332C300A7B25F /* ChatViewController.swift */,
+			);
+			path = "Notification&Message";
+			sourceTree = "<group>";
+		};
+		185F45962363041900A7B25F /* Message&Notification */ = {
+			isa = PBXGroup;
+			children = (
+				185F45972363042C00A7B25F /* MessageModel.swift */,
+			);
+			path = "Message&Notification";
+			sourceTree = "<group>";
+		};
 		185F83CE231E4008002FAF1F /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				185F83CF231E402E002FAF1F /* ChatViewController.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		186ED48A236ACAD300916E5C /* AddDropOffTrackingInfo */ = {
+			isa = PBXGroup;
+			children = (
+				186ED48B236AD28100916E5C /* AddDropOffView.swift */,
+				186ED48C236AD28100916E5C /* AddDropOffView.xib */,
+			);
+			path = AddDropOffTrackingInfo;
 			sourceTree = "<group>";
 		};
 		18721C322316634C00C3AAAC /* ThiredParty */ = {
@@ -455,10 +502,10 @@
 			isa = PBXGroup;
 			children = (
 				18721C3C2316898800C3AAAC /* TabBarViewController.swift */,
+				185F458D2362CA3000A7B25F /* newTabBarViewController.swift */,
 				18721C462316920800C3AAAC /* ProductsListViewController.swift */,
 				18E849622317E74D00A52C62 /* pending */,
 				18E849632317E75A00A52C62 /* processed */,
-				18E849642317E79600A52C62 /* Approved */,
 			);
 			path = MyProducts;
 			sourceTree = "<group>";
@@ -508,7 +555,6 @@
 		188A49E5234C9EBD003F995C /* newScreen */ = {
 			isa = PBXGroup;
 			children = (
-				18204EF52358DAE4007A8A91 /* accountViewController.swift */,
 				188A49E3234C9982003F995C /* Snap&sellSelectBrandViewController.swift */,
 				188A49E6234C9EDD003F995C /* snap&sellSelectModelViewController.swift */,
 				185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */,
@@ -525,6 +571,7 @@
 		188B009923488885007B832F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				186ED48A236ACAD300916E5C /* AddDropOffTrackingInfo */,
 				182DD039235F5DB7009C79BA /* ShowImage */,
 				18F8D759235D89ED00E4E1C4 /* SelectShipment */,
 				18F8D758235D89DC00E4E1C4 /* AnotherView */,
@@ -539,6 +586,15 @@
 				18A7B2FD2345D37000282904 /* mainViewController.swift */,
 			);
 			path = "Home&TabBar";
+			sourceTree = "<group>";
+		};
+		18E0F00B236C7B3A00871199 /* AccountsAndProfile */ = {
+			isa = PBXGroup;
+			children = (
+				18E0F009236C5A0D00871199 /* ProfileViewController.swift */,
+				18204EF52358DAE4007A8A91 /* accountViewController.swift */,
+			);
+			path = AccountsAndProfile;
 			sourceTree = "<group>";
 		};
 		18E849622317E74D00A52C62 /* pending */ = {
@@ -803,6 +859,7 @@
 				188B00A1234888D9007B832F /* AddotherView.xib in Resources */,
 				1808B606231F91FB00243B9C /* client_477867186230-tumr6302i75gnmm6576e3rl7a5rcjuv1.apps.googleusercontent.com.plist in Resources */,
 				182B2984230FB399003E10CD /* Main.storyboard in Resources */,
+				186ED48E236AD28100916E5C /* AddDropOffView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,8 +990,11 @@
 				18E849612317E64800A52C62 /* DefaultAddressViewController.swift in Sources */,
 				18E8D440232A115A00CD8110 /* RepairDetail.swift in Sources */,
 				18A7B2FE2345D37000282904 /* mainViewController.swift in Sources */,
+				186ED48D236AD28100916E5C /* AddDropOffView.swift in Sources */,
 				188A49EB234CA793003F995C /* SelectPhoneModelViewController.swift in Sources */,
 				18F8D75C235D8A1C00E4E1C4 /* SelectShipmentViewController.swift in Sources */,
+				18E0F00A236C5A0D00871199 /* ProfileViewController.swift in Sources */,
+				185F458E2362CA3000A7B25F /* newTabBarViewController.swift in Sources */,
 				188A49ED234CA847003F995C /* SelectModelTableViewCell.swift in Sources */,
 				188A49E7234C9EDD003F995C /* snap&sellSelectModelViewController.swift in Sources */,
 				18EC2E7A23110B8B00870A48 /* ProductImageCollectionViewCell.swift in Sources */,
@@ -947,6 +1007,7 @@
 				188B009823486E7E007B832F /* UploadViewController.swift in Sources */,
 				187E6F812344ADEE00DF78BE /* BWWalkthroughViewController.swift in Sources */,
 				182B29C0231001EC003E10CD /* AddressTableViewCell.swift in Sources */,
+				185F459A236332C300A7B25F /* ChatViewController.swift in Sources */,
 				187E6F832344ADF800DF78BE /* CustomPageViewController.swift in Sources */,
 				18E8495F2317E13F00A52C62 /* processedSetupIndicatorViewController.swift in Sources */,
 				18D5F85B235599F000A167B8 /* SelectPaymentMethodViewController.swift in Sources */,
@@ -966,17 +1027,18 @@
 				182B29C4231003AA003E10CD /* AddressesModel.swift in Sources */,
 				18F0726823190E2300E8F8CB /* PackageDetailsViewController.swift in Sources */,
 				18F072662319092800E8F8CB /* ShipmentSetupViewController.swift in Sources */,
+				185F45982363042C00A7B25F /* MessageModel.swift in Sources */,
 				182B29B8230FBBFA003E10CD /* Utilities.swift in Sources */,
 				182DD03C235F5DDF009C79BA /* ShowImageView.swift in Sources */,
 				18E8D43D232A0F3200CD8110 /* RepairBrandViewController.swift in Sources */,
 				182B29BB230FC9B3003E10CD /* RegisterViewController.swift in Sources */,
-				185F83D0231E402E002FAF1F /* ChatViewController.swift in Sources */,
 				187E6F802344ADEE00DF78BE /* BWWalkthroughPageViewController.swift in Sources */,
 				182A416F233B7F9F008286BE /* CodeVerificationViewController.swift in Sources */,
 				1847D6682328BF7400B04692 /* SelectYourProductViewController.swift in Sources */,
 				188B00A0234888D9007B832F /* AddotherView.swift in Sources */,
 				185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */,
 				18F072612318FD9900E8F8CB /* DropOffDescriptionViewController.swift in Sources */,
+				185F45902362E48300A7B25F /* Message_NotificationTableViewCell.swift in Sources */,
 				18CCCF5D234DED700049742D /* GiveOfferScreenViewController.swift in Sources */,
 				18E8D445232A250B00CD8110 /* ModelViewController.swift in Sources */,
 				18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */,
@@ -990,6 +1052,7 @@
 				18E8D447232A253C00CD8110 /* ProblemViewController.swift in Sources */,
 				18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */,
 				18F0726E2319434800E8F8CB /* ShipmentRatesTableViewCell.swift in Sources */,
+				185F45932362E68500A7B25F /* MessageViewController.swift in Sources */,
 				1809DA5E232F6DBF002D260D /* ProfileModel.swift in Sources */,
 				18C5A5BF2356E7120011FDAA /* SelectdeliveryMethodViewController.swift in Sources */,
 				18E8D449232A32D600CD8110 /* ContactDetailsViewController.swift in Sources */,
@@ -1001,6 +1064,7 @@
 				182B29B0230FB4A4003E10CD /* SnapToSellNetworkMAnager.swift in Sources */,
 				18CCCF5F234DEE030049742D /* OffertableViewCell.swift in Sources */,
 				18721C382316663700C3AAAC /* SideMenuViewController.swift in Sources */,
+				185F45952362E75600A7B25F /* NotificationViewController.swift in Sources */,
 				182B29B6230FB722003E10CD /* Constants.swift in Sources */,
 				18F0726A2319331C00E8F8CB /* ShipmentRatesViewController.swift in Sources */,
 				18721C4123168EB900C3AAAC /* RequestStatusModel.swift in Sources */,

@@ -19,6 +19,7 @@ class MapViewController: UIViewController , CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//       self.backBtn()
         self.locationManager.requestAlwaysAuthorization()
         
         // For use in foreground

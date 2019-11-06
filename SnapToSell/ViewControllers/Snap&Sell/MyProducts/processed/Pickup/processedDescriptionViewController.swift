@@ -12,7 +12,8 @@ class processedDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addBG()
+//        self.addBG()
+//        self.backBtn()
         // Do any additional setup after loading the view.
     }
     

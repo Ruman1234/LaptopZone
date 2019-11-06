@@ -29,8 +29,9 @@ class PackageDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.addBG()
+//self.backBtn()
+        
+//        self.addBG()
         // Do any additional setup after loading the view.
     }
     
@@ -45,16 +46,16 @@ class PackageDetailsViewController: UIViewController {
         self.length.text = self.length.text?.trimmingCharacters(in: .whitespaces)
         
         
-        if self.height.text == ""{
+        if self.height.text == "" || self.height.text == "0"{
             flag = false
             self.showToast(message: "Please enter height")
-        }else if self.weight.text == ""{
+        }else if self.weight.text == "" || self.weight.text == "0"{
                 flag = false
             self.showToast(message: "Please enter weight")
-        }else if self.width.text == ""{
+        }else if self.width.text == "" || self.width.text == "0"{
             self.showToast(message: "Please enter width")
             flag = false
-        }else if self.length.text == ""{
+        }else if self.length.text == "" || self.length.text == "0"{
             self.showToast(message: "Please enter length")
             flag = false
         }

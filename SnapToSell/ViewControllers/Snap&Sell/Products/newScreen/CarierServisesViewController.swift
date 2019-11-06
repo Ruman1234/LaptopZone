@@ -60,7 +60,7 @@ class CarierServisesViewController: UIViewController, UICollectionViewDelegate ,
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! RepairingBrandCollectionViewCell
 //        
         cell.brandName.text = self.brandArray[indexPath.row].CARRIER_NAME
-//        
+        cell.imageView.sd_setImage(with: URL(string: self.brandArray[indexPath.row].IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
 //        cell.imageView.sd_setImage(with: URL(string: self.brandArray[indexPath.row].BRAND_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
         
         return cell

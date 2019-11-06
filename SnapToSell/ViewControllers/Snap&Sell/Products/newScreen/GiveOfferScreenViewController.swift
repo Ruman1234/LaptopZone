@@ -328,8 +328,12 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
         }
         
     }
-
     
+    
+//self.yes_no[sender.tag] = 0 yes || Flawless
+//self.yes_no[sender.tag] = 1 no || Good
+//self.yes_no[sender.tag] = 3 Fair
+//self.yes_no[sender.tag] = 4 broken
     
     
     @IBAction func yesBtn(_ sender: AnyObject) {
@@ -339,24 +343,74 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
         // here is the text of the label
         let string = selectedCell.yesBtn.titleLabel?.text
         
-        
-        if self.yes_no[sender.tag] != 0  {
+        if sender.tag == 0 {
+            
+             var amt = Int()
+                    
+            if self.yes_no[sender.tag] == 1{
+    //            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+                
+                //self.yes_no[sender.tag] = 0 yes || Flawless
+                //self.yes_no[sender.tag] = 1 no || Good
+                //self.yes_no[sender.tag] = 3 Fair
+                //self.yes_no[sender.tag] = 4 broken
+                amt = Int(self.questions[indexPath.row].answers![1].EFFECTIVE_VALUE!)!
+            }else if self.yes_no[sender.tag] == 3{
+                amt = Int(self.questions[indexPath.row].answers![0].EFFECTIVE_VALUE!)!
+            }else if self.yes_no[sender.tag] == 4{
+                amt = Int(self.questions[indexPath.row].answers![3].EFFECTIVE_VALUE!)!
+            }
+            
+            if self.yes_no[sender.tag] != 0 {
             for val in self.questions[indexPath.row].answers!{
-                if string == val.DESCRIPTION{
-//                    if (val.IS_DEFAULT != nil) {
+                   if string == val.DESCRIPTION{
+        //                   if (val.IS_DEFAULT != nil) {
+        //                       self.calculatedAmount = self.calculatedAmount + Int(val.EFFECTIVE_VALUE!)!
+        //                   }else{
+                    
                     self.answerIdArray[sender.tag] = val.ID!
-//                    self.answerIdArray[indexPath.row] = val.ID!
+    //                    self.answerIdArray[indexPath.row] = val.ID!
+    //                    self.answerIdArray.insert(val.ID!, at: indexPath.row)
+                    self.calculatedAmount = self.calculatedAmount + amt
+                    
+//                    self.calculatedAmount = self.calculatedAmount - Int(val.EFFECTIVE_VALUE!)!
+
+                    
+    //                           self.calculatedAmount =  self.calculatedAmount - Int(val.EFFECTIVE_VALUE!)!
+        //                   }
+                   }
+               }
+            }
+            
+        }else{
+            if self.yes_no[sender.tag] != 0  {
+                for val in self.questions[indexPath.row].answers!{
+                    if string == val.DESCRIPTION{
+    //                    if (val.IS_DEFAULT != nil) {
+                        
+    //                    self.answerIdArray[indexPath.row] = val.ID!
+    //                        self.calculatedAmount = self.calculatedAmount + Int(val.EFFECTIVE_VALUE!)!
+    //                    }else{
+    //                        self.calculatedAmount = Int(self.price)! - Int(val.EFFECTIVE_VALUE!)!
+    //                    }
+                    }else{
                         self.calculatedAmount = self.calculatedAmount + Int(val.EFFECTIVE_VALUE!)!
-//                    }else{
-//                        self.calculatedAmount = Int(self.price)! - Int(val.EFFECTIVE_VALUE!)!
-//                    }
+                        self.answerIdArray[sender.tag] = val.ID!
+                    }
                 }
             }
         }
         
-        let str = String(self.calculatedAmount)
-        
-        self.priceLbl.text = Double(str)?.dollarString
+        if self.calculatedAmount < 1{
+            self.priceLbl.text = Double(0).dollarString
+            Utilites.ShowAlert(title: "Alert!!!", message: "We dont want to buy this item", view: self)
+        }else{
+
+            let str = String(self.calculatedAmount)
+            
+            self.priceLbl.text = Double(str)?.dollarString
+            
+        }
         
 
         self.yes_no[sender.tag] = 0
@@ -383,10 +437,16 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
                     
             if self.yes_no[sender.tag] == 0{
     //            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+                
+                //self.yes_no[sender.tag] = 0 yes || Flawless
+                //self.yes_no[sender.tag] = 1 no || Good
+                //self.yes_no[sender.tag] = 3 Fair
+                //self.yes_no[sender.tag] = 4 broken
+
             }else if self.yes_no[sender.tag] == 3{
-                amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+                amt = Int(self.questions[indexPath.row].answers![0].EFFECTIVE_VALUE!)!
             }else if self.yes_no[sender.tag] == 4{
-                amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+                amt = Int(self.questions[indexPath.row].answers![3].EFFECTIVE_VALUE!)!
             }
             
             if self.yes_no[sender.tag] != 1 {
@@ -426,9 +486,21 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
                }
             }
         }
-        let str = String(self.calculatedAmount)
         
-        self.priceLbl.text = Double(str)?.dollarString
+        
+        if self.calculatedAmount < 1{
+            self.priceLbl.text = Double(0).dollarString
+            Utilites.ShowAlert(title: "Alert!!!", message: "We dont want to buy this item", view: self)
+        }else{
+
+           let str = String(self.calculatedAmount)
+           
+           self.priceLbl.text = Double(str)?.dollarString
+           
+        }
+//        let str = String(self.calculatedAmount)
+//
+//        self.priceLbl.text = Double(str)?.dollarString
         self.yes_no[sender.tag] = 1
         tableView.reloadData()
     }
@@ -443,13 +515,18 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
         let string = selectedCell.flawLess.titleLabel?.text
         
         var amt = Int()
-        
+            
+        //self.yes_no[sender.tag] = 0 yes || Flawless
+        //self.yes_no[sender.tag] = 1 no || Good
+        //self.yes_no[sender.tag] = 3 Fair
+        //self.yes_no[sender.tag] = 4 broken
+
         if self.yes_no[sender.tag] == 1{
-            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+            amt = Int(self.questions[indexPath.row].answers![1].EFFECTIVE_VALUE!)!
         }else if self.yes_no[sender.tag] == 1{
 //            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
         }else if self.yes_no[sender.tag] == 4{
-            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+            amt = Int(self.questions[indexPath.row].answers![3].EFFECTIVE_VALUE!)!
         }
 
         if self.yes_no[sender.tag] != 3 {
@@ -472,9 +549,20 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
                }
            }
         }
-        let str = String(self.calculatedAmount)
         
-        self.priceLbl.text = Double(str)?.dollarString
+        if self.calculatedAmount < 1{
+           self.priceLbl.text = Double(0).dollarString
+           Utilites.ShowAlert(title: "Alert!!!", message: "We dont want to buy this item", view: self)
+        }else{
+
+          let str = String(self.calculatedAmount)
+          
+          self.priceLbl.text = Double(str)?.dollarString
+          
+        }
+//        let str = String(self.calculatedAmount)
+        
+//        self.priceLbl.text = Double(str)?.dollarString
         
         self.yes_no[sender.tag] = 3
         tableView.reloadData()
@@ -494,9 +582,15 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
         //            for val in self.questions[indexPath.row].answers!{
         //                amt = Int(val.EFFECTIVE_VALUE!)!
         //            }
+            
+            //self.yes_no[sender.tag] = 0 yes || Flawless
+            //self.yes_no[sender.tag] = 1 no || Good
+            //self.yes_no[sender.tag] = 3 Fair
+            //self.yes_no[sender.tag] = 4 broken
+
         }else if self.yes_no[sender.tag] == 1{
-            amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
-        }else if self.yes_no[sender.tag] == 3{
+            amt = Int(self.questions[indexPath.row].answers![1].EFFECTIVE_VALUE!)!
+        }else if self.yes_no[sender.tag] == 0{
             amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
         }
 
@@ -521,9 +615,20 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
                }
            }
         }
-        let str = String(self.calculatedAmount)
         
-        self.priceLbl.text = Double(str)?.dollarString
+        if self.calculatedAmount < 1{
+           self.priceLbl.text = Double(0).dollarString
+           Utilites.ShowAlert(title: "Alert!!!", message: "We dont want to buy this item", view: self)
+        }else{
+
+          let str = String(self.calculatedAmount)
+          
+          self.priceLbl.text = Double(str)?.dollarString
+          
+        }
+//        let str = String(self.calculatedAmount)
+        
+//        self.priceLbl.text = Double(str)?.dollarString
         self.yes_no[sender.tag] = 4
         tableView.reloadData()
     }

@@ -16,18 +16,19 @@ import SVProgressHUD
 import SocketIO
 
 
-class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource, UINavigationControllerDelegate , UIImagePickerControllerDelegate,OpalImagePickerControllerDelegate,PreviewViewControllerDelegate {
+class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource, UINavigationControllerDelegate , UIImagePickerControllerDelegate,UICollectionViewDelegateFlowLayout,OpalImagePickerControllerDelegate,PreviewViewControllerDelegate {
     
     
     
-    @IBOutlet weak var titleProduct: SkyFloatingLabelTextField!
-    @IBOutlet weak var lotPrice: SkyFloatingLabelTextField!
-    @IBOutlet weak var remarks: SkyFloatingLabelTextField!
+    @IBOutlet weak var titleProduct: UITextField!
+    @IBOutlet weak var lotPrice: UITextField!
+    @IBOutlet weak var remarks: UITextField!
     @IBOutlet weak var senfProduct: UIButton!
 //    @IBOutlet var camera: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var menubtn: UIBarButtonItem!
     
+    @IBOutlet weak var sellAnythingView: UIView!
     
     
     var imagePicker: UIImagePickerController!
@@ -39,63 +40,52 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     let manager = SocketManager(socketURL: URL(string: "http://71.78.236.22:6001")!, config: [.log(true), .compress])
     var socket : SocketIOClient!
 
+    private let spacing:CGFloat = 10.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        self.backBtn()
+        self.sellAnythingView.applyGradient(colours: [
+            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+        ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+        
+//        self.images.append(UIImage(named: "addimage")!)
+        
         _ = UserDefaults.standard.value(forKey: "Token")
         
+        self.senfProduct.setGradient()
 //        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
 //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 //
 //        self.navigationController?.navigationItem.rightBarButtonItem = camera
         
 //        self.navigationController?.navigationItem.rightBarButtonItem = menubtn
+        
+        
+             let layout = UICollectionViewFlowLayout()
+             layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+             layout.minimumLineSpacing = spacing
+             layout.minimumInteritemSpacing = spacing
+             self.collectionView?.collectionViewLayout = layout
         self.addBG()
+        self.textFieldDesign(textField: self.titleProduct)
+        self.textFieldDesign(textField: self.lotPrice)
+        self.textFieldDesign(textField: self.remarks)
         
     }
     
     
-    func SocketData()   {
-        
-        socket = manager.defaultSocket
-
-        socket.connect()
-        print(socket.status)
-        print("ASfda")
+    func textFieldDesign(textField :UITextField)  {
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth = 0.5
+        textField.giveShadow()
         
         
-        let json = [
-            "channel" : "private-App.User.\(CustomUserDefaults.userId.value!)",
-            "name"    : "subscribe",
-            "auth"    : [
-                "headers" : [
-                    "Authorization"  : "Bearer " + CustomUserDefaults.Token.value! ,
-                    "Accept"         : "application/json",
-                    "client_id"      : "21",
-                    "client_secret"  : "4KPwfKtXjuaQlFuU69B4dHvFHGblYQ5GsurdbHqM",
-                ]
-            ]
-
-        ] as [String : Any]
-        
-        print(json)
-        
-        
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-            self.socket.emit("subscribe", json)
-
-        }
-        
-        
-        socket.on("MessagePushed") { (dataArray, socketAck) -> Void in
-            
-            print(dataArray)
-            print(socketAck)
-            
-        }
     }
+    
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +95,10 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
             
         }
         self.tabBarController?.tabBar.isHidden = false
+       if self.images.last != UIImage(named: "addimage"){
+            self.images.append(UIImage(named: "addimage")!)
+        }
+//        self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -130,17 +124,107 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCollectionViewCell", for: indexPath) as! ProductImageCollectionViewCell
         
         cell.productImage.image = self.images[indexPath.row]
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        
-        
-        cell.productImage.addGestureRecognizer(tap)
+        if indexPath.row == self.images.count - 1 {
+            cell.cancleBtn.isHidden = true
+        }else{
+            cell.cancleBtn.isHidden = false
+            cell.cancleBtn.setGradient()
+        }
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+//
+//
+//        cell.productImage.addGestureRecognizer(tap)
         
         cell.cancleBtn.tag = indexPath.row
         return cell
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let numberOfItemsPerRow:CGFloat = 3
+            let spacingBetweenCells:CGFloat = 10
+            
+            
+            let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+            
+            if let collection = self.collectionView{
+                let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+    //            self.height.constant = width
+    //            self.width.constant = width
+                
+                return CGSize(width: width, height: width)
+                
+            }else{
+                return CGSize(width: 0, height: 0)
+            }
+        }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCollectionViewCell", for: indexPath) as! ProductImageCollectionViewCell
+        
+         if indexPath.row == self.images.count - 1{
+                   openCamer()
+         }else{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+                   
+                   
+                   cell.productImage.addGestureRecognizer(tap)
+        }
+    }
+    
+    
+    func openCamer() {
+        
+        let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Take Picture", style: .default) { (ale) in
+//            self.images.removeLast()
+            
+            if self.images.count < 21 {
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+                //            main.type = "repair"
+                self.images.removeLast()
+                self.navigationController?.pushViewController(main, animated: true)
+                            
+            }else{
+              Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos in 20", view: self)
+            }
+            
+        }
+        let media = UIAlertAction(title: "Media", style: .default) { (ale) in
+            guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+                //Show error to user?
+                return
+            }
+//            self.images.removeLast()
+            //Example Instantiating OpalImagePickerController with Closures
+               //Example Instantiating OpalImagePickerController with Closures
+            let imagePicker = OpalImagePickerController()
+            imagePicker.imagePickerDelegate = self
+            imagePicker.allowedMediaTypes = Set([.image ])
+            let max = 21 - self.images.count
+            imagePicker.maximumSelectionsAllowed = max
+
+            if self.images.count < 21 {
+                self.present(imagePicker, animated: true, completion: nil)
+            }else{
+                Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos in 20", view: self)
+            }
+            
+            
+            
+         
+        }
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
+            
+        }
+        imagesource.addAction(camera)
+        imagesource.addAction(media)
+        imagesource.addAction(cancle)
+        
+        self.present(imagesource, animated: true, completion: nil)
+        
+    }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         
@@ -151,6 +235,8 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         self.present(secondVC, animated: true, completion: nil)
         
     }
+    
+    
     
     func remove(_ i: Int) {
         
@@ -195,9 +281,9 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
             flag = false
             self.showToast(message: "please enter title")
             
-        }else if self.images.count == 0{
+        }else if self.images.count == 1{
             flag = false
-            self.showToast(message: "please add images")
+            self.showToast(message: "please add atleast 1 image")
         }
         
         return flag
@@ -208,121 +294,118 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     @IBAction func sendProduct(_ sender: Any) {
 
         if validInput(){
-            DispatchQueue.main.async {
-                SVProgressHUD.show(withStatus: "Loading...")
-//                let storageRef = self.storage.reference()
-                self.view.isUserInteractionEnabled = false
-                var i = 0
-                
-                
-                    NetworkManager.SharedInstance.AddNewOrder(title: self.titleProduct.text!, price: self.lotPrice.text ?? "", remarks: self.remarks.text ?? "", success: { (res) in
-                        print(res)
-                        
-                        for img in self.images{
-                            
-                            let date :Date = Date()
-                            
-                            let dateFormatter = DateFormatter()
-                            //dateFormatter.dateFormat = "yyyy-MM-dd'_'HH:mm:ss"
-                            dateFormatter.dateFormat = "yyyyMMddHHmmssSSSS"
-                            
-                            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-                            
-                            let imageName = "\(dateFormatter.string(from: date))\(i).jpg"
-                            print("images/\(imageName)")
-                            
-                            
-                            let par = ["request_id" : "\(res.id!)",
-                                       "name" : imageName] as [String : Any]
-                            NetworkManager.SharedInstance.UploadImages(params: par, images: img, success: { (res) in
-                                print(res)
-                                if i == self.images.count{
-                                    SVProgressHUD.dismiss()
-                                    Utilites.ShowAlert(title: "Success!!!", message: "Product added successfully", view: self)
-                                    self.view.isUserInteractionEnabled = true
-                                    self.reset()
-                                }
-                                i = i + 1
-                            }, failure: { (err) in
-                                SVProgressHUD.dismiss()
-                                self.view.isUserInteractionEnabled = true
-                                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
-                                
-                            })
-                            
-                        }
-                        
-                    }, failure: { (err) in
-                        SVProgressHUD.dismiss()
-                        self.view.isUserInteractionEnabled = true
-                        Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
-                    })
+            
+            
+
+        
+//        let date :Date = Date()
+//
+//        let dateFormatter = DateFormatter()
+//        //dateFormatter.dateFormat = "yyyy-MM-dd'_'HH:mm:ss"
+//        dateFormatter.dateFormat = "yyyyMMddHHmmssSSSS"
+//
+//        dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+        
+//        let imageName = "\(dateFormatter.string(from: date))\(i).jpg"
+//        print("images/\(imageName)")
+        self.images.removeLast()
+          DispatchQueue.main.async {
+            SVProgressHUD.show(withStatus: "Loading...")
+            self.view.isUserInteractionEnabled = false
+            let par = [
+        //                   "name" : imageName,
+                       "title":self.titleProduct.text! ,
+                       "asking_price":self.lotPrice.text ?? "" ,
+                       "remarks" : self.remarks.text ?? "",
+                       "offered_price" : ""] as [String : Any]
+            
+            
+            
+            NetworkManager.SharedInstance.UploadImages(params: par, images: self.images, success: { (res) in
+                self.view.isUserInteractionEnabled = true
+                print(res)
+        //            if i == self.images.count{
+                    SVProgressHUD.dismiss()
+        //
                     
+                    Utilites.ShowAlert(title: "Success!!!", message: "Your request has been received we will contact you ASAP", view: self) { (alert) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
                     
-//                    let date :Date = Date()
-//
-//                    let dateFormatter = DateFormatter()
-//                    //dateFormatter.dateFormat = "yyyy-MM-dd'_'HH:mm:ss"
-//                    dateFormatter.dateFormat = "yyyyMMddHHmmssSSSS"
-//
-//                    dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-//
-//                    let imageName = "\(dateFormatter.string(from: date))\(i).jpg"
-//                    print("images/\(imageName)")
+//                    self.view.isUserInteractionEnabled = true
+                    self.reset()
+                    
+            }, failure: { (err) in
+                SVProgressHUD.dismiss()
+                self.view.isUserInteractionEnabled = true
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
                 
-                    
-//                    let riversRef = storageRef.child("products/\(imageName)")
-//                    riversRef.putData(data, metadata: nil) { (metadata, error) in
-//                        guard let metadata = metadata else {
-//                            // Uh-oh, an error occurred!
-//                            Utilites.ShowAlert(title: "Error", message: "\(imageName) not upload", view: self)
-//                            return
-//                        }
-//
-//                        let size = metadata.size
-//                        print(size)
-//                        riversRef.downloadURL { (url, error) in
-//                            guard url != nil else {
-//                                // Uh-oh, an error occurred!
-//                                Utilites.ShowAlert(title: "Error", message: "\(imageName) not upload", view: self)
-//                                return
-//                            }
-//                            print(url!)
+            })
+        }
+    
+            
+            
+//            DispatchQueue.main.async {
+//                SVProgressHUD.show(withStatus: "Loading...")
+////                let storageRef = self.storage.reference()
+//                self.view.isUserInteractionEnabled = false
+//                var i = 0
 //
 //
-//                            let dataToAppend: [String: String] = ["url": "\(url!)"]
-//                            self.imageUrl.append(dataToAppend)
+//                NetworkManager.SharedInstance.AddNewOrder(title: self.titleProduct.text!, price: self.lotPrice.text ?? "", offered_price: "", remarks: self.remarks.text ?? "", success: { (res) in
+//                        print(res)
+//                        self.images.removeLast()
+//                        for img in self.images{
 //
-//                            let encoder = JSONEncoder()
-//                            encoder.outputFormatting = .prettyPrinted
-//                            if self.imageUrl.count == self.images.count {
-//                                do{
-//                                    let json = try encoder.encode(self.imageUrl)    // Generic parameter 'T' could not be inferred
-//                                    let str = String(data: json, encoding: .utf8)!
+//                            let date :Date = Date()
 //
-//                                    print(str)
+//                            let dateFormatter = DateFormatter()
+//                            //dateFormatter.dateFormat = "yyyy-MM-dd'_'HH:mm:ss"
+//                            dateFormatter.dateFormat = "yyyyMMddHHmmssSSSS"
+//
+//                            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+//
+//                            let imageName = "\(dateFormatter.string(from: date))\(i).jpg"
+//                            print("images/\(imageName)")
 //
 //
+//                            let par = ["request_id" : "\(res.id!)",
+//                                       "name" : imageName,
+//                                       "title":self.titleProduct.text! ,
+//                                       "asking-price":self.lotPrice.text ?? "" ,
+//                                       "remarks" : self.remarks.text ?? "",
+//                                       "offered_price" : ""] as [String : Any]
+//                            NetworkManager.SharedInstance.UploadImages(params: par, images: [img], success: { (res) in
+//                                print(res)
+//                                if i == self.images.count{
+//                                    SVProgressHUD.dismiss()
+////
 //
-//                                    NetworkManager.SharedInstance.AddNewOrder(title: self.titleProduct.text!, price: self.lotPrice.text!, images: str, remarks: self.remarks.text ?? "", success: { (response) in
-//                                        SVProgressHUD.dismiss()
-//                                        print(response)
-//                                        self.reset()
-//                                        Utilites.ShowAlert(title: "Success!!!", message: "product added successfully", view: self)
-//                                    }, failure: { (err) in
-//                                        SVProgressHUD.dismiss()
-//                                        Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
-//                                    })
+//                                    Utilites.ShowAlert(title: "Success!!!", message: "Your request has been received we will contact you ASAP", view: self) { (alert) in
+//                                        self.navigationController?.popViewController(animated: true)
+//                                    }
 //
-//                                }catch{
+//                                    self.view.isUserInteractionEnabled = true
+//                                    self.reset()
 //
 //                                }
-//                            }
+//                                i = i + 1
+//                            }, failure: { (err) in
+//                                SVProgressHUD.dismiss()
+//                                self.view.isUserInteractionEnabled = true
+//                                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+//
+//                            })
+//
 //                        }
-//                    }
-//                    i += 1
-//                }
-            }
+//
+//                    }, failure: { (err) in
+//                        SVProgressHUD.dismiss()
+//                        self.view.isUserInteractionEnabled = true
+//                        Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+//                    })
+//
+//            }
         }
     }
     
@@ -332,6 +415,9 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         self.lotPrice.text = ""
         self.remarks.text = ""
         self.images.removeAll()
+        if self.images.last != UIImage(named: "addimage"){
+           self.images.append(UIImage(named: "addimage")!)
+        }
         self.collectionView.reloadData()
     }
     
@@ -367,14 +453,14 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
             if self.images.count <= 20 {
                 self.present(imagePicker, animated: true, completion: nil)
             }else{
-                Utilites.ShowAlert(title: "Alert!!!", message: "MAx num of photos in 20", view: self)
+                Utilites.ShowAlert(title: "Alert!!!", message: "MAx num of photos are 20", view: self)
             }
             
             
             
          
         }
-        let cancle = UIAlertAction(title: "Cancle", style: .cancel ) { (ale) in
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
             
         }
         imagesource.addAction(camera)
@@ -395,9 +481,11 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     
         
         print(images.count)
+        self.images.removeLast()
         for img in images{
             self.images.append(img)
         }
+        self.images.append(UIImage(named: "addimage")!)
         self.collectionView.reloadData()
         presentedViewController?.dismiss(animated: true, completion: nil)
     }
@@ -413,5 +501,12 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     func imagePicker(_ picker: OpalImagePickerController, imageURLforExternalItemAtIndex index: Int) -> URL? {
         return URL(string: "https://placeimg.com/500/500/nature")
     }
+    
+    
+    @IBAction func backBTn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     
 }

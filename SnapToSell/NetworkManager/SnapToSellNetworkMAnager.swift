@@ -281,12 +281,12 @@ extension NetworkManager{
     
     func AddNewOrder(title: String ,
                   price: String ,
-                  
+                  offered_price: String ,
                   remarks: String ,
                   success : @escaping(NewRequest) -> Void ,
                   failure : @escaping(NSError) -> Void)  {
         
-        self.request(url: Constants.ADD_NEW_ORDER, method: .post, parameters: ["title":title ,"price":price , "remarks" : remarks], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.ADD_NEW_ORDER, method: .post, parameters: ["title":title ,"asking-price":price , "remarks" : remarks, "offered_price" : offered_price], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
             print(response)
             //            let value = response.result.value
             //            success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
@@ -316,27 +316,49 @@ extension NetworkManager{
     
     
     func RequestStatus(
-        status : String ,
+        searcInput : String ,
         success : @escaping([RequestStatusModel]) -> Void ,
         failure : @escaping(NSError) -> Void)  {
         
         
-        self.request(url: Constants.PRODUCT_STATUS , method: .post, parameters: ["status":status], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
-            
-            guard (response.response?.statusCode) != nil else{
-                failure(NSError())
-                return
-            }
-             if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
-                print(response)
-                if let value = response.result.value{
-                    success(Mapper<RequestStatusModel>().mapArray(JSONObject: value)!)
-                    
-                }
-            }else{
-                failure(NSError())
-            }
-        }
+//        self.request2(url: "ljw_rep_sell_data" , method: .post, parameters: ["searcInput":searcInput], encoding: JSONEncoding.default, header: nil) { (response) in
+//            
+//            guard (response.response?.statusCode) != nil else{
+//                failure(NSError())
+//                return
+//            }
+//             if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+//                print(response)
+//                if let value = response.result.value{
+//                    success(Mapper<RequestStatusModel>().mapArray(JSONObject: value)!)
+//                    
+//                }
+//            }else{
+//                failure(NSError())
+//            }
+//        }
+        
+        
+        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_rep_sell_data")!, method: .post, parameters: ["searcInput" : searcInput]).responseJSON { (response) in
+                          
+                          print(response)
+                   
+                   
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+                   }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                           success(Mapper<RequestStatusModel>().mapArray(JSONObject: value)!)
+                       }
+                   }else{
+                       failure(NSError())
+                   }
+               }
+        
         
     }
     
@@ -525,7 +547,7 @@ extension NetworkManager{
     
     
     func UploadImages(params: Parameters,
-                     images : UIImage,
+                     images : [UIImage],
                      success : @escaping (String) -> Void,
                      failure : @escaping (String) -> Void )  {
         
@@ -540,11 +562,22 @@ extension NetworkManager{
             for (key, value) in params {
                 multipartFormData.append((value as! String).data(using: .utf8)!, withName: key)
             }
+            var i = 0
+            for img in images{
+                           
+//               let data = img.jpegData(compressionQuality: 0.5)
 
-            multipartFormData.append(images.jpegData(compressionQuality: 0.5)!, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+//                MultipartFormData.append(data!, withName: "images[]", fileName: "images\(i).jpg", mimeType: "image/jpg")
+                
+                multipartFormData.append(img.jpegData(compressionQuality: 0.4)!, withName: "images[]", fileName: "images\(i).jpg", mimeType: "images/jpg")
+                
+               i += 1
+           }
+            
+          
             
             
-        }, usingThreshold:UInt64.init(), to: Constants.BASE_URL + "customer/sell-requests/images", method: .post,
+        }, usingThreshold:UInt64.init(), to: Constants.BASE_URL + "customer/sell-requests", method: .post,
            headers: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"], encodingCompletion: { (encodingResult) in
             
             switch encodingResult {
@@ -557,6 +590,9 @@ extension NetworkManager{
                     print(res)
                     success("Product Added Successfully")
                 })
+                upload.uploadProgress { (pr) in
+                    print(pr)
+                }
                 
             case .failure(let encodingError):
                 failure(encodingError as! String )
@@ -577,7 +613,7 @@ extension NetworkManager{
         
         
         self.request(url: Constants.CANCLE_REQUEST + "\(request_id)/cancel"  , method: .post, parameters:["feedback": reason], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
-            print(response)
+            print(response.response?.statusCode)
             guard (response.response?.statusCode) != nil else{
                 failure(NSError())
                 return
@@ -636,6 +672,7 @@ extension NetworkManager{
         
         self.request(url: Constants.SINGAL_PRODUCT_REQUEST + "\(request_id)"  , method: .get, parameters:nil, encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
             print(response)
+            print(response.response?.statusCode)
             guard (response.response?.statusCode) != nil else{
                 failure(NSError())
                 return
@@ -679,6 +716,31 @@ extension NetworkManager{
     }
    
     
+     func UpdateProfile(
+        name:String,
+        email:String,
+         success : @escaping(ProfileModel) -> Void ,
+         failure : @escaping(NSError) -> Void)  {
+         
+         
+        self.request(url: Constants.PROFILE   , method: .post, parameters:["name" :name,"email":email ], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+             print(response)
+             guard (response.response?.statusCode) != nil else{
+                 failure(NSError())
+                 return
+             }
+             if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                 print(response)
+                 if let value = response.result.value{
+                     success(Mapper<ProfileModel>().map(JSON: value as! [String : Any])!)
+                 }
+             }else{
+                 failure(NSError())
+             }
+         }
+         
+     }
+    
     func CancleOffer(
         requestId : String,
         offerid : String,
@@ -686,7 +748,7 @@ extension NetworkManager{
         failure : @escaping(NSError) -> Void)  {
         
         
-        self.request(url: Constants.CANCLE_SINGLE_OFFER  + "\(requestId)/offers/\(offerid)/cancel"  , method: .post, parameters:nil, encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.CANCLE_SINGLE_OFFER  + "\(requestId)/cancel"  , method: .post, parameters:nil, encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
             print(response)
             guard (response.response?.statusCode) != nil else{
                 failure(NSError())
@@ -848,7 +910,8 @@ extension NetworkManager{
         success : @escaping(ProfileModel) -> Void ,
         failure : @escaping(NSError) -> Void)  {
         
-        
+        print(old_password)
+        print(new_password)
         self.request(url: Constants.RESETPASSWORDUSINGOLDPASSWORD , method: .post, parameters:["new_password":new_password,"old_password":old_password], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
             print(response)
             guard (response.response?.statusCode) != nil else{
@@ -1280,4 +1343,264 @@ extension NetworkManager{
     
     
     
+
+    func getMessages(
+        
+                     success : @escaping([MessageModel]) -> Void ,
+                     failure : @escaping(NSError) -> Void)  {
+
+       
+            
+        self.request(url: "customer/conversations", method: .get , header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+            print(CustomUserDefaults.Token.value)
+            guard (response.response?.statusCode) != nil else{
+              failure(NSError())
+              return
+            }
+            print(response.response!.statusCode)
+            if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+              print(response)
+              if let value = response.result.value{
+                success(Mapper<MessageModel>().mapArray(JSONObject: value)!)              }
+            }else{
+              failure(NSError())
+            }
+         }
+      }
+    
+    
+
+    func getMessagesDetails(
+        id :String,
+                     success : @escaping([MessageModel]) -> Void ,
+                     failure : @escaping(NSError) -> Void)  {
+
+       
+            
+        self.request(url: "customer/conversations/\(id)/messages", method: .get  , header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+            guard (response.response?.statusCode) != nil else{
+              failure(NSError())
+              return
+            }
+            print(response.response!.statusCode)
+            if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+              print(response)
+              if let value = response.result.value{
+                success(Mapper<MessageModel>().mapArray(JSONObject: value)!)              }
+            }else{
+              failure(NSError())
+            }
+         }
+      }
+ 
+    
+
+       func sendMessages(
+           id :String,
+           params: Parameters,
+           content :UIImage?,
+                        success : @escaping(MessageModel) -> Void ,
+                        failure : @escaping(String) -> Void){
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 400.0
+        configuration.timeoutIntervalForResource = 400.0
+        self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            for (key, value) in params {
+                multipartFormData.append((value as! String).data(using: .utf8)!, withName: key)
+            }
+
+            if content != nil {
+                multipartFormData.append((content?.jpegData(compressionQuality: 0.5)!)!, withName: "content", fileName: "content.jpg", mimeType: "content/jpg")
+            }
+            
+            
+        }, usingThreshold:UInt64.init(), to: Constants.BASE_URL + "customer/conversations/\(id)/messages", method: .post,
+           headers: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"], encodingCompletion: { (encodingResult) in
+            
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseString(completionHandler: { (res) in
+                    print(res)
+//                    success("Product Added Successfully")
+//                     success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+                })
+                upload.responseJSON(completionHandler: { (res) in
+                    print(res)
+                    
+                    if let value = res.result.value{
+//                     success(Mapper<ShipmentRates>().map(JSON: value as! [String : Any])!)
+                        success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+                  }
+//                    success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+//                    success("Product Added Successfully")
+                })
+                
+            case .failure(let encodingError):
+                failure(encodingError as! String )
+                failure("error" )
+            }
+            
+        })
+        
+    }
+       //{
+
+          
+               
+//           self.request(url: "customer/conversations/\(id)/messages", method: .post  , header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+//               guard (response.response?.statusCode) != nil else{
+//                 failure(NSError())
+//                 return
+//               }
+//               print(response.response!.statusCode)
+//               if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+//                 print(response)
+//                 if let value = response.result.value{
+//                   success(Mapper<MessageModel>().mapArray(JSONObject: value)!)              }
+//               }else{
+//                 failure(NSError())
+//               }
+//            }
+        
+        
+        
+        
+//         }
+    
+    
+    
+    func createConversations(
+           id :String,
+                        success : @escaping(MessageModel) -> Void ,
+                        failure : @escaping(NSError) -> Void)  {
+
+        Alamofire.request(Constants.BASE_URL + "customer/conversations", method: .post, parameters: ["request_id" : id], headers: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]).responseJSON { (response) in
+           guard (response.response?.statusCode) != nil else{
+             failure(NSError())
+             return
+           }
+           print(response.response!.statusCode)
+            print(response)
+            
+            print(response.response)
+           if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+             print(response)
+             if let value = response.result.value{
+               success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+                
+            }
+           }else{
+             failure(NSError())
+           }
+        }
+               
+//        self.request(url: "customer/conversations", method: .post  ,parameters: ["request_id" : id], header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+//               guard (response.response?.statusCode) != nil else{
+//                 failure(NSError())
+//                 return
+//               }
+//               print(response.response!.statusCode)
+//               if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+//                 print(response)
+//                 if let value = response.result.value{
+//                   success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+//
+//                }
+//               }else{
+//                 failure(NSError())
+//               }
+//            }
+         }
+    
+    
+    func UpdateDropOff(
+           request_id :String,
+           tracking_id :String,
+           carrier_name :String,
+                        success : @escaping(MessageModel) -> Void ,
+                        failure : @escaping(NSError) -> Void)  {
+
+          
+               
+        self.request(url: Constants.UPDATE_DROPOFF, method: .post  ,parameters: ["request_id" : request_id,"tracking_code" : tracking_id,"carrier_name" : carrier_name], header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+               guard (response.response?.statusCode) != nil else{
+                 failure(NSError())
+                 return
+               }
+            print(response)
+               print(response.response!.statusCode)
+               if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                 print(response)
+                 if let value = response.result.value{
+                   success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+                    
+                }
+               }else{
+                 failure(NSError())
+               }
+            }
+         }
+    
+    
+    
+    
+    func GetCount(
+                        success : @escaping(MessageModel) -> Void ,
+                        failure : @escaping(NSError) -> Void)  {
+
+          
+               
+        self.request2(url: "ljw_rep_sell_counts", method: .get  ,parameters: nil, header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+               guard (response.response?.statusCode) != nil else{
+                 failure(NSError())
+                 return
+               }
+            print(response)
+               print(response.response!.statusCode)
+               if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                 print(response)
+                 if let value = response.result.value{
+                   success(Mapper<MessageModel>().map(JSON: value as! [String : Any])!)
+                    
+                }
+               }else{
+                 failure(NSError())
+               }
+            }
+         }
+    
+    
+    
+    func getRepRecData(
+        searcInput : String,
+        success : @escaping(RequestStatusModel) -> Void ,
+        failure : @escaping(NSError) -> Void)  {
+        
+        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/get_rep_rec_detail")!, method: .post, parameters: ["searcInput" : searcInput]).responseJSON { (response) in
+                          
+                          print(response)
+                   
+                   
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+                   }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                        success(Mapper<RequestStatusModel>().map(JSON: value as! [String : Any])!)                       }
+                   }else{
+                       failure(NSError())
+                   }
+               }
+
+    }
+    
 }
+

@@ -14,6 +14,8 @@ pod ‘ReachabilitySwift’, ‘~> 3’
 pod 'SVProgressHUD'
 pod 'SDWebImage'
 pod 'IQKeyboardManagerSwift'
+pod 'XLPagerTabStrip'
+
 
 pod 'OpalImagePicker'
 
@@ -33,7 +35,6 @@ pod 'GooglePlaces'
 
 pod 'Socket.IO-Client-Swift', '~> 15.1.0'
 
-pod 'XLPagerTabStrip'
 
 pod 'StepView'
 

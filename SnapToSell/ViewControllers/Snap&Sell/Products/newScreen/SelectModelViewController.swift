@@ -66,7 +66,11 @@ class SelectModelViewController: UIViewController, UICollectionViewDelegate , UI
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! RepairingBrandCollectionViewCell
 
         cell.brandName.text = self.brandArray[indexPath.row].DESCRIPTION
-//        cell.imageView.sd_setImage(with: URL(string: self.brandArray[indexPath.row].BRAND_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+        
+        if self.brandArray[indexPath.row].IMAGE_URL_FULL != "" {
+            cell.imageView.sd_setImage(with: URL(string: self.brandArray[indexPath.row].IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+
+        }
         
         return cell
         

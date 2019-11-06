@@ -43,9 +43,10 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableVew.reloadData()
+        self.otherBtn.setTitle("Others", for: .normal)
     }
     
-
+    
     func fetchDetails(id :String) {
         SVProgressHUD.show(withStatus: "Loading...")
         Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_Series")!, method: HTTPMethod.post, parameters: ["get_brand_name" : id], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -123,6 +124,10 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
         let main = self.storyboard?.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
         main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
         Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
+        Constants.seriesName = self.itemsArray[indexPath.row].sERIES_NAME!
+        
+        
+        
         self.navigationController?.pushViewController(main, animated: true)
     }
 
@@ -135,25 +140,28 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     
    func didClose(text: String) {
-      self.otherBtn.setTitle(text, for: .normal)
-      self.addotherView.removeFromSuperview()
-              
-      UIView.animate(withDuration: 0.3) {
-
-          self.addotherView.alpha = 0
-          self.addotherView = nil
-      }
-
-      Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-        
-//        print("asdfadf")
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
-//        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
-//        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
-        self.navigationController?.pushViewController(main, animated: true)
-        
-      }
     
+    if text != "" {
+          self.otherBtn.setTitle(text, for: .normal)
+          self.addotherView.removeFromSuperview()
+                  
+          UIView.animate(withDuration: 0.3) {
+
+              self.addotherView.alpha = 0
+              self.addotherView = nil
+          }
+
+          Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+            
+    //        print("asdfadf")
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
+            Constants.seriesId = self.otherBtn.titleLabel!.text!
+    //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
+    //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
+            self.navigationController?.pushViewController(main, animated: true)
+            
+          }
+       }
    }
        
     
@@ -174,6 +182,8 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
                self.addotherView = (Bundle.main.loadNibNamed("AddotherView", owner: self, options: nil)![0] as!  AddotherView)
                
                self.addotherView.delegate = self
+            self.addotherView.titleName = "Enter Series Name"
+            self.addotherView.nameLbl.text = "Enter Series Name"
                self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
                           
               self.view.addSubview(addotherView)

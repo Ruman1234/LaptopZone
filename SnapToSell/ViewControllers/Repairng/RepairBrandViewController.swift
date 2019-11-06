@@ -51,6 +51,9 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
 //        self.tableView.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.otherText = "Other"
+    }
     func fetchDetails(id :String) {
         SVProgressHUD.show(withStatus: "Loading...")
         Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_Brands")!, method: HTTPMethod.post, parameters: ["get_product_name" : id], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -194,27 +197,31 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
     
     func didClose(text: String) {
         
-        self.otherText = text
-        self.collectionView.reloadData()
-//        self.otherBtn.setTitle(text, for: .normal)
-        self.addotherView.removeFromSuperview()
-               
-       UIView.animate(withDuration: 0.3) {
-           
-           self.addotherView.alpha = 0
-           self.addotherView = nil
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                
-        //        print("asdfadf")
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "SeriesViewController") as! SeriesViewController
-        //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
-        //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
-            self.navigationController?.pushViewController(main, animated: true)
+        if text != ""{
             
-        }
         
+            self.otherText = text
+            self.collectionView.reloadData()
+    //        self.otherBtn.setTitle(text, for: .normal)
+            self.addotherView.removeFromSuperview()
+                   
+           UIView.animate(withDuration: 0.3) {
+               
+               self.addotherView.alpha = 0
+               self.addotherView = nil
+            }
+            
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                    
+            //        print("asdfadf")
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "SeriesViewController") as! SeriesViewController
+            //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
+            //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
+                Constants.brandId = self.otherText
+                self.navigationController?.pushViewController(main, animated: true)
+                
+            }
+        }
     }
     
     func didClose() {
@@ -231,9 +238,11 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
     func addView()  {
         if self.addotherView == nil {
             self.addotherView = nil
+//            self.addotherView.titleName = "Enter Brand Name"
             self.addotherView = (Bundle.main.loadNibNamed("AddotherView", owner: self, options: nil)![0] as!  AddotherView)
-            
+            self.addotherView.nameLbl.text = "Enter Brand Name"
             self.addotherView.delegate = self
+            
             self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
                        
            self.view.addSubview(addotherView)
@@ -245,6 +254,7 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
     }
     
     @IBAction func otherBtn(_ sender: Any) {
+        
         addView()
         
     }

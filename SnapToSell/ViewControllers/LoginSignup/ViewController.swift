@@ -59,7 +59,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         
 //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.red
         
-
+        self.setGragientBar()
         if !userdefaults.bool(forKey: "walkthroughPresented") {
            
            showWalkthrough()
@@ -81,8 +81,9 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         
         userName.setIcon(UIImage(named: "emalImg")!)
         password.setIcon(UIImage(named: "passwordimg")!)
-        
-        if self.userdefaults.bool(forKey: "islogin") &&  CustomUserDefaults.Token.value! != "" {
+        print(self.userdefaults.bool(forKey: "islogin"))
+        print(CustomUserDefaults.Token.value)
+        if self.userdefaults.bool(forKey: "islogin") &&  CustomUserDefaults.Token.value != nil {
             let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
             
             self.navigationController?.pushViewController(main, animated: true)
@@ -107,7 +108,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
         self.hideKeyboardWhenTappedAround()
-        
+        self.tabBarController?.tabBar.isHidden = true
         
     }
 //
@@ -207,7 +208,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
                 
                 self.userdefaults.setValue(response.access_token, forKey: "Token")
                 
-                self.userdefaults.set(true, forKey: "islogin")
+//                self.userdefaults.set(true, forKey: "islogin")
                 
                 AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
                 
@@ -258,21 +259,25 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
                 
                 NetworkManager.SharedInstance.Profile(success: { (res) in
                     print(res)
+                    SVProgressHUD.dismiss()
                     CustomUserDefaults.email.value = res.email
                     CustomUserDefaults.userName.value = res.name
                     CustomUserDefaults.VerifyPaypal.value = res.paypal
                     CustomUserDefaults.userId.value = "\(res.id!)"
+                    CustomUserDefaults.password.value = self.password.text!
+                    print(CustomUserDefaults.userId.value!)
+
+                    let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    
+                    self.navigationController?.pushViewController(main, animated: true)
+
+                    
                 }, failure: { (err) in
                     print("Error!!!")
                 })
                 
                
             
-                let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                
-                self.navigationController?.pushViewController(main, animated: true)
-
-                
             }
             
         }) { (error) in
@@ -353,6 +358,9 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         
         
     }
+    
+    
+    
     
 }
 

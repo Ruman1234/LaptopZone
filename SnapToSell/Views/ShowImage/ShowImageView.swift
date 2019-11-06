@@ -72,6 +72,7 @@ class ShowImageView: UIView {
            } else {
 //               let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
 //               ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.showToast(message: "Save Successfully")
             delegate?.didCloseImgView()
 //            self.showToast(message: "Saved!")
             

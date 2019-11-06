@@ -33,6 +33,14 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var savebtn: UIButton!
+    
+    @IBOutlet weak var selectPhotos: UIButton!
+    
+    @IBOutlet weak var selectPhototsheight: NSLayoutConstraint!
+    
+    @IBOutlet weak var selectProductHeight: NSLayoutConstraint!
+    @IBOutlet weak var productName: UILabel!
+    
     var type = String()
     var images = [UIImage]()
     
@@ -40,12 +48,17 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         super.viewDidLoad()
         self.addBG()
         
+        
+        self.email.text = CustomUserDefaults.email.value
+        self.firstname.text = CustomUserDefaults.userName.value
        
+        self.selectPhotos.setGradient()
         self.savebtn.setGradient()
         //message.layer.cornerRadius = 5
         message.layer.borderColor = UIColor.lightGray.cgColor
         message.layer.borderWidth = 1
         if type == "recycle"{
+            self.selectProductHeight.constant = 0
 //            self.navigationItem.rightBarButtonItem = cameraBtn
 //            self.navigationItem.leftBarButtonItem = menuBtn
 //            self.menuBtn.target = self.revealViewController()
@@ -54,13 +67,26 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         }else{
             self.addPAger(totalPage: 7, currentPage: 6)
             self.cancleBtn()
-
+            self.selectPhototsheight.constant = 0
+            self.productName.text = Constants.seriesName
+            self.selectPhotos.isHidden = true
+            self.selectPhotos.isEnabled = false
             self.navigationItem.rightBarButtonItem = nil
         }
         self.backBtn()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if self.type == "recycle"{
+            self.tabBarController?.tabBar.isHidden = false
+        }
+          if self.images.count != 0 {
+            self.selectPhotos.setTitle("\(images.count) files selected", for: .normal)
+            
+          }
+    }
+  
 
     func SaveRepairInfo(brand_name: String,
                         product_name: String,
@@ -130,10 +156,22 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
                         let json = response.result.value as? NSDictionary
 //                        print(json)
                         
-                        self.showToast(message: "Product Send successfully")
-                       
-                        let a = self.navigationController?.viewControllers[1] as! mainViewController
-                        self.navigationController?.popToViewController(a, animated: true)
+//                        self.showToast(message: "Product Send successfully")
+                       Utilites.ShowAlert(title: "Success!!!", message: "Thanks for contacting us", view: self){ (alert) in
+//                           self.navigationController?.popViewController(animated: true)
+                        
+                        if #available(iOS 13.0, *) {
+                            
+                            
+                            let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                            self.navigationController?.popToViewController(a, animated: true)
+
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                       }
+                        
+                        
 
                     }
                     else
@@ -204,7 +242,10 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             SVProgressHUD.dismiss()
             print(res)
             self.Reset()
-            Utilites.ShowAlert(title: "Success!!!", message: "Thanks for contacting us", view: self)
+            self.navigationController?.popViewController(animated: true)
+            Utilites.ShowAlert(title: "Success!!!", message: "Thanks for contacting us", view: self){ (alert) in
+                self.navigationController?.popViewController(animated: true)
+            }
         }) { (err) in
             SVProgressHUD.dismiss()
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
@@ -218,26 +259,16 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
 //        let lastname = self.lastname.text?.trimmingCharacters(in: .whitespaces)
         let email = self.email.text?.trimmingCharacters(in: .whitespaces)
         let phone = self.phone.text?.trimmingCharacters(in: .whitespaces)
+       self.message.text = self.message.text?.trimmingCharacters(in: .whitespaces)
         
 //        print(firstname)
 //        print(lastname)
 //        print(email)
 //        print(phone)
         
-        
-        if self.email.text == "" {
-            flag = false
-            self.showToast(message: "Please enter email")
-        }else if self.firstname.text == "" {
-            flag = false
-            self.showToast(message: "Please enter first name")
-        }else if self.phone.text == "" {
-            flag = false
-            self.showToast(message: "Please enter phone")
-        }else if Utilites.isValid(email: self.email!.text! as NSString) == false{
-            flag = false
-            self.showToast(message: "Please enter a valid email")
-        }
+        self.firstname.text = firstname
+        self.email.text = email
+        self.phone.text = phone
         
         if self.type == "recycle" {
             if self.images.count == 0 {
@@ -246,8 +277,32 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             }else if self.message.text == "" {
                 flag = false
                 self.showToast(message: "Please add message")
+            }else if self.phone.text == "" {
+                flag = false
+                self.showToast(message: "Please enter phone")
+            }else if self.email.text == "" {
+                flag = false
+                self.showToast(message: "Please enter email")
+            }else if Utilites.isValid(email: self.email!.text! as NSString) == false{
+                flag = false
+                self.showToast(message: "Please enter a valid email")
+            }
+        }else{
+            if self.email.text == "" {
+                flag = false
+                self.showToast(message: "Please enter email")
+            }else if self.firstname.text == "" {
+                flag = false
+                self.showToast(message: "Please enter first name")
+            }else if self.phone.text == "" {
+                flag = false
+                self.showToast(message: "Please enter phone")
+            }else if Utilites.isValid(email: self.email!.text! as NSString) == false{
+                flag = false
+                self.showToast(message: "Please enter a valid email")
             }
         }
+        
         
         return flag
     }
@@ -280,10 +335,14 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
         
         let camera = UIAlertAction(title: "Take Picture", style: .default) { (ale) in
+            if self.images.count >= 10{
+                Utilites.ShowAlert(title: "Alert!!!", message: "You can't select more then 10 images", view: self)
+            }else{
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+                main.type = "recycle"
+                self.navigationController?.pushViewController(main, animated: true)
+            }
             
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
-            main.type = "recycle"
-            self.navigationController?.pushViewController(main, animated: true)
             
         }
         let media = UIAlertAction(title: "Media", style: .default) { (ale) in
@@ -299,21 +358,21 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             
             let imagePicker = OpalImagePickerController()
             imagePicker.imagePickerDelegate = self
-            let max = 10 - self.images.count
-            imagePicker.maximumSelectionsAllowed = max
+//            let max = 10 - self.images.count
+            imagePicker.maximumSelectionsAllowed = 10
 
             
-            if self.images.count <= 10 {
+            if self.images.count < 10 {
                 self.present(imagePicker, animated: true, completion: nil)
             }else{
-                Utilites.ShowAlert(title: "Alert!!!", message: "MAx num of photos in 10", view: self)
+                Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos are 10", view: self)
             }
             
             
             
             
         }
-        let cancle = UIAlertAction(title: "Cancle", style: .cancel ) { (ale) in
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
             
         }
         imagesource.addAction(camera)
@@ -340,9 +399,11 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         
         
         print(images.count)
-//        for img in images{
-//            self.images.append(img)
-//        }
+        for img in images{
+            self.images.append(img)
+        }
+        self.selectPhotos.setTitle("\(self.images.count) files selected", for: .normal)
+
 //        self.collectionView.reloadData()
         presentedViewController?.dismiss(animated: true, completion: nil)
     }

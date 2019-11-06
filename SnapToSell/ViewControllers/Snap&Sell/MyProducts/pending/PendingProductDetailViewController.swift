@@ -18,6 +18,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var navigationTitile: UILabel!
     @IBOutlet weak var titleProduct: UILabel!
     
     @IBOutlet weak var lotPrice: UILabel!
@@ -28,18 +29,35 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     @IBOutlet var cameraButton: UIBarButtonItem!
     
     @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var activeLbl: UILabel!
     
     var detail = RequestStatusModel()
     var img = Int()
     var images = [UIImage]()
+    var type = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       fetchSingalProduct()
+        
+        if type == "rep" {
+            fetchRepProduct()
+        }else{
+            fetchSingalProduct()
+        }
+       
         sendBtn.isHidden = true
         sendBtn.isEnabled = false
-        self.navigationItem.rightBarButtonItem = cameraButton
+//        self.navigationItem.rightBarButtonItem = cameraButton
         self.addBG()
+        self.backBtn()
+        
+//        self.activeLbl.applyGradient(colours: [
+//            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+//          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+//        ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+        self.activeLbl.textColor = .white
+        self.activeLbl.text = "NEW"
+        self.activeLbl.layer.cornerRadius = 13
         // Do any additional setup after loading the view.
     }
     
@@ -55,16 +73,21 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     }
     
     func fetchSingalProduct()  {
+        
+        SVProgressHUD.show(withStatus: "Loading...")
         print("\(String(describing: detail!.id!))")
+        
         NetworkManager.SharedInstance.getSingalRequest(request_id: "\(String(describing: detail!.id!))", success: { (res) in
+            
+            SVProgressHUD.dismiss()
             self.detail = res
             if (self.detail?.images!.count)! > 0 {
                 self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![0].url)!), placeholderImage: UIImage(named: "placeholder.png"))
                 
             }
-            
+            self.navigationTitile.text = self.detail!.title
             self.titleProduct.text = self.detail?.title
-            self.lotPrice.text = Double(self.detail!.price ?? "0")?.dollarString
+            self.lotPrice.text = Double(self.detail!.asking_price ?? "0")?.dollarString
             
             
             
@@ -76,8 +99,8 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
 //            print(resultString)
             
            
-            self.dateLbl.text = self.detail?.created_at
-            self.status.text = self.detail?.status
+//            self.dateLbl.text = self.detail?.created_at
+//            self.status.text = self.detail?.status
             self.remarks.text = self.detail?.remarks
             self.img = (self.detail?.images!.count)!
             
@@ -90,9 +113,57 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
             self.collectionView.reloadData()
             
         }) { (err) in
+            SVProgressHUD.dismiss()
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
         }
     }
+    
+    
+    func fetchRepProduct()  {
+            
+            SVProgressHUD.show(withStatus: "Loading...")
+            
+            
+        NetworkManager.SharedInstance.getRepRecData(searcInput: "\(String(describing: detail!.REQ_ID!))", success: { (res) in
+                
+                SVProgressHUD.dismiss()
+                self.detail = res
+                if (self.detail?.images_rep!.count)! > 0 {
+                    self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images_rep![0])!), placeholderImage: UIImage(named: "placeholder.png"))
+                    
+                }
+                self.navigationTitile.text = self.detail!.details![0].MODEL_NAME
+            self.titleProduct.text = self.detail!.details![0].MODEL_NAME
+            self.lotPrice.text = Double(self.detail!.details![0].OFFER ?? "0")?.dollarString
+                
+                
+                
+    //            let inputFormatter = DateFormatter()
+    //            inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    //            let showDate = inputFormatter.date(from: self.detail!.created_at!)
+    //            inputFormatter.dateFormat = "yyyy-MM-dd"
+    //            let resultString = inputFormatter.string(from: showDate!)
+    //            print(resultString)
+                
+               
+    //            self.dateLbl.text = self.detail?.created_at
+    //            self.status.text = self.detail?.status
+            self.remarks.text = self.detail!.details![0].REMARKS
+                self.img = (self.detail?.images_rep!.count)!
+                
+    //            for image in self.detail!.images! {
+    //                let img = UIImageView ()
+    //                img.sd_setImage(with: URL(string: image.url!), placeholderImage: nil)
+    //
+    //                self.images.append(img.image!)
+    //            }
+                self.collectionView.reloadData()
+                
+            }) { (err) in
+                SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+            }
+        }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return img
@@ -106,7 +177,13 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
         if self.images.count > 0 {
            cell.productImage.image = self.images[indexPath.row]
         }else{
-            cell.productImage.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+            if self.type == "rep"{
+                cell.productImage.sd_setImage(with: URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+            }else{
+                cell.productImage.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+
+            }
+            
 
         }
 //        cell.productImage.image = self.images[indexPath.row]
@@ -147,7 +224,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
             
             
         }
-        let cancle = UIAlertAction(title: "Cancle", style: .cancel ) { (ale) in
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
             
         }
         imagesource.addAction(camera)
@@ -217,7 +294,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
             
             let par = ["request_id" : "\(String(describing: self.detail!.id!))",
                 "name" : imageName] as [String : Any]
-            NetworkManager.SharedInstance.UploadImages(params: par, images: img, success: { (res) in
+            NetworkManager.SharedInstance.UploadImages(params: par, images: [img], success: { (res) in
                 print(res)
                 if i == self.images.count{
                     SVProgressHUD.dismiss()

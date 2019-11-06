@@ -51,7 +51,7 @@ open class ButtonBarView: UICollectionView {
         return bar
     }()
 
-    internal var selectedBarHeight: CGFloat = 4 {
+    internal var selectedBarHeight: CGFloat = 1 {
         didSet {
             updateSelectedBarYPosition()
         }

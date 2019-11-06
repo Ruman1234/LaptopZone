@@ -48,6 +48,9 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.otherBtn.setTitle("Others", for: .normal)
+    }
 
     func fetchDetails(id :String) {
         SVProgressHUD.show(withStatus: "Loading...")
@@ -125,22 +128,24 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     
     
     func didClose(text: String) {
-           self.otherBtn.setTitle(text, for: .normal)
-           self.addotherView.removeFromSuperview()
-                  
-          UIView.animate(withDuration: 0.3) {
+        if text != ""{
+               self.otherBtn.setTitle(text, for: .normal)
+               self.addotherView.removeFromSuperview()
+                      
+              UIView.animate(withDuration: 0.3) {
 
-              self.addotherView.alpha = 0
-              self.addotherView = nil
-          }
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                             
-                     
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
-            self.navigationController?.pushViewController(main, animated: true)
-                             
+                  self.addotherView.alpha = 0
+                  self.addotherView = nil
+              }
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                                 
+                         
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
+                Constants.issuesId = self.otherBtn.titleLabel!.text!
+                self.navigationController?.pushViewController(main, animated: true)
+                                 
+            }
         }
-               
         
     }
        
@@ -162,6 +167,8 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
                self.addotherView = (Bundle.main.loadNibNamed("AddotherView", owner: self, options: nil)![0] as!  AddotherView)
                
                self.addotherView.delegate = self
+            self.addotherView.titleName = "Enter Problem Name"
+            self.addotherView.nameLbl.text = "Enter Problem Name"
                self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
                           
               self.view.addSubview(addotherView)

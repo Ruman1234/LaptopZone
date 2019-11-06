@@ -70,10 +70,13 @@ class SelectPaymentMethodViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func textfieldRemoveSpaces(textfield:UITextField)  {
+        textfield.text = textfield.text?.trimmingCharacters(in:.whitespaces)
+    }
     
     
     @IBAction func amazonBtn(_ sender: AnyObject) {
-        
+        /*
         if sender.tag == 0 {
             self.amazonBtn.tag = 1
             self.view.layoutIfNeeded()
@@ -127,7 +130,7 @@ class SelectPaymentMethodViewController: UIViewController {
 
         }
         
-        
+        */
     }
     
     
@@ -332,11 +335,16 @@ class SelectPaymentMethodViewController: UIViewController {
     
     func validPaypal() -> Bool {
         var flag = true
+        self.textfieldRemoveSpaces(textfield: paypalEmail)
+        self.textfieldRemoveSpaces(textfield: paypalConfirmEmail)
         
         if self.paypalEmail.text == "" {
             flag = false
             Utilites.ShowAlert(title: "Error!!!", message: "Please enter paypal email", view: self)
-        }else if self.paypalEmail.text != self.paypalConfirmEmail.text {
+        }else if Utilites.isValid(email: self.paypalEmail.text! as NSString) == false{
+            flag = false
+            self.showToast(message: "Please enter a valid Email")
+        } else if self.paypalEmail.text != self.paypalConfirmEmail.text {
             flag = false
              Utilites.ShowAlert(title: "Error!!!", message: "Please confirm paypal email", view: self)
         }
@@ -348,27 +356,38 @@ class SelectPaymentMethodViewController: UIViewController {
     func validCheque() -> Bool {
            var flag = true
            
+        self.textfieldRemoveSpaces(textfield: chequePayableTo)
+        self.textfieldRemoveSpaces(textfield: chequeEmail)
+        self.textfieldRemoveSpaces(textfield: chequeLineAddress)
+        self.textfieldRemoveSpaces(textfield: cite)
+        self.textfieldRemoveSpaces(textfield: Chequestate)
+        self.textfieldRemoveSpaces(textfield: chequwZipcode)
+        self.textfieldRemoveSpaces(textfield: chequeCountry)
+            
            if self.chequePayableTo.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter Payable email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter Payable", view: self)
            }else if self.chequeEmail.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter Email email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter Email", view: self)
+           }else if Utilites.isValid(email: self.chequeEmail.text! as NSString) == false{
+               flag = false
+               self.showToast(message: "Please enter a valid Email")
            }else if self.chequeLineAddress.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter address email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter address", view: self)
            }else if self.cite.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter city email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter city", view: self)
            }else if self.Chequestate.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter state email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter state", view: self)
            }else if self.chequwZipcode.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter zipcode email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter zipcode", view: self)
            }else if self.chequeCountry.text == "" {
                flag = false
-               Utilites.ShowAlert(title: "Error!!!", message: "Please enter country email", view: self)
+               Utilites.ShowAlert(title: "Error!!!", message: "Please enter country", view: self)
            }
         
            return flag

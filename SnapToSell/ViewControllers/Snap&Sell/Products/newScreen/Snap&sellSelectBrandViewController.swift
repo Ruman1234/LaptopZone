@@ -15,14 +15,14 @@ struct selectProduct {
 }
 
 class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
-   
-
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     private let spacing:CGFloat = 10.0
 //    let arr = ["Phones" , "Ipad/Tablet" , "Laptop"]
-    let arr = [selectProduct(name: "Phones", id: "6", image: nil),
-               selectProduct(name: "Ipad/Tablet", id: "5", image: nil),
-               selectProduct(name: "Laptop", id: "2", image: nil)]
+    let arr = [selectProduct(name: "Phones", id: "6", image: UIImage(named: "iphones")),
+               selectProduct(name: "Ipad/Tablet", id: "5", image: UIImage(named: "ipad")),
+               selectProduct(name: "Laptop", id: "2", image: UIImage(named: "prod-3"))]
     
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
         self.collectionView?.collectionViewLayout = layout
         // Do any additional setup after loading the view.
     }
- 
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arr.count
@@ -50,7 +50,8 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! RepairingBrandCollectionViewCell
         
         cell.brandName.text = arr[indexPath.row].name
-        
+        cell.imageView.image = arr[indexPath.row].image
+//        print(arr[indexPath.row].image)
         return cell
         
     }

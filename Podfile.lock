@@ -189,7 +189,6 @@ SPEC REPOS:
     - SVProgressHUD
     - SwiftUserDefault
     - SwiftyJSON
-    - XLPagerTabStrip
   trunk:
     - GoogleMaps
     - GooglePlacePicker
@@ -197,6 +196,7 @@ SPEC REPOS:
     - KJNavigationViewAnimation
     - Socket.IO-Client-Swift
     - Starscream
+    - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -236,6 +236,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 64fc915e709bcad1dcbfbfcee826ba4d0d087843
+PODFILE CHECKSUM: 11379fd3472f6c9f38c69e5c080f1f38a1cc6184
 
 COCOAPODS: 1.8.1

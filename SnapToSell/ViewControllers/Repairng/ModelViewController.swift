@@ -50,6 +50,7 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
     
     override func viewWillAppear(_ animated: Bool) {
         self.collectionView.reloadData()
+        self.otherBtn.setTitle("Others", for: .normal)
     }
 
     
@@ -159,25 +160,30 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
     
     
        func didClose(text: String) {
-           self.otherBtn.setTitle(text, for: .normal)
-           self.addotherView.removeFromSuperview()
-                  
-          UIView.animate(withDuration: 0.3) {
+        
+        if text != "" {
+            
+        
+               self.otherBtn.setTitle(text, for: .normal)
+               self.addotherView.removeFromSuperview()
+                      
+              UIView.animate(withDuration: 0.3) {
 
-              self.addotherView.alpha = 0
-              self.addotherView = nil
+                  self.addotherView.alpha = 0
+                  self.addotherView = nil
+              }
+            
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                          
+                  //        print("asdfadf")
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
+                Constants.modelId = self.otherBtn.titleLabel!.text!
+                  //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
+                  //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
+                self.navigationController?.pushViewController(main, animated: true)
+                          
+            }
           }
-        
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                      
-              //        print("asdfadf")
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
-              //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
-              //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
-            self.navigationController?.pushViewController(main, animated: true)
-                      
-        }
-        
        }
        
        
@@ -187,6 +193,8 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
                self.addotherView = (Bundle.main.loadNibNamed("AddotherView", owner: self, options: nil)![0] as!  AddotherView)
                
                self.addotherView.delegate = self
+            self.addotherView.titleName = "Enter Model Name"
+            self.addotherView.nameLbl.text = "Enter Model Name"
                self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
                           
               self.view.addSubview(addotherView)

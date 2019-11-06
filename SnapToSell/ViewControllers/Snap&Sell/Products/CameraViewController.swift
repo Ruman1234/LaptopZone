@@ -44,7 +44,9 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
     
     var contactDetailsViewController = ContactDetailsViewController()
     var uploadViewController = UploadViewController()
+    var chatViewController = ChatViewController()
     
+    var count = Int()
 //    var dekitiewController = De_KittingViewController()
     var orientationValue = 1
     var orientaionArray = [Int]()
@@ -70,6 +72,10 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         }else if self.type == "repair"{
             let a = self.navigationController?.viewControllers[1] as! UploadViewController
             uploadViewController = a
+            
+        }else if self.type == "message"{
+            let a = self.navigationController?.viewControllers[count] as! ChatViewController
+            chatViewController = a
             
         }else{
             let a = self.navigationController?.viewControllers[1] as! ProductDetailViewController
@@ -360,9 +366,15 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
             
         }else if type == "repair" {
             uploadViewController.images.append(image!)
-            if self.uploadViewController.images.count >= 10{
+            if self.uploadViewController.images.count >= 20{
                 self.navigationController?.popViewController(animated: true)
             }
+            
+        }else if type == "message" {
+            chatViewController.img = image!
+//            if self.uploadViewController.images.count >= 10{
+                self.navigationController?.popViewController(animated: true)
+//            }
             
         }else {
              productDetailViewController.images.append(image!)

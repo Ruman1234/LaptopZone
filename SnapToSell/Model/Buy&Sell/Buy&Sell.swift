@@ -54,6 +54,7 @@ struct Buy_SellModel : Mappable {
   
     var LZW_CARRIER_DT_ID : String?
     var CARRIER_NAME : String?
+    var IMAGE_URL_FULL : String?
     
     var SALE_PRICE : String?
     var LZW_STORAGE_DT_ID : String?
@@ -79,6 +80,7 @@ struct Buy_SellModel : Mappable {
 
         LZW_CARRIER_DT_ID <- map["LZW_CARRIER_DT_ID"]
         CARRIER_NAME <- map["CARRIER_NAME"]
+        IMAGE_URL_FULL <- map["IMAGE_URL_FULL"]
         
         SALE_PRICE <- map["SALE_PRICE"]
         LZW_STORAGE_DT_ID <- map["LZW_STORAGE_DT_ID"]

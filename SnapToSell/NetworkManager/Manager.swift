@@ -48,7 +48,7 @@ class NetworkManager {
     
       func request2(url:String ,
                    method : Alamofire.HTTPMethod ,
-                   parameters : Parameters ,
+                   parameters : Parameters? = nil ,
                    encoding : ParameterEncoding = URLEncoding.default,
                    header : [String : String]? = nil,
                    completionHandler :@escaping (DataResponse<Any>) -> Void
