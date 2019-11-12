@@ -10,12 +10,23 @@ import UIKit
 import XLPagerTabStrip
 
 
-class newTabBarViewController: ButtonBarPagerTabStripViewController {
-
+class newTabBarViewController: ButtonBarPagerTabStripViewController  {
+  
+    static let SharedInstance = newTabBarViewController()
     @IBOutlet weak var barView: ButtonBarView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
+//        if self.accountViewController == nil {
+//            self.accountViewController = nil
+//        self.accountViewController?.delegte = self
+//        }
+      
+//        let inputHandler = accountViewController()
+//        let inputReceiver = newTabBarViewController()
+//        inputHandler.delegate = inputReceiver
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showSpinningWheel(_:)), name: NSNotification.Name(rawValue: "sendData"), object: nil)
         
           self.datasource = self
                 containerView.isScrollEnabled = true
@@ -71,20 +82,48 @@ class newTabBarViewController: ButtonBarPagerTabStripViewController {
 
         
         
-        override func viewDidAppear(_ animated: Bool) {
-            let requestImg = UIImageView()
-                  requestImg.image = UIImage(named: "Your Requests")
-                  requestImg.frame = CGRect(x: 25, y: 42, width: 166, height: 22)
-                  self.view.addSubview(requestImg)
+    override func viewDidAppear(_ animated: Bool) {
+        let requestImg = UIImageView()
+        requestImg.image = UIImage(named: "Your Requests")
+        requestImg.frame = CGRect(x: 25, y: 42, width: 166, height: 22)
+        self.view.addSubview(requestImg)
 
-                  let xside = self.view.frame.width / 1.123
+        let xside = self.view.frame.width / 1.123
 
 
-                  let sideImg = UIImageView()
-                  sideImg.image = UIImage(named: "sideimg1")
-                  sideImg.frame = CGRect(x: xside, y: 45, width: 25, height: 15)
-                  self.view.addSubview(sideImg)
-        }
+        let sideImg = UIImageView()
+        sideImg.image = UIImage(named: "sideimg1")
+        sideImg.frame = CGRect(x: xside, y: 45, width: 25, height: 15)
+        self.view.addSubview(sideImg)
+//        moveToViewController(at: 2)
+
+    }
+    
+    
+    
+    @objc func showSpinningWheel(_ notification: NSNotification) {
+         print(notification.userInfo ?? "")
+         if let dict = notification.userInfo as NSDictionary? {
+             if let id = dict["image"] as? Int{
+                 // do something with your image
+                self.tabBarController?.selectedIndex = 4
+                print(id)
+                moveToViewController(at: id)
+             }
+         }
+    }
+
+  
+//    func moveto(index : Int)  {
+////        self.tabBarController?.selectedIndex = 4
+////        moveToViewController(at: index)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.showSpinningWheel(_:)), name: NSNotification.Name(rawValue: "sendData"), object: nil)
+//
+//
+////        self.viewDidLoad()
+//
+//    }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
            

@@ -16,7 +16,7 @@ import SVProgressHUD
 import SocketIO
 
 
-class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource, UINavigationControllerDelegate , UIImagePickerControllerDelegate,UICollectionViewDelegateFlowLayout,OpalImagePickerControllerDelegate,PreviewViewControllerDelegate {
+class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource, UINavigationControllerDelegate , UIImagePickerControllerDelegate,UICollectionViewDelegateFlowLayout,OpalImagePickerControllerDelegate,PreviewViewControllerDelegate ,UITextFieldDelegate{
     
     
     
@@ -46,16 +46,12 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         super.viewDidLoad()
         
 //        self.backBtn()
-        self.sellAnythingView.applyGradient(colours: [
-            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
-          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
-        ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
-        
+       
 //        self.images.append(UIImage(named: "addimage")!)
         
         _ = UserDefaults.standard.value(forKey: "Token")
+        titleProduct.delegate = self as! UITextFieldDelegate
         
-        self.senfProduct.setGradient()
 //        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
 //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 //
@@ -76,6 +72,15 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         
     }
     
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == titleProduct{
+            return range.location < 80
+        }
+        return range.location < 10
+    }
+
     
     func textFieldDesign(textField :UITextField)  {
         textField.layer.borderColor = UIColor.lightGray.cgColor
@@ -104,6 +109,12 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     
     override func viewDidAppear(_ animated: Bool) {
        
+        self.sellAnythingView.applyGradient(colours: [
+                   UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+                 UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+               ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+               
+        self.senfProduct.setGradient()
 //        self.navigationItem.rightBarButtonItem = camera
 //        self.navigationItem.leftBarButtonItem = menubtn
 

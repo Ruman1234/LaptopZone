@@ -128,23 +128,26 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         
         self.shipmentAdsres.delegate = self
         self.pickupSearchAddress.delegate = self
-        
-        self.addBG()
-        self.addPAger(totalPage: 7, currentPage: 6)
-        self.cancleBtn()
-        self.backBtn()
-        
-        
-        self.dropOffBtn.setGradient()
-        self.pickUpBtn.setGradient()
-        self.shipmentnextBtn.setGradient()
+      
         self.tableView.isHidden = true
 //        self.tableView2.isHidden = true
         // Do any additional setup after loading the view.
     }
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+          
+              self.addBG()
+              self.addPAger(totalPage: 7, currentPage: 6)
+              self.cancleBtn()
+              self.backBtn()
+              
+              
+              self.dropOffBtn.setGradient()
+              self.pickUpBtn.setGradient()
+              self.shipmentnextBtn.setGradient()
+        self.shipmentnextBtn.isHidden = true
+    }
     
     func setupTableView(y : CGFloat) {
         tableView.isHidden = true
@@ -169,11 +172,17 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         
         if textField == self.shipmentAdsres {
             self.tableView.isHidden = false
-
+            let point = CGPoint(x: 0, y: 410 )
+            scrollView.contentOffset = point
 //            searchCompleter.queryFragment = self.shipmentAdsres.text!
             placeAutocomplete(text_input: self.shipmentAdsres.text!)
         }else if textField == self.pickupSearchAddress{
+            
             self.tableView.isHidden = false
+            
+            let point = CGPoint(x: 0, y: 300 )
+            scrollView.contentOffset = point
+            
             placeAutocomplete(text_input: self.pickupSearchAddress.text!)
         }
         
@@ -222,6 +231,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.mainviewHeight.constant = self.view.frame.height + 429
             self.paypalViewHeight.constant = 0
             self.chequeViewHeight.constant = 0
+            self.shipmentnextBtn.isHidden = true
             UIView.animate(withDuration: 0.5, animations: {
 
                 self.view.layoutIfNeeded()
@@ -273,7 +283,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             } else {
                 // Fallback on earlier versions
             }
-            
+           
             self.setupTableView(y: 360)
 
              self.textFieldBorder(textField: self.pickupCity)
@@ -285,7 +295,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
              self.paypalViewHeight.constant = 797
              self.amazonDetailHeight.constant = 0
              self.chequeViewHeight.constant = 0
-             
+             self.shipmentnextBtn.isHidden = true
              UIView.animate(withDuration: 0.5, animations: {
 
                  self.view.layoutIfNeeded()
@@ -358,6 +368,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.paypalViewHeight.constant = 0
             self.amazonDetailHeight.constant = 0
             self.chequeViewHeight.constant = 649
+            self.shipmentnextBtn.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
 
                 self.view.layoutIfNeeded()
@@ -515,8 +526,11 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.imgView.alpha = 0
             self.imgView = nil
             if #available(iOS 13.0, *) {
-                let a = self.navigationController?.viewControllers[0] as! HomeViewController
-                self.navigationController?.popToViewController(a, animated: true)
+                Utilites.ShowAlert(title: "!!!", message: "Image downloaded", view: self) { (res) in
+                    let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                    self.navigationController?.popToViewController(a, animated: true)
+
+                }
             } else {
                 // Fallback on earlier versions
             }

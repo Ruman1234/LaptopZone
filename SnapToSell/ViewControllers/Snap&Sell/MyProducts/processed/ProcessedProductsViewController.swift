@@ -68,11 +68,14 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         hideLAble()
-        self.acceptBtn.setGradient()
+       
         self.messageBtn.layer.cornerRadius = self.messageBtn.frame.height / 2.041
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+         self.acceptBtn.setGradient()
+    }
     
 //    func offers(id :String) {
 //        SVProgressHUD.show(withStatus: "Loading..")

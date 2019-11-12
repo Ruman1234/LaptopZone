@@ -133,12 +133,15 @@ import UIKit
         super.viewWillAppear(animated);
         
         updateUI()
-        
+        self.setGragientBar()
         pageControl?.numberOfPages = controllers.count
         pageControl?.currentPage = 0
     }
     
-    
+    open override func viewDidAppear(_ animated: Bool) {
+//        self.signinBtn.setGradient()
+        self.setGragientBar()
+    }
     // MARK: - Internal methods -
     
     @IBAction open func nextPage(){

@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 
 class AllAddresViewController: UIViewController ,UITableViewDataSource , UITableViewDelegate{
+    @IBOutlet weak var noAddressView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var addBtn: UIBarButtonItem!
@@ -60,12 +61,18 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
             print(self.addresses.count)
             self.tableView.reloadData()
             if self.addresses.count == 0 {
-                Utilites.ShowAlert(title: "Ooops", message: "You don't have any address kindly add a new address", view: self) { (res) in
-                      let main = self.storyboard?.instantiateViewController(withIdentifier: "AddNewAddressViewController") as! AddNewAddressViewController
-                        main.type = "add"
-                        self.navigationController?.pushViewController(main, animated: true)
+//                Utilites.ShowAlert(title: "Oops", message: "You don't have any address kindly add a new address", view: self) { (res) in
+//                      let main = self.storyboard?.instantiateViewController(withIdentifier: "AddNewAddressViewController") as! AddNewAddressViewController
+//
+//                        main.type = "add"
+//                        main.isdefault = "yes"
+////                    main.defaultAddress.isOn = true
+//                        self.navigationController?.pushViewController(main, animated: true)
 
-                }
+//                }
+                self.addNewAddressBtn.isHidden = true
+                
+                self.noAddressView.isHidden = false
               
             }
             
@@ -106,7 +113,7 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
         
         cell.name.text = addres.contact_name
         cell.aptStreet.text = (addres.apartment ?? "") + "," + (addres.street ?? "")
-        cell.city.text = addres.city! + addres.state!
+        cell.city.text = addres.city! + "," + addres.state!
 //        cell.state.text = addres.state
         cell.zip.text = addres.zip
         cell.number.text = addres.phone

@@ -60,15 +60,26 @@ class SelectPaymentMethodViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addBG()
-        self.addPAger(totalPage: 7, currentPage: 6)
-        self.cancleBtn()
-        self.backBtn()
-        self.chwqueNextBtn.setGradient()
-        self.paypalNextBtn.setGradient()
-        self.chequeNextBtn.setGradient()
+//        self.addBG()
+//        self.addPAger(totalPage: 7, currentPage: 6)
+//        self.cancleBtn()
+//        self.backBtn()
+//        self.chwqueNextBtn.setGradient()
+//        self.paypalNextBtn.setGradient()
+//        self.chequeNextBtn.setGradient()
         // Do any additional setup after loading the view.
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+            self.addBG()
+                  self.addPAger(totalPage: 7, currentPage: 0)
+                  self.backBtn()
+                  self.cancleBtn()
+        self.chwqueNextBtn.setGradient()
+               self.paypalNextBtn.setGradient()
+               self.chequeNextBtn.setGradient()
+       }
     
     func textfieldRemoveSpaces(textfield:UITextField)  {
         textfield.text = textfield.text?.trimmingCharacters(in:.whitespaces)

@@ -1,0 +1,6 @@
+framework module Pods_LaptopZoneUITests {
+  umbrella header "Pods-LaptopZoneUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

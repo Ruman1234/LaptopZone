@@ -38,6 +38,9 @@ class SelectShipmentView: UIView , UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
 
         tableView.register(UINib(nibName: "shipmentTableViewCell", bundle: nil), forCellReuseIdentifier: "shipmentCell")
+        
+        self.tableView.tableFooterView = UIView()
+//        tableView.fott
     }
     
     func apiCall() {
@@ -107,7 +110,7 @@ class SelectShipmentView: UIView , UITableViewDelegate, UITableViewDataSource {
         if self.rateId != "" &&  self.id != ""{
             delegate?.didClose(text: self.rateId, id: self.id)
         }else{
-            self.showToast(message: "Please select carier")
+            self.showToast(message: "Please select carrier")
         }
 //        delegate?.didClose(text: self.rateId)
     }

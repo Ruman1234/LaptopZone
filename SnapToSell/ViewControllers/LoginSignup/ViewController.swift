@@ -58,16 +58,18 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         // Do any additional setup after loading the view.
         
 //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.red
-        
-        self.setGragientBar()
+//        self.signinBtn.setGradient()
+//        self.setGragientBar()
         if !userdefaults.bool(forKey: "walkthroughPresented") {
-           
+//
            showWalkthrough()
            
            userdefaults.set(true, forKey: "walkthroughPresented")
            userdefaults.synchronize()
         }
         
+        
+        self.rememberMe.image =  UIImage(named: "tickImg")
         tickImg.layer.cornerRadius = 2
         rememberMe.layer.borderWidth = 0.5
         rememberMe.layer.borderColor = UIColor.init(rgb: 0xFC2B08).cgColor
@@ -84,9 +86,13 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         print(self.userdefaults.bool(forKey: "islogin"))
         print(CustomUserDefaults.Token.value)
         if self.userdefaults.bool(forKey: "islogin") &&  CustomUserDefaults.Token.value != nil {
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
             
-            self.navigationController?.pushViewController(main, animated: true)
+            if CustomUserDefaults.Token.value != "" {
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                
+                self.navigationController?.pushViewController(main, animated: true)
+
+            }
         }
         
         DispatchQueue.main.async {
@@ -96,10 +102,35 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
         }
-       
+//        if self.userdefaults.bool(forKey: "islogin") == false {
+//
+//        }else{
+//            self.userdefaults.set(true, forKey: "islogin")
+//        }
+        
+//
+//        let button = UIButton(type: .custom)
+//           button.setImage(UIImage(named: "asdf"), for: .normal)
+////        button.setTitle("View", for: .normal)
+//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+//        button.frame = CGRect(x: CGFloat(self.password.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+//           button.addTarget(self, action: #selector(self.refresh), for: .touchUpInside)
+//           self.password.rightView = button
+//           self.password.rightViewMode = .always
+//
 
+        self.password.hideShowText()
         
     }
+    
+//    @IBAction func refresh(_ sender: Any) {
+//
+//        if self.password.isSecureTextEntry{
+//            self.password.isSecureTextEntry = false
+//        }else{
+//            self.password.isSecureTextEntry = true
+//        }
+//    }
 
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +139,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
         self.hideKeyboardWhenTappedAround()
+        self.signinBtn.setGradient()
         self.tabBarController?.tabBar.isHidden = true
         
     }
@@ -120,6 +152,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         self.signinBtn.setGradient()
+        self.setGragientBar()
     }
     
     
@@ -208,7 +241,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
                 
                 self.userdefaults.setValue(response.access_token, forKey: "Token")
                 
-//                self.userdefaults.set(true, forKey: "islogin")
+                self.userdefaults.set(true, forKey: "islogin")
                 
                 AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
                 
@@ -246,6 +279,12 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
             }else{
                 print("Adasd")
                 
+                if self.rememberMe.image == UIImage(named: "tickImg"){
+                    self.userdefaults.set(true, forKey: "islogin")
+                }else{
+                    self.userdefaults.set(false, forKey: "islogin")
+                }
+                           
                 
                 self.userdefaults.setValue(response.access_token, forKey: "Token")
                 

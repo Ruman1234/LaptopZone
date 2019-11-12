@@ -39,6 +39,12 @@ class snap_sellSelectModelViewController: UIViewController, UICollectionViewDele
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+            self.addBG()
+                  self.addPAger(totalPage: 7, currentPage: 0)
+                  self.backBtn()
+                  self.cancleBtn()
+       }
     
     func callApi(id : String)  {
         SVProgressHUD.show(withStatus: "Loading...")

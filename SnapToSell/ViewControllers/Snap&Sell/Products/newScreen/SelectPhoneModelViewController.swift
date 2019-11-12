@@ -35,6 +35,13 @@ class SelectPhoneModelViewController: UIViewController ,UITableViewDelegate , UI
     }
     
     
+    override func viewDidAppear(_ animated: Bool) {
+            self.addBG()
+                  self.addPAger(totalPage: 7, currentPage: 0)
+                  self.backBtn()
+                  self.cancleBtn()
+       }
+    
     func callApi(id : String)  {
              SVProgressHUD.show(withStatus: "Loading...")
              NetworkManager.SharedInstance.getStorage(Id: id, success: { (res) in

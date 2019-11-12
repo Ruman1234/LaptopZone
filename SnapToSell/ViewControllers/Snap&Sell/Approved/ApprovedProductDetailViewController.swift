@@ -138,7 +138,7 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     
     func fetchSingalProduct()  {
     //            print("\(String(describing: detail!.id!))")
-        print("\(detail!.id!)")
+//        print("\(detail!.id!)")
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.getSingalRequest(request_id: "\(detail!.id!)", success: { (res) in
             SVProgressHUD.dismiss()

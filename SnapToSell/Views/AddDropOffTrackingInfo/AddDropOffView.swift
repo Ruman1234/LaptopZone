@@ -52,7 +52,7 @@ class AddDropOffView: UIView {
             self.showToast(message: "Please enter new password")
         }else if self.carierNAme.text != CustomUserDefaults.password.value {
             flag = false
-            self.showToast(message: "Please enter your valid password")
+            self.showToast(message: "Please enter your valid old password")
         }else if self.trackingNumber.text == self.carierNAme.text {
             flag = false
             self.showToast(message: "Old password and new passwor are same")

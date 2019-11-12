@@ -24,22 +24,27 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         super.viewDidLoad()
 //        let a = self.navigationController?.viewControllers[1] as! mainViewController
         
-        self.addPAger(totalPage: 7, currentPage: 0)
-        self.addBG()
-        
-        nextBtn.setGradient()
-        nextBtn.setFont(size: 19.5)
+     
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         self.collectionview?.collectionViewLayout = layout
-        self.backBtn()
-        self.cancleBtn()
+      
         // Do any additional setup after loading the view.
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+          self.backBtn()
+              self.cancleBtn()
+        self.addPAger(totalPage: 7, currentPage: 0)
+             self.addBG()
+             
+             nextBtn.setGradient()
+             nextBtn.setFont(size: 19.5)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.collectionview.reloadData()

@@ -31,7 +31,8 @@ class ResetYourPasswordViewController: UIViewController {
             self.addBG()
             self.doneBtn.setGradient()
         }
-        
+        self.newPassword.hideShowText()
+        self.confimPassword.hideShowText()
        
         
     }
@@ -63,9 +64,11 @@ class ResetYourPasswordViewController: UIViewController {
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.ResetPasswordWithOTP(Email: self.email, password: self.newPassword.text!, otp: otp, success: { (res) in
             SVProgressHUD.dismiss()
-            
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            Utilites.ShowAlert(title: "Success", message: "Your password updated", view: self) { (res) in
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
             self.navigationController?.pushViewController(main, animated: true)
+            }
+           
 
             
         }) { (err) in

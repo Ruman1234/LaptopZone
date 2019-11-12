@@ -28,10 +28,7 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addBG()
-        self.addPAger(totalPage: 7, currentPage: 0)
-        self.backBtn()
-        self.cancleBtn()
+       
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -41,6 +38,12 @@ class Snap_sellSelectBrandViewController: UIViewController, UICollectionViewDele
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+         self.addBG()
+               self.addPAger(totalPage: 7, currentPage: 0)
+               self.backBtn()
+               self.cancleBtn()
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arr.count

@@ -90,6 +90,10 @@ open class BWWalkthroughPageViewController: UIViewController, BWWalkthroughPage 
         }
     }
     
+    open override func viewDidAppear(_ animated: Bool) {
+    //        self.signinBtn.setGradient()
+            self.setGragientBar()
+        }
     open func walkthroughDidScroll(to: CGFloat, offset: CGFloat) {
         
         for i in 0 ..< subviewsSpeed.count{

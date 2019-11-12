@@ -19,6 +19,11 @@ class CustomPageViewController: UIViewController, BWWalkthroughPage{
         super.viewDidLoad()
     }
 
+    open override func viewDidAppear(_ animated: Bool) {
+    //        self.signinBtn.setGradient()
+            self.setGragientBar()
+        }
+    
     // MARK: BWWalkThroughPage protocol
     
     func walkthroughDidScroll(to: CGFloat, offset: CGFloat) {

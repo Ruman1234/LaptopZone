@@ -156,6 +156,7 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
     //        print("asdfadf")
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ModelViewController") as! ModelViewController
             Constants.seriesId = self.otherBtn.titleLabel!.text!
+            Constants.seriesName = self.otherBtn.titleLabel!.text!
     //        main.id = self.itemsArray[indexPath.row].sERIES_DT_ID!
     //        Constants.seriesId = self.itemsArray[indexPath.row].sERIES_DT_ID!
             self.navigationController?.pushViewController(main, animated: true)

@@ -33,6 +33,7 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     @IBOutlet weak var save: UIButton!
     
     var type = String()
+    var isdefault = String()
     var orderId = String()
     var locationManager = CLLocationManager()
     
@@ -44,7 +45,9 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
         self.addBG()
 //        self.backBtn()
         self.hideKeyboardWhenTappedAround()
-        
+        if self.isdefault == "yes"{
+            self.defaultAddress.isOn = true
+        }
         self.locationManager.requestAlwaysAuthorization()
         
         // For use in foreground
@@ -92,6 +95,8 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     
     
     func designTextField(textField : UITextField)  {
+        
+        textField.layer.masksToBounds = false
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.addShadow()
@@ -201,7 +206,7 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
             SVProgressHUD.dismiss()
             self.navigationController?.popViewController(animated: true)
             print(response)
-                Utilites.ShowAlert(title: "!!!", message: response.message!, view: self)
+                Utilites.ShowAlert(title: "!!!", message: "Address added successfully", view: self)
             
             
         }) { (error) in

@@ -52,8 +52,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         self.email.text = CustomUserDefaults.email.value
         self.firstname.text = CustomUserDefaults.userName.value
        
-        self.selectPhotos.setGradient()
-        self.savebtn.setGradient()
+        
         //message.layer.cornerRadius = 5
         message.layer.borderColor = UIColor.lightGray.cgColor
         message.layer.borderWidth = 1
@@ -75,6 +74,11 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         }
         self.backBtn()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.selectPhotos.setGradient()
+        self.savebtn.setGradient()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,7 +161,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
 //                        print(json)
                         
 //                        self.showToast(message: "Product Send successfully")
-                       Utilites.ShowAlert(title: "Success!!!", message: "Thanks for contacting us", view: self){ (alert) in
+                       Utilites.ShowAlert(title: "Success!!!", message: "Your request has been received we will contact you ASAP", view: self){ (alert) in
 //                           self.navigationController?.popViewController(animated: true)
                         
                         if #available(iOS 13.0, *) {
@@ -243,7 +247,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             print(res)
             self.Reset()
             self.navigationController?.popViewController(animated: true)
-            Utilites.ShowAlert(title: "Success!!!", message: "Thanks for contacting us", view: self){ (alert) in
+            Utilites.ShowAlert(title: "Success!!!", message: "Your request has been received we will contact you ASAP", view: self){ (alert) in
                 self.navigationController?.popViewController(animated: true)
             }
         }) { (err) in

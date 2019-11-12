@@ -52,6 +52,9 @@ class RegisterViewController: UIViewController {
             self.password.setIcon(UIImage(named: "passwordimg")!)
         }
  
+        
+        self.password.hideShowText()
+        self.confirmPassword.hideShowText()
         // Do any additional setup after loading the view.
     }
     

@@ -16,7 +16,7 @@ class mainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
-        self.setRedStatusBar()
+//        self.setRedStatusBar()
         self.tabBarController?.tabBar.isHidden = false
         self.hidesBottomBarWhenPushed = false
         // Do any additional setup after loading the view.

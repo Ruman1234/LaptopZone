@@ -39,22 +39,22 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         self.addButton.setGradient()
         
         socketdata()
         
-        self.setGragientBar()
+        self.tableView.tableFooterView = UIView()
+        
         self.getAllProductList()
         
         requestView.layer.cornerRadius = 8
         self.menuBtn.target = self.revealViewController()
         self.menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-        
-        self.upperView.applyGradient(colours: [
-            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
-          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
-        ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+//        self.upperView.applyGradient(colours: [
+//            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+//          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+//        ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
         
     }
     
@@ -64,6 +64,11 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
         super.viewDidAppear(true)
 //        self.tabBarController?.tabBar.isHidden = false
 //        self.hidesBottomBarWhenPushed = false
+        self.setGragientBar()
+        self.upperView.applyGradient(colours: [
+                   UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+                 UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+               ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
     }
     
     override func viewWillAppear(_ animated: Bool) {

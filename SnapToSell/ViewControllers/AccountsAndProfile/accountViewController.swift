@@ -9,7 +9,13 @@
 import UIKit
 import SVProgressHUD
 
-class accountViewController: UIViewController,AddDropOffViewDelegate {
+protocol accountViewControllerDelegate : AnyObject{
+    
+    func moveToNextTab(index : Int)
+    
+}
+
+class accountViewController: UIViewController,ChangePasswordViewDelegate {
     
     
 
@@ -30,7 +36,9 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
     @IBOutlet weak var editBtn: UIButton!
     
     
-    var addotherView : AddDropOffView!
+    var addotherView : ChangePasswordView!
+    var delegte : accountViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +60,13 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
         APiCall()
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+          self.myTitleView.applyGradient(colours: [
+                         UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+                       UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+                     ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+              
+    }
     
     func APiCall()  {
         SVProgressHUD.show(withStatus: "Loading..")
@@ -137,6 +151,18 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
             self.profileNAme.isUserInteractionEnabled = true
             self.profileEmail.isUserInteractionEnabled = true
             self.profilePhoneNumber.isUserInteractionEnabled = true
+            
+            self.profileNAme.layer.borderColor = UIColor.lightGray.cgColor
+            self.profileNAme.layer.borderWidth = 0.5
+            
+            self.profileEmail.layer.borderColor = UIColor.lightGray.cgColor
+            self.profileEmail.layer.borderWidth = 0.5
+            
+            self.profilePhoneNumber.layer.borderColor = UIColor.lightGray.cgColor
+            self.profilePhoneNumber.layer.borderWidth = 0.5
+//            self.profileEmail.isUserInteractionEnabled = true
+//            self.profilePhoneNumber.isUserInteractionEnabled = true
+            
             self.profileNAme.resignFirstResponder()
             self.editBtn.setTitle("Done", for: .normal)
         }else if self.editBtn.tag == 1{
@@ -145,7 +171,11 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
                 self.profileNAme.isUserInteractionEnabled = false
                 self.profileEmail.isUserInteractionEnabled = false
                 self.profilePhoneNumber.isUserInteractionEnabled = false
-
+                
+                self.profileNAme.layer.borderWidth = 0
+                self.profileEmail.layer.borderWidth = 0
+                self.profilePhoneNumber.layer.borderWidth = 0
+                
                 self.editBtn.setTitle("Edit", for: .normal)
 
                 self.UpdateProfileCall()
@@ -244,12 +274,12 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
     func addView()  {
         if self.addotherView == nil {
             self.addotherView = nil
-            self.addotherView = (Bundle.main.loadNibNamed("AddDropOffView", owner: self, options: nil)![0] as!  AddDropOffView)
+            self.addotherView = (Bundle.main.loadNibNamed("ChangePasswordView", owner: self, options: nil)![0] as!  ChangePasswordView)
 
             self.addotherView.delegate = self
-            self.addotherView.type = "password"
-            self.addotherView.firstLbl.text = "Old Password"
-            self.addotherView.secondLbl.text = "New Password"
+//            self.addotherView.type = "password"
+//            self.addotherView.firstLbl.text = "Old Password"
+//            self.addotherView.secondLbl.text = "New Password"
 //            self.addotherView.titleName = "Enter Series Name"
 //            self.addotherView.nameLbl.text = "Enter Tracking number"
             self.addotherView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
@@ -264,9 +294,27 @@ class accountViewController: UIViewController,AddDropOffViewDelegate {
     
     
     
-    @IBAction func redirectBtn(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 4
+    @IBAction func redirectBtn(_ sender: AnyObject) {
+//        self.delegte?.moveToNextTab(index: sender.tag)
+        let imageDataDict:[String: Any] = ["image": sender.tag!]
+//        self.tabBarController?.selectedIndex = 4
+//        UIView.animate(withDuration: 2) {
+//        newTabBarViewController.SharedInstance.moveto(index: sender.tag )
+            
+//        print("asdf")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendData"), object: nil, userInfo: imageDataDict)
+
+//        }
+        
+        
+         // `default` is now a property, not a method call
+
+        // Register to receive notification in your class
+       
+        // handle notification
+       
+//        self.tabBarController?.selectedIndex = 4
+        
     }
-    
-    
+   
 }

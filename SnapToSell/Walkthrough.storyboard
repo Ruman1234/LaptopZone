@@ -19,7 +19,7 @@
         <!--Walkthrough View Controller-->
         <scene sceneID="f1r-A2-2vT">
             <objects>
-                <viewController storyboardIdentifier="walk" useStoryboardIdentifierAsRestorationIdentifier="YES" id="txJ-gV-nlq" customClass="BWWalkthroughViewController" customModule="SnapToSell" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walk" useStoryboardIdentifierAsRestorationIdentifier="YES" id="txJ-gV-nlq" customClass="BWWalkthroughViewController" customModule="LaptopZone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xnf-dR-UXp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,13 +93,13 @@
         <!--Walkthrough Page View Controller-->
         <scene sceneID="hhd-kh-VF3">
             <objects>
-                <viewController storyboardIdentifier="walk2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XYk-C3-fzG" customClass="BWWalkthroughPageViewController" customModule="SnapToSell" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walk2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XYk-C3-fzG" customClass="BWWalkthroughPageViewController" customModule="LaptopZone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AvX-wc-16a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell your old mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdS-mW-U9l">
-                                <rect key="frame" x="85" y="371" width="276" height="41"/>
+                                <rect key="frame" x="63" y="371" width="289" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="1JA-Au-Cyb"/>
                                 </constraints>
@@ -123,12 +123,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CMp-gQ-i9l" firstAttribute="trailing" secondItem="FOu-va-7af" secondAttribute="trailing" constant="22" id="4hA-qN-oTw"/>
-                            <constraint firstItem="CdS-mW-U9l" firstAttribute="leading" secondItem="CMp-gQ-i9l" secondAttribute="leading" constant="85" id="Hfe-N8-fzz"/>
+                            <constraint firstItem="CdS-mW-U9l" firstAttribute="leading" secondItem="CMp-gQ-i9l" secondAttribute="leading" constant="63" id="Hfe-N8-fzz"/>
                             <constraint firstItem="CdS-mW-U9l" firstAttribute="top" secondItem="FOu-va-7af" secondAttribute="bottom" constant="60" id="Nej-RG-OO0"/>
                             <constraint firstItem="Uoi-Jj-dcq" firstAttribute="top" secondItem="CdS-mW-U9l" secondAttribute="bottom" constant="6" id="SCi-Ts-CHV"/>
                             <constraint firstItem="Uoi-Jj-dcq" firstAttribute="leading" secondItem="CMp-gQ-i9l" secondAttribute="leading" constant="31" id="Ymw-In-mA8"/>
                             <constraint firstItem="FOu-va-7af" firstAttribute="top" secondItem="CMp-gQ-i9l" secondAttribute="top" constant="52" id="cZb-iO-0jT"/>
-                            <constraint firstItem="CdS-mW-U9l" firstAttribute="centerX" secondItem="Uoi-Jj-dcq" secondAttribute="centerX" constant="15" id="gWB-PL-pFB"/>
+                            <constraint firstItem="CdS-mW-U9l" firstAttribute="centerX" secondItem="Uoi-Jj-dcq" secondAttribute="centerX" constant="-0.5" id="gWB-PL-pFB"/>
                             <constraint firstItem="CMp-gQ-i9l" firstAttribute="trailing" secondItem="Uoi-Jj-dcq" secondAttribute="trailing" constant="29" id="h0c-NZ-idg"/>
                             <constraint firstItem="CMp-gQ-i9l" firstAttribute="bottom" secondItem="Uoi-Jj-dcq" secondAttribute="bottom" constant="233" id="sdF-Cx-SMD"/>
                             <constraint firstItem="FOu-va-7af" firstAttribute="leading" secondItem="CMp-gQ-i9l" secondAttribute="leading" constant="17" id="wg2-MK-0So"/>
@@ -146,12 +146,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6r-P2-d5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="-853"/>
+            <point key="canvasLocation" x="1298.5507246376812" y="-853.53260869565224"/>
         </scene>
         <!--Walkthrough Page View Controller-->
         <scene sceneID="8Tf-D7-UzW">
             <objects>
-                <viewController storyboardIdentifier="walk0" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a0v-IS-EXc" customClass="BWWalkthroughPageViewController" customModule="SnapToSell" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walk0" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a0v-IS-EXc" customClass="BWWalkthroughPageViewController" customModule="LaptopZone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ilO-KC-33e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,12 +214,12 @@
         <!--Custom Page View Controller-->
         <scene sceneID="5mS-PA-mNj">
             <objects>
-                <viewController storyboardIdentifier="walk3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2tr-5e-K2b" customClass="CustomPageViewController" customModule="SnapToSell" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walk3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2tr-5e-K2b" customClass="CustomPageViewController" customModule="LaptopZone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9My-yD-6bv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop Repairing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAh-pb-Elf">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop Recycling" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAh-pb-Elf">
                                 <rect key="frame" x="89" y="372" width="276" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="boj-uA-KZV"/>
@@ -264,7 +264,7 @@
         <!--Walkthrough Page View Controller-->
         <scene sceneID="ywq-dR-M81">
             <objects>
-                <viewController storyboardIdentifier="walk1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JbJ-Ac-xgR" customClass="BWWalkthroughPageViewController" customModule="SnapToSell" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walk1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JbJ-Ac-xgR" customClass="BWWalkthroughPageViewController" customModule="LaptopZone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pGR-jM-79V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

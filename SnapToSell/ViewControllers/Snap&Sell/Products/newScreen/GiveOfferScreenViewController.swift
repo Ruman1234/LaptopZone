@@ -29,10 +29,7 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
-        self.addPAger(totalPage: 7, currentPage: 6)
-        self.cancleBtn()
-        self.backBtn()
-        self.continuewBtn.applyGradient(colours: [UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1) , UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)], locations: nil, startPoint: CGPoint(x: 0.25, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.5))
+       
         priceLbl.text = Double(price)?.dollarString
         callApi(id: Constants.productName)
         
@@ -41,6 +38,12 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
     }
     
 
+    override func viewDidAppear(_ animated: Bool) {
+            self.addPAger(totalPage: 7, currentPage: 6)
+                   self.cancleBtn()
+                   self.backBtn()
+                   self.continuewBtn.applyGradient(colours: [UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1) , UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)], locations: nil, startPoint: CGPoint(x: 0.25, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.5))
+       }
      
     func callApi(id : String)  {
          SVProgressHUD.show(withStatus: "Loading...")

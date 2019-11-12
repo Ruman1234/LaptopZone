@@ -82,6 +82,10 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
         self.tabBarController?.tabBar.isHidden = false
         SocketData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.backBtn()
+    }
 
     func createConversation(id : String)  {
         NetworkManager.SharedInstance.createConversations(id: id, success: { (res) in

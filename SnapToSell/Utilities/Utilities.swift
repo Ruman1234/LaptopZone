@@ -143,50 +143,54 @@ class GridView: UIView
 extension UIViewController {
     
     
-    func setRedStatusBar()  {
-         if #available(iOS 13.0, *) {
-             let app = UIApplication.shared
-             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
-             
-             let statusbarView = UIView()
-             statusbarView.backgroundColor = UIColor.red
-             view.addSubview(statusbarView)
-           
-             statusbarView.translatesAutoresizingMaskIntoConstraints = false
-             statusbarView.heightAnchor
-                 .constraint(equalToConstant: statusBarHeight).isActive = true
-             statusbarView.widthAnchor
-                 .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
-             statusbarView.topAnchor
-                 .constraint(equalTo: view.topAnchor).isActive = true
-             statusbarView.centerXAnchor
-                 .constraint(equalTo: view.centerXAnchor).isActive = true
-           
-         } else {
-             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-             statusBar?.backgroundColor = UIColor.red
-         }
-    }
+//    func setRedStatusBar()  {
+//         if #available(iOS 13.0, *) {
+//             let app = UIApplication.shared
+//             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+//
+//             let statusbarView = UIView()
+//             statusbarView.backgroundColor = UIColor.red
+//             view.addSubview(statusbarView)
+//
+//             statusbarView.translatesAutoresizingMaskIntoConstraints = false
+//             statusbarView.heightAnchor
+//                 .constraint(equalToConstant: statusBarHeight).isActive = true
+//             statusbarView.widthAnchor
+//                 .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+//             statusbarView.topAnchor
+//                 .constraint(equalTo: view.topAnchor).isActive = true
+//             statusbarView.centerXAnchor
+//                 .constraint(equalTo: view.centerXAnchor).isActive = true
+//
+//         } else {
+//             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+//             statusBar?.backgroundColor = UIColor.red
+//         }
+//    }
     
     
     func setGragientBar() {
+        
+        
          let gradientLayer = CAGradientLayer()
 
-            gradientLayer.frame = CGRect(x:0, y:-20, width:375, height:64)
+        gradientLayer.frame = CGRect(x:0, y:-20, width: self.view.frame.width, height:64)
+        
+     
         let colorTop = UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor
         
         let colorBottom = UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
             gradientLayer.colors = [ colorTop, colorBottom]
-    //        gradientLayer.locations = [ 0.0, 1.0]
+            gradientLayer.locations = [0.12, 1]
             
     //                gradientLayer.locations = [0.12, 1]
             
-            
+//            startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1)
             gradientLayer.startPoint = CGPoint(x: 0.25, y: 0.5)
             gradientLayer.endPoint = CGPoint(x: 0.75, y: 0.5)
             
             
-            gradientLayer.frame = CGRect(x:0, y:-20, width:375, height:self.view.frame.height * 0.06)
+            gradientLayer.frame = CGRect(x:0, y:-20, width:self.view.frame.width, height:self.view.frame.height * 0.06)
             
             let window: UIWindow? = UIApplication.shared.keyWindow
             let view = UIView()
@@ -199,7 +203,7 @@ extension UIViewController {
     }
     
     func addPAger(totalPage : Int , currentPage : Int) {
-        
+        let y = self.view.frame.height * 0.01
         let pager = UIPageControl()
         pager.numberOfPages = totalPage
         pager.tintColor = UIColor.gray
@@ -207,7 +211,7 @@ extension UIViewController {
         pager.currentPageIndicatorTintColor = .red
         pager.currentPage = currentPage
         let x = (self.view.frame.width / 2) - 75
-        pager.frame = CGRect(x: x, y: 50, width: 130, height: 10)
+        pager.frame = CGRect(x: x, y: y + 50, width: 130, height: 10)
         self.view.addSubview(pager)
         
                                         
@@ -218,8 +222,9 @@ extension UIViewController {
     func cancleBtn()  {
         
         let x = self.view.frame.width - 85 
+         let y = self.view.frame.height * 0.01
         
-        let button = UIButton(frame: CGRect(x: x, y: 45, width: 70, height: 20))
+        let button = UIButton(frame: CGRect(x: x, y: y + 45, width: 70, height: 20))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
         button.setTitle("Cancel", for: .normal)
@@ -229,23 +234,23 @@ extension UIViewController {
     }
     
      func backBtn()  {
-            
-            let x = 20
-            let imageview = UIImageView(frame: CGRect(x: x, y: 46, width: 25, height: 15))
-            imageview.image = UIImage(named: "back")
-        
-            let button = UIButton(frame: CGRect(x: x, y: 46, width: 70, height: 70))
-    //        button.backgroundColor = .green
-            button.setTitleColor(.red, for: .normal)
+        let y = self.view.frame.height * 0.01
+        let x = 20
+        let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 46), width: 25, height: 15))
+        imageview.image = UIImage(named: "back")
+    
+        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 5), width: 100, height: 100))
+//        button.backgroundColor = .green
+        button.setTitleColor(.red, for: .normal)
 //            button.setTitle("Cancle", for: .normal)
 //            button.setImage(UIImage(named: "back"), for: .normal)
-            
-            button.addTarget(self, action: #selector(back), for: .touchUpInside)
         
-            self.view.addSubview(imageview)
-        
-            self.view.addSubview(button)
-        }
+        button.addTarget(self, action: #selector(back), for: .touchUpInside)
+    
+        self.view.addSubview(imageview)
+    
+        self.view.addSubview(button)
+    }
         
     @objc func back(){
            
@@ -300,7 +305,7 @@ extension UIViewController {
     
     
     func addBG()  {
-        self.setRedStatusBar()
+        self.setGragientBar()
     
         
         let imageOnTop = UIImageView()
@@ -650,11 +655,13 @@ extension UIView {
                    shadowOffset: CGSize = CGSize(width: 0, height: 1.0),
                    shadowOpacity: Float = 0.4,
                    shadowRadius: CGFloat = 4.0) {
+        
+        layer.masksToBounds = false
         layer.shadowColor = shadowColor
         layer.shadowOffset = shadowOffset
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
-        layer.masksToBounds = false
+        
     }
     func giveShadow()  {
         
@@ -879,3 +886,33 @@ extension UITableView {
         }
     }
 }
+
+extension UITextField{
+    
+    func hideShowText(){
+         
+                let button = UIButton(type: .custom)
+                   button.setImage(UIImage(named: "asdf"), for: .normal)
+        //        button.setTitle("View", for: .normal)
+                button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+                button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+                   button.addTarget(self, action: #selector(self.refresh), for: .touchUpInside)
+                   self.rightView = button
+                   self.rightViewMode = .always
+                   
+
+                   
+    }
+    
+    
+    @IBAction func refresh(_ sender: Any) {
+         
+         if self.isSecureTextEntry{
+             self.isSecureTextEntry = false
+         }else{
+             self.isSecureTextEntry = true
+         }
+     }
+
+}
+
