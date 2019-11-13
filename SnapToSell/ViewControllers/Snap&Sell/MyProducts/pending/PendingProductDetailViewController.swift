@@ -41,6 +41,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
         
         if type == "rep" {
             fetchRepProduct()
+            self.previewIamge.sd_setImage(with: URL(string: detail!.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
         }else{
             fetchSingalProduct()
         }
@@ -121,7 +122,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     
     func fetchRepProduct()  {
             
-            SVProgressHUD.show(withStatus: "Loading...")
+        SVProgressHUD.show(withStatus: "Loading...")
             
             
         NetworkManager.SharedInstance.getRepRecData(searcInput: "\(String(describing: detail!.REQ_ID!))", success: { (res) in
@@ -191,7 +192,12 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        if self.type == "rep"{
+            self.previewIamge.sd_setImage(with:  URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        }
+        
     }
     
     

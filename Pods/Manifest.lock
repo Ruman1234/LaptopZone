@@ -1,5 +1,15 @@
 PODS:
   - Alamofire (4.8.2)
+  - FBSDKCoreKit (5.10.0):
+    - FBSDKCoreKit/Basics (= 5.10.0)
+    - FBSDKCoreKit/Core (= 5.10.0)
+  - FBSDKCoreKit/Basics (5.10.0)
+  - FBSDKCoreKit/Core (5.10.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.10.0):
+    - FBSDKLoginKit/Login (= 5.10.0)
+  - FBSDKLoginKit/Login (5.10.0):
+    - FBSDKCoreKit (~> 5.0)
   - Firebase/Analytics (6.5.0):
     - Firebase/Core
   - Firebase/Auth (6.5.0):
@@ -134,6 +144,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -190,6 +201,8 @@ SPEC REPOS:
     - SwiftUserDefault
     - SwiftyJSON
   trunk:
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - GoogleMaps
     - GooglePlacePicker
     - GooglePlaces
@@ -200,6 +213,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  FBSDKCoreKit: f9bae468a078f20c05c73450825ccd54cfafbbb7
+  FBSDKLoginKit: 4ece964272a52c4e1363d5c048a545e33761491b
   Firebase: dedc9e48ea3f3649ad5f6b982f8a0c73508a14b5
   FirebaseAnalytics: 3fb375bc9d13779add4039716f868d233a473fad
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
@@ -236,6 +251,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 42ba8de7e5e5a2873b59d4cf28dd16c0a8cbc1a3
+PODFILE CHECKSUM: 58c50ff7a53e59ae3d1eaf5ed1cc377ff47c5c18
 
 COCOAPODS: 1.8.1

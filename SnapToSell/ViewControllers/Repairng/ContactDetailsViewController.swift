@@ -117,6 +117,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             "LastName":LastName,
             "yourName":yourName,
             "enterComents":enterComents,
+            "user_id" : CustomUserDefaults.userId.value!
         ]
 
         Alamofire.upload(multipartFormData: { (MultipartFormData) in
@@ -238,9 +239,11 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         let par = ["email" : email,
                    "phone" : phone,
                     "remarks" : remarks,
-                    "full_name" : full_name
+                    "full_name" : full_name,
+                    "user_id" : CustomUserDefaults.userId.value!
+            
          ]
-        
+        print(par)
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.UploadReycleImages(params: par, images: images, success: { (res) in
             SVProgressHUD.dismiss()

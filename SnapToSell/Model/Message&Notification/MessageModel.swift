@@ -38,6 +38,7 @@ class MessageModel : Mappable {
     var content : String?
     
     var repairCount : String?
+    var rec_count : String?
     var sellCount : String?
     
  
@@ -53,6 +54,7 @@ class MessageModel : Mappable {
     func mapping(map: Map) {
 
         repairCount <- map["rep_count"]
+        rec_count <- map["rec_count"]
         sellCount <- map["sell_count"]
         
         conversation_id <- map["conversation_id"]

@@ -30,6 +30,7 @@ class RequestStatusModel : Mappable {
     var MODEL_NAME : String?
     var OFFER : String?
     var STATUS : String?
+    var IMAGE_URL_FULL : String?
     
     
     
@@ -70,6 +71,7 @@ class RequestStatusModel : Mappable {
         MODEL_NAME <- map["MODEL_NAME"]
         OFFER <- map["OFFER"]
         STATUS <- map["STATUS"]
+        IMAGE_URL_FULL <- map["IMAGE_URL_FULL"]
         
         
         details <- map["details"]

@@ -105,6 +105,9 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     var selectShipment : SelectShipmentView!
     var imgView : ShowImageView!
     
+    
+    var type = String()
+    var repRecId = String()
     lazy var searchCompleter: MKLocalSearchCompleter = {
            let sC = MKLocalSearchCompleter()
            sC.delegate = self
@@ -438,10 +441,38 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     }
     
     @IBAction func dropoffbtn(_ sender: Any) {
-        self.selectOption = "1"
-        self.countryName = "United States"
-        self.sendRequest() 
         
+        if self.type == "rec"{
+            sendRepRecRequest()
+        }else{
+            self.selectOption = "1"
+            self.countryName = "United States"
+            self.sendRequest()
+        }
+        
+    }
+    
+    
+    func sendRepRecRequest()  {
+        SVProgressHUD.show(withStatus: "Loading...")
+        let parameters = ["getRadioVale" : "1",
+                            "requestId" : repRecId,
+                            "user_id" : CustomUserDefaults.userId.value!]
+        
+        NetworkManager.SharedInstance.setRepRecProceed(pra: parameters, success: { (res) in
+            SVProgressHUD.dismiss()
+            
+            print(res)
+            Utilites.ShowAlert(title: "Success", message: "Your request has been received we will contact you ASAP", view: self) { (res) in
+                let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
+                
+                self.navigationController?.popToViewController(a, animated: true)
+
+            }
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+        }
     }
     
     func sendRequest()  {
@@ -472,7 +503,8 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
                          "pick_area" : self.shipmentCity,
                          "pick_city" : self.shipmentCity,
                          "pick_state" : self.shipmentState,
-                         "pick_zipcode" : self.shipmentZip]
+                         "pick_zipcode" : self.shipmentZip,
+                         "user_id" : CustomUserDefaults.userId.value!]
         
 
         print(parameters)
@@ -490,7 +522,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
                 }
 //                self.navigationController?.popToViewController(a, animated: true)
                        
-                Utilites.ShowAlert(title: "Success!!", message: "Product Send successdully", view: self)
+                Utilites.ShowAlert(title: "Success!!", message: "Your request has been received we will contact you ASAP", view: self)
             }else{
                 if (res.data != nil){
                    self.request_id = res.data!
@@ -527,8 +559,15 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.imgView = nil
             if #available(iOS 13.0, *) {
                 Utilites.ShowAlert(title: "!!!", message: "Image downloaded", view: self) { (res) in
-                    let a = self.navigationController?.viewControllers[0] as! HomeViewController
-                    self.navigationController?.popToViewController(a, animated: true)
+                    if self.type == "rec"{
+                        let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
+                        self.navigationController?.popToViewController(a, animated: true)
+
+                    }else{
+                        let a = self.navigationController?.viewControllers[0] as! HomeViewController
+                        self.navigationController?.popToViewController(a, animated: true)
+
+                    }
 
                 }
             } else {
@@ -552,10 +591,19 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.selectShipment = nil
         }
         SVProgressHUD.show(withStatus: "Loading...")
+        
+        var request_type = String()
+        
+        if self.type == "rec" {
+            request_type = "REPAIRING"
+        }else{
+            request_type = "BUY_SELL"
+        }
+        
         let parameters = ["shipment_id" : id,
                             "rate_id" : text,
                             "request_id" : self.request_id,
-                            "request_type" : "BUY_SELL"]
+                            "request_type" : request_type]
         
         NetworkManager.SharedInstance.getShipmentImage(pra: parameters, success: { (res) in
             print(res)
@@ -702,6 +750,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     //                               "state" : self.shipmentState,
     //                               "phone" : "+1539888550"]
             
+
             let parameters = ["weight" : self.shipmentWeight.text!,
             "length" : self.shipmentLength.text!,
             "width" : self.shipmentWidth.text!,
@@ -716,7 +765,14 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
                 SVProgressHUD.dismiss()
                 print(res)
                 self.rates = res.rates!
-                self.sendRequest()
+                
+                if self.type == "rec"{
+                    print("Asdf")
+                    self.request_id = self.repRecId
+                    self.addView(rate: self.rates)
+                }else{
+                    self.sendRequest()
+                }
                 
             }) { (err) in
                 SVProgressHUD.dismiss()
@@ -726,6 +782,36 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         }
         
     }
+    
+//    func sendRepRecshipmentRequest()  {
+//        SVProgressHUD.show(withStatus: "Loading...")
+//
+//      shipment_id: shp_02a47ff54c9749e2984bd49520933870
+//      rate_id: rate_38308f6ce7b6470f85c577896b843fef
+//      request_id: REP-000142
+//      request_type: REPAIRING
+//
+//        let parameters = [
+//            "shipment_id" : self.shipmentStreet,
+//            "rate_id" : self.shipmentStreet,
+//            "request_id" : self.shipmentStreet,
+//            "request_type" : self.shipmentStreet]
+//        print(parameters)
+//        NetworkManager.SharedInstance.setRepRecPickup(pra: parameters, success: { (res) in
+//            SVProgressHUD.dismiss()
+//
+//            print(res)
+//            Utilites.ShowAlert(title: "Success", message: "Your request has been received we will contact you ASAP", view: self) { (res) in
+//                let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
+//
+//                self.navigationController?.popToViewController(a, animated: true)
+//
+//            }
+//        }) { (err) in
+//            SVProgressHUD.dismiss()
+//            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+//        }
+//    }
     
     
     func placeAutocomplete(text_input: String) {
@@ -770,13 +856,62 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     
     
     @IBAction func pickUpNextBtn(_ sender: Any) {
-        if pickpValidInput(){
-            self.countryName = "United States"
-            self.sendRequest()
+        if self.type == "rec"{
+            sendRepRecPickupRequest()
+        }else{
+            if pickpValidInput(){
+                self.countryName = "United States"
+                self.sendRequest()
+
+            }
 
         }
     }
     
+    
+    func sendRepRecPickupRequest()  {
+        SVProgressHUD.show(withStatus: "Loading...")
+        
+//        "pick_address" : self.shipmentStreet,
+//        "pick_area" : self.shipmentCity,
+//        "pick_city" : self.shipmentCity,
+//        "pick_state" : self.shipmentState,
+//        "pick_zipcode" : self.shipmentZip
+//
+        
+        //        address: 2720 Royal Ln
+           //        city: Dallas County
+           //        area: Dallas
+           //        state: Texas
+           //        zipcode: 75229
+           //        getRepareId: REP-000142
+           //        getradio: 2
+
+
+        let parameters = [  "address" : self.shipmentStreet,
+                            "city" : self.shipmentCity,
+                            "area" : self.shipmentCity,
+                            "state" : self.shipmentState,
+                            "zipcode" : self.shipmentZip,
+                            "getRepareId" : self.repRecId,
+                            "getradio" : "2",
+         "user_id" : CustomUserDefaults.userId.value!]
+        print(parameters)
+        NetworkManager.SharedInstance.setRepRecPickup(pra: parameters, success: { (res) in
+            SVProgressHUD.dismiss()
+            
+            print(res)
+            Utilites.ShowAlert(title: "Success", message: "Your request has been received we will contact you ASAP", view: self) { (res) in
+                let a = self.navigationController?.viewControllers[0] as! newTabBarViewController
+                
+                self.navigationController?.popToViewController(a, animated: true)
+
+            }
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+        }
+    }
     
 }
 

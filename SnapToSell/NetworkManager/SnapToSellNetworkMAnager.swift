@@ -77,6 +77,41 @@ extension NetworkManager{
     }
     
     
+    
+    func socalFBLogin(Token: String ,
+               
+               success : @escaping(LoginModel) -> Void ,
+               failure : @escaping(NSError) -> Void)  {
+        
+        self.request(url: Constants.SOCIAL_FB_LOGIN, method: .post, parameters: ["access_token":Token], encoding: JSONEncoding.default, header: ["Accept": "application/json"]) { (response) in
+            print(response)
+            print(response.response?.statusCode)
+            //            let value = response.result.value
+            //            success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+            guard (response.response?.statusCode) != nil else{
+                failure(NSError())
+                return
+            }
+            
+            if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                print(response)
+                if let value = response.result.value{
+                    success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                }
+            }else if response.response!.statusCode >= 400 && response.response!.statusCode < 500{
+                print(response)
+                if let value = response.result.value{
+                    success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                }
+            }else{
+                failure(NSError())
+            }
+        }
+        
+        
+    }
+    
+    
     func Register(name: String ,
                   email: String ,
                   password: String ,
@@ -339,7 +374,9 @@ extension NetworkManager{
 //        }
         
         
-        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_rep_sell_data")!, method: .post, parameters: ["searcInput" : searcInput]).responseJSON { (response) in
+        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_rep_sell_data")!, method: .post, parameters: [
+            "searcInput" : searcInput,
+            "user_id" : CustomUserDefaults.userId.value!]).responseJSON { (response) in
                           
                           print(response)
                    
@@ -1550,12 +1587,12 @@ extension NetworkManager{
     
     
     func GetCount(
-                        success : @escaping(MessageModel) -> Void ,
-                        failure : @escaping(NSError) -> Void)  {
+                    success : @escaping(MessageModel) -> Void ,
+                    failure : @escaping(NSError) -> Void)  {
 
           
                
-        self.request2(url: "ljw_rep_sell_counts", method: .get  ,parameters: nil, header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request2(url: "ljw_rep_sell_counts", method: .post  ,parameters: [ "user_id" : CustomUserDefaults.userId.value!], header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
                guard (response.response?.statusCode) != nil else{
                  failure(NSError())
                  return
@@ -1581,7 +1618,8 @@ extension NetworkManager{
         success : @escaping(RequestStatusModel) -> Void ,
         failure : @escaping(NSError) -> Void)  {
         
-        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/get_rep_rec_detail")!, method: .post, parameters: ["searcInput" : searcInput]).responseJSON { (response) in
+        Alamofire.request(URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/get_rep_rec_detail")!, method: .post, parameters: ["searcInput" : searcInput,
+         "user_id" : CustomUserDefaults.userId.value!]).responseJSON { (response) in
                           
                           print(response)
                    
@@ -1602,5 +1640,77 @@ extension NetworkManager{
 
     }
     
+    
+    
+    func setRepRecProceed(
+    pra :Parameters,
+                  success : @escaping(LoginModel) -> Void ,
+                  failure : @escaping(NSError) -> Void)  {
+        
+     let BASE_URL = URL(string:"http://71.78.236.20/laptopzone/reactcontroller/lz_website/c_lz_recycle/save_pull_request")
+        
+        Alamofire.request(BASE_URL!, method: .post,
+                          
+                          parameters: pra
+        ).responseJSON { (response) in
+
+           
+           print(response)
+
+           guard (response.response?.statusCode) != nil else{
+                    failure(NSError())
+                    return
+           }
+                print(response.response!.statusCode)
+                if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                    print(response)
+                    if let value = response.result.value{
+                       success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                    }
+                }else{
+                    failure(NSError())
+                }
+        }
+     
+    }
+    
+    
+    func setRepRecPickup(
+       pra :Parameters,
+                     success : @escaping(LoginModel) -> Void ,
+                     failure : @escaping(NSError) -> Void)  {
+           
+        let BASE_URL = URL(string:"http://71.78.236.20/laptopzone/reactcontroller/c_react/saveOptionData")
+           
+           Alamofire.request(BASE_URL!, method: .post,
+                             
+                             parameters: pra
+           ).responseJSON { (response) in
+
+              
+              print(response)
+
+              guard (response.response?.statusCode) != nil else{
+                       failure(NSError())
+                       return
+              }
+                   print(response.response!.statusCode)
+                   if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                       print(response)
+                       if let value = response.result.value{
+                          success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                       }
+                   }else{
+                       failure(NSError())
+                   }
+           }
+        
+       }
+       
+    
+    //      pickup
+    //    http://71.78.236.20/laptopzone/reactcontroller/c_react/saveOptionData
+            
+   
 }
 

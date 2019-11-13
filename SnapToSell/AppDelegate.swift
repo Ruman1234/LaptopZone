@@ -16,7 +16,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 import GoogleMaps
 import GooglePlaces
-
+import FBSDKCoreKit
 import Foundation
 
 @available(iOS 13.0, *)
@@ -116,10 +116,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         UINavigationBar.appearance().isTranslucent = true
         
         UIApplication.shared.setMinimumBackgroundFetchInterval(18)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+
+
+       
         return true
     }
     
  
+    
+//     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//
+//        let handled: Bool = ApplicationDelegate.shared.application(application, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+//            // Add any custom logic here.
+//            return handled
+//        }
+        func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+            
+            let handled: Bool = ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+            // Add any custom logic here.
+            return handled
+        }
+
+
+
+
+
+    
+
     
      func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
@@ -299,6 +323,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print("error")
     }
     //Google signin
+    
+//    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//               
+//           let handled: Bool = ApplicationDelegate.shared.application(application, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+//               // Add any custom logic here.
+//               return handled
+//           }
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print("Asdf")
         return GIDSignIn.sharedInstance().handle(url as URL?,
@@ -306,6 +337,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         
     }
+    
+    
+    
     // [END openurl]
 
     // [START openurl_new]

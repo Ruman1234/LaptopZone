@@ -11,6 +11,7 @@ import SkyFloatingLabelTextField
 import SVProgressHUD
 import GoogleSignIn
 import SocketIO
+import FBSDKLoginKit
 
 
 
@@ -20,7 +21,11 @@ class eee: UIViewController {
     }
 }
 
-class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthroughViewControllerDelegate{
+class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthroughViewControllerDelegate ,LoginButtonDelegate{
+   
+    
+   
+    
     
     
     @IBOutlet weak var userName: UITextField!
@@ -42,9 +47,26 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     @IBOutlet weak var tickImg: UIImageView!
     
     
-    @IBOutlet weak var fblogin: UIButton!
+//    @IBOutlet weak var fblogin: UIButton!
+    
+    @IBOutlet weak var fbloginBtn: FBLoginButton! = {
+        
+        let butt = FBLoginButton()
+//        butt.delegate = self
+        butt.permissions = ["email","public_profile", "first_name", "last_name"]
+//           butt.readPermissions = ["email"]
+           return butt
+       }()
     
     
+    let loginManager = LoginManager()
+
+    
+//    FBSDKLoginButton! = {
+//        let butt = FBSDKLoginButton()
+//        butt.readPermissions = ["email"]
+//        return butt
+//    }()
     @IBOutlet weak var teitter: UIButton!
     
     let userdefaults = UserDefaults.standard
@@ -60,6 +82,11 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
 //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.red
 //        self.signinBtn.setGradient()
 //        self.setGragientBar()
+        fbloginBtn.delegate = self
+        print(AccessToken.current)
+        print(AccessToken.self)
+       
+        
         if !userdefaults.bool(forKey: "walkthroughPresented") {
 //
            showWalkthrough()
@@ -76,7 +103,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         
         
         self.googleLogin.layer.cornerRadius = self.googleLogin.frame.width / 2
-        self.fblogin.layer.cornerRadius = self.fblogin.frame.width / 2
+        self.fbloginBtn.layer.cornerRadius = self.fbloginBtn.frame.width / 2
         self.teitter.layer.cornerRadius = self.teitter.frame.width / 2
         
         
@@ -121,7 +148,127 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
 
         self.password.hideShowText()
         
+        loginManager.logIn(permissions: [ "publicProfile", "email" ], from: self) { (result, error) in
+            
+            
+            
+//            print(result?.token?.tokenString)
+            
+//            switch result {
+//
+//
+////             case .failed(let error):
+////                 print(error)
+////             case .cancelled:
+////                 print("User cancelled login.")
+////             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+////
+////                 print("accessToken: " +  accessToken.authenticationToken)
+////                 break
+//
+//             }
+        }
+//
+        
     }
+    
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        
+        print(result?.token?.tokenString)
+        
+//        print(result?.value(forKey: "name"))
+        
+        
+        if(AccessToken.current != nil){
+
+            GraphRequest(graphPath: "me", parameters: ["fields": "id,name , first_name, last_name , email"]).start(completionHandler: { (connection, result, error) in
+
+                   guard let Info = result as? [String: Any] else { return }
+
+                    if let userName = Info["name"] as? String
+                    {
+                        print(userName)
+                        //                        CustomUserDefaults.email.value = res.email
+                        CustomUserDefaults.userName.value = userName
+                    }
+                    if let email = Info["email"] as? String
+                    {
+                        print(email)
+                        CustomUserDefaults.email.value = email
+//                        CustomUserDefaults.userName.value = userName
+                    }
+
+               })
+           }
+        
+     
+        let token = result?.token?.tokenString
+        if token == nil {
+            return
+        }
+        SVProgressHUD.show(withStatus: "Loading")
+        NetworkManager.SharedInstance.socalFBLogin(Token: token!, success: { (response) in
+            print(response)
+            
+            SVProgressHUD.dismiss()
+            if (response.message != nil) {
+                Utilites.ShowAlert(title: "Error!!", message: response.message!, view: self)
+                return
+            }else{
+                print("Adasd")
+                
+                self.userdefaults.setValue(response.access_token, forKey: "Token")
+                
+                self.userdefaults.set(true, forKey: "islogin")
+                
+                AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
+                
+                print(AppManager.shared().accessToken)
+                
+                CustomUserDefaults.Token.value = response.access_token
+                
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                
+                self.navigationController?.pushViewController(main, animated: true)
+                
+                
+            }
+            
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+        }
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+       print("logout")
+    }
+    
+    
+//    func loginManagerDidComplete(_ result: LoginResult) {
+//        let alertController: UIAlertController
+//        switch result {
+//        case .cancelled:
+//            alertController = UIAlertController(
+//                nibName: "Login Cancelled",
+//                bundle: : "User cancelled login."
+//            )
+//
+//        case .failed(let error):
+//            alertController = UIAlertController(
+//                nibName: "Login Fail",
+//                bundle: "Login failed with error \(error)"
+//            )
+//
+//        case .success(let grantedPermissions, _, _):
+//            alertController = UIAlertController(
+//                nibName: "Login Success",
+//                bundle: "Login succeeded with granted permissions: \(grantedPermissions)"
+//            )
+//        }
+//        self.present(alertController, animated: true, completion: nil)
+//    }
     
 //    @IBAction func refresh(_ sender: Any) {
 //
@@ -153,6 +300,11 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         super.viewDidAppear(true)
         self.signinBtn.setGradient()
         self.setGragientBar()
+        self.fbloginBtn.setImage(UIImage(named: "Fb"), for: .normal)
+        let buttonText = NSAttributedString(string: " ")
+        self.fbloginBtn.setAttributedTitle(buttonText, for: .normal)
+
+//        self.fbloginBtn.setTitle(" ", for: .normal)
     }
     
     

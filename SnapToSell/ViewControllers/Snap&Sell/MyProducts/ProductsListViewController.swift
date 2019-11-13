@@ -57,17 +57,17 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         }
     }
     
-    func getAllProductList() {
-        SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.AllProductsRequest( success: { (response) in
-            SVProgressHUD.dismiss()
-            self.AllProducts = response
-            self.tableView.reloadData()
-        }) { (err) in
-            SVProgressHUD.dismiss()
-            Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
-        }
-    }
+//    func getAllProductList() {
+//        SVProgressHUD.show(withStatus: "Loading..")
+//        NetworkManager.SharedInstance.AllProductsRequest( success: { (response) in
+//            SVProgressHUD.dismiss()
+//            self.AllProducts = response
+//            self.tableView.reloadData()
+//        }) { (err) in
+//            SVProgressHUD.dismiss()
+//            Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
+//        }
+//    }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Repairing")
@@ -83,11 +83,13 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
         cell.productName.text = product.MODEL_NAME
         cell.priceLbl.text = Double(product.OFFER!)?.dollarString
-//        if (product.cover != nil) {
-//            cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
-//        }else{
-//            cell.productImage.image = UIImage(named: "placeholder.png")
-//        }
+        
+        if (product.IMAGE_URL_FULL != nil) {
+            cell.productImage.sd_setImage(with: URL(string: product.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            cell.productImage.image = UIImage(named: "placeholder.png")
+        }
+        
         cell.statusLbl.text = product.STATUS
         cell.selectionStyle = .none
         
@@ -127,9 +129,10 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         }else if product.STATUS == "APPROVED" {
             
 //
-//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
-//            main.detail = self.AllProducts[indexPath.row]
-//            self.navigationController?.pushViewController(main, animated: true)
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+            main.detail = self.AllProducts[indexPath.row]
+            main.type = "rep"
+            self.navigationController?.pushViewController(main, animated: true)
             
             
         }
@@ -235,6 +238,11 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
 //        }else{
 //            cell.productImage.image = UIImage(named: "placeholder.png")
 //        }
+        if (product.IMAGE_URL_FULL != nil) {
+           cell.productImage.sd_setImage(with: URL(string: product.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+           cell.productImage.image = UIImage(named: "placeholder.png")
+        }
         cell.statusLbl.text = product.STATUS
         cell.selectionStyle = .none
 //        cell.delBTn.tag = indexPath.row
@@ -388,6 +396,13 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
 //        }else{
 //            cell.productImage.image = UIImage(named: "placeholder.png")
 //        }
+        
+        if (product.IMAGE_URL_FULL != nil) {
+           cell.productImage.sd_setImage(with: URL(string: product.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+           cell.productImage.image = UIImage(named: "placeholder.png")
+        }
+        
         cell.statusLbl.text = product.STATUS
         cell.selectionStyle = .none
 //        cell.delBTn.tag = indexPath.row
@@ -402,9 +417,13 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
             let product = self.AllProducts[indexPath.row]
             if product.STATUS == "PENDING" {
                 
-                
+//                let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
+
+                let currentCell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! AddressTableViewCell
+
                 let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
                 main.type = "rep"
+//                main.previewIamge.image = UIImage(named: "addimage")
                 main.detail = self.AllProducts[indexPath.row]
                 self.navigationController?.pushViewController(main, animated: true)
                 

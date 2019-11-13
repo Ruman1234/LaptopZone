@@ -21,6 +21,7 @@ class Constants {
     static let LOGIN = "auth/login"
     static let REGISTER = "auth/signup"
     static let SOCIAL_LOGIN = "auth/google"
+    static let SOCIAL_FB_LOGIN = "auth/facebook"
     static let PROFILE = "customer/profile"
     static let ADD_NEW_ADDRESS = "customer/profile/address"
     static let UPDATE_ADDRESS = "customer/profile/address/"

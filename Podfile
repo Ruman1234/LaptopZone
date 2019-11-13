@@ -32,8 +32,7 @@ pod 'GoogleMaps'
 pod 'GooglePlacePicker'
 pod 'GooglePlaces'
 
-
-
+pod 'FBSDKLoginKit'
 
 pod 'Socket.IO-Client-Swift', '~> 15.1.0'
 

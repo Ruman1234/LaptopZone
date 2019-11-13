@@ -51,6 +51,8 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     var index = Int()
     var img = Int()
     var products = [String]()
+    
+    var type = String()
 //    var images = [UIImage]()
 //    let cancelBtn = UIButton()
                
@@ -62,13 +64,20 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
         Constants.requestId = id
         self.addBG()
         self.backBtn()
-        fetchSingalProduct()
+        
          self.activeLbl.layer.cornerRadius = 13
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         hideLAble()
        
+        if self.type == "rep"{
+            self.messageBtn.isHidden = true
+            fetchDetailOfRepRec() 
+        }else{
+            fetchSingalProduct()
+        }
+        
         self.messageBtn.layer.cornerRadius = self.messageBtn.frame.height / 2.041
         // Do any additional setup after loading the view.
     }
@@ -97,6 +106,55 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
 //        }
 //    }
 //
+    
+    func fetchDetailOfRepRec()  {
+            
+        SVProgressHUD.show(withStatus: "Loading...")
+        
+        
+    NetworkManager.SharedInstance.getRepRecData(searcInput: "\(String(describing: detail!.REQ_ID!))", success: { (res) in
+            
+            SVProgressHUD.dismiss()
+            self.detail = res
+            if (self.detail?.images_rep!.count)! > 0 {
+                self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images_rep![0])!), placeholderImage: UIImage(named: "placeholder.png"))
+                
+            }
+            self.navigationTitile.text = self.detail!.details![0].MODEL_NAME
+        self.titleProduct.text = self.detail!.details![0].MODEL_NAME
+        self.lotPrice.text = Double(self.detail!.details![0].OFFER ?? "0")?.dollarString
+            
+        self.activeLbl.text = "PROCESSED"
+        self.askingpriceLbl.isHidden = true
+        self.products.append(self.detail!.details![0].MODEL_NAME!)
+//            let inputFormatter = DateFormatter()
+//            inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//            let showDate = inputFormatter.date(from: self.detail!.created_at!)
+//            inputFormatter.dateFormat = "yyyy-MM-dd"
+//            let resultString = inputFormatter.string(from: showDate!)
+//            print(resultString)
+            
+           
+//            self.dateLbl.text = self.detail?.created_at
+//            self.status.text = self.detail?.status
+        self.remarks.text = self.detail!.details![0].REMARKS
+            self.img = (self.detail?.images_rep!.count)!
+            
+//            for image in self.detail!.images! {
+//                let img = UIImageView ()
+//                img.sd_setImage(with: URL(string: image.url!), placeholderImage: nil)
+//
+//                self.images.append(img.image!)
+//            }
+        self.tableView.reloadData()
+            self.collectionView.reloadData()
+            
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+        }
+    }
+    
     func fetchSingalProduct()  {
 //            print("\(String(describing: detail!.id!))")
             print(id)
@@ -168,6 +226,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return img
     }
 
@@ -179,7 +238,15 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     //            if self.images.count > 0 {
     //               cell.productImage.image = self.images[indexPath.row]
     //            }else{
+//            cell.productImage.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        
+        if self.type == "rep"{
+            cell.productImage.sd_setImage(with: URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
             cell.productImage.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+
+        }
+        
 
     //            }
     //        cell.productImage.image = self.images[indexPath.row]
@@ -187,7 +254,11 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        if self.type == "rep"{
+            self.previewIamge.sd_setImage(with:  URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        }
     }
 
     func cancleRequest(requestid : String , offerid : String)  {
@@ -392,42 +463,55 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     }
     
     @IBAction func approve(_ sender: Any) {
-        let alert = UIAlertController(title: "Continue By", message: "", preferredStyle: .actionSheet)
         
-        
-        let pickup = UIAlertAction(title: "Pickup", style: .default) { (ale) in
+        if self.type == "rep"{
             
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "processedSetupIndicatorViewController") as! processedSetupIndicatorViewController
-            main.requestId = self.id
+            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "SelectdeliveryMethodViewController") as! SelectdeliveryMethodViewController
+            main.repRecId = "\(String(describing: self.detail!.details![0].REQ_ID!))"
+            main.type = "rec"
             self.navigationController?.pushViewController(main, animated: true)
+
+            
+        }else{
+            let alert = UIAlertController(title: "Continue By", message: "", preferredStyle: .actionSheet)
+            
+            
+            let pickup = UIAlertAction(title: "Pickup", style: .default) { (ale) in
+                
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "processedSetupIndicatorViewController") as! processedSetupIndicatorViewController
+                main.requestId = self.id
+                self.navigationController?.pushViewController(main, animated: true)
+                
+            }
+            
+            let dropOff = UIAlertAction(title: "Drop Off", style: .default) { (ale) in
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "DropOffSetupViewController") as! DropOffSetupViewController
+                main.requestId = self.id
+                self.navigationController?.pushViewController(main, animated: true)
+                
+            }
+            
+            let Shipment = UIAlertAction(title: "Shipment", style: .default) { (ale) in
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "ShipmentSetupViewController") as! ShipmentSetupViewController
+                
+                self.navigationController?.pushViewController(main, animated: true)
+                
+            }
+            
+            let cancle = UIAlertAction(title: "Cancel", style: .cancel) { (ale) in
+                
+            }
+            
+            
+            alert.addAction(pickup)
+            alert.addAction(dropOff)
+            alert.addAction(Shipment)
+            alert.addAction(cancle)
+            
+            self.present(alert, animated: true, completion: nil)
             
         }
-        
-        let dropOff = UIAlertAction(title: "Drop Off", style: .default) { (ale) in
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "DropOffSetupViewController") as! DropOffSetupViewController
-            main.requestId = self.id
-            self.navigationController?.pushViewController(main, animated: true)
-            
-        }
-        
-        let Shipment = UIAlertAction(title: "Shipment", style: .default) { (ale) in
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ShipmentSetupViewController") as! ShipmentSetupViewController
-            
-            self.navigationController?.pushViewController(main, animated: true)
-            
-        }
-        
-        let cancle = UIAlertAction(title: "Cancel", style: .cancel) { (ale) in
-            
-        }
-        
-        
-        alert.addAction(pickup)
-        alert.addAction(dropOff)
-        alert.addAction(Shipment)
-        alert.addAction(cancle)
-        
-        self.present(alert, animated: true, completion: nil)
         
     }
     

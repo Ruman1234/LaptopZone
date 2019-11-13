@@ -101,6 +101,7 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
         
             self.repairTotalCount.text = res.repairCount
             self.SellDeviceTotalCount.text = res.sellCount
+            self.recycleTotalCount.text = res.rec_count
             
         }) { (err) in
             SVProgressHUD.dismiss()
