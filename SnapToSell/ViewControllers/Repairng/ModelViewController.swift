@@ -117,6 +117,7 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
                  }
             
             let main = self.storyboard?.instantiateViewController(withIdentifier: "ProblemViewController") as! ProblemViewController
+             print(self.itemsArray[indexPath.row])
              main.id = self.itemsArray[indexPath.row].mODEL_DT_ID!
              Constants.modelId = self.itemsArray[indexPath.row].mODEL_DT_ID!
              self.navigationController?.pushViewController(main, animated: true)

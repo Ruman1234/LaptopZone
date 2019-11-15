@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -103,7 +103,7 @@
                                 <color key="textColor" red="1" green="0.22745098039215686" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signin by entering the detail below." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-Um-EiI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In by entering the detail below." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-Um-EiI">
                                 <rect key="frame" x="47.5" y="285" width="280" height="23.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="SKa-ed-Izc"/>
@@ -257,7 +257,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signup by entering the detail below." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTS-Vw-AnO">
-                                <rect key="frame" x="44.5" y="23.5" width="286.5" height="30"/>
+                                <rect key="frame" x="51.5" y="23.5" width="272.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="mtw-ZY-xvA"/>
                                 </constraints>
@@ -281,7 +281,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXo-lQ-vZd">
-                                <rect key="frame" x="271" y="475.5" width="40" height="25"/>
+                                <rect key="frame" x="261.5" y="471" width="38" height="25"/>
                                 <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="15"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="0.2274509804" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -291,7 +291,7 @@
                                 </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" spacing="26.329999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="2RP-di-TRK">
-                                <rect key="frame" x="84" y="394.5" width="207" height="50"/>
+                                <rect key="frame" x="84" y="390" width="207" height="50"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgf-rL-MoI">
                                         <rect key="frame" x="0.0" y="0.0" width="90.5" height="50"/>
@@ -310,7 +310,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-TY-OBN">
-                                <rect key="frame" x="123.5" y="346" width="128" height="31.5"/>
+                                <rect key="frame" x="123.5" y="346" width="128" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="qEf-Vc-eSf"/>
                                 </constraints>
@@ -319,7 +319,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eun-2P-3jR">
-                                <rect key="frame" x="88" y="475.5" width="180" height="25"/>
+                                <rect key="frame" x="88" y="471" width="170.5" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Jd7-eg-ZCU"/>
                                 </constraints>
@@ -328,7 +328,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nc6-dQ-4r0">
-                                <rect key="frame" x="162" y="394.5" width="51" height="50"/>
+                                <rect key="frame" x="162" y="390" width="51" height="50"/>
                                 <color key="backgroundColor" red="0.91957312820000003" green="0.26427900789999997" blue="0.20838060980000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="PHZ-FY-s9N"/>
@@ -499,13 +499,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="376" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Addresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXo-E3-J8C">
-                                        <rect key="frame" x="55" y="25" width="117.5" height="22"/>
+                                        <rect key="frame" x="55" y="25" width="112.5" height="19"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ba-AB-rrd">
-                                        <rect key="frame" x="279" y="15" width="75" height="36"/>
+                                        <rect key="frame" x="283" y="15" width="71" height="36"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="17"/>
                                         <state key="normal" title="Add New">
                                             <color key="titleColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -642,13 +642,13 @@
                                 <rect key="frame" x="18" y="77" width="339" height="295"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You did not add any Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1L-4o-HNX">
-                                        <rect key="frame" x="53.5" y="81" width="231.5" height="23.5"/>
+                                        <rect key="frame" x="53.5" y="81" width="231.5" height="20"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can add maximum five addresses and you can decide one address as a default address from the list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmR-Pg-ZCb">
-                                        <rect key="frame" x="23" y="116" width="296" height="61.5"/>
+                                        <rect key="frame" x="23" y="112.5" width="296" height="52.5"/>
                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -660,7 +660,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44E-Y6-7ZX">
-                                        <rect key="frame" x="2" y="233" width="332" height="57"/>
+                                        <rect key="frame" x="2" y="220.5" width="332" height="69.5"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="17"/>
                                         <state key="normal" title="Add New">
                                             <color key="titleColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -731,13 +731,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0R-UL-28T">
-                                <rect key="frame" x="24" y="56" width="327" height="37"/>
+                                <rect key="frame" x="24" y="56" width="327" height="31.5"/>
                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="eV4-xy-fhR">
-                                <rect key="frame" x="22" y="112" width="331" height="478"/>
+                                <rect key="frame" x="22" y="106.5" width="331" height="478"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="wv6-VH-ArZ">
                                         <rect key="frame" x="0.0" y="0.0" width="331" height="142"/>
@@ -751,7 +751,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxY-gy-e19">
-                                                <rect key="frame" x="111" y="34" width="169" height="24.5"/>
+                                                <rect key="frame" x="111" y="34" width="169" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="169" id="yVW-SK-uPV"/>
                                                 </constraints>
@@ -760,7 +760,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repairing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEm-np-rRb">
-                                                <rect key="frame" x="111" y="59.5" width="169" height="38.5"/>
+                                                <rect key="frame" x="111" y="56" width="169" height="33"/>
                                                 <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -810,7 +810,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z2-wY-xWZ">
-                                                <rect key="frame" x="111" y="34" width="169" height="24.5"/>
+                                                <rect key="frame" x="111" y="34" width="169" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="169" id="AB9-vo-URd"/>
                                                 </constraints>
@@ -819,7 +819,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recycling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqI-jp-2lE">
-                                                <rect key="frame" x="111" y="59.5" width="169" height="38.5"/>
+                                                <rect key="frame" x="111" y="56" width="169" height="33"/>
                                                 <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -868,7 +868,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGg-N2-lEZ">
-                                                <rect key="frame" x="111" y="34" width="169" height="24.5"/>
+                                                <rect key="frame" x="111" y="34" width="169" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="169" id="8uc-Nm-VYz"/>
                                                 </constraints>
@@ -877,7 +877,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell Device" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqL-9s-bYv">
-                                                <rect key="frame" x="111" y="59.5" width="169" height="38.5"/>
+                                                <rect key="frame" x="111" y="56" width="169" height="33"/>
                                                 <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -988,7 +988,7 @@
                                 <rect key="frame" x="24" y="83" width="327" height="191"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4t-6K-ag7">
-                                        <rect key="frame" x="18" y="11" width="176" height="24.5"/>
+                                        <rect key="frame" x="18" y="11" width="176" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="176" id="yhM-Zn-oFd"/>
                                         </constraints>
@@ -997,7 +997,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="riQ-Rf-rO1">
-                                        <rect key="frame" x="0.0" y="36" width="326" height="155"/>
+                                        <rect key="frame" x="0.0" y="32.5" width="326" height="158.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nMf-8q-LFJ">
                                             <size key="itemSize" width="91" height="80"/>
@@ -2095,86 +2095,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qyE-n6-1NJ">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressTableViewCell" rowHeight="85" id="oKX-o1-vac" customClass="AddressTableViewCell" customModule="LaptopZone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="85"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oKX-o1-vac" id="06T-C9-r6i">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77F-HJ-rv7">
-                                                    <rect key="frame" x="19" y="8.5" width="337.5" height="68"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-PA-Itw">
-                                                            <rect key="frame" x="91" y="5.5" width="108.5" height="57.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDP-eD-bXi">
-                                                            <rect key="frame" x="10.000000000000313" y="6.9999999999998508" width="75" height="55"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="55" id="ctA-hi-QXm"/>
-                                                                <constraint firstAttribute="width" constant="75" id="v5H-6d-Pw4"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0d-kG-SOV">
-                                                            <rect key="frame" x="271.5" y="26" width="60" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRS-dN-qGK">
-                                                            <rect key="frame" x="220.5" y="24" width="36" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                    <constraints>
-                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="centerY" secondItem="AZ5-PA-Itw" secondAttribute="centerY" id="2bi-lY-Son"/>
-                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="leading" secondItem="77F-HJ-rv7" secondAttribute="leading" constant="10.000000000000313" id="8VE-3w-183"/>
-                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="centerY" secondItem="77F-HJ-rv7" secondAttribute="centerY" id="9qH-ol-VeP"/>
-                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="leading" secondItem="AZ5-PA-Itw" secondAttribute="trailing" constant="71.999999999999687" id="JDp-Lh-wNR"/>
-                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="topMargin" constant="17.999999999999851" id="O50-8C-lOH"/>
-                                                        <constraint firstAttribute="trailing" secondItem="AZ5-PA-Itw" secondAttribute="trailing" constant="137.66666666666643" id="RQh-jr-j5h"/>
-                                                        <constraint firstItem="eRS-dN-qGK" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="top" constant="24" id="WIg-dA-xqd"/>
-                                                        <constraint firstAttribute="trailing" secondItem="s0d-kG-SOV" secondAttribute="trailing" constant="5.6666666666667425" id="c8X-Du-euw"/>
-                                                        <constraint firstAttribute="bottom" secondItem="eRS-dN-qGK" secondAttribute="bottom" constant="23" id="gDD-v6-xEB"/>
-                                                        <constraint firstItem="AZ5-PA-Itw" firstAttribute="leading" secondItem="tDP-eD-bXi" secondAttribute="trailing" constant="6" id="oOu-ww-0fd"/>
-                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="top" constant="7" id="sZ6-3a-9bp"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="s0d-kG-SOV" secondAttribute="bottom" constant="16.000000000000149" id="vqk-Nd-zxZ"/>
-                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="leading" secondItem="eRS-dN-qGK" secondAttribute="trailing" constant="15.000000000000341" id="zTH-6t-J2k"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="centerX" secondItem="06T-C9-r6i" secondAttribute="centerX" id="24p-Zq-NoO"/>
-                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="height" secondItem="06T-C9-r6i" secondAttribute="height" multiplier="0.8" id="2TG-W5-bXd"/>
-                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="width" secondItem="06T-C9-r6i" secondAttribute="width" multiplier="0.9" id="XM8-ww-E5g"/>
-                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="centerY" secondItem="06T-C9-r6i" secondAttribute="centerY" id="YNn-Uw-kzk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="priceLbl" destination="eRS-dN-qGK" id="zoP-11-YwW"/>
-                                            <outlet property="productImage" destination="tDP-eD-bXi" id="oBs-PQ-lb7"/>
-                                            <outlet property="productName" destination="AZ5-PA-Itw" id="pCP-kf-hyY"/>
-                                            <outlet property="statusLbl" destination="s0d-kG-SOV" id="NST-qf-qzH"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="ila-T0-z6V" id="VMn-mT-gh0"/>
-                                    <outlet property="delegate" destination="ila-T0-z6V" id="I5K-4B-QVh"/>
-                                </connections>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXh-jO-9le">
                                 <rect key="frame" x="6" y="162" width="363" height="478"/>
                                 <subviews>
@@ -2218,6 +2138,86 @@
                                     <constraint firstAttribute="width" constant="363" id="JSo-Kd-JJ5"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qyE-n6-1NJ">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressTableViewCell" rowHeight="85" id="oKX-o1-vac" customClass="AddressTableViewCell" customModule="LaptopZone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oKX-o1-vac" id="06T-C9-r6i">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77F-HJ-rv7">
+                                                    <rect key="frame" x="19" y="8.5" width="337.5" height="68"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-PA-Itw">
+                                                            <rect key="frame" x="68" y="5.5" width="108.5" height="57.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDP-eD-bXi">
+                                                            <rect key="frame" x="10" y="7" width="46" height="55"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="55" id="ctA-hi-QXm"/>
+                                                                <constraint firstAttribute="width" constant="46" id="v5H-6d-Pw4"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0d-kG-SOV">
+                                                            <rect key="frame" x="249" y="26" width="82" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRS-dN-qGK">
+                                                            <rect key="frame" x="188" y="24" width="45" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="centerY" secondItem="AZ5-PA-Itw" secondAttribute="centerY" id="2bi-lY-Son"/>
+                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="leading" secondItem="77F-HJ-rv7" secondAttribute="leading" constant="10.000000000000313" id="8VE-3w-183"/>
+                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="centerY" secondItem="77F-HJ-rv7" secondAttribute="centerY" id="9qH-ol-VeP"/>
+                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="leading" secondItem="AZ5-PA-Itw" secondAttribute="trailing" constant="71.999999999999687" id="JDp-Lh-wNR"/>
+                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="topMargin" constant="17.999999999999851" id="O50-8C-lOH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="AZ5-PA-Itw" secondAttribute="trailing" constant="161" id="RQh-jr-j5h"/>
+                                                        <constraint firstItem="eRS-dN-qGK" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="top" constant="24" id="WIg-dA-xqd"/>
+                                                        <constraint firstAttribute="trailing" secondItem="s0d-kG-SOV" secondAttribute="trailing" constant="5.6666666666667425" id="c8X-Du-euw"/>
+                                                        <constraint firstAttribute="bottom" secondItem="eRS-dN-qGK" secondAttribute="bottom" constant="23" id="gDD-v6-xEB"/>
+                                                        <constraint firstItem="AZ5-PA-Itw" firstAttribute="leading" secondItem="tDP-eD-bXi" secondAttribute="trailing" constant="12" id="oOu-ww-0fd"/>
+                                                        <constraint firstItem="tDP-eD-bXi" firstAttribute="top" secondItem="77F-HJ-rv7" secondAttribute="top" constant="7" id="sZ6-3a-9bp"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="s0d-kG-SOV" secondAttribute="bottom" constant="16.000000000000149" id="vqk-Nd-zxZ"/>
+                                                        <constraint firstItem="s0d-kG-SOV" firstAttribute="leading" secondItem="eRS-dN-qGK" secondAttribute="trailing" constant="15.000000000000341" id="zTH-6t-J2k"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="centerX" secondItem="06T-C9-r6i" secondAttribute="centerX" id="24p-Zq-NoO"/>
+                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="height" secondItem="06T-C9-r6i" secondAttribute="height" multiplier="0.8" id="2TG-W5-bXd"/>
+                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="width" secondItem="06T-C9-r6i" secondAttribute="width" multiplier="0.9" id="XM8-ww-E5g"/>
+                                                <constraint firstItem="77F-HJ-rv7" firstAttribute="centerY" secondItem="06T-C9-r6i" secondAttribute="centerY" id="YNn-Uw-kzk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="priceLbl" destination="eRS-dN-qGK" id="zoP-11-YwW"/>
+                                            <outlet property="productImage" destination="tDP-eD-bXi" id="oBs-PQ-lb7"/>
+                                            <outlet property="productName" destination="AZ5-PA-Itw" id="pCP-kf-hyY"/>
+                                            <outlet property="statusLbl" destination="s0d-kG-SOV" id="NST-qf-qzH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ila-T0-z6V" id="VMn-mT-gh0"/>
+                                    <outlet property="delegate" destination="ila-T0-z6V" id="I5K-4B-QVh"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -2751,7 +2751,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add atleast 3 photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3E-BK-fuH">
-                                <rect key="frame" x="-3" y="121" width="209" height="23.5"/>
+                                <rect key="frame" x="-3" y="121" width="209" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="209" id="KgZ-5v-UiX"/>
                                 </constraints>
@@ -2760,7 +2760,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-ra-gVS">
-                                <rect key="frame" x="15" y="167" width="345" height="401"/>
+                                <rect key="frame" x="15" y="163.5" width="345" height="404.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8LK-UU-Sr5">
                                     <size key="itemSize" width="74" height="83"/>
@@ -2888,7 +2888,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desktop PC / iMac " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Em1-31-zzN">
-                                                <rect key="frame" x="72" y="159" width="183" height="27.5"/>
+                                                <rect key="frame" x="72" y="159" width="183" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2928,7 +2928,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol7-wf-EJE">
-                                                <rect key="frame" x="73" y="166" width="183" height="27.5"/>
+                                                <rect key="frame" x="73" y="166" width="183" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3586,13 +3586,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Series" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuE-3Z-wYY">
-                                <rect key="frame" x="16" y="55" width="343" height="41"/>
+                                <rect key="frame" x="16" y="55" width="343" height="35"/>
                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XW9-Qg-FRt">
-                                <rect key="frame" x="0.0" y="115" width="375" height="476"/>
+                                <rect key="frame" x="0.0" y="109" width="375" height="482"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3802,7 +3802,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Type your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jor-iw-DcA">
-                                <rect key="frame" x="19" y="310" width="340" height="49"/>
+                                <rect key="frame" x="19" y="305.5" width="340" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="hQ9-rp-Kfu"/>
                                 </constraints>
@@ -3819,7 +3819,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to recieve your access code by email Please enter the email address you provided during the registration process." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0R-lt-SEa">
-                                <rect key="frame" x="19" y="218" width="338" height="69"/>
+                                <rect key="frame" x="19" y="213.5" width="338" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="VcI-Vt-86j"/>
                                 </constraints>
@@ -3828,7 +3828,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Cv-iW-agX">
-                                <rect key="frame" x="112" y="404" width="150" height="49"/>
+                                <rect key="frame" x="112" y="399.5" width="150" height="49"/>
                                 <color key="backgroundColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="Yly-cM-PZu"/>
@@ -4332,13 +4332,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your iPhone 7 Plus" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQS-a7-CN4">
-                                <rect key="frame" x="16" y="55" width="343" height="37"/>
+                                <rect key="frame" x="16" y="55" width="343" height="31.5"/>
                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IlF-7P-7Fz">
-                                <rect key="frame" x="0.0" y="111" width="375" height="555"/>
+                                <rect key="frame" x="0.0" y="105.5" width="375" height="560.5"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4360,13 +4360,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iPhone 7 Plus (64 )" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDX-NQ-XqE">
-                                                            <rect key="frame" x="136" y="30" width="182" height="24.5"/>
+                                                            <rect key="frame" x="136" y="30" width="182" height="21"/>
                                                             <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carrier: AT&amp;T" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-nI-UR0">
-                                                            <rect key="frame" x="136" y="56.5" width="191" height="29"/>
+                                                            <rect key="frame" x="136" y="53" width="191" height="29"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="29" id="fBh-Z5-6iF"/>
                                                             </constraints>
@@ -4468,28 +4468,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What condition is it in?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kU3-A3-NhW">
-                                <rect key="frame" x="35" y="55" width="304" height="37"/>
+                                <rect key="frame" x="35" y="55" width="304" height="31.5"/>
                                 <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-BB-uh1">
-                                <rect key="frame" x="24" y="112.5" width="327" height="77"/>
+                                <rect key="frame" x="24" y="107" width="327" height="77"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We offer you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR6-Rs-Vkw">
-                                        <rect key="frame" x="22" y="22" width="138" height="32"/>
+                                        <rect key="frame" x="22" y="22" width="129.5" height="32"/>
                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="23"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dottedLine" translatesAutoresizingMaskIntoConstraints="NO" id="fFh-AX-bpG">
-                                        <rect key="frame" x="180.5" y="22" width="3" height="32"/>
+                                        <rect key="frame" x="185" y="22" width="3" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="3" id="w7V-On-CTP"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10000.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9e-X1-7SE">
-                                        <rect key="frame" x="205" y="10" width="118" height="57"/>
+                                        <rect key="frame" x="209.5" y="10" width="113.5" height="57"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="24"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -4512,7 +4512,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2RD-Gl-PLh">
-                                <rect key="frame" x="24" y="200.5" width="327" height="411.5"/>
+                                <rect key="frame" x="24" y="195" width="327" height="417"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help us give you an accurate price" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRR-5E-prX">
                                         <rect key="frame" x="0.0" y="20" width="327" height="37"/>
@@ -4524,7 +4524,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="elY-af-Wfm">
-                                        <rect key="frame" x="0.0" y="69" width="327" height="340"/>
+                                        <rect key="frame" x="0.0" y="69" width="327" height="345.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OffertableViewCell" rowHeight="131" id="dvM-0S-oVf" customClass="OffertableViewCell" customModule="LaptopZone" customModuleProvider="target">
@@ -4541,13 +4541,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Does the device power on?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96t-cv-hnI">
-                                                            <rect key="frame" x="33" y="9" width="290" height="23.5"/>
+                                                            <rect key="frame" x="33" y="9" width="290" height="20"/>
                                                             <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3n0-q9-v94">
-                                                            <rect key="frame" x="37" y="39" width="50" height="25"/>
+                                                            <rect key="frame" x="37" y="35.5" width="49" height="21"/>
                                                             <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="18"/>
                                                             <color key="tintColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="5"/>
@@ -4560,7 +4560,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7m-wJ-xtE">
-                                                            <rect key="frame" x="142" y="39" width="74" height="26"/>
+                                                            <rect key="frame" x="141" y="35.5" width="74" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="74" id="H8G-jg-u6T"/>
                                                             </constraints>
@@ -4576,7 +4576,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGN-Tt-x5z">
-                                                            <rect key="frame" x="37" y="89.5" width="119" height="25"/>
+                                                            <rect key="frame" x="37" y="82" width="119" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="119" id="uCv-0s-9aq"/>
                                                             </constraints>
@@ -4592,7 +4592,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-Fx-fEg">
-                                                            <rect key="frame" x="166" y="89.5" width="110" height="26"/>
+                                                            <rect key="frame" x="166" y="82" width="110" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="110" id="g9M-Sc-uVH"/>
                                                             </constraints>
@@ -4735,7 +4735,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HP - Probook 450 G1" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2p-8G-yAL">
-                                                        <rect key="frame" x="19" y="40" width="301" height="24.5"/>
+                                                        <rect key="frame" x="19" y="40" width="301" height="21"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="18"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -4774,13 +4774,13 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dottedLine" translatesAutoresizingMaskIntoConstraints="NO" id="cky-83-fqq">
-                                                                        <rect key="frame" x="102" y="15" width="3" height="54.5"/>
+                                                                        <rect key="frame" x="98" y="15" width="3" height="54.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="3" id="DLe-qN-naG"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GoK-Pa-5c4">
-                                                                        <rect key="frame" x="116" y="14" width="197" height="52"/>
+                                                                        <rect key="frame" x="112" y="14" width="201" height="52"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         <userDefinedRuntimeAttributes>
@@ -4814,19 +4814,19 @@
                                                                 <rect key="frame" x="0.0" y="83.5" width="317" height="84"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6K-Hl-3zc">
-                                                                        <rect key="frame" x="19" y="30.5" width="52" height="23.5"/>
+                                                                        <rect key="frame" x="19" y="32" width="49" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dottedLine" translatesAutoresizingMaskIntoConstraints="NO" id="031-QJ-K4f">
-                                                                        <rect key="frame" x="102" y="14" width="3" height="51"/>
+                                                                        <rect key="frame" x="99" y="14" width="3" height="51"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="3" id="eAL-Xo-grP"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VIC-vx-uhI">
-                                                                        <rect key="frame" x="116" y="10" width="205" height="59"/>
+                                                                        <rect key="frame" x="113" y="10" width="208" height="59"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                         <userDefinedRuntimeAttributes>
@@ -4866,19 +4866,19 @@
                                                                 <rect key="frame" x="0.0" y="166.5" width="317" height="84.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-CN-fCV">
-                                                                        <rect key="frame" x="19" y="30.5" width="46.5" height="23.5"/>
+                                                                        <rect key="frame" x="19" y="32.5" width="42" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dottedLine" translatesAutoresizingMaskIntoConstraints="NO" id="BZV-mv-XNh">
-                                                                        <rect key="frame" x="102" y="14" width="3" height="52"/>
+                                                                        <rect key="frame" x="97.5" y="14" width="3" height="52"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="3" id="zxD-YE-7wx"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4G8-rj-cQk">
-                                                                        <rect key="frame" x="115.5" y="11" width="205.5" height="53"/>
+                                                                        <rect key="frame" x="111" y="11" width="210" height="53"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                     </textField>
@@ -5061,7 +5061,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNP-36-JRM">
-                                        <rect key="frame" x="58" y="163" width="259" height="23.5"/>
+                                        <rect key="frame" x="58" y="163" width="259" height="20"/>
                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -5531,7 +5531,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatically earn an extra 3%*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YoY-Ss-Yxx">
-                                                        <rect key="frame" x="34" y="61" width="259" height="22"/>
+                                                        <rect key="frame" x="34" y="64" width="259" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -5574,7 +5574,7 @@
                                                 <rect key="frame" x="24" y="129" width="327" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="Payment will be sent to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDO-KT-No7">
-                                                        <rect key="frame" x="61" y="27" width="204" height="24.5"/>
+                                                        <rect key="frame" x="61" y="27" width="204" height="21"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <viewLayoutGuide key="safeArea" id="lMa-ii-7En"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
@@ -5582,7 +5582,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="xtreemwork@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6r-kv-9gv">
-                                                        <rect key="frame" x="4" y="58" width="320" height="24.5"/>
+                                                        <rect key="frame" x="4" y="58" width="320" height="21"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                                                         <viewLayoutGuide key="safeArea" id="wcQ-Cg-4Xd"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
@@ -5678,14 +5678,14 @@
                                                 <rect key="frame" x="24" y="251" width="327" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm your PayPal email address so we can ensure prompt payment." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V6Y-4k-4Bw">
-                                                        <rect key="frame" x="15" y="13" width="298" height="44"/>
+                                                        <rect key="frame" x="15" y="13" width="298" height="37.5"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PayPal email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSO-kK-Ulx">
-                                                        <rect key="frame" x="30" y="83" width="186" height="24.5"/>
+                                                        <rect key="frame" x="30" y="83" width="186" height="21"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
                                                         <nil key="textColor"/>
@@ -5695,10 +5695,10 @@
                                                         <rect key="frame" x="26" y="116" width="285" height="27"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                     </textField>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm PayPal email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pj-2d-wof">
-                                                        <rect key="frame" x="30" y="190" width="287" height="24.5"/>
+                                                        <rect key="frame" x="30" y="190" width="287" height="21"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
                                                         <nil key="textColor"/>
@@ -5708,7 +5708,7 @@
                                                         <rect key="frame" x="26" y="223" width="285" height="25"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                     </textField>
                                                     <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cB0-QW-dP8">
                                                         <rect key="frame" x="97" y="308" width="133" height="50"/>
@@ -5839,7 +5839,7 @@
                                                         <rect key="frame" x="19" y="224" width="285" height="25"/>
                                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="emailAddress"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Line 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLP-u1-DaX">
                                                         <rect key="frame" x="34" y="295" width="121" height="21"/>
@@ -7140,7 +7140,7 @@
                                                     <rect key="frame" x="12" y="8.5" width="351" height="68"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="222-OC-zoL">
-                                                            <rect key="frame" x="77" y="23" width="125" height="22"/>
+                                                            <rect key="frame" x="77" y="24.5" width="125" height="19"/>
                                                             <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -7183,7 +7183,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 1212.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsw-Au-AGZ">
-                                                    <rect key="frame" x="217" y="31.5" width="50.5" height="22"/>
+                                                    <rect key="frame" x="217" y="33" width="50.5" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50.5" id="g7T-to-vhH"/>
                                                     </constraints>
@@ -7306,26 +7306,26 @@
                                                     <rect key="frame" x="19" y="8.5" width="337.5" height="68"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQf-jX-PEv">
-                                                            <rect key="frame" x="91" y="5.5" width="108.5" height="57.5"/>
+                                                            <rect key="frame" x="66" y="5.5" width="108.5" height="57.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Up0-db-CU2">
-                                                            <rect key="frame" x="10.000000000000313" y="6.9999999999998508" width="75" height="55"/>
+                                                            <rect key="frame" x="10" y="7" width="44" height="55"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="jIc-Sf-vMD"/>
+                                                                <constraint firstAttribute="width" constant="44" id="jIc-Sf-vMD"/>
                                                                 <constraint firstAttribute="height" constant="55" id="sgD-WE-6P6"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9R-0h-jhy">
-                                                            <rect key="frame" x="271.5" y="26" width="60" height="18"/>
+                                                            <rect key="frame" x="246.5" y="26" width="76.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Wu-KD-E21">
-                                                            <rect key="frame" x="220.5" y="24" width="36" height="21"/>
+                                                            <rect key="frame" x="195.5" y="24" width="36" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -7335,10 +7335,10 @@
                                                     <constraints>
                                                         <constraint firstItem="0Wu-KD-E21" firstAttribute="top" secondItem="lsf-Mm-Yc5" secondAttribute="top" constant="24" id="1UT-yK-su5"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="J9R-0h-jhy" secondAttribute="bottom" constant="16.000000000000149" id="2vx-qy-Yhu"/>
-                                                        <constraint firstAttribute="trailing" secondItem="YQf-jX-PEv" secondAttribute="trailing" constant="137.66666666666643" id="36l-Yz-h65"/>
-                                                        <constraint firstItem="YQf-jX-PEv" firstAttribute="leading" secondItem="Up0-db-CU2" secondAttribute="trailing" constant="6" id="8V8-B7-rCS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YQf-jX-PEv" secondAttribute="trailing" constant="163" id="36l-Yz-h65"/>
+                                                        <constraint firstItem="YQf-jX-PEv" firstAttribute="leading" secondItem="Up0-db-CU2" secondAttribute="trailing" constant="12" id="8V8-B7-rCS"/>
                                                         <constraint firstItem="J9R-0h-jhy" firstAttribute="top" secondItem="lsf-Mm-Yc5" secondAttribute="topMargin" constant="17.999999999999851" id="995-6Y-cT8"/>
-                                                        <constraint firstAttribute="trailing" secondItem="J9R-0h-jhy" secondAttribute="trailing" constant="5.6666666666667425" id="B25-pf-Mh2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="J9R-0h-jhy" secondAttribute="trailing" constant="14.5" id="B25-pf-Mh2"/>
                                                         <constraint firstItem="J9R-0h-jhy" firstAttribute="leading" secondItem="0Wu-KD-E21" secondAttribute="trailing" constant="15.000000000000341" id="BMT-ee-bjJ"/>
                                                         <constraint firstItem="Up0-db-CU2" firstAttribute="leading" secondItem="lsf-Mm-Yc5" secondAttribute="leading" constant="10.000000000000313" id="Blm-G2-eAz"/>
                                                         <constraint firstItem="Up0-db-CU2" firstAttribute="centerY" secondItem="YQf-jX-PEv" secondAttribute="centerY" id="DP6-5Z-x7V"/>
@@ -7460,26 +7460,26 @@
                                                     <rect key="frame" x="19" y="8.5" width="337.5" height="68"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7c1-Np-xZx">
-                                                            <rect key="frame" x="91" y="5.5" width="108.5" height="57.5"/>
+                                                            <rect key="frame" x="66" y="5.5" width="108.5" height="57.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5WY-Up-Chv">
-                                                            <rect key="frame" x="10.000000000000313" y="6.9999999999998508" width="75" height="55"/>
+                                                            <rect key="frame" x="10" y="7" width="45" height="55"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="H9j-CT-hgD"/>
+                                                                <constraint firstAttribute="width" constant="45" id="H9j-CT-hgD"/>
                                                                 <constraint firstAttribute="height" constant="55" id="NB2-w9-4Yf"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvF-4W-0RD">
-                                                            <rect key="frame" x="271.5" y="26" width="60" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAble" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvF-4W-0RD">
+                                                            <rect key="frame" x="246.5" y="26" width="84.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzm-41-8Bm">
-                                                            <rect key="frame" x="220.5" y="24" width="36" height="21"/>
+                                                            <rect key="frame" x="195.5" y="24" width="36" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -7490,14 +7490,14 @@
                                                         <constraint firstAttribute="bottomMargin" secondItem="cvF-4W-0RD" secondAttribute="bottom" constant="16.000000000000149" id="0Sd-fb-xWE"/>
                                                         <constraint firstItem="5WY-Up-Chv" firstAttribute="leading" secondItem="pqU-Q2-lFg" secondAttribute="leading" constant="10.000000000000313" id="3Qm-XL-mVu"/>
                                                         <constraint firstAttribute="bottom" secondItem="mzm-41-8Bm" secondAttribute="bottom" constant="23" id="5WD-qT-seZ"/>
-                                                        <constraint firstItem="7c1-Np-xZx" firstAttribute="leading" secondItem="5WY-Up-Chv" secondAttribute="trailing" constant="6" id="7cE-EX-gmo"/>
+                                                        <constraint firstItem="7c1-Np-xZx" firstAttribute="leading" secondItem="5WY-Up-Chv" secondAttribute="trailing" constant="11" id="7cE-EX-gmo"/>
                                                         <constraint firstItem="5WY-Up-Chv" firstAttribute="centerY" secondItem="pqU-Q2-lFg" secondAttribute="centerY" id="AU1-oQ-1xC"/>
-                                                        <constraint firstAttribute="trailing" secondItem="7c1-Np-xZx" secondAttribute="trailing" constant="137.66666666666643" id="AvV-oo-LEh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7c1-Np-xZx" secondAttribute="trailing" constant="163" id="AvV-oo-LEh"/>
                                                         <constraint firstItem="cvF-4W-0RD" firstAttribute="leading" secondItem="mzm-41-8Bm" secondAttribute="trailing" constant="15.000000000000341" id="HgV-Jp-mko"/>
                                                         <constraint firstItem="cvF-4W-0RD" firstAttribute="top" secondItem="pqU-Q2-lFg" secondAttribute="topMargin" constant="17.999999999999851" id="WHH-gy-d0Q"/>
                                                         <constraint firstItem="5WY-Up-Chv" firstAttribute="centerY" secondItem="7c1-Np-xZx" secondAttribute="centerY" id="f13-h6-RJ5"/>
                                                         <constraint firstItem="cvF-4W-0RD" firstAttribute="leading" secondItem="7c1-Np-xZx" secondAttribute="trailing" constant="71.999999999999687" id="foS-Lo-pgZ"/>
-                                                        <constraint firstAttribute="trailing" secondItem="cvF-4W-0RD" secondAttribute="trailing" constant="5.6666666666667425" id="hfl-UZ-fjE"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cvF-4W-0RD" secondAttribute="trailing" constant="6.5" id="hfl-UZ-fjE"/>
                                                         <constraint firstItem="5WY-Up-Chv" firstAttribute="top" secondItem="pqU-Q2-lFg" secondAttribute="top" constant="7" id="rht-Vv-AtT"/>
                                                         <constraint firstItem="mzm-41-8Bm" firstAttribute="top" secondItem="pqU-Q2-lFg" secondAttribute="top" constant="24" id="s58-5O-ngu"/>
                                                     </constraints>
@@ -7546,7 +7546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGe-jH-W7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9517" y="1891"/>
+            <point key="canvasLocation" x="9516" y="1890.4047976011996"/>
         </scene>
         <!--Pending Product Detail View Controller-->
         <scene sceneID="uUb-em-7Aq">
@@ -7578,11 +7578,11 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VE5-Qs-nft">
-                                                        <rect key="frame" x="224" y="21" width="73" height="27"/>
+                                                        <rect key="frame" x="195" y="21" width="102" height="27"/>
                                                         <color key="backgroundColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="b7l-66-Ihz"/>
-                                                            <constraint firstAttribute="width" constant="73" id="npc-A1-OJh"/>
+                                                            <constraint firstAttribute="width" constant="102" id="jse-fo-Ump"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7651,7 +7651,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2g-Vp-TOE">
-                                                        <rect key="frame" x="179" y="15" width="39" height="25"/>
+                                                        <rect key="frame" x="179" y="15" width="36.5" height="25"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="18"/>
                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -7743,7 +7743,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKO-hp-i9Y">
-                                                        <rect key="frame" x="18" y="191" width="285" height="20.5"/>
+                                                        <rect key="frame" x="18" y="191" width="285" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -7836,6 +7836,8 @@
                         <outlet property="navigationTitile" destination="0NM-Fh-hqP" id="ZuU-LA-KNE"/>
                         <outlet property="previewIamge" destination="4I2-2p-tLm" id="MTC-9W-sbh"/>
                         <outlet property="remarks" destination="PKO-hp-i9Y" id="anh-HD-C30"/>
+                        <outlet property="reqDescription" destination="83c-Tv-LEX" id="oua-Cn-87u"/>
+                        <outlet property="reqStatusLbl" destination="U2g-Vp-TOE" id="4i7-X8-PgL"/>
                         <outlet property="sendBtn" destination="kho-o4-glI" id="74b-RA-Qls"/>
                         <outlet property="titleProduct" destination="R2u-ZI-sIR" id="DsE-15-gHl"/>
                     </connections>
@@ -7952,7 +7954,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROCESSED" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4Z-eP-Uah">
-                                                        <rect key="frame" x="172" y="15" width="105.5" height="25"/>
+                                                        <rect key="frame" x="172" y="15" width="103" height="25"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="17"/>
                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -8047,7 +8049,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZG-Ft-QW5">
-                                                        <rect key="frame" x="18" y="216" width="285" height="20.5"/>
+                                                        <rect key="frame" x="18" y="216" width="285" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8068,10 +8070,10 @@
                                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OffertableViewCell" id="3Jw-a4-Hu7" customClass="OffertableViewCell" customModule="LaptopZone" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="282" height="43.5"/>
+                                                                <rect key="frame" x="0.0" y="28" width="282" height="40"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Jw-a4-Hu7" id="aRu-my-Wwj">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="282" height="43.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="282" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BHJ-0j-wOr">
@@ -8083,7 +8085,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YW8-CT-uFi">
-                                                                            <rect key="frame" x="34" y="9" width="233" height="24.5"/>
+                                                                            <rect key="frame" x="34" y="9" width="233" height="21"/>
                                                                             <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -8109,7 +8111,7 @@
                                                         </connections>
                                                     </tableView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your asking Price was $1053*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-8V-mzG">
-                                                        <rect key="frame" x="18" y="60" width="223.5" height="22"/>
+                                                        <rect key="frame" x="18" y="60" width="212" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="PIX-9j-Kii"/>
                                                         </constraints>
@@ -8404,7 +8406,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APPROVED" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5P-0u-nU9">
-                                                        <rect key="frame" x="172" y="15" width="94" height="25"/>
+                                                        <rect key="frame" x="172" y="15" width="90.5" height="25"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="17"/>
                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -8437,7 +8439,7 @@
                                                 <rect key="frame" x="24" y="428" width="327" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place this slip inside the box with your device" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJy-sb-YpL">
-                                                        <rect key="frame" x="18" y="46" width="298.5" height="19"/>
+                                                        <rect key="frame" x="18" y="46" width="284.5" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8547,7 +8549,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1W-NS-p3d">
-                                                        <rect key="frame" x="18" y="191" width="285" height="20.5"/>
+                                                        <rect key="frame" x="18" y="191" width="285" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8569,10 +8571,10 @@
                                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OffertableViewCell" id="LYY-ny-ZFa" customClass="OffertableViewCell" customModule="LaptopZone" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="282" height="43.5"/>
+                                                                <rect key="frame" x="0.0" y="28" width="282" height="40"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LYY-ny-ZFa" id="kxZ-l4-JxJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="282" height="43.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="282" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Q4-8f-Zxt">
@@ -8583,7 +8585,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEi-uf-1uj">
-                                                                            <rect key="frame" x="35" y="9" width="233" height="24.5"/>
+                                                                            <rect key="frame" x="35" y="9" width="233" height="21"/>
                                                                             <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -8618,7 +8620,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lable" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gog-tl-7mg">
-                                                        <rect key="frame" x="18" y="542" width="298" height="20.5"/>
+                                                        <rect key="frame" x="18" y="542" width="298" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Eina03-Regular" family="Eina03-Regular" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8627,7 +8629,7 @@
                                                         <rect key="frame" x="18" y="481" width="291" height="7"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you send your box on your behalf, Add tracking ID which shipment company gave you." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocg-7x-5fz">
-                                                        <rect key="frame" x="18" y="592" width="298" height="0.0"/>
+                                                        <rect key="frame" x="18" y="589" width="298" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" id="fQ0-Ku-T3g"/>
                                                         </constraints>
@@ -8636,25 +8638,25 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add Tracking Info" translatesAutoresizingMaskIntoConstraints="NO" id="S6R-Gb-9uv">
-                                                        <rect key="frame" x="18" y="606.5" width="301" height="25"/>
+                                                        <rect key="frame" x="18" y="603.5" width="301" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="6Pn-3M-Hqf"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3M-74-zIs">
-                                                        <rect key="frame" x="18" y="606.5" width="301" height="25"/>
+                                                        <rect key="frame" x="18" y="603.5" width="301" height="25"/>
                                                         <connections>
                                                             <action selector="addTracking_downloadSlip:" destination="oPK-Kh-6XG" eventType="touchUpInside" id="aJE-CR-52W"/>
                                                         </connections>
                                                     </button>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carrier: FEDEX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8u-pY-mEe">
-                                                        <rect key="frame" x="18" y="580" width="298" height="24.5"/>
+                                                        <rect key="frame" x="18" y="577" width="298" height="21"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aln-Nc-MXq">
-                                                        <rect key="frame" x="18" y="613.5" width="299" height="21"/>
+                                                        <rect key="frame" x="18" y="607" width="299" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Yy6-xH-Seb"/>
                                                         </constraints>
@@ -8810,7 +8812,7 @@
                                 <rect key="frame" x="0.0" y="-12" width="375" height="92"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjn-kx-n3E">
-                                        <rect key="frame" x="121" y="31" width="133" height="33"/>
+                                        <rect key="frame" x="121" y="31" width="133" height="28"/>
                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -8841,7 +8843,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repairing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6Z-7N-MaR">
-                                                        <rect key="frame" x="51" y="20" width="75" height="22"/>
+                                                        <rect key="frame" x="51" y="20" width="75" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="75" id="aPb-Cn-4r4"/>
                                                         </constraints>
@@ -8869,7 +8871,7 @@
                                                         <rect key="frame" x="198" y="20" width="20" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recycling" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4e-Cf-eAv">
-                                                        <rect key="frame" x="228" y="20" width="75" height="22"/>
+                                                        <rect key="frame" x="228" y="20" width="75" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8885,19 +8887,19 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="gs5-5u-Yy2">
-                                                        <rect key="frame" x="11" y="60" width="161" height="5"/>
+                                                        <rect key="frame" x="11" y="57" width="161" height="5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="5" id="jYK-oF-xca"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="n55-CW-1hm">
-                                                        <rect key="frame" x="203" y="60" width="161" height="5"/>
+                                                        <rect key="frame" x="203" y="57" width="161" height="5"/>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="TGA-f2-7K7">
                                                         <rect key="frame" x="21" y="81" width="20" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell Device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0p-AS-lSf">
-                                                        <rect key="frame" x="51" y="81" width="85" height="22"/>
+                                                        <rect key="frame" x="51" y="78" width="85" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="85" id="0RG-FF-o7h"/>
                                                             <constraint firstAttribute="height" constant="22" id="kgc-5w-dn5"/>
@@ -8919,7 +8921,7 @@
                                                         <rect key="frame" x="198" y="81" width="20" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell Anything" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Miz-EL-Ebk">
-                                                        <rect key="frame" x="228" y="81" width="100" height="22"/>
+                                                        <rect key="frame" x="228" y="78" width="100" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="Cm6-gD-9tX"/>
                                                             <constraint firstAttribute="width" constant="100" id="zfh-ok-fNz"/>
@@ -9055,7 +9057,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnd-Ww-0Cj">
-                                                        <rect key="frame" x="51" y="18" width="66" height="22"/>
+                                                        <rect key="frame" x="51" y="18" width="63" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <color key="textColor" red="1" green="0.20392156859999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -9086,7 +9088,7 @@
                                                 <rect key="frame" x="0.0" y="227" width="375" height="175"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="viu-ba-chC">
-                                                        <rect key="frame" x="10" y="58" width="355" height="5"/>
+                                                        <rect key="frame" x="10" y="55" width="355" height="5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="5" id="aZE-fo-VU2"/>
                                                         </constraints>
@@ -9099,7 +9101,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxT-Ip-NKX">
-                                                        <rect key="frame" x="51" y="19" width="83" height="22"/>
+                                                        <rect key="frame" x="51" y="19" width="83" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="83" id="O7y-V1-Ak0"/>
                                                         </constraints>
@@ -9114,7 +9116,7 @@
                                                         <rect key="frame" x="21" y="78" width="20" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi8-pJ-wvn">
-                                                        <rect key="frame" x="51" y="81" width="83" height="22"/>
+                                                        <rect key="frame" x="51" y="78" width="83" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -9123,7 +9125,7 @@
                                                         <rect key="frame" x="21" y="138" width="20" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96p-gf-1dK">
-                                                        <rect key="frame" x="51" y="144" width="132" height="22"/>
+                                                        <rect key="frame" x="51" y="138" width="132" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -9198,7 +9200,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0g-LT-1Ok">
-                                                <rect key="frame" x="27" y="187" width="71" height="22"/>
+                                                <rect key="frame" x="27" y="187" width="67" height="22"/>
                                                 <fontDescription key="fontDescription" name="Eina03-Bold" family="Eina03-Bold" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -9221,7 +9223,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Addresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jc3-VA-BS5">
-                                                        <rect key="frame" x="51" y="17" width="151.5" height="22"/>
+                                                        <rect key="frame" x="51" y="17" width="143.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -9245,7 +9247,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4d-Kd-jxE">
-                                                <rect key="frame" x="27" y="19" width="91" height="19"/>
+                                                <rect key="frame" x="27" y="19" width="88.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="Eina03-Bold" family="Eina03-Bold" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -9282,7 +9284,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfg-Gg-iuw">
-                                                        <rect key="frame" x="51" y="17" width="140" height="22"/>
+                                                        <rect key="frame" x="51" y="17" width="131" height="19"/>
                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -9398,7 +9400,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vim-2A-5b6">
-                                <rect key="frame" x="127" y="21" width="121" height="27.5"/>
+                                <rect key="frame" x="129.5" y="21" width="116" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27.5" id="TCJ-QC-Mox"/>
                                 </constraints>
@@ -9454,7 +9456,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="285" height="88"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svW-Ab-JPZ">
-                                                                        <rect key="frame" x="0.0" y="6" width="109.5" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="101.5" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9479,7 +9481,7 @@
                                                                 <rect key="frame" x="0.0" y="103" width="285" height="88"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apt, suit, unit etc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLS-d4-tEd">
-                                                                        <rect key="frame" x="0.0" y="6" width="124.5" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="121.5" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9504,7 +9506,7 @@
                                                                 <rect key="frame" x="0.0" y="206" width="285" height="88"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwK-67-Mxj">
-                                                                        <rect key="frame" x="0.0" y="6" width="110" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="104.5" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9534,7 +9536,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="92.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhN-cA-bnb">
-                                                                        <rect key="frame" x="0.0" y="6" width="30.5" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="28.5" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9562,7 +9564,7 @@
                                                                 <rect key="frame" x="0.0" y="103.5" width="145" height="92.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgO-6f-aaZ">
-                                                                        <rect key="frame" x="0.0" y="6" width="25" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="23" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9595,7 +9597,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="92.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-jy-uYR">
-                                                                        <rect key="frame" x="0.0" y="6" width="39.5" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="38" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -9625,7 +9627,7 @@
                                                                 <rect key="frame" x="0.0" y="103.5" width="145" height="92.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rd7-Gf-p7w">
-                                                                        <rect key="frame" x="0.0" y="6" width="49" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="6" width="46" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Eina03-SemiBold" family="Eina03-SemiBold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>

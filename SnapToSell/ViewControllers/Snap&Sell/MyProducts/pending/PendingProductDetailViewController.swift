@@ -31,20 +31,21 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var activeLbl: UILabel!
     
+    @IBOutlet weak var reqStatusLbl: UILabel!
+    
+    @IBOutlet weak var reqDescription: UILabel!
+    
+    
     var detail = RequestStatusModel()
     var img = Int()
     var images = [UIImage]()
     var type = String()
+    var approves = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if type == "rep" {
-            fetchRepProduct()
-            self.previewIamge.sd_setImage(with: URL(string: detail!.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
-        }else{
-            fetchSingalProduct()
-        }
+       
        
         sendBtn.isHidden = true
         sendBtn.isEnabled = false
@@ -59,6 +60,18 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
         self.activeLbl.textColor = .white
         self.activeLbl.text = "NEW"
         self.activeLbl.layer.cornerRadius = 13
+        
+        if type == "rep" {
+           fetchRepProduct()
+           self.previewIamge.sd_setImage(with: URL(string: detail!.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
+           if self.approves {
+               self.activeLbl.text = "APPROVED"
+               self.reqStatusLbl.text = "APPROVED"
+            self.reqDescription.text = "Awaiting for your Package, Please send as soon as for further Processing"
+           }
+       }else{
+           fetchSingalProduct()
+       }
         // Do any additional setup after loading the view.
     }
     

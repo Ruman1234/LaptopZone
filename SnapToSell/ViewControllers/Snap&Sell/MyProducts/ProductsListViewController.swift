@@ -102,7 +102,7 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let product = self.AllProducts[indexPath.row]
-        if product.STATUS == "PENDING" {
+        if product.STATUS == "NEW" {
             
             
             let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
@@ -112,7 +112,11 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
             
             
         }else if product.STATUS == "PROCESSED" || product.STATUS == "DELIVERED" || product.STATUS == "CANCELLED" {
-            
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+            main.detail = self.AllProducts[indexPath.row]
+            main.type = "rep"
+            self.navigationController?.pushViewController(main, animated: true)
+                      
             
 //            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
 //
@@ -127,12 +131,18 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
 //
             
         }else if product.STATUS == "APPROVED" {
-            
-//
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
-            main.detail = self.AllProducts[indexPath.row]
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
             main.type = "rep"
+            main.approves = true
+            main.detail = self.AllProducts[indexPath.row]
             self.navigationController?.pushViewController(main, animated: true)
+                      
+//
+//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
+//            main.detail = self.AllProducts[indexPath.row]
+//            main.type = "rep"
+//            self.navigationController?.pushViewController(main, animated: true)
+            
             
             
         }
@@ -252,7 +262,7 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let product = self.AllProducts[indexPath.row]
-            if product.STATUS == "PENDING" {
+            if product.STATUS == "NEW" {
                 
                 
                 let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
@@ -431,16 +441,16 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
             }else if product.STATUS == "PROCESSED" || product.STATUS == "DELIVERED" || product.STATUS == "CANCELLED" {
                 
                 
-                let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
-                
-                main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
-                if self.AllProducts[indexPath.row].conversation_id != nil {
-                    main.conversation_id = "\(String(describing: self.AllProducts[indexPath.row].conversation_id!))"
-                }else{
-                     main.conversation_id = ""
-                }
-                
-                self.navigationController?.pushViewController(main, animated: true)
+//                let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+//
+//                main.id = "\(String(describing: self.AllProducts[indexPath.row].id!))"
+//                if self.AllProducts[indexPath.row].conversation_id != nil {
+//                    main.conversation_id = "\(String(describing: self.AllProducts[indexPath.row].conversation_id!))"
+//                }else{
+//                     main.conversation_id = ""
+//                }
+//
+//                self.navigationController?.pushViewController(main, animated: true)
                 
                 
             }else if product.STATUS == "APPROVED" {
@@ -450,6 +460,7 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
                 
               let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
               main.type = "rep"
+              main.approves = true
               main.detail = self.AllProducts[indexPath.row]
               self.navigationController?.pushViewController(main, animated: true)
                               

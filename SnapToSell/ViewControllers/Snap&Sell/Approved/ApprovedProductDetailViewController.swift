@@ -68,6 +68,7 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     var img = Int()
     var products = [String]()
     var slipImage = UIImage()
+    var type = String()
 //    var addDropOffView : AddDropOffView!
     var addotherView : AddDropOffView!
     

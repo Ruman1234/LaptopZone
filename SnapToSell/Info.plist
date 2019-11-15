@@ -64,19 +64,22 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Need photo permission</string>
+	<string>This App accesses your storage/media for HD pictures of your product.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>need camera permission</string>
+	<string>This App accesses your camera for taking high-quality pictures of your products.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need location permission for getting your lat log</string>
+	<string>This App accesses your location for ‘pick up and drop off’ services.
+</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Need location permission for getting your lat log</string>
+	<string>This App accesses your location for ‘pick up and drop off’ services.
+</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need location permission for getting your lat log</string>
+	<string>This App accesses your location for ‘pick up and drop off’ services.
+</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Need photo permission</string>
+	<string>This App accesses your library for taking high-quality pictures of your products.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need photo permission</string>
+	<string>This App accesses your library for taking high-quality pictures of your products.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Eina-Bold.otf</string>

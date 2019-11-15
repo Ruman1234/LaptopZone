@@ -34,7 +34,7 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
         self.addBG()
         self.otherBtn.setGradient()
         self.addPAger(totalPage: 7, currentPage: 5)
-        fetchDetails(id: id)
+        fetchDetails(id: Constants.productId)
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -84,15 +84,15 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
 
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "modelCell", for: indexPath) as! RepairingBrandCollectionViewCell
-//            cell.textLabel?.text = self.itemsArray[indexPath.row].dESCRIPTION
-//                cell.textLabel?.text = self.itemsArray[indexPath.row].iSSU_NAME
+        //            cell.textLabel?.text = self.itemsArray[indexPath.row].dESCRIPTION
+        //                cell.textLabel?.text = self.itemsArray[indexPath.row].iSSU_NAME
         cell.brandName.text = self.itemsArray[indexPath.row].iSSU_NAME
         return cell
 
-     }
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
@@ -111,7 +111,7 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
 
            if let collection = self.collectionView{
                let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
-               return CGSize(width: width + 10, height: 110)
+               return CGSize(width: width , height: 110)
            }else{
                return CGSize(width: 0, height: 0)
            }
