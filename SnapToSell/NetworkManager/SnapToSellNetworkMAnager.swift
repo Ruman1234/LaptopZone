@@ -1343,6 +1343,39 @@ extension NetworkManager{
       }
     
     
+
+    func saveRepairRequest(
+                        pra :Parameters,
+                        success : @escaping(LoginModel) -> Void ,
+                        failure : @escaping(NSError) -> Void)  {
+    //                         let ur = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/c_react/ljw_saveBuySell")!
+    //                         print(ur)
+
+        let BASE_URL = URL(string: "http://71.78.236.20/laptopzone/reactcontroller/lz_website/c_lz_recycle/save_pull_request")
+        Alamofire.request(BASE_URL!, method: .post,
+                         
+                         parameters: pra
+            ).responseJSON { (response) in
+
+          
+          print(response)
+
+          guard (response.response?.statusCode) != nil else{
+                   failure(NSError())
+                   return
+          }
+               print(response.response!.statusCode)
+               if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                   print(response)
+                   if let value = response.result.value{
+                      success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
+                   }
+               }else{
+                   failure(NSError())
+               }
+        }
+
+    }
     
 
     func getShipmentImage(

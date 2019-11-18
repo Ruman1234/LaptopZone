@@ -17,6 +17,9 @@ class MessageViewController: UIViewController  ,UITableViewDelegate , UITableVie
     @IBOutlet weak var noreuestView: UIView!
     var messages = [MessageModel]()
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,7 +29,14 @@ class MessageViewController: UIViewController  ,UITableViewDelegate , UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        apicall()
+        if Utilites.isInternetAvailable() {
+          apicall()
+        }else{
+            self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+              
+        }
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -115,4 +125,17 @@ class MessageViewController: UIViewController  ,UITableViewDelegate , UITableVie
         return 133
     }
 
+    
+    @objc func buttonAction(_ sender:UIButton!)
+          {
+              if Utilites.isInternetAvailable() {
+                  self.imageView.isHidden = true
+                  self.button.isHidden = true
+                  apicall()
+          //            self.viewWillAppear(true)
+              }else{
+                  self.showToast(message: "Internet is not availble")
+              }
+          }
+    
 }

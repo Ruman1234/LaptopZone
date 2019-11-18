@@ -75,6 +75,10 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     
     var socket : SocketIOClient!
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+      
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -422,7 +426,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     func Login() {
         
         SVProgressHUD.show(withStatus: "Loading...")
-        
+        self.userName.text = self.userName.text?.lowercased()
         NetworkManager.SharedInstance.login(userNAme: self.userName.text!, password: self.password.text!, fcm_token: CustomUserDefaults.fcm_token.value ?? "", success: { (response) in
             SVProgressHUD.dismiss()
             if (response.message != nil) {
@@ -494,10 +498,18 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     }
     
     
+    @available(iOS 13.0, *)
     @IBAction func login(_ sender: Any) {
 //        print(socket.status)
         if validInput(){
-            Login()
+            if Utilites.isInternetAvailable() {
+                self.Login()
+            }else{
+                  self.netCheck(button: button, imageView: imageView)
+                  button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+                    
+            }
+            
         }
         
     }
@@ -551,7 +563,16 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
     }
     
     
-    
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        if Utilites.isInternetAvailable() {
+            self.imageView.isHidden = true
+            self.button.isHidden = true
+    //            self.viewWillAppear(true)
+        }else{
+            self.showToast(message: "Internet is not availble")
+        }
+    }
     
 }
 

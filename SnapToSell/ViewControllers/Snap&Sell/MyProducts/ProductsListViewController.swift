@@ -21,7 +21,9 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     
     @IBOutlet weak var createRequestBtn: UIButton!
     var AllProducts = [RequestStatusModel]()
-    
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.addBG()
@@ -32,7 +34,16 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     
     override func viewWillAppear(_ animated: Bool) {
 //        getProductList()
-        getProductList()
+        let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+           let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+        if Utilites.isInternetAvailable() {
+         getProductList()
+        }else{
+         self.netCheck(button: button, imageView: imageView)
+           button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+               
+        }
         self.createRequestBtn.setGradient()
     }
     
@@ -131,7 +142,7 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
 //
             
         }else if product.STATUS == "APPROVED" {
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "PendingProductDetailViewController") as! PendingProductDetailViewController
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
             main.type = "rep"
             main.approves = true
             main.detail = self.AllProducts[indexPath.row]
@@ -184,7 +195,19 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
         
     }
     
-    
+
+     @objc func buttonAction(_ sender:UIButton!)
+        {
+            if Utilites.isInternetAvailable() {
+                self.imageView.isHidden = true
+                self.button.isHidden = true
+                getProductList()
+    //            self.viewWillAppear(true)
+//                fetchDetails(id: id)
+            }else{
+                self.showToast(message: "Internet is not availble")
+            }
+        }
     
 }
 
@@ -199,14 +222,28 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
       
     var AllProducts = [RequestStatusModel]()
     
+    
+     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+                  let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+             
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.createRequestBtn.setGradient()
         // Do any additional setup after loading the view.
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
-        getProductList()
+        
+        if Utilites.isInternetAvailable() {
+            getProductList()
+        }else{
+            self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+         
+        }
     }
     
     func getProductList() {
@@ -339,7 +376,20 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
               
     }
     
-  
+ 
+
+         @objc func buttonAction(_ sender:UIButton!)
+            {
+                if Utilites.isInternetAvailable() {
+                    self.imageView.isHidden = true
+                    self.button.isHidden = true
+                    getProductList()
+        //            self.viewWillAppear(true)
+    //                fetchDetails(id: id)
+                }else{
+                    self.showToast(message: "Internet is not availble")
+                }
+            }
 }
 
 
@@ -352,7 +402,10 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
     @IBOutlet weak var createRequestBtn: UIButton!
      
       
-    
+      
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+                           let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     
     var AllProducts = [RequestStatusModel]()
     
@@ -364,7 +417,14 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
     
     
     override func viewWillAppear(_ animated: Bool) {
-        getProductList()
+        
+        if Utilites.isInternetAvailable() {
+                    getProductList()
+                }else{
+                    self.netCheck(button: button, imageView: imageView)
+                    button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                 
+                }
     }
     
     func getProductList() {
@@ -511,7 +571,21 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
                 
                 
       }
-      
+
+        
+
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+      if Utilites.isInternetAvailable() {
+          self.imageView.isHidden = true
+          self.button.isHidden = true
+          getProductList()
+    //            self.viewWillAppear(true)
+    //                fetchDetails(id: id)
+      }else{
+          self.showToast(message: "Internet is not availble")
+      }
+    }
 
 }
 
@@ -528,6 +602,13 @@ class Snap_SellListViewController: UIViewController , UITableViewDelegate , UITa
     
     var AllProducts = [RequestStatusModel]()
     
+    
+     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.createRequestBtn.setGradient()
@@ -537,7 +618,13 @@ class Snap_SellListViewController: UIViewController , UITableViewDelegate , UITa
     
     override func viewWillAppear(_ animated: Bool) {
 //        getProductList()
-        getAllProductList()
+        if Utilites.isInternetAvailable() {
+            getAllProductList()
+        }else{
+         self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+
+        }
     }
     
     
@@ -674,5 +761,18 @@ class Snap_SellListViewController: UIViewController , UITableViewDelegate , UITa
                 
       }
       
-    
+  
+    @objc func buttonAction(_ sender:UIButton!)
+     {
+         if Utilites.isInternetAvailable() {
+             self.imageView.isHidden = true
+             self.button.isHidden = true
+             getAllProductList()
+    //            self.viewWillAppear(true)
+    //                fetchDetails(id: id)
+         }else{
+             self.showToast(message: "Internet is not availble")
+         }
+     }
+
 }

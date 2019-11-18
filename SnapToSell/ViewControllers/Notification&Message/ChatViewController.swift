@@ -30,6 +30,10 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
     let manager = SocketManager(socketURL: URL(string: "http://71.78.236.22:6001")!, config: [.log(true), .compress])
     var socket : SocketIOClient!
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+
     
     
     var type = String()
@@ -43,7 +47,14 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
-        
+        if Utilites.isInternetAvailable() {
+//            apicall()
+        }else{
+           self.netCheck(button: button, imageView: imageView)
+           button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+             
+        }
+
         
         let pra = ["conversation_id" : "",
                "cover" : "asdfasdf",
@@ -386,6 +397,12 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
             let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
                 
             }
+        
+        if let popoverController = imagesource.popoverPresentationController {
+                           popoverController.sourceView = self.view
+                           popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                           popoverController.permittedArrowDirections = []
+                         }
             imagesource.addAction(camera)
             imagesource.addAction(media)
             imagesource.addAction(cancle)
@@ -426,5 +443,18 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
     func imagePicker(_ picker: OpalImagePickerController, imageURLforExternalItemAtIndex index: Int) -> URL? {
         return URL(string: "https://placeimg.com/500/500/nature")
     }
+    
+    
+    @objc func buttonAction(_ sender:UIButton!)
+      {
+          if Utilites.isInternetAvailable() {
+              self.imageView.isHidden = true
+              self.button.isHidden = true
+    //                  apicall()()
+      //            self.viewWillAppear(true)
+          }else{
+              self.showToast(message: "Internet is not availble")
+          }
+      }
     
 }

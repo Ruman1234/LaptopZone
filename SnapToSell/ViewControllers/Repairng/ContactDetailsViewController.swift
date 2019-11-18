@@ -44,6 +44,10 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     var type = String()
     var images = [UIImage]()
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+       let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
@@ -318,10 +322,17 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     
     @IBAction func saveBtn(_ sender: Any) {
         if validInput(){
-            if self.type == "recycle" {
-                self.Recycle(email: self.email.text!, phone: self.phone.text!, remarks: self.message.text!, full_name: self.firstname.text! , images: self.images)
+            
+            if Utilites.isInternetAvailable() {
+                if self.type == "recycle" {
+                   self.Recycle(email: self.email.text!, phone: self.phone.text!, remarks: self.message.text!, full_name: self.firstname.text! , images: self.images)
+                }else{
+                   self.SaveRepairInfo(brand_name: Constants.brandId, product_name: Constants.productId, series_name: Constants.seriesId, model_name: Constants.modelId, issues_name: Constants.issuesId, emailNumb: self.email.text!, phoneNumb: self.phone.text!, LastName:"", yourName: self.firstname.text!, enterComents: self.message.text ?? "", images: Constants.UploadImage)
+                }
             }else{
-                self.SaveRepairInfo(brand_name: Constants.brandId, product_name: Constants.productId, series_name: Constants.seriesId, model_name: Constants.modelId, issues_name: Constants.issuesId, emailNumb: self.email.text!, phoneNumb: self.phone.text!, LastName:"", yourName: self.firstname.text!, enterComents: self.message.text ?? "", images: Constants.UploadImage)
+                self.netCheck(button: button, imageView: imageView)
+                button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                  
             }
             
         }
@@ -337,7 +348,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     }
     
     
-    @IBAction func cameraBtn(_ sender: Any) {
+    @IBAction func cameraBtn(_ sender: AnyObject) {
         
         let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
         
@@ -386,6 +397,13 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         imagesource.addAction(media)
         imagesource.addAction(cancle)
         
+        
+       if let popoverController = imagesource.popoverPresentationController {
+          popoverController.sourceView = self.view
+          popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+          popoverController.permittedArrowDirections = []
+        }
+        
         self.present(imagesource, animated: true, completion: nil)
         
     }
@@ -427,5 +445,16 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         return URL(string: "https://placeimg.com/500/500/nature")
     }
     
+    @objc func buttonAction(_ sender:UIButton!)
+            {
+                if Utilites.isInternetAvailable() {
+                    self.imageView.isHidden = true
+                    self.button.isHidden = true
+        //            self.viewWillAppear(true)
+//                    fetchDetails(id: Constants.productId)
+                }else{
+                    self.showToast(message: "Internet is not availble")
+                }
+            }
     
 }

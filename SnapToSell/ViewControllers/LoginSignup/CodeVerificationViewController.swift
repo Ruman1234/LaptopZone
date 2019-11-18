@@ -15,7 +15,12 @@ class CodeVerificationViewController: UIViewController {
     @IBOutlet weak var number: UITextField!
     
     @IBOutlet weak var verifyBtn: UIButton!
+    
     var email = String()
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,12 +66,30 @@ class CodeVerificationViewController: UIViewController {
     @IBAction func verifyBtn(_ sender: Any) {
         
         if self.validInput() {
-            self.enterCode(number: self.number.text!)
+            if Utilites.isInternetAvailable() {
+                   self.enterCode(number: self.number.text!)
+               }else{
+                     self.netCheck(button: button, imageView: imageView)
+                   button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                       
+               }
+            
         }
         
     }
     
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        if Utilites.isInternetAvailable() {
+            self.imageView.isHidden = true
+            self.button.isHidden = true
+    //            self.viewWillAppear(true)
+        }else{
+            self.showToast(message: "Internet is not availble")
+        }
     }
 }

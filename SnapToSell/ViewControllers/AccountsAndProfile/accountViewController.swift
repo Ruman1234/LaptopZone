@@ -39,6 +39,9 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
     var addotherView : ChangePasswordView!
     var delegte : accountViewControllerDelegate?
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +60,14 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        APiCall()
+        
+        if Utilites.isInternetAvailable() {
+          APiCall()
+        }else{
+            self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+              
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -317,5 +327,17 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
 //        self.tabBarController?.selectedIndex = 4
         
     }
+    
+    @objc func buttonAction(_ sender:UIButton!)
+       {
+           if Utilites.isInternetAvailable() {
+               self.imageView.isHidden = true
+               self.button.isHidden = true
+               APiCall()
+       //            self.viewWillAppear(true)
+           }else{
+               self.showToast(message: "Internet is not availble")
+           }
+       }
    
 }

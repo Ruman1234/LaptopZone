@@ -191,6 +191,13 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
         imagesource.addAction(media)
         imagesource.addAction(cancle)
         
+        
+        if let popoverController = imagesource.popoverPresentationController {
+                 popoverController.sourceView = self.view
+                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                 popoverController.permittedArrowDirections = []
+               }
+        
         self.present(imagesource, animated: true, completion: nil)
         
     }

@@ -27,6 +27,8 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
     
     var addotherView : AddotherView!
      
+     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+             let button = UIButton(type: UIButton.ButtonType.system) as UIButton
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,15 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
         self.addPAger(totalPage: 7, currentPage: 4)
         self.otherBtn.setGradient()
         self.addBG()
-        fetchDetails(id: id)
+        
+        if Utilites.isInternetAvailable() {
+          fetchDetails(id: id)
+        }else{
+          self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                
+        }
+        
         
       let layout = UICollectionViewFlowLayout()
        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -206,5 +216,20 @@ class ModelViewController: UIViewController , UICollectionViewDelegate , UIColle
            }
        }
        
+    
+    
+           
+             @objc func buttonAction(_ sender:UIButton!)
+                {
+                    if Utilites.isInternetAvailable() {
+                        self.imageView.isHidden = true
+                        self.button.isHidden = true
+            //            self.viewWillAppear(true)
+                        fetchDetails(id: id)
+                    }else{
+                        self.showToast(message: "Internet is not availble")
+                    }
+                }
+
     
 }

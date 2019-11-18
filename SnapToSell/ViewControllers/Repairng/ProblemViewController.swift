@@ -26,7 +26,9 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     
     private let spacing:CGFloat = 10.0
     var addotherView : AddotherView!
-    
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+       let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,16 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
         self.addBG()
         self.otherBtn.setGradient()
         self.addPAger(totalPage: 7, currentPage: 5)
-        fetchDetails(id: Constants.productId)
+        
+        if Utilites.isInternetAvailable() {
+                 fetchDetails(id: Constants.productId)
+               }else{
+                 self.netCheck(button: button, imageView: imageView)
+                   button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                       
+               }
+               
+        
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -179,5 +190,16 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
            }
        }
        
-    
+   
+      @objc func buttonAction(_ sender:UIButton!)
+         {
+             if Utilites.isInternetAvailable() {
+                 self.imageView.isHidden = true
+                 self.button.isHidden = true
+     //            self.viewWillAppear(true)
+                 fetchDetails(id: Constants.productId)
+             }else{
+                 self.showToast(message: "Internet is not availble")
+             }
+         }
 }

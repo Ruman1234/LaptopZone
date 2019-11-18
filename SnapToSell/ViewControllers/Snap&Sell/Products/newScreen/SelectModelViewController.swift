@@ -19,6 +19,24 @@ class SelectModelViewController: UIViewController, UICollectionViewDelegate , UI
     
     var brandArray = [Buy_SellModel]()
     
+    
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+                              let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+                        
+                     @objc func buttonAction(_ sender:UIButton!)
+                        {
+                            if Utilites.isInternetAvailable() {
+                                self.imageView.isHidden = true
+                                self.button.isHidden = true
+                    //            self.viewWillAppear(true)
+                                self.callApi(id: self.id)
+                            }else{
+                                self.showToast(message: "Internet is not availble")
+                            }
+                        }
+         
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +48,14 @@ class SelectModelViewController: UIViewController, UICollectionViewDelegate , UI
 
         
         print(self.id)
-        self.callApi(id: self.id)
+        
+        if Utilites.isInternetAvailable() {
+          self.callApi(id: self.id)
+        }else{
+          self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                
+        }
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing

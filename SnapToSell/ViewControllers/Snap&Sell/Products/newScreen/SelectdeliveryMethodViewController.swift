@@ -117,6 +117,23 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
        var searchSource: [String]?
     
     
+    
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+                                     let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+                               
+                            @objc func buttonAction(_ sender:UIButton!)
+                               {
+                                   if Utilites.isInternetAvailable() {
+                                       self.imageView.isHidden = true
+                                       self.button.isHidden = true
+                           //            self.viewWillAppear(true)
+//                                       self.callApi(id: self.id)
+                                   }else{
+                                       self.showToast(message: "Internet is not availble")
+                                   }
+                               }
+    
     override func loadView() {
       super.loadView()
 //        setupTableView()
@@ -172,37 +189,44 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
-        if textField == self.shipmentAdsres {
-            self.tableView.isHidden = false
-            let point = CGPoint(x: 0, y: 410 )
-            scrollView.contentOffset = point
-//            searchCompleter.queryFragment = self.shipmentAdsres.text!
-            placeAutocomplete(text_input: self.shipmentAdsres.text!)
-        }else if textField == self.pickupSearchAddress{
-            
-            self.tableView.isHidden = false
-            
-            let point = CGPoint(x: 0, y: 300 )
-            scrollView.contentOffset = point
-            
-            placeAutocomplete(text_input: self.pickupSearchAddress.text!)
+        if Utilites.isInternetAvailable(){
+            if textField == self.shipmentAdsres {
+                self.tableView.isHidden = false
+                let point = CGPoint(x: 0, y: 410 )
+                scrollView.contentOffset = point
+            //            searchCompleter.queryFragment = self.shipmentAdsres.text!
+                placeAutocomplete(text_input: self.shipmentAdsres.text!)
+            }else if textField == self.pickupSearchAddress{
+                
+                self.tableView.isHidden = false
+                
+                let point = CGPoint(x: 0, y: 300 )
+                scrollView.contentOffset = point
+                
+                placeAutocomplete(text_input: self.pickupSearchAddress.text!)
+            }
         }
+       
         
         return true
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == self.shipmentAdsres {
-            self.tableView.isHidden = false
-            
-//            searchCompleter.queryFragment = self.shipmentAdsres.text!
-            placeAutocomplete(text_input: self.shipmentAdsres.text!)
+        
+        
+        if Utilites.isInternetAvailable(){
+             if textField == self.shipmentAdsres {
+                        self.tableView.isHidden = false
+                        
+            //            searchCompleter.queryFragment = self.shipmentAdsres.text!
+                        placeAutocomplete(text_input: self.shipmentAdsres.text!)
 
-        }else if textField == self.pickupSearchAddress{
-            self.tableView.isHidden = false
-            placeAutocomplete(text_input: self.shipmentAdsres.text!)
+                    }else if textField == self.pickupSearchAddress{
+                        self.tableView.isHidden = false
+                        placeAutocomplete(text_input: self.shipmentAdsres.text!)
+                    }
         }
+       
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -739,17 +763,6 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             SVProgressHUD.show(withStatus: "Loading...")
             
             self.selectOption = "3"
-    //        self.countryName = "United States"
-    //        let parameters = ["weight" : self.shipmentWeight.text!,
-    //                               "length" : self.shipmentLength.text!,
-    //                               "width" : self.shipmentWidth.text!,
-    //                               "height" : self.shipmentHeight.text!,
-    //                               "city" : self.shipmentCity,
-    //                               "zip" : self.shipmentZip,
-    //                               "street" : self.shipmentStreet,
-    //                               "state" : self.shipmentState,
-    //                               "phone" : "+1539888550"]
-            
 
             let parameters = ["weight" : self.shipmentWeight.text!,
             "length" : self.shipmentLength.text!,
@@ -760,7 +773,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             "street" : self.shipmentStreet,
             "state" : self.shipmentState,
             "phone" : "+1539888550"]
-            
+//            "getradio" : "2",
             NetworkManager.SharedInstance.getShipmentRates(pra: parameters, success: { (res) in
                 SVProgressHUD.dismiss()
                 print(res)
@@ -768,8 +781,8 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
                 
                 if self.type == "rec"{
                     print("Asdf")
-                    self.request_id = self.repRecId
-                    self.addView(rate: self.rates)
+                    
+                    self.saveRepairShipment()
                 }else{
                     self.sendRequest()
                 }
@@ -781,6 +794,29 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
            
         }
         
+    }
+    
+    func saveRepairShipment()  {
+        print(self.repRecId)
+        print(self.request_id)
+        
+         let parameters = ["getRadioVale" : "3",
+                           "requestId" : self.repRecId,
+                   ]
+        //            "getradio" : "2",
+            NetworkManager.SharedInstance.saveRepairRequest(pra: parameters, success: { (res) in
+                
+                SVProgressHUD.dismiss()
+                
+                print(res)
+                
+                self.request_id = self.repRecId
+                self.addView(rate: self.rates)
+                
+            }) { (err) in
+                SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!", message: "Something went wrong", view: self)
+            }
     }
     
 //    func sendRepRecshipmentRequest()  {

@@ -24,9 +24,25 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var changeBtn: UIButton!
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-            APiCall()
+        
+//        if validInput(){
+            if Utilites.isInternetAvailable() {
+               APiCall()
+            }else{
+                 self.netCheck(button: button, imageView: imageView)
+                 button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+                   
+            }
+//        }
+
+               
+            
         self.circleImg.layer.cornerRadius = self.circleImg.frame.width / 2
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width / 2
         // Do any additional setup after loading the view.
@@ -98,6 +114,16 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        if Utilites.isInternetAvailable() {
+            self.imageView.isHidden = true
+            self.button.isHidden = true
+            APiCall()
+    //            self.viewWillAppear(true)
+        }else{
+            self.showToast(message: "Internet is not availble")
+        }
+    }
     
 }

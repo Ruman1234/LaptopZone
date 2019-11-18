@@ -30,6 +30,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var twitter: UIButton!
     let userdefaults = UserDefaults.standard
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -178,7 +181,14 @@ class RegisterViewController: UIViewController {
     
     @IBAction func register(_ sender: Any) {
         if self.validInput(){
-            self.register()
+            if Utilites.isInternetAvailable() {
+                self.register()
+            }else{
+                  self.netCheck(button: button, imageView: imageView)
+                button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                    
+            }
+            
         }
     }
     
@@ -189,4 +199,14 @@ class RegisterViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func buttonAction(_ sender:UIButton!)
+       {
+           if Utilites.isInternetAvailable() {
+               self.imageView.isHidden = true
+               self.button.isHidden = true
+       //            self.viewWillAppear(true)
+           }else{
+               self.showToast(message: "Internet is not availble")
+           }
+       }
 }

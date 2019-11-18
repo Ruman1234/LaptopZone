@@ -17,6 +17,25 @@ class CarierServisesViewController: UIViewController, UICollectionViewDelegate ,
     var id = String()
     var name = String()
     
+
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+                              let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+                        
+                     @objc func buttonAction(_ sender:UIButton!)
+                        {
+                            if Utilites.isInternetAvailable() {
+                                self.imageView.isHidden = true
+                                self.button.isHidden = true
+                    //            self.viewWillAppear(true)
+                                self.callApi(id: self.id)
+                            }else{
+                                self.showToast(message: "Internet is not availble")
+                            }
+                        }
+  
+    
+    
     var brandArray = [Buy_SellModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +44,15 @@ class CarierServisesViewController: UIViewController, UICollectionViewDelegate ,
         self.addPAger(totalPage: 7, currentPage: 4)
         self.cancleBtn()
         self.backBtn()
-        callApi(id: self.id)
+        
+        if Utilites.isInternetAvailable() {
+            self.callApi(id: self.id)
+          }else{
+            self.netCheck(button: button, imageView: imageView)
+              button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                  
+          }
+        
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing

@@ -40,6 +40,11 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     var address : AddressesModel = AddressesModel()
     var phone = false
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+          let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+      
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
@@ -263,10 +268,18 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     @IBAction func saveBtn(_ sender: Any) {
      
         if self.validInput(){
-            if self.type == "update"{
-                self.UpdateAddress(id: "\(self.address.id!)")
+            
+            if Utilites.isInternetAvailable() {
+                if self.type == "update"{
+                    self.UpdateAddress(id: "\(self.address.id!)")
+                }else{
+                    self.addnewAddress()
+                }
+                
             }else{
-                self.addnewAddress()
+                  self.netCheck(button: button, imageView: imageView)
+                  button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+                    
             }
             
         }
@@ -343,7 +356,16 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+    @objc func buttonAction(_ sender:UIButton!)
+       {
+           if Utilites.isInternetAvailable() {
+               self.imageView.isHidden = true
+               self.button.isHidden = true
+       //            self.viewWillAppear(true)
+           }else{
+               self.showToast(message: "Internet is not availble")
+           }
+       }
     
 }
 

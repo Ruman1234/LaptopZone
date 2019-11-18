@@ -22,6 +22,9 @@ class ResetYourPasswordViewController: UIViewController {
     var email = String()
     var otp = String()
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,7 +92,13 @@ class ResetYourPasswordViewController: UIViewController {
     
     @IBAction func doneBtn(_ sender: Any) {
         if self.validInput(){
-            self.reset()
+            if Utilites.isInternetAvailable() {
+                  self.reset()
+              }else{
+                    self.netCheck(button: button, imageView: imageView)
+                  button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                      
+              }
         }
     }
     
@@ -97,5 +106,15 @@ class ResetYourPasswordViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        if Utilites.isInternetAvailable() {
+            self.imageView.isHidden = true
+            self.button.isHidden = true
+    //            self.viewWillAppear(true)
+        }else{
+            self.showToast(message: "Internet is not availble")
+        }
+    }
     
 }

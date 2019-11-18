@@ -12,6 +12,8 @@ import Foundation
 import SystemConfiguration
 import SwiftUserDefault
 import UIKit
+import ReachabilitySwift
+import SVProgressHUD
 
 var MaxEmailLength = 245
 
@@ -169,12 +171,61 @@ extension UIViewController {
 //    }
     
     
+//    func internetCheck()  {
+//        
+//        let reachability = try! Reachability()
+//
+//        reachability!.whenReachable = { reachability in
+//           print("connected")
+//        }
+//        reachability?.whenUnreachable = { _ in
+//            print("Not reachable")
+//        }
+//
+//        do {
+//            try reachability?.startNotifier()
+//        } catch {
+//            print("Unable to start notifier")
+//        }
+//        
+//    }
+    
+    
+    func netCheck (button :UIButton , imageView :UIImageView) {
+        
+        SVProgressHUD.dismiss()
+        
+        imageView.isHidden = false
+        button.isHidden = false
+        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+        button.frame = CGRect(x:(self.view.frame.size.width / 2) - 75 , y:self.view.frame.size.height / 1.5, width:150, height:45)
+
+        button.backgroundColor = UIColor.white
+        button.setTitle("Retry", for: UIControl.State.normal)
+        button.tintColor = Constants.APP_THEME_COLOR
+        button.layer.borderColor = Constants.APP_THEME_COLOR.cgColor
+        button.layer.borderWidth = 0.6
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize(width: 0, height: 3)
+        button.layer.masksToBounds = true
+        button.titleLabel?.font = UIFont(name: "Eina-Regular", size: 18)
+        button.layer.cornerRadius = 5
+
+        self.view.addSubview(imageView)
+        self.view.addSubview(button)
+
+        self.showToast(message: "Internet is not availble")
+    }
+    
+   
+    
     func setGragientBar() {
         
         
          let gradientLayer = CAGradientLayer()
 
-        gradientLayer.frame = CGRect(x:0, y:-20, width: self.view.frame.width, height:64)
+        gradientLayer.frame = CGRect(x:0, y:-20, width: self.view.frame.width, height:self.view.frame.height * 0.06)
         
      
         let colorTop = UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor
@@ -203,7 +254,8 @@ extension UIViewController {
     }
     
     func addPAger(totalPage : Int , currentPage : Int) {
-        let y = self.view.frame.height * 0.01
+//        let y = self.view.frame.height * 0.01
+        let y = UIApplication.shared.statusBarFrame.height
         let pager = UIPageControl()
         pager.numberOfPages = totalPage
         pager.tintColor = UIColor.gray
@@ -211,7 +263,7 @@ extension UIViewController {
         pager.currentPageIndicatorTintColor = .red
         pager.currentPage = currentPage
         let x = (self.view.frame.width / 2) - 75
-        pager.frame = CGRect(x: x, y: y + 50, width: 130, height: 10)
+        pager.frame = CGRect(x: x, y: y + 33, width: 130, height: 10)
         self.view.addSubview(pager)
         
                                         
@@ -221,10 +273,27 @@ extension UIViewController {
     
     func cancleBtn()  {
         
-        let x = self.view.frame.width - 85 
-         let y = self.view.frame.height * 0.01
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        var ipad_iphone = 0.0
+        // 2. check the idiom
+        switch (deviceIdiom) {
+
+        case .pad:
+            print("iPad style UI")
+            ipad_iphone = 20.0
+        case .phone:
+            print("iPhone and iPod touch style UI")
+            ipad_iphone = 0.0
+        case .tv:
+            print("tvOS style UI")
+        default:
+            print("Unspecified UI idiom")
+        }
         
-        let button = UIButton(frame: CGRect(x: x, y: y + 45, width: 70, height: 20))
+        let x = self.view.frame.width - 85 
+//         let y = self.view.frame.height * 0.01
+        let y = UIApplication.shared.statusBarFrame.height + CGFloat(ipad_iphone)
+        let button = UIButton(frame: CGRect(x: x, y: y + 30, width: 70, height: 20))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
         button.setTitle("Cancel", for: .normal)
@@ -234,12 +303,35 @@ extension UIViewController {
     }
     
      func backBtn()  {
-        let y = self.view.frame.height * 0.01
+        print(UIApplication.shared.statusBarFrame.height)
+        
+        
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+               var ipad_iphone = 0.0
+               // 2. check the idiom
+               switch (deviceIdiom) {
+
+               case .pad:
+                   print("iPad style UI")
+                   ipad_iphone = 20.0
+               case .phone:
+                   print("iPhone and iPod touch style UI")
+                   ipad_iphone = 0.0
+               case .tv:
+                   print("tvOS style UI")
+               default:
+                   print("Unspecified UI idiom")
+               }
+               
+        
+        let y = UIApplication.shared.statusBarFrame.height + CGFloat(ipad_iphone)
+//        let y = self.view.frame.height * 0.01
         let x = 20
-        let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 46), width: 25, height: 15))
+        let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 30), width: 25, height: 15))
         imageview.image = UIImage(named: "back")
     
-        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 5), width: 100, height: 100))
+        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 30), width: 150, height: 150))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
 //            button.setTitle("Cancle", for: .normal)

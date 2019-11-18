@@ -25,13 +25,23 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
     @IBOutlet weak var otherBtn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.addPAger(totalPage: 7, currentPage: 3)
         self.addBG()
-        self.fetchDetails(id: id)
+        
+        if Utilites.isInternetAvailable() {
+                 self.fetchDetails(id: id)
+               }else{
+                 self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                       
+               }
+        
         
         self.otherBtn.setGradient()
         
@@ -195,6 +205,18 @@ class SeriesViewController: UIViewController,UITableViewDataSource, UITableViewD
            }
        }
        
-      
+   
+        
+          @objc func buttonAction(_ sender:UIButton!)
+             {
+                 if Utilites.isInternetAvailable() {
+                     self.imageView.isHidden = true
+                     self.button.isHidden = true
+         //            self.viewWillAppear(true)
+                     fetchDetails(id: id)
+                 }else{
+                     self.showToast(message: "Internet is not availble")
+                 }
+             }
 
 }

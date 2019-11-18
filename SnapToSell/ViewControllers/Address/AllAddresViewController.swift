@@ -20,7 +20,11 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
     var addresses = [AddressesModel]()
     var type = String()
     var defaultAddressViewController = DefaultAddressViewController()
-   
+   let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+            let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+    
+      
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBG()
@@ -29,7 +33,15 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getaddress()
+        
+        if Utilites.isInternetAvailable() {
+           getaddress()
+        }else{
+              self.netCheck(button: button, imageView: imageView)
+              button.addTarget(self, action: #selector(ViewController.buttonAction(_:)), for: .touchUpInside)
+                
+        }
+        
     }
     override func viewDidAppear(_ animated: Bool) {
 
@@ -158,6 +170,13 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
                 
             }
             
+            
+            if let popoverController = bottomSheet.popoverPresentationController {
+                     popoverController.sourceView = self.view
+                     popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                     popoverController.permittedArrowDirections = []
+                   }
+            
             bottomSheet.addAction(edit)
             bottomSheet.addAction(delete)
             bottomSheet.addAction(cancle)
@@ -210,5 +229,17 @@ class AllAddresViewController: UIViewController ,UITableViewDataSource , UITable
         self.navigationController?.popViewController(animated: true)
     }
     
+    
+    @objc func buttonAction(_ sender:UIButton!)
+           {
+               if Utilites.isInternetAvailable() {
+                   self.imageView.isHidden = true
+                   self.button.isHidden = true
+                getaddress()
+           //            self.viewWillAppear(true)
+               }else{
+                   self.showToast(message: "Internet is not availble")
+               }
+           }
     
 }

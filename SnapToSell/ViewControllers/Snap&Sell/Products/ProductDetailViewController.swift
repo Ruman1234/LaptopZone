@@ -41,6 +41,9 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     var socket : SocketIOClient!
 
     private let spacing:CGFloat = 10.0
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -306,7 +309,14 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
 
         if validInput(){
             
-            
+            if Utilites.isInternetAvailable() {
+                   
+               }else{
+                   self.netCheck(button: button, imageView: imageView)
+                   button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                return
+                
+               }
 
         
 //        let date :Date = Date()
@@ -439,7 +449,7 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
     }
     
     
-    @IBAction func cameraBtn(_ sender: Any) {
+    @IBAction func cameraBtn(_ sender: AnyObject) {
         
         let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
         
@@ -477,6 +487,13 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         imagesource.addAction(camera)
         imagesource.addAction(media)
         imagesource.addAction(cancle)
+        
+        
+        if let popoverController = imagesource.popoverPresentationController {
+                 popoverController.sourceView = self.view
+                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                 popoverController.permittedArrowDirections = []
+               }
         
         self.present(imagesource, animated: true, completion: nil)
         
@@ -518,6 +535,17 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+    @objc func buttonAction(_ sender:UIButton!)
+                    {
+                        if Utilites.isInternetAvailable() {
+                            self.imageView.isHidden = true
+                            self.button.isHidden = true
+                            
+                //            self.viewWillAppear(true)
+            //                fetchDetails(id: id)
+                        }else{
+                            self.showToast(message: "Internet is not availble")
+                        }
+                    }
     
 }

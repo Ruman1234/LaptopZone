@@ -31,6 +31,9 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     let manager = SocketManager(socketURL: URL(string: "http://71.78.236.22:6001")!, config: [.log(true), .compress])
     var socket : SocketIOClient!
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+    
     override var preferredStatusBarStyle : UIStatusBarStyle {
         
         return UIStatusBarStyle.lightContent
@@ -46,7 +49,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
         
         self.tableView.tableFooterView = UIView()
         
-        self.getAllProductList()
+//        self.getAllProductList()
         
         requestView.layer.cornerRadius = 8
         self.menuBtn.target = self.revealViewController()
@@ -74,9 +77,18 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
                  
          super.viewWillAppear(true)
-         self.getAllProductList()
+//         self.getAllProductList()
 //         self.tabBarController?.tabBar.isHidden = false
 //         self.hidesBottomBarWhenPushed = false
+        
+        if Utilites.isInternetAvailable() {
+           self.getAllProductList()
+        }else{
+           self.netCheck(button: button, imageView: imageView)
+           button.addTarget(self, action: #selector(HomeViewController.buttonAction(_:)), for: .touchUpInside)
+                 
+        }
+        
     }
     
     func socketdata(){
@@ -211,41 +223,41 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     }
     
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-       return true
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//       return true
+//    }
        
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-     
-       let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-           let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
-           
-           var reason = ""
-           
-           alert.addTextField {  (textField : UITextField!) -> Void  in
-               //             searchTextField?.delegate = self
-               reason = textField.text!
-               
-           }
-           alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-               NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[indexPath.row].id!)", reason: reason, success: { (res) in
-                   print(res)
-                   self.AllProducts.remove(at:indexPath.row)
-                   self.tableView.reloadData()
-               }, failure: { (err) in
-                   Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
-               })
-           }))
-           
-           alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
-               
-           }))
-           self.present(alert, animated: true, completion: nil)
-           
-       })
-       
-       return [deleteAction]
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//     
+//       let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+//           let alert = UIAlertController(title: "!!!!", message: "Are you sure", preferredStyle: .alert)
+//           
+//           var reason = ""
+//           
+//           alert.addTextField {  (textField : UITextField!) -> Void  in
+//               //             searchTextField?.delegate = self
+//               reason = textField.text!
+//               
+//           }
+//           alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//               NetworkManager.SharedInstance.CancleRequest(request_id: "\(self.AllProducts[indexPath.row].id!)", reason: reason, success: { (res) in
+//                   print(res)
+//                   self.AllProducts.remove(at:indexPath.row)
+//                   self.tableView.reloadData()
+//               }, failure: { (err) in
+//                   Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong ", view: self)
+//               })
+//           }))
+//           
+//           alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+//               
+//           }))
+//           self.present(alert, animated: true, completion: nil)
+//           
+//       })
+//       
+//       return [deleteAction]
+//    }
     
     @IBAction func addBtn(_ sender: Any) {
         
@@ -302,6 +314,15 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
         self.tabBarController?.selectedIndex = 0
     }
     
-    
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        if Utilites.isInternetAvailable() {
+            self.imageView.isHidden = true
+            self.button.isHidden = true
+//            self.viewWillAppear(true)
+        }else{
+            self.showToast(message: "Internet is not availble")
+        }
+    }
     
 }

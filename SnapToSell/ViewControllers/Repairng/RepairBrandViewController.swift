@@ -32,6 +32,9 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
     
     var otherText = "Other"
     
+    let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+    let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +48,16 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
         self.collectionView?.collectionViewLayout = layout
         self.addBG()
 //        self.otherBtn.addDashedBorder()
-        fetchDetails(id: id)
+        let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
+           let button = UIButton(type: UIButton.ButtonType.system) as UIButton
+
+        if Utilites.isInternetAvailable() {
+          fetchDetails(id: id)
+        }else{
+          self.netCheck(button: button, imageView: imageView)
+            button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                
+        }
         self.cancleBtn()
         self.backBtn()
 //        self.tableView.tableFooterView = UIView()
@@ -259,4 +271,16 @@ class RepairBrandViewController: UIViewController ,UICollectionViewDelegate , UI
         
     }
     
+    
+     @objc func buttonAction(_ sender:UIButton!)
+        {
+            if Utilites.isInternetAvailable() {
+                self.imageView.isHidden = true
+                self.button.isHidden = true
+    //            self.viewWillAppear(true)
+                fetchDetails(id: id)
+            }else{
+                self.showToast(message: "Internet is not availble")
+            }
+        }
 }

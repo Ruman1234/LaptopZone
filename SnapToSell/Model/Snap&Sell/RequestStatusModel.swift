@@ -31,6 +31,7 @@ class RequestStatusModel : Mappable {
     var OFFER : String?
     var STATUS : String?
     var IMAGE_URL_FULL : String?
+    var SELECT_OPTION : String?
     
     
     
@@ -47,7 +48,8 @@ class RequestStatusModel : Mappable {
 
     func mapping(map: Map) {
 
-		id <- map["id"]
+		SELECT_OPTION <- map["SELECT_OPTION"]
+        id <- map["id"]
         conversation_id <- map["conversation_id"]
 		user_id <- map["user_id"]
 		title <- map["title"]

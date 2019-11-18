@@ -53,6 +53,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
     var products = [String]()
     
     var type = String()
+    var approves = Bool()
 //    var images = [UIImage]()
 //    let cancelBtn = UIButton()
                
@@ -73,6 +74,12 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
        
         if self.type == "rep"{
             self.messageBtn.isHidden = true
+            if self.approves {
+                self.activeLbl.text = "APPROVED"
+                self.requestStatusLbl.text = "APPROVED"
+             self.descriptionLbl.text = "Awaiting for your Package, Please send as soon as for further Processing"
+                self.acceptBtn.setTitle("Proceed by another way", for: .normal)
+            }
             fetchDetailOfRepRec() 
         }else{
             fetchSingalProduct()
@@ -120,6 +127,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
                 self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images_rep![0])!), placeholderImage: UIImage(named: "placeholder.png"))
                 
             }
+        
             self.navigationTitile.text = self.detail!.details![0].MODEL_NAME
         self.titleProduct.text = self.detail!.details![0].MODEL_NAME
         self.lotPrice.text = Double(self.detail!.details![0].OFFER ?? "0")?.dollarString
@@ -503,6 +511,11 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
                 
             }
             
+            if let popoverController = alert.popoverPresentationController {
+                                      popoverController.sourceView = self.view
+                                      popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                                      popoverController.permittedArrowDirections = []
+                                    }
             
             alert.addAction(pickup)
             alert.addAction(dropOff)
