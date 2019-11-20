@@ -67,7 +67,7 @@ class SelectModelViewController: UIViewController, UICollectionViewDelegate , UI
     
     override func viewDidAppear(_ animated: Bool) {
             self.addBG()
-                  self.addPAger(totalPage: 7, currentPage: 0)
+//                  self.addPAger(totalPage: 7, currentPage: 0)
                   self.backBtn()
                   self.cancleBtn()
        }

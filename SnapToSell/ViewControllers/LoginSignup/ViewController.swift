@@ -152,7 +152,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
 
         self.password.hideShowText()
         
-        loginManager.logIn(permissions: [ "publicProfile", "email" ], from: self) { (result, error) in
+//        loginManager.logIn(permissions: [ "publicProfile", "email" ], from: self) { (result, error) in
             
             
             
@@ -171,7 +171,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
 ////                 break
 //
 //             }
-        }
+//        }
 //
         
     }
@@ -290,7 +290,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
         self.hideKeyboardWhenTappedAround()
-        self.signinBtn.setGradient()
+//        self.signinBtn.setGradient()
         self.tabBarController?.tabBar.isHidden = true
         
     }
@@ -304,7 +304,7 @@ class ViewController: eee ,GIDSignInDelegate, GIDSignInUIDelegate ,BWWalkthrough
         super.viewDidAppear(true)
         self.signinBtn.setGradient()
         self.setGragientBar()
-        self.fbloginBtn.setImage(UIImage(named: "Fb"), for: .normal)
+        self.fbloginBtn.setImage(nil, for: .normal)
         let buttonText = NSAttributedString(string: " ")
         self.fbloginBtn.setAttributedTitle(buttonText, for: .normal)
 

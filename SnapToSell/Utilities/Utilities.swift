@@ -222,10 +222,27 @@ extension UIViewController {
     
     func setGragientBar() {
         
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+             var ipad_iphone = 0
+             // 2. check the idiom
+             switch (deviceIdiom) {
+
+             case .pad:
+                 print("iPad style UI")
+                 ipad_iphone = 40
+             case .phone:
+                 print("iPhone and iPod touch style UI")
+                 ipad_iphone = Int(self.view.frame.size.height * 0.06)
+//                    self.view.frame.height * 0.06
+             case .tv:
+                 print("tvOS style UI")
+             default:
+                 print("Unspecified UI idiom")
+             }
         
          let gradientLayer = CAGradientLayer()
 
-        gradientLayer.frame = CGRect(x:0, y:-20, width: self.view.frame.width, height:self.view.frame.height * 0.06)
+        gradientLayer.frame = CGRect(x:0, y:-20, width: Int(self.view.frame.width), height:ipad_iphone)
         
      
         let colorTop = UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor
@@ -241,13 +258,13 @@ extension UIViewController {
             gradientLayer.endPoint = CGPoint(x: 0.75, y: 0.5)
             
             
-            gradientLayer.frame = CGRect(x:0, y:-20, width:self.view.frame.width, height:self.view.frame.height * 0.06)
+            gradientLayer.frame = CGRect(x:0, y:-20, width:Int(self.view.frame.width), height:ipad_iphone)
             
             let window: UIWindow? = UIApplication.shared.keyWindow
             let view = UIView()
             view.backgroundColor = UIColor.clear
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.frame = CGRect(x: 0, y: 0, width: (window?.frame.width)!, height: self.view.frame.height * 0.07)
+        view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: ipad_iphone)
             view.layer.addSublayer(gradientLayer)
             window?.addSubview(view)
                 
@@ -292,8 +309,8 @@ extension UIViewController {
         
         let x = self.view.frame.width - 85 
 //         let y = self.view.frame.height * 0.01
-        let y = UIApplication.shared.statusBarFrame.height + CGFloat(ipad_iphone)
-        let button = UIButton(frame: CGRect(x: x, y: y + 30, width: 70, height: 20))
+        let y = UIApplication.shared.statusBarFrame.height + CGFloat(9)
+        let button = UIButton(frame: CGRect(x: x, y: y + 20, width: 70, height: 20))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
         button.setTitle("Cancel", for: .normal)
@@ -325,13 +342,13 @@ extension UIViewController {
                }
                
         
-        let y = UIApplication.shared.statusBarFrame.height + CGFloat(ipad_iphone)
+        let y = UIApplication.shared.statusBarFrame.height + CGFloat(9)
 //        let y = self.view.frame.height * 0.01
         let x = 20
-        let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 30), width: 25, height: 15))
+        let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 20), width: 25, height: 15))
         imageview.image = UIImage(named: "back")
     
-        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 30), width: 150, height: 150))
+        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 30), width: 150, height: 80))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
 //            button.setTitle("Cancle", for: .normal)

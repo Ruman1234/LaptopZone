@@ -232,6 +232,12 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
         let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
             
         }
+        
+        if let popoverController = imagesource.popoverPresentationController {
+                        popoverController.sourceView = self.view
+                        popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                        popoverController.permittedArrowDirections = []
+                      }
         imagesource.addAction(camera)
         imagesource.addAction(media)
         imagesource.addAction(cancle)

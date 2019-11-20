@@ -48,10 +48,10 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
 //        self.setGragientBar()
         self.tabBarController?.selectedIndex = 2
         
-        self.myTitleView.applyGradient(colours: [
-                   UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
-                 UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
-               ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
+//        self.myTitleView.applyGradient(colours: [
+//                   UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
+//                 UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
+//               ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
         
         self.profileNAme.isUserInteractionEnabled = false
         self.profileEmail.isUserInteractionEnabled = false

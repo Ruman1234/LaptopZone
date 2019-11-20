@@ -140,7 +140,23 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
 //        setupTableView2()
     }
     
+    func hideShipmentViews()  {
+        self.shipmentAdsres.isHidden = true
+        self.shipmentLength.isHidden = true
+        self.shipmentWidth.isHidden = true
+        self.shipmentWeight.isHidden = true
+        self.shipmentHeight.isHidden = true
+        self.shipmentnextBtn.isHidden = true
+    }
     
+    func showShipmentViews()  {
+        self.shipmentAdsres.isHidden = false
+        self.shipmentLength.isHidden = false
+        self.shipmentWidth.isHidden = false
+        self.shipmentWeight.isHidden = false
+        self.shipmentHeight.isHidden = false
+        self.shipmentnextBtn.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -148,7 +164,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         
         self.shipmentAdsres.delegate = self
         self.pickupSearchAddress.delegate = self
-      
+        self.hideShipmentViews()
         self.tableView.isHidden = true
 //        self.tableView2.isHidden = true
         // Do any additional setup after loading the view.
@@ -239,7 +255,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     }
     
     @IBAction func amazonBtn(_ sender: AnyObject) {
-        
+        self.hideShipmentViews()
         if sender.tag == 0 {
             self.dropoffopenBtn.tag = 1
             self.view.layoutIfNeeded()
@@ -253,7 +269,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             } else {
                // Fallback on earlier versions
             }
-
+            
             self.amazonDetailHeight.constant = 429
             self.mainviewHeight.constant = self.view.frame.height + 429
             self.paypalViewHeight.constant = 0
@@ -296,6 +312,9 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     
 //
     @IBAction func paypalView(_ sender: AnyObject) {
+        
+        self.hideShipmentViews()
+        
         if sender.tag == 0 {
             self.pickupopenBnt.tag = 1
             self.selectOption = "2"
@@ -370,6 +389,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     @IBAction func chequeViewBtn(_ sender: AnyObject) {
         
         if sender.tag == 0 {
+            self.showShipmentViews()
              self.shipmentopenBtn.tag = 1
              self.view.layoutIfNeeded()
              self.setupTableView(y: 500)
@@ -403,6 +423,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             })
 
         }else{
+            self.hideShipmentViews()
              self.shipmentopenBtn.tag = 0
              self.view.layoutIfNeeded()
              
