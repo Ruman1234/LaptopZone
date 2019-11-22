@@ -82,6 +82,18 @@ class MessageModel : Mappable {
 
 }
 
+extension MessageModel {
+    /// converts the startDate to an actual date type which will be used for comparison
+    var convertedStartDate: Date {
+        return dateFormatter.date(from: timestamp!) ?? Date() // if server data has something in start_date that can't be converted to any date, assume that refers to current date. Or you can have your own logic here
+    }
+    private var dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter
+    }
+}
 
 
 class details : Mappable {

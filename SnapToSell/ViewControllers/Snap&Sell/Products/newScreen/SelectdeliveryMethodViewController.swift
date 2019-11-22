@@ -391,6 +391,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
         if sender.tag == 0 {
             self.showShipmentViews()
              self.shipmentopenBtn.tag = 1
+            self.selectOption = "3"
              self.view.layoutIfNeeded()
              self.setupTableView(y: 500)
              if #available(iOS 13.0, *) {
@@ -783,7 +784,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             
             SVProgressHUD.show(withStatus: "Loading...")
             
-            self.selectOption = "3"
+            
 
             let parameters = ["weight" : self.shipmentWeight.text!,
             "length" : self.shipmentLength.text!,
@@ -914,7 +915,11 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     
     @IBAction func pickUpNextBtn(_ sender: Any) {
         if self.type == "rec"{
-            sendRepRecPickupRequest()
+            if pickpValidInput(){
+                self.countryName = "United States"
+                sendRepRecPickupRequest()
+            }
+            
         }else{
             if pickpValidInput(){
                 self.countryName = "United States"

@@ -177,7 +177,7 @@ class UploadViewController: UIViewController , UICollectionViewDelegateFlowLayou
             if self.images.count < 21 {
                 self.present(imagePicker, animated: true, completion: nil)
             }else{
-                Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos in 20", view: self)
+                Utilites.ShowAlert(title: "Alert!!!", message: "Max num of photos are 20", view: self)
             }
             
             

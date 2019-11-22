@@ -13,6 +13,7 @@ import SVProgressHUD
 
 class PendingProductDetailViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource,OpalImagePickerControllerDelegate{
   
+    @IBOutlet weak var titleModelLBl: UILabel!
     
     @IBOutlet weak var previewIamge: UIImageView!
     
@@ -63,6 +64,7 @@ class PendingProductDetailViewController: UIViewController ,UICollectionViewDele
         
         if type == "rep" {
            fetchRepProduct()
+            titleModelLBl.text = "Model"
            self.previewIamge.sd_setImage(with: URL(string: detail!.IMAGE_URL_FULL!), placeholderImage: UIImage(named: "placeholder.png"))
            if self.approves {
                self.activeLbl.text = "APPROVED"

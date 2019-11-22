@@ -15,7 +15,7 @@ protocol accountViewControllerDelegate : AnyObject{
     
 }
 
-class accountViewController: UIViewController,ChangePasswordViewDelegate {
+class accountViewController: UIViewController,ChangePasswordViewDelegate ,UITextFieldDelegate{
     
     
 
@@ -41,7 +41,8 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
     
     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
     let button = UIButton(type: UIButton.ButtonType.system) as UIButton
-
+    var email = String()
+    var profilePhoneNumberValid = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +57,83 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
         self.profileNAme.isUserInteractionEnabled = false
         self.profileEmail.isUserInteractionEnabled = false
         self.profilePhoneNumber.isUserInteractionEnabled = false
+        
+        self.profilePhoneNumber.delegate = self
+        
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+              if textField == profilePhoneNumber {
+                  
+                  
+                  let txt = testFormat(sourcePhoneNumber: profilePhoneNumber.text!)
+                  profilePhoneNumber.text = txt
+              }
+          }
+       
+    func testFormat(sourcePhoneNumber: String) -> String {
+      if let formattedPhoneNumber = format(phoneNumber: sourcePhoneNumber) {
+          profilePhoneNumberValid = true
+          return "\(formattedPhoneNumber)"
+          
+      }
+      else {
+          profilePhoneNumberValid = false
+          return "\(sourcePhoneNumber)"
+      }
+    }
+    
+    func format(phoneNumber sourcePhoneNumber: String) -> String? {
+       // Remove any character that is not a number
+       let numbersOnly = sourcePhoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+       let length = numbersOnly.count
+       let hasLeadingOne = numbersOnly.hasPrefix("1")
+       
+       // Check for supported phone number length
+       guard length == 7 || length == 10 || (length == 11 && hasLeadingOne) else {
+           return nil
+       }
+       
+       let hasAreaCode = (length >= 10)
+       var sourceIndex = 0
+       
+       // Leading 1
+       var leadingOne = ""
+       if hasLeadingOne {
+           leadingOne = "1 "
+           sourceIndex += 1
+       }
+       
+       // Area code
+       var areaCode = ""
+       if hasAreaCode {
+           let areaCodeLength = 3
+           guard let areaCodeSubstring = numbersOnly.substring(start: sourceIndex, offsetBy: areaCodeLength) else {
+               return nil
+           }
+           areaCode = String(format: "(%@) ", areaCodeSubstring)
+           sourceIndex += areaCodeLength
+       }
+       
+       // Prefix, 3 characters
+       let prefixLength = 3
+       guard let prefix = numbersOnly.substring(start: sourceIndex, offsetBy: prefixLength) else {
+           return nil
+       }
+       sourceIndex += prefixLength
+       
+       // Suffix, 4 characters
+       let suffixLength = 4
+       guard let suffix = numbersOnly.substring(start: sourceIndex, offsetBy: suffixLength) else {
+           return nil
+       }
+       
+       return leadingOne + areaCode + prefix + "-" + suffix
+    }
+       
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -86,6 +162,7 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
             SVProgressHUD.dismiss()
             self.profileEmail.text = res.email
             self.profileNAme.text = res.name
+            self.email = res.email!
               CustomUserDefaults.email.value = res.email
               CustomUserDefaults.userName.value = res.name
               CustomUserDefaults.VerifyPaypal.value = res.paypal
@@ -151,7 +228,14 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
             flag = false
             self.showToast(message: "Please enter Email")
         }
-        
+//        else if self.profilePhoneNumberValid == false{
+//            flag = false
+//            self.showToast(message: "Enter a valid phone number")
+//        }
+//        else if self.profileEmail.text == self.email {
+//            flag = false
+//            self.showToast(message: "Email Already registerd")
+//        }
         return flag
     }
     
@@ -247,7 +331,7 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate {
         
         addView()
     }
-    
+    // success change password 
     func didClose(trackingNumber: String, carierName: String) {
         
         self.view.showToast(message: "Password Changed")

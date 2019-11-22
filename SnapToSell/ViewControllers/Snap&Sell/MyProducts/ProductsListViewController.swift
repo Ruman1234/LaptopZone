@@ -191,7 +191,7 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
     
     
     @IBAction func createRequestBtn(_ sender: Any) {
-        
+        self.tabBarController?.selectedIndex = 2
         
     }
     
@@ -373,7 +373,7 @@ class PendingProductsListViewController: UIViewController , UITableViewDelegate 
     
     @IBAction func createRequestBtn(_ sender: Any) {
               
-              
+              self.tabBarController?.selectedIndex = 2
     }
     
  
@@ -568,7 +568,7 @@ class ApprovedProductsListViewController: UIViewController , UITableViewDelegate
     
     
       @IBAction func createRequestBtn(_ sender: Any) {
-                
+                self.tabBarController?.selectedIndex = 2
                 
       }
 
@@ -757,7 +757,7 @@ class Snap_SellListViewController: UIViewController , UITableViewDelegate , UITa
     }
     
       @IBAction func createRequestBtn(_ sender: Any) {
-                
+                self.tabBarController?.selectedIndex = 2
                 
       }
       

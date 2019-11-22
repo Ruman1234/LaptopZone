@@ -54,7 +54,7 @@ class ChangePasswordView: UIView {
             self.showToast(message: "Please enter new password")
         }else if self.oldpasswordView.text != CustomUserDefaults.password.value {
             flag = false
-            self.showToast(message: "Please enter your valid old password")
+            self.showToast(message: "Current password is invalid")
         }else if self.oldpasswordView.text == self.newPasswordView.text {
             flag = false
             self.showToast(message: "Old password and new passwor are same")
@@ -68,13 +68,15 @@ class ChangePasswordView: UIView {
     
     @IBAction func doneBtn(_ sender: Any) {
         
-        
+        if self.validInput(){
             NetworkManager.SharedInstance.ResetPasswordUsingOld(new_password: newPasswordView.text!, old_password: oldpasswordView.text!, success: { (res) in
-                //                self.delegate?.didClose()
-                self.delegate?.didClose(trackingNumber: "", carierName: "")
-            }) { (err) in
-                self.showToast(message: "Can't change password right now")
-            }
+                          //                self.delegate?.didClose()
+                          self.delegate?.didClose(trackingNumber: "", carierName: "")
+                      }) { (err) in
+                          self.showToast(message: "Can't change password right now")
+                      }
+        }
+          
 
         
     }

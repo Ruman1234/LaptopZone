@@ -145,52 +145,6 @@ class GridView: UIView
 extension UIViewController {
     
     
-//    func setRedStatusBar()  {
-//         if #available(iOS 13.0, *) {
-//             let app = UIApplication.shared
-//             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
-//
-//             let statusbarView = UIView()
-//             statusbarView.backgroundColor = UIColor.red
-//             view.addSubview(statusbarView)
-//
-//             statusbarView.translatesAutoresizingMaskIntoConstraints = false
-//             statusbarView.heightAnchor
-//                 .constraint(equalToConstant: statusBarHeight).isActive = true
-//             statusbarView.widthAnchor
-//                 .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
-//             statusbarView.topAnchor
-//                 .constraint(equalTo: view.topAnchor).isActive = true
-//             statusbarView.centerXAnchor
-//                 .constraint(equalTo: view.centerXAnchor).isActive = true
-//
-//         } else {
-//             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-//             statusBar?.backgroundColor = UIColor.red
-//         }
-//    }
-    
-    
-//    func internetCheck()  {
-//        
-//        let reachability = try! Reachability()
-//
-//        reachability!.whenReachable = { reachability in
-//           print("connected")
-//        }
-//        reachability?.whenUnreachable = { _ in
-//            print("Not reachable")
-//        }
-//
-//        do {
-//            try reachability?.startNotifier()
-//        } catch {
-//            print("Unable to start notifier")
-//        }
-//        
-//    }
-    
-    
     func netCheck (button :UIButton , imageView :UIImageView) {
         
         SVProgressHUD.dismiss()
@@ -290,23 +244,23 @@ extension UIViewController {
     
     func cancleBtn()  {
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        var ipad_iphone = 0.0
-        // 2. check the idiom
-        switch (deviceIdiom) {
-
-        case .pad:
-            print("iPad style UI")
-            ipad_iphone = 20.0
-        case .phone:
-            print("iPhone and iPod touch style UI")
-            ipad_iphone = 0.0
-        case .tv:
-            print("tvOS style UI")
-        default:
-            print("Unspecified UI idiom")
-        }
-        
+//        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//        var ipad_iphone = 0.0
+//        // 2. check the idiom
+//        switch (deviceIdiom) {
+//
+//        case .pad:
+//            print("iPad style UI")
+//            ipad_iphone = 20.0
+//        case .phone:
+//            print("iPhone and iPod touch style UI")
+//            ipad_iphone = 0.0
+//        case .tv:
+//            print("tvOS style UI")
+//        default:
+//            print("Unspecified UI idiom")
+//        }
+//
         let x = self.view.frame.width - 85 
 //         let y = self.view.frame.height * 0.01
         let y = UIApplication.shared.statusBarFrame.height + CGFloat(9)
@@ -324,22 +278,22 @@ extension UIViewController {
         
         
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-               var ipad_iphone = 0.0
-               // 2. check the idiom
-               switch (deviceIdiom) {
-
-               case .pad:
-                   print("iPad style UI")
-                   ipad_iphone = 20.0
-               case .phone:
-                   print("iPhone and iPod touch style UI")
-                   ipad_iphone = 0.0
-               case .tv:
-                   print("tvOS style UI")
-               default:
-                   print("Unspecified UI idiom")
-               }
+//        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//               var ipad_iphone = 0.0
+//               // 2. check the idiom
+//               switch (deviceIdiom) {
+//
+//               case .pad:
+//                   print("iPad style UI")
+//                   ipad_iphone = 20.0
+//               case .phone:
+//                   print("iPhone and iPod touch style UI")
+//                   ipad_iphone = 0.0
+//               case .tv:
+//                   print("tvOS style UI")
+//               default:
+//                   print("Unspecified UI idiom")
+//               }
                
         
         let y = UIApplication.shared.statusBarFrame.height + CGFloat(9)
@@ -648,99 +602,6 @@ extension UIButton {
           UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
 
         ], locations: [0, 0.5, 1], startPoint: CGPoint(x: 0.00, y: 0.5), endPoint: CGPoint(x: 0.75, y: 0.09))
-
-        
-//        func ccc (){
-//                let view = UIView()
-//
-//        view.frame = self.frame
-//
-//                view.backgroundColor = .white
-//
-////                view
-////         = view
-//
-//
-//
-//
-//                let shadows = UIView()
-//
-//                shadows.frame = view.frame
-//
-//                shadows.clipsToBounds = false
-//
-//                view.addSubview(shadows)
-//
-//
-//                let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 50)
-//
-//                let layer0 = CALayer()
-//
-//                layer0.shadowPath = shadowPath0.cgPath
-//
-//                layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-//
-//                layer0.shadowOpacity = 1
-//
-//                layer0.shadowRadius = 20
-//
-//                layer0.shadowOffset = CGSize(width: 0, height: 10)
-//
-//                layer0.bounds = shadows.bounds
-//
-//                layer0.position = shadows.center
-//
-//                shadows.layer.addSublayer(layer0)
-//
-//
-//                let shapes = UIView()
-//
-//                shapes.frame = view.frame
-//
-//                shapes.clipsToBounds = true
-//
-//                view.addSubview(shapes)
-//
-//
-//                let layer1 = CAGradientLayer()
-//
-//                layer1.colors = [
-//
-//                  UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor,
-//
-//                  UIColor(red: 1, green: 0.19, blue: 0, alpha: 1).cgColor,
-//
-//                  UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
-//
-//                ]
-//
-//                layer1.locations = [0, 0.5, 1]
-//
-//        layer1.startPoint = CGPoint(x: 0., y: 0.5)
-//
-//                layer1.endPoint = CGPoint(x: 0.75, y: 0.5)
-//
-//                layer1.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
-//
-//                layer1.bounds = shapes.bounds.insetBy(dx: -0.5*shapes.bounds.size.width, dy: -0.5*shapes.bounds.size.height)
-//
-//                layer1.position = shapes.center
-//
-//                shapes.layer.addSublayer(layer1)
-//
-//
-//                shapes.layer.cornerRadius = 50
-//
-//
-//            let parent = self
-//
-//                parent.addSubview(view)
-//
-//                view.translatesAutoresizingMaskIntoConstraints = false
-
-
-//            }
-        
         
         self.titleLabel?.font = UIFont(name: "Eina03-Regular", size: 17.0)
         self.layer.cornerRadius =  self.frame.height / 2.041
@@ -773,27 +634,6 @@ extension UIView {
         
     }
     func giveShadow()  {
-        
-//        let shadows = UIView()
-//        let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 0)
-//
-//        let layer0 = CALayer()
-//
-//        layer0.shadowPath = shadowPath0.cgPath
-//
-//        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05).cgColor
-//
-//        layer0.shadowOpacity = 1
-//
-//        layer0.shadowRadius = 4
-//
-//        layer0.shadowOffset = CGSize(width: 0, height: 1)
-//
-//        layer0.bounds = shadows.bounds
-//
-//        layer0.position = shadows.center
-//
-//        shadows.layer.addSublayer(layer0)
         
         self.layer.shadowOpacity = 0.2
         
@@ -851,94 +691,6 @@ extension UIView {
         self.layer.insertSublayer(gradient, at: 0)
         
     }
-    
-//    func ccc (){
-//            let view = UILabel()
-//
-//            view.frame = CGRect(x: 0, y: 0, width: 190, height: 49)
-//
-//            view.backgroundColor = .white
-//
-//    //        self.view
-//
-//
-//            let shadows = UIView()
-//
-//            shadows.frame = view.frame
-//
-//            shadows.clipsToBounds = false
-//
-//            view.addSubview(shadows)
-//
-//
-//            let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 50)
-//
-//    //        let layer0 = CALayer()
-//    //
-//    //        layer0.shadowPath = shadowPath0.cgPath
-//    //
-//    //        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-//    //
-//    //        layer0.shadowOpacity = 1
-//    //
-//    //        layer0.shadowRadius = 20
-//    //
-//    //        layer0.shadowOffset = CGSize(width: 0, height: 10)
-//    //
-//    //        layer0.bounds = shadows.bounds
-//    //
-//    //        layer0.position = shadows.center
-//    //
-//    //        shadows.layer.addSublayer(layer0)
-//
-//
-//            let shapes = UIView()
-//
-//            shapes.frame = view.frame
-//
-//            shapes.clipsToBounds = true
-//
-//            view.addSubview(shapes)
-//
-//
-//            let layer1 = CAGradientLayer()
-//
-//            layer1.colors = [
-//
-//              UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1).cgColor,
-//
-//              UIColor(red: 1, green: 0.19, blue: 0, alpha: 1).cgColor,
-//
-//              UIColor(red: 1, green: 0.49, blue: 0, alpha: 1).cgColor
-//
-//            ]
-//
-//            layer1.locations = [0, 0.5, 1]
-//
-//            layer1.startPoint = CGPoint(x: 0.25, y: 0.5)
-//
-//            layer1.endPoint = CGPoint(x: 0.75, y: 0.5)
-//
-//            layer1.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
-//
-//            layer1.bounds = shapes.bounds.insetBy(dx: -0.5*shapes.bounds.size.width, dy: -0.5*shapes.bounds.size.height)
-//
-//            layer1.position = shapes.center
-//
-//            shapes.layer.addSublayer(layer1)
-//
-//
-//            shapes.layer.cornerRadius = 50
-//
-//
-//        let parent = self.view
-//
-//            parent.addSubview(view)
-//
-//            view.translatesAutoresizingMaskIntoConstraints = false
-//
-//
-//        }
     
     
     func addDashedBorder() {
@@ -1018,6 +770,7 @@ extension UITextField{
          
          if self.isSecureTextEntry{
              self.isSecureTextEntry = false
+            
          }else{
              self.isSecureTextEntry = true
          }

@@ -110,6 +110,16 @@ class AddNewAddressViewController: UIViewController , CLLocationManagerDelegate 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
     }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == phones{
+            return range.location < 10
+        }
+        return range.location < 10
+    }
+
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == phones {
             

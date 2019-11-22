@@ -130,19 +130,19 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
             
             let dd =  dataArray[1] as! [String: AnyObject]
                      print(dd)
-                     
-                    let msg = dd["message"] as! [String: AnyObject]
-                     print(msg)
-                     print(msg.count)
-                     let type = msg["type"] as! String
-                     print(type)
-                     let content = msg["content"] as! String
-                     print(content)
+//                     
+//                    let msg = dd["message"] as! [String: Any]
+//                     print(msg)
+//                     print(msg.count)
+//                     let type = msg["type"] as! String
+//                     print(type)
+//                     let content = msg["content"] as! String
+//                     print(content)
             
             
               if #available(iOS 13.0, *) {
                   let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                  appDelegate?.scheduleNotification(title: "New message from Admin", body: content)
+//                  appDelegate?.scheduleNotification(title: "New message from Admin", body: content)
               } else {
                   // Fallback on earlier versions
               }

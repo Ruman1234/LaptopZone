@@ -82,6 +82,38 @@
             endingLineNumber = "87"
             landmarkName = "socalFBLogin(Token:success:failure:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "94D19DE4-6CB5-4909-A9CB-84FE0FF1EAAD - fb92f06f4d281c04"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LaptopZone.NetworkManager.socalFBLogin(Token: Swift.String, success: (LaptopZone.LoginModel) -&gt; (), failure: (__C.NSError) -&gt; ()) -&gt; ()"
+                  moduleName = "LaptopZone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/LaptopZone/SnapToSell/NetworkManager/SnapToSellNetworkMAnager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "94D19DE4-6CB5-4909-A9CB-84FE0FF1EAAD - 859b3e96988fc468"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in LaptopZone.NetworkManager.socalFBLogin(Token: Swift.String, success: (LaptopZone.LoginModel) -&gt; (), failure: (__C.NSError) -&gt; ()) -&gt; ()"
+                  moduleName = "LaptopZone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/LaptopZone/SnapToSell/NetworkManager/SnapToSellNetworkMAnager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "168">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

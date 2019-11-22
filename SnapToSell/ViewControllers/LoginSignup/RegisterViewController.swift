@@ -10,8 +10,9 @@
 import UIKit
 import SkyFloatingLabelTextField
 import SVProgressHUD
-
-class RegisterViewController: UIViewController {
+import FBSDKLoginKit
+class RegisterViewController: UIViewController,LoginButtonDelegate {
+   
 
     
     @IBOutlet weak var name: UITextField!
@@ -24,9 +25,16 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var signupBtn: UIButton!
     
     
-    @IBOutlet weak var fb: UIButton!
+    //@IBOutlet weak var fb: UIButton!
     @IBOutlet weak var google: UIButton!
-    
+     @IBOutlet weak var fb: FBLoginButton! = {
+            
+            let butt = FBLoginButton()
+    //        butt.delegate = self
+            butt.permissions = ["email","public_profile", "first_name", "last_name"]
+    //           butt.readPermissions = ["email"]
+               return butt
+           }()
     @IBOutlet weak var twitter: UIButton!
     let userdefaults = UserDefaults.standard
     
@@ -61,13 +69,89 @@ class RegisterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+            
+            print(result?.token?.tokenString)
+            
+    //        print(result?.value(forKey: "name"))
+            
+            
+            if(AccessToken.current != nil){
+
+                GraphRequest(graphPath: "me", parameters: ["fields": "id,name , first_name, last_name , email"]).start(completionHandler: { (connection, result, error) in
+
+                       guard let Info = result as? [String: Any] else { return }
+
+                        if let userName = Info["name"] as? String
+                        {
+                            print(userName)
+                            //                        CustomUserDefaults.email.value = res.email
+                            CustomUserDefaults.userName.value = userName
+                        }
+                        if let email = Info["email"] as? String
+                        {
+                            print(email)
+                            CustomUserDefaults.email.value = email
+    //                        CustomUserDefaults.userName.value = userName
+                        }
+
+                   })
+               }
+            
+         
+            let token = result?.token?.tokenString
+            if token == nil {
+                return
+            }
+            SVProgressHUD.show(withStatus: "Loading")
+            NetworkManager.SharedInstance.socalFBLogin(Token: token!, success: { (response) in
+                print(response)
+                
+                SVProgressHUD.dismiss()
+                if (response.message != nil) {
+                    Utilites.ShowAlert(title: "Error!!", message: response.message!, view: self)
+                    return
+                }else{
+                    print("Adasd")
+                    
+                    self.userdefaults.setValue(response.access_token, forKey: "Token")
+                    
+                    self.userdefaults.set(true, forKey: "islogin")
+                    
+                    AppManager.shared().accessToken = UserDefaults.standard.value(forKey: "Token") as! String
+                    
+                    print(AppManager.shared().accessToken)
+                    
+                    CustomUserDefaults.Token.value = response.access_token
+                    
+                    let main = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    
+                    self.navigationController?.pushViewController(main, animated: true)
+                    
+                    
+                }
+                
+            }) { (err) in
+                SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+            }
+        }
+
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+       print("logout")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
-      
+        self.fb.setImage(nil, for: .normal)
+        let buttonText = NSAttributedString(string: " ")
+        self.fb.setAttributedTitle(buttonText, for: .normal)
+
     }
     
     func validInput() -> Bool {

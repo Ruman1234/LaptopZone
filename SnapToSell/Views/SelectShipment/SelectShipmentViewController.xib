@@ -3,7 +3,7 @@
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,21 +30,21 @@
                                 <constraint firstAttribute="height" constant="31" id="jzf-Qy-CkW"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQz-Ci-7ZF">
-                            <rect key="frame" x="57" y="68.999999999999986" width="253" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your top priorities for Shipping! " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQz-Ci-7ZF">
+                            <rect key="frame" x="16" y="69.000000000000057" width="334" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lb6-Le-ePL">
-                            <rect key="frame" x="0.0" y="88.999999999999986" width="366" height="1"/>
+                            <rect key="frame" x="0.0" y="108.99999999999999" width="366" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="ZO8-Y2-vg9"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kz2-Sy-YC3">
-                            <rect key="frame" x="1" y="91" width="366" height="318"/>
+                            <rect key="frame" x="1" y="111" width="366" height="298"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="yUU-BN-vke"/>
@@ -74,9 +74,9 @@
                         <constraint firstItem="I9g-Bo-N4M" firstAttribute="centerX" secondItem="MGj-RZ-MpM" secondAttribute="centerX" id="7ap-NF-6E9"/>
                         <constraint firstAttribute="trailing" secondItem="Lb6-Le-ePL" secondAttribute="trailing" id="9we-0C-sxj"/>
                         <constraint firstAttribute="width" constant="366" id="Mn3-TR-Lq5"/>
-                        <constraint firstItem="vQz-Ci-7ZF" firstAttribute="leading" secondItem="MGj-RZ-MpM" secondAttribute="leading" constant="57" id="WfU-x7-l3Q"/>
+                        <constraint firstItem="vQz-Ci-7ZF" firstAttribute="leading" secondItem="MGj-RZ-MpM" secondAttribute="leading" constant="16" id="WfU-x7-l3Q"/>
                         <constraint firstItem="vQz-Ci-7ZF" firstAttribute="top" secondItem="MM7-VQ-RuE" secondAttribute="bottom" constant="14" id="Xxn-Lp-x6P"/>
-                        <constraint firstAttribute="trailing" secondItem="vQz-Ci-7ZF" secondAttribute="trailing" constant="56" id="YEN-9H-OvB"/>
+                        <constraint firstAttribute="trailing" secondItem="vQz-Ci-7ZF" secondAttribute="trailing" constant="16" id="YEN-9H-OvB"/>
                         <constraint firstItem="MM7-VQ-RuE" firstAttribute="centerX" secondItem="MGj-RZ-MpM" secondAttribute="centerX" id="bs8-SH-bjF"/>
                         <constraint firstItem="kz2-Sy-YC3" firstAttribute="top" secondItem="Lb6-Le-ePL" secondAttribute="bottom" constant="1.0000000000000142" id="f9u-XY-7aW"/>
                         <constraint firstItem="kz2-Sy-YC3" firstAttribute="leading" secondItem="MGj-RZ-MpM" secondAttribute="leading" constant="1" id="gaT-IH-IF8"/>

@@ -53,7 +53,7 @@ class ProductDetailViewController: UIViewController ,UICollectionViewDelegate , 
 //        self.images.append(UIImage(named: "addimage")!)
         
         _ = UserDefaults.standard.value(forKey: "Token")
-        titleProduct.delegate = self as! UITextFieldDelegate
+        titleProduct.delegate = self 
         
 //        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
 //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false

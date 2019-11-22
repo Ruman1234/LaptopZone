@@ -15,7 +15,7 @@ import SVProgressHUD
 import SkyFloatingLabelTextField
 import OpalImagePicker
 
-class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDelegate {
+class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDelegate , UITextFieldDelegate {
     
     
     
@@ -43,7 +43,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
     
     var type = String()
     var images = [UIImage]()
-    
+    var phoneCheck = false
     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
        let button = UIButton(type: UIButton.ButtonType.system) as UIButton
 
@@ -55,7 +55,7 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
         
         self.email.text = CustomUserDefaults.email.value
         self.firstname.text = CustomUserDefaults.userName.value
-       
+        self.phone.delegate = self
         
         //message.layer.cornerRadius = 5
         message.layer.borderColor = UIColor.lightGray.cgColor
@@ -95,6 +95,85 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
           }
     }
   
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           
+           if textField == phone{
+               return range.location < 10
+           }
+           return range.location < 10
+       }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+              if textField == phone {
+                  
+                  
+                  let txt = testFormat(sourcePhoneNumber: phone.text!)
+                  phone.text = txt
+              }
+          }
+       
+          func testFormat(sourcePhoneNumber: String) -> String {
+              if let formattedPhoneNumber = format(phoneNumber: sourcePhoneNumber) {
+                  phoneCheck = true
+                  return "\(formattedPhoneNumber)"
+                  
+              }
+              else {
+                  phoneCheck = false
+                  return "\(sourcePhoneNumber)"
+              }
+          }
+       
+       func format(phoneNumber sourcePhoneNumber: String) -> String? {
+           // Remove any character that is not a number
+           let numbersOnly = sourcePhoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+           let length = numbersOnly.count
+           let hasLeadingOne = numbersOnly.hasPrefix("1")
+           
+           // Check for supported phone number length
+           guard length == 7 || length == 10 || (length == 11 && hasLeadingOne) else {
+               return nil
+           }
+           
+           let hasAreaCode = (length >= 10)
+           var sourceIndex = 0
+           
+           // Leading 1
+           var leadingOne = ""
+           if hasLeadingOne {
+               leadingOne = "1 "
+               sourceIndex += 1
+           }
+           
+           // Area code
+           var areaCode = ""
+           if hasAreaCode {
+               let areaCodeLength = 3
+               guard let areaCodeSubstring = numbersOnly.substring(start: sourceIndex, offsetBy: areaCodeLength) else {
+                   return nil
+               }
+               areaCode = String(format: "(%@) ", areaCodeSubstring)
+               sourceIndex += areaCodeLength
+           }
+           
+           // Prefix, 3 characters
+           let prefixLength = 3
+           guard let prefix = numbersOnly.substring(start: sourceIndex, offsetBy: prefixLength) else {
+               return nil
+           }
+           sourceIndex += prefixLength
+           
+           // Suffix, 4 characters
+           let suffixLength = 4
+           guard let suffix = numbersOnly.substring(start: sourceIndex, offsetBy: suffixLength) else {
+               return nil
+           }
+           
+           return leadingOne + areaCode + prefix + "-" + suffix
+       }
+       
 
     func SaveRepairInfo(brand_name: String,
                         product_name: String,
@@ -297,6 +376,9 @@ class ContactDetailsViewController: UIViewController,OpalImagePickerControllerDe
             }else if Utilites.isValid(email: self.email!.text! as NSString) == false{
                 flag = false
                 self.showToast(message: "Please enter a valid email")
+            }else if self.phoneCheck == false{
+                self.showToast(message: "Please enter a valid phone number")
+                flag = false
             }
         }else{
             if self.email.text == "" {

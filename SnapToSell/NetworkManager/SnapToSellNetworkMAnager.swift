@@ -28,6 +28,7 @@ extension NetworkManager{
             if response.response?.statusCode == 200{
                 print(response)
                 if let value = response.result.value{
+                    
                     success(Mapper<LoginModel>().map(JSON: value as! [String : Any])!)
                 }
             }else if response.response?.statusCode == 401{

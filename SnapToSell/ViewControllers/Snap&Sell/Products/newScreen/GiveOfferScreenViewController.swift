@@ -37,7 +37,8 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
                                     self.imageView.isHidden = true
                                     self.button.isHidden = true
                         //            self.viewWillAppear(true)
-                                    self.callApi(id: self.id)
+//                                    Constants.productName
+                                    self.callApi(id: Constants.productName)
                                 }else{
                                     self.showToast(message: "Internet is not availble")
                                 }
@@ -50,7 +51,7 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
         priceLbl.text = Double(price)?.dollarString
         
              if Utilites.isInternetAvailable() {
-                     self.callApi(id: self.id)
+                     self.callApi(id: Constants.productName)
                    }else{
                      self.netCheck(button: button, imageView: imageView)
                        button.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
@@ -664,13 +665,17 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
     
     
     @IBAction func getOffer(_ sender: Any) {
+        if self.answerIdArray.count == 0 {
+            
+        }else{
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "SelectPaymentMethodViewController") as! SelectPaymentMethodViewController
+            Constants.gevin_offer = price
+            Constants.available_offer = "\(self.calculatedAmount)"
+            Constants.answer_ids = self.answerIdArray.joined(separator: ",")
+            self.navigationController?.pushViewController(main, animated: true)
+        }
         
-        
-        let main = self.storyboard?.instantiateViewController(withIdentifier: "SelectPaymentMethodViewController") as! SelectPaymentMethodViewController
-        Constants.gevin_offer = price
-        Constants.available_offer = "\(self.calculatedAmount)"
-        Constants.answer_ids = self.answerIdArray.joined(separator: ",")
-        self.navigationController?.pushViewController(main, animated: true)
+       
                   
         
     }

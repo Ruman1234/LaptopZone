@@ -162,49 +162,113 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
             let dd =  dataArray[1] as! [String: AnyObject]
             print(dd)
             
-           let msg = dd["message"] as! [String: AnyObject]
-            print(msg)
-            print(msg.count)
-            let type = msg["type"] as! String
-            print(type)
-            let content = msg["content"] as! String
-            print(content)
-           let conversation_id = msg["conversation_id"] as! Int
-            print(conversation_id)
-           let id = msg["id"] as! Int
-            print(id)
-           let timestamp = msg["timestamp"] as! String
-            print(timestamp)
-           let user_id = msg["user_id"] as! Int
-            print(user_id)
-           let user_role = msg["user_role"] as! String
-            print(user_role)
-           let status = msg["status"] as! String
-            
-            print(status)
-            
-            
-            
-            let pra = ["conversation_id" : conversation_id,
-                          "cover" : "asdfasdf",
-                          "created_at" : "",
-                          "delivered_as" : "",
-                          "id" : id,
-                          "price" : "",
-                          "remarks" : "",
-                          "unread_messages" : "",
-                          "status" : status,
-                          "title" : "asdfasf",
-                          "user_id" : user_id,
-                          "user_role" : user_role,
-                          "type" : type,
-                          "timestamp" : timestamp,
-                          "content" : content] as [String : Any]
+            let msg0 = dd["message"] as! String
+                       print(msg0)
+            let str = "[\(msg0)]"
+//            print(msg0["id"] as! AnyObject)
+             let msg1 = dd["message"] as! String
+            print(msg1)
+            print(msg1.count)
+           
+            let data = str.data(using: .utf8)!
+            do {
+                if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [Dictionary<String,Any>]
+                {
+                   print(jsonArray) // use the json here
+                    print(jsonArray[0])
+                    let msg = jsonArray[0]
+                    let arr = msg["type"] as! String
+                    let type = msg["type"] as! String
+                             print(type)
+                             let content = msg["content"] as! String
+                             print(content)
+                            let conversation_id = msg["conversation_id"] as! Int
+                             print(conversation_id)
+                            let id = msg["id"] as! Int
+                             print(id)
+                            let timestamp = msg["timestamp"] as! String
+                             print(timestamp)
+                            let user_id = msg["user_id"] as! Int
+                             print(user_id)
+                            let user_role = msg["user_role"] as! String
+                             print(user_role)
+                            let status = msg["status"] as! String
+                             
+                             print(status)
+                             
+                             
+                             
+                             let pra = ["conversation_id" : conversation_id,
+                                           "cover" : "asdfasdf",
+                                           "created_at" : "",
+                                           "delivered_as" : "",
+                                           "id" : id,
+                                           "price" : "",
+                                           "remarks" : "",
+                                           "unread_messages" : "",
+                                           "status" : status,
+                                           "title" : "asdfasf",
+                                           "user_id" : user_id,
+                                           "user_role" : user_role,
+                                           "type" : type,
+                                           "timestamp" : timestamp,
+                                           "content" : content] as [String : Any]
 
-                          let msgsocket = MessageModel(JSON: pra)
-            self.messages.append(msgsocket!)
-            self.tableView.reloadData()
-            self.tableView.scrollToBottom(animated: true)
+                                           let msgsocket = MessageModel(JSON: pra)
+                             self.messages.append(msgsocket!)
+                             self.tableView.reloadData()
+                             self.tableView.scrollToBottom(animated: true)
+                             
+                } else {
+                    print("bad json")
+                }
+            } catch let error as NSError {
+                print(error)
+            }
+            
+//           let msg = dd["message"] as! [String: Any]
+//            print(msg)
+//            print(msg.count)
+//            let type = msg["type"] as! String
+//            print(type)
+//            let content = msg["content"] as! String
+//            print(content)
+//           let conversation_id = msg["conversation_id"] as! Int
+//            print(conversation_id)
+//           let id = msg["id"] as! Int
+//            print(id)
+//           let timestamp = msg["timestamp"] as! String
+//            print(timestamp)
+//           let user_id = msg["user_id"] as! Int
+//            print(user_id)
+//           let user_role = msg["user_role"] as! String
+//            print(user_role)
+//           let status = msg["status"] as! String
+//
+//            print(status)
+//
+//
+//
+//            let pra = ["conversation_id" : conversation_id,
+//                          "cover" : "asdfasdf",
+//                          "created_at" : "",
+//                          "delivered_as" : "",
+//                          "id" : id,
+//                          "price" : "",
+//                          "remarks" : "",
+//                          "unread_messages" : "",
+//                          "status" : status,
+//                          "title" : "asdfasf",
+//                          "user_id" : user_id,
+//                          "user_role" : user_role,
+//                          "type" : type,
+//                          "timestamp" : timestamp,
+//                          "content" : content] as [String : Any]
+//
+//                          let msgsocket = MessageModel(JSON: pra)
+//            self.messages.append(msgsocket!)
+//            self.tableView.reloadData()
+//            self.tableView.scrollToBottom(animated: true)
             
             
         }
@@ -214,7 +278,13 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
         SVProgressHUD.show(withStatus: "Loading...")
         NetworkManager.SharedInstance.getMessagesDetails(id: id, success: { (res) in
             SVProgressHUD.dismiss()
+            
+            
             self.messages = res
+            
+            let arr = self.messages.sorted { $0.convertedStartDate < $1.convertedStartDate }
+           
+            self.messages = arr
             self.tableView.reloadData()
             self.tableView.scrollToBottom(animated: true)
         }) { (err) in

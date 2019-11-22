@@ -18,6 +18,7 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var nextBTn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var otherBtn: UIButton!
@@ -29,14 +30,17 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
        let button = UIButton(type: UIButton.ButtonType.system) as UIButton
 
+    var problems = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.addBG()
         self.otherBtn.setGradient()
-        self.addPAger(totalPage: 7, currentPage: 5)
+        self.nextBTn.setGradient()
         
+        self.addPAger(totalPage: 7, currentPage: 5)
+        collectionView.allowsMultipleSelection = true
         if Utilites.isInternetAvailable() {
                  fetchDetails(id: Constants.productId)
                }else{
@@ -106,12 +110,37 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
-        Constants.issuesId = self.itemsArray[indexPath.row].iSSUE_DT_ID!
-        self.navigationController?.pushViewController(main, animated: true)
+//       let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
+//        Constants.issuesId = self.itemsArray[indexPath.row].iSSUE_DT_ID!
+//        self.navigationController?.pushViewController(main, animated: true)
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell?.isSelected == true {
+            cell?.backgroundColor = UIColor.red
+            
+            self.problems.append(self.itemsArray[indexPath.row].iSSUE_DT_ID!)
+        }
     }
             
             
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        
+        for i in 0..<problems.count{
+            print(indexPath.row)
+            if self.problems[i] == self.itemsArray[indexPath.row].iSSUE_DT_ID!{
+                self.problems.remove(at: i)
+                cell?.backgroundColor = UIColor.clear
+                return
+            }
+        }
+        
+       
+        
+        
+    }
+    
+  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
            let numberOfItemsPerRow:CGFloat = 2
@@ -148,14 +177,16 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
                   self.addotherView.alpha = 0
                   self.addotherView = nil
               }
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                                 
-                         
-                let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
-                Constants.issuesId = self.otherBtn.titleLabel!.text!
-                self.navigationController?.pushViewController(main, animated: true)
-                                 
-            }
+            
+            self.problems.append(text)
+//            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+//
+//
+//                let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
+//                Constants.issuesId = self.otherBtn.titleLabel!.text!
+//                self.navigationController?.pushViewController(main, animated: true)
+//
+//            }
         }
         
     }
@@ -202,4 +233,20 @@ class ProblemViewController: UIViewController, UICollectionViewDelegate , UIColl
                  self.showToast(message: "Internet is not availble")
              }
          }
+    
+    
+    
+    @IBAction func nextBTn(_ sender: Any) {
+        
+        if self.problems.count == 0 {
+            self.showToast(message: "Kindly select a problem")
+        }else{
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ContactDetailsViewController") as! ContactDetailsViewController
+            Constants.issuesId = self.problems.joined(separator: ",")
+            self.navigationController?.pushViewController(main, animated: true)
+
+        }
+        
+    }
+    
 }

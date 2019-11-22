@@ -51,10 +51,10 @@ class newTabBarViewController: ButtonBarPagerTabStripViewController  {
                 settings.style.buttonBarItemTitleColor = UIColor.black
         //        settings.style.selectedBarHeight = 1.0
                 settings.style.buttonBarMinimumLineSpacing = 0
-                settings.style.selectedBarHeight = 3
+                settings.style.selectedBarHeight = 1
                 settings.style.buttonBarLeftContentInset = 0
                 settings.style.buttonBarRightContentInset = 0
-                settings.style.buttonBarHeight = 5
+//                settings.style.buttonBarHeight = 5
                 buttonBarView.selectedBar.backgroundColor = Constants.APP_THEME_COLOR
         //        buttonBarView.selectedBar.heightAnchor = 1
                 buttonBarView.selectedBar.frame.size.height = 1

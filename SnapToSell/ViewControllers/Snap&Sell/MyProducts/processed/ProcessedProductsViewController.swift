@@ -21,6 +21,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
 
     @IBOutlet weak var titleProduct: UILabel!
 
+    @IBOutlet weak var titleModel: UILabel!
     @IBOutlet weak var lotPrice: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var status: UILabel!
@@ -74,11 +75,14 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
        
         if self.type == "rep"{
             self.messageBtn.isHidden = true
+            titleModel.text = "Model"
             if self.approves {
                 self.activeLbl.text = "APPROVED"
                 self.requestStatusLbl.text = "APPROVED"
              self.descriptionLbl.text = "Awaiting for your Package, Please send as soon as for further Processing"
                 self.acceptBtn.setTitle("Proceed by another way", for: .normal)
+            }else{
+                self.activeLbl.text = "PROCESSED"
             }
             fetchDetailOfRepRec() 
         }else{
@@ -132,7 +136,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
         self.titleProduct.text = self.detail!.details![0].MODEL_NAME
         self.lotPrice.text = Double(self.detail!.details![0].OFFER ?? "0")?.dollarString
             
-        self.activeLbl.text = "PROCESSED"
+        
         self.askingpriceLbl.isHidden = true
         self.products.append(self.detail!.details![0].MODEL_NAME!)
 //            let inputFormatter = DateFormatter()
