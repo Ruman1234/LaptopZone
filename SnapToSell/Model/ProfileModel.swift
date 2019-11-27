@@ -21,6 +21,7 @@ struct ProfileModel : Mappable {
     var email_verified : String?
     var email_verified_at : String?
     var role : String?
+    var phone : String?
     var created_at : Int?
     var updated_at : String?
     var requests_count : Int?
@@ -39,6 +40,7 @@ struct ProfileModel : Mappable {
         email_verified <- map["email_verified"]
         email_verified_at <- map["email_verified_at"]
         role <- map["role"]
+        phone <- map["phone"]
         created_at <- map["created_at"]
         updated_at <- map["updated_at"]
         requests_count <- map["requests_count"]

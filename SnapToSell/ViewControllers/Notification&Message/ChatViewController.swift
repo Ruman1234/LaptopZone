@@ -45,6 +45,9 @@ class ChatViewController: UIViewController ,UITableViewDataSource ,UITableViewDe
         self.addBG()
         self.backBtn()
 
+        self.navigationController?.navigationItem.hidesBackButton = true
+        self.navigationItem.setHidesBackButton(true, animated:true)
+
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         if Utilites.isInternetAvailable() {

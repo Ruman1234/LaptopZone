@@ -757,11 +757,12 @@ extension NetworkManager{
      func UpdateProfile(
         name:String,
         email:String,
+        phone:String,
          success : @escaping(ProfileModel) -> Void ,
          failure : @escaping(NSError) -> Void)  {
          
          
-        self.request(url: Constants.PROFILE   , method: .post, parameters:["name" :name,"email":email ], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.PROFILE   , method: .post, parameters:["name" :name,"email":email, "phone" : phone ], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
              print(response)
              guard (response.response?.statusCode) != nil else{
                  failure(NSError())
@@ -1618,7 +1619,34 @@ extension NetworkManager{
          }
     
     
-    
+    func UpdateDropOffRep(
+              req_id :String,
+              trac_num :String,
+              carier :String,
+                           success : @escaping([MessageModel]) -> Void ,
+                           failure : @escaping(NSError) -> Void)  {
+
+             
+                  
+           self.request2(url: "update_carrier_track", method: .post  ,parameters: ["req_id" : req_id,"trac_num" : trac_num,"carier" : carier], header:["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+                  guard (response.response?.statusCode) != nil else{
+                    failure(NSError())
+                    return
+                  }
+               print(response)
+                  print(response.response!.statusCode)
+                  if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                    print(response)
+                    if let value = response.result.value{
+                        success(Mapper<MessageModel>().mapArray(JSONObject: value)!)
+
+                       
+                   }
+                  }else{
+                    failure(NSError())
+                  }
+               }
+            }
     
     func GetCount(
                     success : @escaping(MessageModel) -> Void ,
@@ -1745,6 +1773,35 @@ extension NetworkManager{
     //      pickup
     //    http://71.78.236.20/laptopzone/reactcontroller/c_react/saveOptionData
             
+    
+
+     func getNotificaiton(
+    
+         success : @escaping([notificationModel]) -> Void ,
+//         success1 : @escaping(notificationModel) -> Void ,
+         failure : @escaping(NSError) -> Void)  {
+         
+         
+         self.request(url: Constants.GETNOTIFICATIONS   , method: .get, parameters:nil, encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+             print(response)
+             guard (response.response?.statusCode) != nil else{
+                 failure(NSError())
+                 return
+             }
+             if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                 print(response)
+                print(CustomUserDefaults.Token.value!)
+               
+
+                 if let value = response.result.value{
+                     success(Mapper<notificationModel>().mapArray(JSONObject: value)!)
+                 }
+             }else{
+                 failure(NSError())
+             }
+         }
+         
+     }
    
 }
 

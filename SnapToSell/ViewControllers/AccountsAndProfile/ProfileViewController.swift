@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController {
                 self.cityCountryname.text = "\(String(describing: response.city!)), United State."
                  self.addressLbl.text = "\(String(describing: response.street!)), \(String(describing: response.city!)), \(String(describing: response.state!)), \(String(describing: response.zip!)), United State."
                 
-                self.numberLbl.text = response.phone!
+                self.numberLbl.text = response.phone ?? ""
 //                self.address = response
 //                self.name.text = response.contact_name
 //                self.aptStreet.text = (response.apartment ?? "") + "," + (response.street ?? "")

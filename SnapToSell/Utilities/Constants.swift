@@ -50,6 +50,8 @@ class Constants {
     static let FORGOTPASSWORDVERIFY = "auth/forgot-password/verify"
     static let UPDATETOKEN = "customer/devices"
     
+    static let GETNOTIFICATIONS = "customer/notifications"
+    
     
     static let SELECT_BRAND = "ljw_Brands"
     static let SELECT_SERIES = "ljw_Series"

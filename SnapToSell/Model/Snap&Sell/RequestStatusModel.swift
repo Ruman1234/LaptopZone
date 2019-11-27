@@ -32,6 +32,9 @@ class RequestStatusModel : Mappable {
     var STATUS : String?
     var IMAGE_URL_FULL : String?
     var SELECT_OPTION : String?
+    var TRACK_NUMB : String?
+    var TYPE : String?
+    var URL : String?
     
     
     
@@ -75,6 +78,10 @@ class RequestStatusModel : Mappable {
         STATUS <- map["STATUS"]
         IMAGE_URL_FULL <- map["IMAGE_URL_FULL"]
         
+        TRACK_NUMB <- map["TRACK_NUMB"]
+        TYPE <- map["TYPE"]
+        URL <- map["URL"]
+               
         
         details <- map["details"]
         images_rep <- map["images"]

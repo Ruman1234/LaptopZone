@@ -142,17 +142,17 @@ class NewProductsListViewController: UIViewController , UITableViewDelegate , UI
 //
             
         }else if product.STATUS == "APPROVED" {
-            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
-            main.type = "rep"
-            main.approves = true
-            main.detail = self.AllProducts[indexPath.row]
-            self.navigationController?.pushViewController(main, animated: true)
+//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ProcessedProductsViewController") as! ProcessedProductsViewController
+//            main.type = "rep"
+//            main.approves = true
+//            main.detail = self.AllProducts[indexPath.row]
+//            self.navigationController?.pushViewController(main, animated: true)
                       
 //
-//            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
-//            main.detail = self.AllProducts[indexPath.row]
-//            main.type = "rep"
-//            self.navigationController?.pushViewController(main, animated: true)
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "ApprovedProductDetailViewController") as! ApprovedProductDetailViewController
+            main.detail = self.AllProducts[indexPath.row]
+            main.type = "rep"
+            self.navigationController?.pushViewController(main, animated: true)
             
             
             

@@ -27,23 +27,24 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     
     
       
-      @IBOutlet weak var tableView: UITableView!
-      
-      @IBOutlet weak var previewIamge: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
 
-      @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var previewIamge: UIImageView!
 
-      @IBOutlet weak var titleProduct: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
 
-      @IBOutlet weak var lotPrice: UILabel!
-      @IBOutlet weak var dateLbl: UILabel!
-      @IBOutlet weak var status: UILabel!
-      @IBOutlet weak var remarks: UILabel!
+    @IBOutlet weak var titleProduct: UILabel!
 
-      @IBOutlet var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var lotPrice: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var remarks: UILabel!
 
-      @IBOutlet weak var sendBtn: UIButton!
-      @IBOutlet weak var activeLbl: UILabel!
+    @IBOutlet var cameraButton: UIBarButtonItem!
+
+    @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var activeLbl: UILabel!
+    
     @IBOutlet weak var navigationTitile: UILabel!
     
     
@@ -88,15 +89,115 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
 //        self.remarks.text = self.detail?.remarks
 //        offers(id: "\(detail!.id!)")
         self.backBtn()
-        fetchSingalProduct()
+        if type == "rep"{
+            fetchDetailOfRepRec()
+        }else{
+            fetchSingalProduct()
+        }
+        
         // Do any additional setup after loading the view.
     }
     
-    
+    func fetchDetailOfRepRec()  {
+                
+            SVProgressHUD.show(withStatus: "Loading...")
+            
+            
+        NetworkManager.SharedInstance.getRepRecData(searcInput: "\(String(describing: detail!.REQ_ID!))", success: { (res) in
+                print(res)
+                SVProgressHUD.dismiss()
+                self.detail = res
+                if (self.detail?.images_rep!.count)! > 0 {
+                    self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images_rep![0])!), placeholderImage: UIImage(named: "placeholder.png"))
+
+                }
+            
+                self.navigationTitile.text = self.detail!.details![0].MODEL_NAME
+            self.titleProduct.text = self.detail!.details![0].MODEL_NAME
+            self.lotPrice.text = Double(self.detail!.details![0].OFFER ?? "0")?.dollarString
+
+            
+//            self.askingpriceLbl.isHidden = true
+            self.products.append(self.detail!.details![0].MODEL_NAME!)
+    //            let inputFormatter = DateFormatter()
+    //            inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    //            let showDate = inputFormatter.date(from: self.detail!.created_at!)
+    //            inputFormatter.dateFormat = "yyyy-MM-dd"
+    //            let resultString = inputFormatter.string(from: showDate!)
+    //            print(resultString)
+
+
+    //            self.dateLbl.text = self.detail?.created_at
+    //            self.status.text = self.detail?.status
+            self.remarks.text = self.detail!.details![0].REMARKS
+                self.img = (self.detail?.images_rep!.count)!
+
+    //            for image in self.detail!.images! {
+    //                let img = UIImageView ()
+    //                img.sd_setImage(with: URL(string: image.url!), placeholderImage: nil)
+    //
+    //                self.images.append(img.image!)
+    //            }
+            
+            
+            if self.detail!.details![0].SELECT_OPTION == "PIC UP"{
+                
+                self.deliveredAsLbl.text = "Pickup - Your Address"
+            //                self.address_trackingNumber.text = self.detail!.pickup?.street + self.detail!.pickup?.city + self.detail!.pickup?.state + self.detail!.pickup?.zip + "United State"
+                self.address_trackingNumber.text = self.detail!.details![0].ADDRESS
+                
+                self.download_addTrackingBtn.isHidden = true
+                self.download_addtracking.isEnabled = false
+                
+            }else if self.detail!.details![0].SELECT_OPTION == "DROP OF"{
+                
+                
+                self.deliveredAsLbl.text = "DropOff - LaptopZone Address"
+                self.address_trackingNumber.text = "2720 Royal Lane Ste #180 Dallas, TX 75229 Phone: (214) 427-4496"
+            //                print(self.detail!.drop_off?.carrier_name!)
+                if self.detail!.details![0].CARIER_NAME != nil {
+                    self.trackingNumberForDropOff.isHidden = false
+                    self.carierForDropOff.isHidden = false
+                    
+            //                    self.trackingNumberForDropOff.text
+                    self.trackingNumberForDropOff.text = self.detail!.details![0].TRACK_NUMB
+                    self.carierForDropOff.text = "Carrier: " + self.detail!.details![0].CARIER_NAME!
+
+                    self.download_addTrackingBtn.image = nil
+                    self.download_addtracking.isHidden = true
+                    
+                }else{
+                    self.dropOffDetailHeight.constant = 61.5
+                     self.download_addTrackingBtn.image = UIImage(named: "Add Tracking Info")
+                }
+                
+            }else if self.detail!.details![0].SELECT_OPTION == "SHIPMENT"{
+                self.download_addTrackingBtn.image = UIImage(named: "Download Shipment Label")
+                self.deliveredAsLbl.text = "Shipment - Tracking Info"
+                self.address_trackingNumber.text = self.detail!.details![0].TRACK_NUMB
+                
+            }
+                        
+            
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+                
+            }) { (err) in
+                SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+            }
+        }
     func getBarcode()  {
         
         SVProgressHUD.show(withStatus: "Loading...")
-        Alamofire.request(URL(string: "http://talkerscode.com/webtricks/demo/js/barcode/barcode.php?codetype=Code39&size=40&text=\(self.detail!.id!)&print=true")!)        .responseData { (data) in
+        var id = String()
+        if self.type == "rep"{
+            id = "\(String(describing: self.detail!.details![0].REQ_ID!))"
+        }else{
+            id = "\(String(describing: self.detail!.id!))"
+                
+        }
+        Alamofire.request(URL(string: "http://talkerscode.com/webtricks/demo/js/barcode/barcode.php?codetype=Code39&size=40&text=\(id)&print=true")!).responseData { (data) in
             SVProgressHUD.dismiss()
             self.showToast(message: "Slip Downloaded")
             
@@ -242,7 +343,12 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     //            if self.images.count > 0 {
     //               cell.productImage.image = self.images[indexPath.row]
     //            }else{
-            cell.productImage.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        if self.type == "rep"{
+            cell.productImage.sd_setImage(with: URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            cell.productImage.sd_setImage(with: URL(string:     (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+
+        }
 
     //            }
     //        cell.productImage.image = self.images[indexPath.row]
@@ -250,7 +356,14 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+        
+        if self.type == "rep"{
+           self.previewIamge.sd_setImage(with:  URL(string: (self.detail?.images_rep![indexPath.row])!), placeholderImage: UIImage(named: "placeholder.png"))
+        }else{
+            self.previewIamge.sd_setImage(with: URL(string: (self.detail?.images![indexPath.row].url)!), placeholderImage: UIImage(named: "placeholder.png"))
+            
+        }
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -296,36 +409,64 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
             
         }else if self.detail!.delivered_as == "DROP_OFF"{
          
-            addView()
+            
                
+        }else{
+            
+            if self.detail?.details![0].SELECT_OPTION == "DROP OF"{
+              addView()
+            }else{
+                
+                SVProgressHUD.show(withStatus: "Loading...")
+                Alamofire.request(URL(string: self.detail!.details![0].url!)!).responseData { (response) in
+                  SVProgressHUD.dismiss()
+                if response.error == nil {
+                      print(response.result)
+
+                  
+                      if let data = response.data {
+                          let img = UIImage(data: data)
+
+                          Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (time) in
+                              if img != nil {
+
+                              UIImageWriteToSavedPhotosAlbum(img!, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+
+                              }
+                          }
+                      }
+                  }
+                }
+            }
+         
         }
         
     }
 
        
-        @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-            if error != nil {
-                   // we got back an error!
-    //               let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-    //               ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self.showToast(message: "Save error")
-    //            delegate?.didCloseImgView()
-    //               present(ac, animated: true)
-               } else {
-    //               let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
-    //               ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self.showToast(message: "Save Successfully")
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if error != nil {
+               // we got back an error!
+//               let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+//               ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.showToast(message: "Save error")
+//            delegate?.didCloseImgView()
+//               present(ac, animated: true)
+           } else {
+//               let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+//               ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.showToast(message: "Save Successfully")
 //                delegate?.didCloseImgView()
-    //            self.showToast(message: "Saved!")
-                
-    //               present(ac, animated: true)
-               }
+//            self.showToast(message: "Saved!")
+            
+//               present(ac, animated: true)
            }
+       }
     
   
     func didClose(trackingNumber: String, carierName: String)  {
      
-     if trackingNumber != "" || carierName != "" {
+     if trackingNumber != "" && carierName != "" {
 //           self.otherBtn.setTitle(text, for: .normal)
            self.addotherView.removeFromSuperview()
                    
@@ -351,13 +492,25 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
         self.carierForDropOff.text = "Carrier: " + carierName
         
         SVProgressHUD.show(withStatus: "Loading...")
-        NetworkManager.SharedInstance.UpdateDropOff(request_id:"\(self.detail!.id!)" , tracking_id: trackingNumber, carrier_name: carierName, success: { (res) in
-            SVProgressHUD.dismiss()
-            print(res)
-        }) { (err) in
-            SVProgressHUD.dismiss()
-            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+        if self.type == "rep" {
+            NetworkManager.SharedInstance.UpdateDropOffRep(req_id: "\(self.detail!.details![0].REQ_ID!)", trac_num: trackingNumber, carier: carierName, success: { (res) in
+                SVProgressHUD.dismiss()
+                print(res)
+            }) { (err) in
+                 SVProgressHUD.dismiss()
+                Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+            }
+        }else{
+            NetworkManager.SharedInstance.UpdateDropOff(request_id:"\(self.detail!.id!)" , tracking_id: trackingNumber, carrier_name: carierName, success: { (res) in
+               SVProgressHUD.dismiss()
+               print(res)
+            }) { (err) in
+               SVProgressHUD.dismiss()
+               Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+            }
         }
+        
+       
         
 //           Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
 //
@@ -376,15 +529,15 @@ class ApprovedProductDetailViewController: UIViewController,UITableViewDelegate 
     }
         
      
-     func didClose() {
-            self.addotherView.removeFromSuperview()
-                    
-            UIView.animate(withDuration: 0.3) {
+    func didClose() {
+        self.addotherView.removeFromSuperview()
+                
+        UIView.animate(withDuration: 0.3) {
 
-                self.addotherView.alpha = 0
-                self.addotherView = nil
-            }
+            self.addotherView.alpha = 0
+            self.addotherView = nil
         }
+    }
         
         
     func addView()  {

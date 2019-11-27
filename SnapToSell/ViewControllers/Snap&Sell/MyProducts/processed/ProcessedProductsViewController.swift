@@ -187,7 +187,7 @@ class ProcessedProductsViewController: UIViewController ,UITableViewDelegate , U
                     self.descriptionLbl.text = "Congratualation , Item has been recieved at our store. Thank you"
                 }
                 
-                if self.detail?.status == "CANCELED"{
+                if self.detail?.status == "CANCELLED"{
                     self.descriptionLbl.text = "You Canceled your item"
                 }
                 

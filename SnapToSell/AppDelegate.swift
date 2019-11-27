@@ -76,46 +76,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
       UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
       application.registerForRemoteNotifications()
 
-//        if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
-//            UNUserNotificationCenter.current().delegate = self
-//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//            UNUserNotificationCenter.current().requestAuthorization(
-//                options: authOptions,
-//                completionHandler: {_, _ in })
-//            // For iOS 10 data message (sent via FCM
-//            Messaging.messaging().delegate = self
-//        } else {
-//            let settings: UIUserNotificationSettings =
-//                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//            application.registerUserNotificationSettings(settings)
-//        }
+        if #available(iOS 10.0, *) {
+//             For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
         
-//        application.registerForRemoteNotifications()
+        application.registerForRemoteNotifications()
         
-//        Messaging.messaging().isAutoInitEnabled = true
+        Messaging.messaging().isAutoInitEnabled = true
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        // Sets shadow (line below the bar) to a blank image
-        UINavigationBar.appearance().shadowImage = UIImage()
-        // Sets the translucent background color
-        UINavigationBar.appearance().backgroundColor = .clear
-        // Set translucent. (Default value is already true, so this can be removed if desired.)
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        // Sets shadow (line below the bar) to a blank image
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        // Sets the translucent background color
+//        UINavigationBar.appearance().backgroundColor = .clear
+//         Set translucent. (Default value is already true, so this can be removed if desired.)
         
 //        navigationController?.navigationItem.backBarButtonItem?.image = UIImage(named: "backImg")
         
         
-        let backImage = UIImage(named: "back")!.withRenderingMode(.alwaysOriginal)
-        
-        UINavigationBar.appearance().backIndicatorImage = backImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -80.0), for: .default)
-        
-        
-        
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UIApplication.shared.setMinimumBackgroundFetchInterval(18)
+//        let backImage = UIImage(named: "back")!.withRenderingMode(.alwaysOriginal)
+//
+//        UINavigationBar.appearance().backIndicatorImage = backImage
+//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
+//        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -80.0), for: .default)
+//        
+//        
+//        
+//        UINavigationBar.appearance().isTranslucent = true
+//        
+//        UIApplication.shared.setMinimumBackgroundFetchInterval(18)
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
 

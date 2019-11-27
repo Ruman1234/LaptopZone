@@ -63,7 +63,14 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
         // Do any additional setup after loading the view.
     }
     
-    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+             
+             if textField == profilePhoneNumber{
+                 return range.location < 10
+             }
+             return range.location < 10
+         }
+      
     
     func textFieldDidEndEditing(_ textField: UITextField) {
               if textField == profilePhoneNumber {
@@ -160,13 +167,17 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
               print(res)
 //            SVProgressHUD.show(withStatus: "Loading..")
             SVProgressHUD.dismiss()
+            
             self.profileEmail.text = res.email
             self.profileNAme.text = res.name
             self.email = res.email!
-              CustomUserDefaults.email.value = res.email
-              CustomUserDefaults.userName.value = res.name
-              CustomUserDefaults.VerifyPaypal.value = res.paypal
-              CustomUserDefaults.userId.value = "\(res.id!)"
+            self.profilePhoneNumber.text = res.phone ?? ""
+            
+            CustomUserDefaults.email.value = res.email
+            CustomUserDefaults.userName.value = res.name
+            CustomUserDefaults.VerifyPaypal.value = res.paypal
+            CustomUserDefaults.phone.value = res.phone ?? ""
+            CustomUserDefaults.userId.value = "\(res.id!)"
              
             self.sellAnythingTotalCount.text = "\(res.requests_count!)"
 //            self.getDefaultAddress()
@@ -197,7 +208,7 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
     }
      func UpdateProfileCall()  {
             SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.UpdateProfile(name: self.profileNAme.text!, email: self.profileEmail.text!, success: { (res) in
+        NetworkManager.SharedInstance.UpdateProfile(name: self.profileNAme.text!, email: self.profileEmail.text!, phone: self.profilePhoneNumber.text!, success: { (res) in
                   print(res)
     //            SVProgressHUD.show(withStatus: "Loading..")
                 SVProgressHUD.dismiss()
@@ -391,13 +402,13 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
     
     @IBAction func redirectBtn(_ sender: AnyObject) {
 //        self.delegte?.moveToNextTab(index: sender.tag)
-        let imageDataDict:[String: Any] = ["image": sender.tag!]
+//        let imageDataDict:[String: Any] = ["image": sender.tag!]
 //        self.tabBarController?.selectedIndex = 4
 //        UIView.animate(withDuration: 2) {
 //        newTabBarViewController.SharedInstance.moveto(index: sender.tag )
             
 //        print("asdf")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendData"), object: nil, userInfo: imageDataDict)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendData"), object: nil, userInfo: imageDataDict)
 
 //        }
         
@@ -408,7 +419,7 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
        
         // handle notification
        
-//        self.tabBarController?.selectedIndex = 4
+        self.tabBarController?.selectedIndex = 4
         
     }
     

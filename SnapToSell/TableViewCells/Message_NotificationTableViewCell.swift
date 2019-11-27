@@ -29,6 +29,9 @@ class Message_NotificationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var leadingSpace: NSLayoutConstraint!
     
+    @IBOutlet weak var descriptionLBl: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

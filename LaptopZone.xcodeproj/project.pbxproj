@@ -32,6 +32,7 @@
 		182B29C4231003AA003E10CD /* AddressesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B29C3231003AA003E10CD /* AddressesModel.swift */; };
 		182DD03C235F5DDF009C79BA /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DD03A235F5DDF009C79BA /* ShowImageView.swift */; };
 		182DD03D235F5DDF009C79BA /* ShowImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182DD03B235F5DDF009C79BA /* ShowImageView.xib */; };
+		18421E93238CF02000A8EAA1 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18421E92238CF02000A8EAA1 /* NotificationModel.swift */; };
 		1847D6682328BF7400B04692 /* SelectYourProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847D6672328BF7400B04692 /* SelectYourProductViewController.swift */; };
 		185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD5032354509C0011FA0A /* Buy&Sell.swift */; };
 		185AD506235466CE0011FA0A /* SelectSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */; };
@@ -161,6 +162,7 @@
 		182B29C3231003AA003E10CD /* AddressesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesModel.swift; sourceTree = "<group>"; };
 		182DD03A235F5DDF009C79BA /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
 		182DD03B235F5DDF009C79BA /* ShowImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageView.xib; sourceTree = "<group>"; };
+		18421E92238CF02000A8EAA1 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		1847D6672328BF7400B04692 /* SelectYourProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYourProductViewController.swift; sourceTree = "<group>"; };
 		185AD5032354509C0011FA0A /* Buy&Sell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buy&Sell.swift"; sourceTree = "<group>"; };
 		185AD505235466CE0011FA0A /* SelectSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSeriesViewController.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				185AD502235450800011FA0A /* Buy&Sell */,
 				18E8D441232A117700CD8110 /* Snap&Sell */,
 				18E8D43E232A114200CD8110 /* Repairing */,
+				18421E92238CF02000A8EAA1 /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,13 +477,6 @@
 				185F45972363042C00A7B25F /* MessageModel.swift */,
 			);
 			path = "Message&Notification";
-			sourceTree = "<group>";
-		};
-		185F83CE231E4008002FAF1F /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Chat;
 			sourceTree = "<group>";
 		};
 		186ED48A236ACAD300916E5C /* AddDropOffTrackingInfo */ = {
@@ -613,7 +609,6 @@
 		18E849632317E75A00A52C62 /* processed */ = {
 			isa = PBXGroup;
 			children = (
-				185F83CE231E4008002FAF1F /* Chat */,
 				18E8495A2317D48D00A52C62 /* ProcessedProductsViewController.swift */,
 				18F072642319090C00E8F8CB /* Shipment */,
 				18F0725D2318FBF900E8F8CB /* DropOff */,
@@ -1055,6 +1050,7 @@
 				185AD5042354509C0011FA0A /* Buy&Sell.swift in Sources */,
 				18F072612318FD9900E8F8CB /* DropOffDescriptionViewController.swift in Sources */,
 				185F45902362E48300A7B25F /* Message_NotificationTableViewCell.swift in Sources */,
+				18421E93238CF02000A8EAA1 /* NotificationModel.swift in Sources */,
 				18CCCF5D234DED700049742D /* GiveOfferScreenViewController.swift in Sources */,
 				18E8D445232A250B00CD8110 /* ModelViewController.swift in Sources */,
 				18721C362316636A00C3AAAC /* SWRevealViewController.m in Sources */,
@@ -1270,7 +1266,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.EcoLogix.SnapToSell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapToSell/ThiredParty/SnapToSell-Bridging-Header.h";
@@ -1296,7 +1292,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.EcoLogix.SnapToSell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SnapToSell/ThiredParty/SnapToSell-Bridging-Header.h";

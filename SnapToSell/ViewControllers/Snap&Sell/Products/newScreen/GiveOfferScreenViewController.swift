@@ -350,8 +350,15 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let data = questions[indexPath.row]
         if indexPath.row == 0 {
-            return 131
+            
+            if data.answers?.count == 4{
+                return 131
+            }else{
+                return 96
+            }
+            
         }else{
             return 96
         }
@@ -621,6 +628,8 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
             amt = Int(self.questions[indexPath.row].answers![1].EFFECTIVE_VALUE!)!
         }else if self.yes_no[sender.tag] == 0{
             amt = Int(self.questions[indexPath.row].answers![2].EFFECTIVE_VALUE!)!
+        }else if self.yes_no[sender.tag] == 3{
+            amt = Int(self.questions[indexPath.row].answers![0].EFFECTIVE_VALUE!)!
         }
 
         if self.yes_no[sender.tag] != 4 {
@@ -665,9 +674,10 @@ class GiveOfferScreenViewController: UIViewController , UITableViewDataSource,UI
     
     
     @IBAction func getOffer(_ sender: Any) {
-        if self.answerIdArray.count == 0 {
+        if self.answerIdArray.count == 0 || self.calculatedAmount <= 0 {
             
         }else{
+            
             let main = self.storyboard?.instantiateViewController(withIdentifier: "SelectPaymentMethodViewController") as! SelectPaymentMethodViewController
             Constants.gevin_offer = price
             Constants.available_offer = "\(self.calculatedAmount)"

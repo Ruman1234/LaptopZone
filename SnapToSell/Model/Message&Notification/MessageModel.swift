@@ -12,9 +12,7 @@
 import Foundation
 import ObjectMapper
 
-class MessageModel : Mappable {
-    
-    
+class MessageModel : NSObject,Mappable {
     
     var conversation_id : String?
     var cover : String?
@@ -25,7 +23,7 @@ class MessageModel : Mappable {
     var id : Int?
     var price : Int?
     var remarks : String?
-// shipment
+    
     var status : String?
     var title : String?
     
@@ -40,14 +38,15 @@ class MessageModel : Mappable {
     var repairCount : String?
     var rec_count : String?
     var sellCount : String?
-    
+    var last_message : last_message?
  
     
     
     required init?(map: Map) {
 
     }
-    init() {
+   
+    override init() {
         
     }
 
@@ -74,12 +73,48 @@ class MessageModel : Mappable {
         type <- map["type"]
         timestamp <- map["timestamp"]
         content <- map["content"]
+        last_message <- map["last_message"]
 
      
          
     }
     
 
+}
+
+
+class last_message :NSObject, Mappable {
+   
+    
+    var content : String?
+    var conversation_id : Int?
+    var created_at : String?
+    
+    var id : Int?
+    var status : Int?
+    var type : String?
+    var updated_at : String?
+    var user_id : Int?
+    
+   required init?(map: Map) {
+
+   }
+   override init() {
+       
+   }
+
+   func mapping(map: Map) {
+
+        content <- map["content"]
+        conversation_id <- map["conversation_id"]
+
+        created_at <- map["created_at"]
+        id <- map["id"]
+        status <- map["status"]
+        type <- map["type"]
+        updated_at <- map["updated_at"]
+        user_id <- map["user_id"]
+    }
 }
 
 extension MessageModel {
@@ -106,6 +141,13 @@ class details : Mappable {
     var OFFER : String?
     var STATUS : String?
     var REMARKS : String?
+    
+    var SELECT_OPTION : String?
+    var TRACK_NUMB : String?
+    var TYPE : String?
+    var url : String?
+    var ADDRESS : String?
+    var CARIER_NAME : String?
 
     required init?(map: Map) {
 
@@ -116,6 +158,13 @@ class details : Mappable {
 
     func mapping(map: Map) {
 
+        ADDRESS <- map["ADDRESS"]
+        CARIER_NAME <- map["CARIER_NAME"]
+        SELECT_OPTION <- map["SELECT_OPTION"]
+        TRACK_NUMB <- map["TRACK_NUMB"]
+        TYPE <- map["TYPE"]
+        url <- map["URL"]
+        
         REQ_ID <- map["REQ_ID"]
         DATA_SOURCE <- map["DATA_SOURCE"]
         MODEL_NAME <- map["MODEL_NAME"]

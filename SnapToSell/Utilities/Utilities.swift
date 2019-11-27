@@ -302,7 +302,7 @@ extension UIViewController {
         let imageview = UIImageView(frame: CGRect(x: x, y: Int(y + 20), width: 25, height: 15))
         imageview.image = UIImage(named: "back")
     
-        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 30), width: 150, height: 80))
+        let button = UIButton(frame: CGRect(x: 0, y: Int(y - 10), width: 150, height: 100))
 //        button.backgroundColor = .green
         button.setTitleColor(.red, for: .normal)
 //            button.setTitle("Cancle", for: .normal)
@@ -325,8 +325,15 @@ extension UIViewController {
     @objc func logoutUser(){
         
         if #available(iOS 13.0, *) {
-            let a = self.navigationController?.viewControllers[0] as! HomeViewController
-            self.navigationController?.popToViewController(a, animated: true)
+            
+            if let a = self.navigationController?.viewControllers[0] as? HomeViewController {
+                self.navigationController?.popToViewController(a, animated: true)
+            }else{
+                let b = self.navigationController?.viewControllers[0] as! newTabBarViewController
+                self.navigationController?.popToViewController(b, animated: true)
+            }
+//            let a = self.navigationController?.viewControllers[0] as! HomeViewController
+            
         } else {
             // Fallback on earlier versions
         }
@@ -523,6 +530,7 @@ struct CustomUserDefaults {
     static let fcm_token = UserDefaultsItem<String>("fcm_token")
     static let userId = UserDefaultsItem<String>("Userid")
     static let password = UserDefaultsItem<String>("password")
+    static let phone = UserDefaultsItem<String>("phone")
     
 }
 
@@ -778,3 +786,58 @@ extension UITextField{
 
 }
 
+
+//extension UINavigationBar {
+//
+//    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+//        return CGSize(width: UIScreen.main.bounds.size.width, height: 80.0)
+//    }
+//
+//}
+extension UINavigationBar {
+      
+//            let gradient: CAGradientLayer = CAGradientLayer()
+//            gradient.frame = self.bounds
+//            gradient.colors = colours.map { $0.cgColor }
+//            gradient.locations = locations
+//            gradient.startPoint = startPoint!
+//            gradient.endPoint = endPoint!
+//            gradient.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
+//
+//    //        gradient.bounds = self.bounds.insetBy(dx: -0.5*self.bounds.size.width, dy: -0.5*self.bounds.size.height)
+//    //
+//    //        gradient.position = self.center
+//
+//
+//            self.layer.insertSublayer(gradient, at: 0)
+    
+    func setGradientBackground(colors: [UIColor]) {
+        let gradient: CAGradientLayer = CAGradientLayer()
+//        var updatedFrame = self.bounds
+        gradient.colors = colors.map { $0.cgColor }
+        gradient.locations = [0.12, 1]
+        gradient.startPoint = CGPoint(x:0.00, y: 0.1)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+
+        
+         gradient.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1, b: 0, c: 0, d: 8.76, tx: 0, ty: -3.87))
+         gradient.bounds = self.bounds.insetBy(dx: -0.5*self.bounds.size.width, dy: -0.5*self.bounds.size.height)
+        gradient.position = self.center
+         self.layer.insertSublayer(gradient, at: 0)
+        
+//        updatedFrame.size.height += self.frame.origin.y
+//        gradient.frame = updatedFrame
+//        gradient.colors = colors;
+        
+        
+        self.setBackgroundImage(self.image(fromLayer: gradient), for: .default)
+    }
+
+    func image(fromLayer layer: CALayer) -> UIImage {
+        UIGraphicsBeginImageContext(layer.frame.size)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return outputImage!
+    }
+}
