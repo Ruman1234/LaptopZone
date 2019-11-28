@@ -67,6 +67,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
 
     
     @IBOutlet weak var shipmentnextBtn: UIButton!
+    @IBOutlet weak var shippingAddres: UIButton!
     
     var paypalEmail = String()
     var chequeEmail = String()
@@ -105,6 +106,8 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     var selectShipment : SelectShipmentView!
     var imgView : ShowImageView!
     
+    var setPickup = Bool()
+    var setShipment = Bool()
     
     var type = String()
     var repRecId = String()
@@ -171,19 +174,86 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.shipmentnextBtn.isHidden = true
+        self.shippingAddres.isHidden = true
+        let add = Constants.address
+        if self.setPickup && add.contact_name != nil {
+            
+            let address = "\(add.street!), \(add.city!), \(add.zip!), \(add.state!), USA"
+            SVProgressHUD.show(withStatus: "Loading...")
+            let geoCoder = CLGeocoder()
+            geoCoder.geocodeAddressString(address) { (placemarks, error) in
+               guard
+                   let placemarks = placemarks,
+                   let location = placemarks.first?.location
+                
+               else {
+                   // handle no location found
+                    self.pickUpBtn.isEnabled = false
+                    self.pickUpBtn.layer.opacity = 0.6
+                   return
+               }
+
+                
+                self.latLong(lat: location.coordinate.latitude, long: location.coordinate.longitude)
+                
+            }
+            self.pickupSearchAddress.text = "\(add.street!), \(add.city!), \(add.state!), USA"
+
+            self.pickupStreetAddress.text = add.street
+            self.pickupCity.text = add.city
+            self.pickupState.text = add.state
+            self.pickUpzipcode.text = add.zip
+            
+            
+            self.shipmentCity = add.city!
+            self.shipmentZip = add.zip!
+            self.shipmentState = add.state!
+            self.shipmentStreet = "\(add.street!), \(add.city!), \(add.zip!), \(add.state!), USA"
+            
+            
+            
+            
+        }else if self.setShipment && Constants.address.contact_name != nil{
+            self.shipmentAdsres.text = "\(add.street!), \(add.city!), \(add.state!), USA"
+            self.shipmentCity = add.city!
+            self.shipmentZip = add.zip!
+            self.shipmentState = add.state!
+            self.shipmentStreet = "\(add.street!), \(add.city!), \(add.zip!), \(add.state!), USA"
+            self.shipmentnextBtn.isHidden = false
+            self.shippingAddres.isHidden = false
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
           
               self.addBG()
               self.addPAger(totalPage: 7, currentPage: 6)
               self.cancleBtn()
               self.backBtn()
-              
+        self.hideTableViewWhenTappedAround()
               
               self.dropOffBtn.setGradient()
               self.pickUpBtn.setGradient()
               self.shipmentnextBtn.setGradient()
-        self.shipmentnextBtn.isHidden = true
+        
     }
+    
+    
+    func hideTableViewWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+        self.virw.addGestureRecognizer(tap)
+    }
+         
+     @objc func dismissTableView() {
+         view.endEditing(true)
+        tableView.isHidden = true
+     }
+         
     
     func setupTableView(y : CGFloat) {
         tableView.isHidden = true
@@ -229,26 +299,24 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        
         if Utilites.isInternetAvailable(){
              if textField == self.shipmentAdsres {
-                        self.tableView.isHidden = false
-                        
-            //            searchCompleter.queryFragment = self.shipmentAdsres.text!
-                        placeAutocomplete(text_input: self.shipmentAdsres.text!)
+                self.tableView.isHidden = false
+                
+    //            searchCompleter.queryFragment = self.shipmentAdsres.text!
+                placeAutocomplete(text_input: self.shipmentAdsres.text!)
 
-                    }else if textField == self.pickupSearchAddress{
-                        self.tableView.isHidden = false
-                        placeAutocomplete(text_input: self.shipmentAdsres.text!)
-                    }
+            }else if textField == self.pickupSearchAddress{
+                self.tableView.isHidden = false
+                placeAutocomplete(text_input: self.shipmentAdsres.text!)
+            }
         }
-       
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == self.shipmentAdsres && self.shipmentAdsres.text == ""{
+        if textField == self.shipmentAdsres {
             self.tableView.isHidden = true
-        }else if textField == self.pickupSearchAddress && self.pickupSearchAddress.text == ""{
+        }else if textField == self.pickupSearchAddress {
             self.tableView.isHidden = true
         }
 
@@ -275,6 +343,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.paypalViewHeight.constant = 0
             self.chequeViewHeight.constant = 0
             self.shipmentnextBtn.isHidden = true
+            self.shippingAddres.isHidden = true
             UIView.animate(withDuration: 0.5, animations: {
 
                 self.view.layoutIfNeeded()
@@ -342,6 +411,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
              self.amazonDetailHeight.constant = 0
              self.chequeViewHeight.constant = 0
              self.shipmentnextBtn.isHidden = true
+            self.shippingAddres.isHidden = true
              UIView.animate(withDuration: 0.5, animations: {
 
                  self.view.layoutIfNeeded()
@@ -417,6 +487,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             self.amazonDetailHeight.constant = 0
             self.chequeViewHeight.constant = 649
             self.shipmentnextBtn.isHidden = false
+            self.shippingAddres.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
 
                 self.view.layoutIfNeeded()
@@ -424,6 +495,7 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             })
 
         }else{
+            self.shippingAddres.isHidden = true
             self.hideShipmentViews()
              self.shipmentopenBtn.tag = 0
              self.view.layoutIfNeeded()
@@ -973,6 +1045,37 @@ class SelectdeliveryMethodViewController: UIViewController,SelectShipmentViewDel
             SVProgressHUD.dismiss()
             Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
         }
+    }
+    
+    
+    
+    @IBAction func locationBtn(_ sender: Any) {
+        self.setPickup = true
+        self.setShipment = false
+        
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "AllAddresViewController") as! AllAddresViewController
+                    
+        main.type = "selectaddress"
+
+        //        self.present(main, animated: true, completion: nil)
+        self.navigationController?.pushViewController(main, animated: true)
+                
+    }
+    
+    
+    
+    @IBAction func shipmentLocationBTn(_ sender: Any) {
+        self.setPickup = false
+        self.setShipment = true
+        
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "AllAddresViewController") as! AllAddresViewController
+                    
+        main.type = "selectaddress"
+
+        //        self.present(main, animated: true, completion: nil)
+        self.navigationController?.pushViewController(main, animated: true)
+
+        
     }
     
 }

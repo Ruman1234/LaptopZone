@@ -57,6 +57,9 @@ class SelectPaymentMethodViewController: UIViewController {
     @IBOutlet weak var paypalBtn: UIButton!
     @IBOutlet weak var chequeBtn: UIButton!
     
+    var address = Bool()
+    @IBOutlet weak var shippingAddress: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +73,23 @@ class SelectPaymentMethodViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let add = Constants.address
+        self.shippingAddress.isHidden = true
+        if self.address && add.contact_name != nil {
+            self.chequePayableTo.text = add.contact_name
+            self.chequeLineAddress.text = "\(add.street!), \(add.city!), \(add.zip!), \(add.state!), USA"
+            
+            self.chequwZipcode.text = add.zip
+            self.cite.text = add.city
+            self.Chequestate.text = add.state
+            self.chequwZipcode.text = add.zip
+            self.shippingAddress.isHidden = false
+        }
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
             self.addBG()
@@ -147,7 +167,7 @@ class SelectPaymentMethodViewController: UIViewController {
     
     @IBAction func paypalView(_ sender: AnyObject) {
         
-        
+        self.shippingAddress.isHidden = true
         if sender.tag == 0 {
             self.paypalBtn.tag = 1
             self.view.layoutIfNeeded()
@@ -240,12 +260,14 @@ class SelectPaymentMethodViewController: UIViewController {
             self.paypalViewHeight.constant = 0
             self.amazonDetailHeight.constant = 0
             self.chequeViewHeight.constant = 948
+            self.shippingAddress.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
 
                 self.view.layoutIfNeeded()
 
             })
         }else{
+            self.shippingAddress.isHidden = true
             self.chequeBtn.tag = 0
             self.view.layoutIfNeeded()
              
@@ -404,6 +426,21 @@ class SelectPaymentMethodViewController: UIViewController {
            return flag
            
        }
+    
+    
+    @IBAction func shippingAddress(_ sender: Any) {
+        
+        self.address = true
+        let main = self.storyboard?.instantiateViewController(withIdentifier: "AllAddresViewController") as! AllAddresViewController
+                           
+        main.type = "selectaddress"
+
+        //        self.present(main, animated: true, completion: nil)
+        self.navigationController?.pushViewController(main, animated: true)
+                       
+        
+    }
+    
 
 }
 

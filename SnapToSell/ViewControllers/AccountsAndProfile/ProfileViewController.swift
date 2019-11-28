@@ -8,8 +8,9 @@
 
 import UIKit
 import SVProgressHUD
-
-class ProfileViewController: UIViewController {
+import OpalImagePicker
+import Alamofire
+class ProfileViewController: UIViewController,OpalImagePickerControllerDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
     
@@ -27,6 +28,8 @@ class ProfileViewController: UIViewController {
     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
     let button = UIButton(type: UIButton.ButtonType.system) as UIButton
 
+    var img = UIImage()
+    var setimage = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +52,18 @@ class ProfileViewController: UIViewController {
     }
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        if self.setimage {
+            self.profileImage.image = img
+            self.tabBarController?.tabBar.isHidden = false
+            UpdateProfileCall()
+            
+        }
+        
+        
+    }
     func APiCall()  {
         SVProgressHUD.show(withStatus: "Loading..")
           NetworkManager.SharedInstance.Profile(success: { (res) in
@@ -60,6 +75,11 @@ class ProfileViewController: UIViewController {
               CustomUserDefaults.userName.value = res.name
               CustomUserDefaults.VerifyPaypal.value = res.paypal
               CustomUserDefaults.userId.value = "\(res.id!)"
+            if res.avatar != nil {
+                self.profileImage.sd_setImage(with: URL(string: res.avatar!), placeholderImage: UIImage(named: "placeholder.png"))
+
+            }
+            
             self.getDefaultAddress()
           }, failure: { (err) in
             SVProgressHUD.show(withStatus: "Loading..")
@@ -68,6 +88,69 @@ class ProfileViewController: UIViewController {
 
           })
     }
+    
+    
+    func UpdateProfileCall()  {
+        
+//        let pra = ["name" : CustomUserDefaults.userName.value!,"email":CustomUserDefaults.email.value]
+        SVProgressHUD.show(withStatus: "Loading...")
+        Alamofire.upload(multipartFormData: { (MultipartFormData) in
+    
+        if  let data = self.profileImage.image!.jpegData(compressionQuality: 0.5)
+        {
+            MultipartFormData.append(data, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+                       
+        }
+
+//        for (key, value) in pra
+//        {
+//            MultipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+//        }
+
+            
+        }, usingThreshold: UInt64.init(), to: "http://71.78.236.22/laptop-zone-stage/public/api/customer/profile/avatar", method: .post,headers: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (result) in
+
+            switch result {
+            case .success(let upload, _, _):
+
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                })
+
+                
+                upload.responseString { (res) in
+                    print(res)
+                }
+                
+                
+                
+                upload.responseJSON { response in
+                    print(response)
+                    SVProgressHUD.dismiss()
+                    self.view.showToast(message: "Image uploaded")
+                    if response.response?.statusCode == 200
+                    {
+                       
+                        
+
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+
+            case .failure(let encodingError):
+                print(encodingError)
+
+        //                completion(false,[:]);
+            }
+
+        }
+
+
+    }
+    
     
     @IBAction func changeBtn(_ sender: Any) {
         
@@ -113,6 +196,94 @@ class ProfileViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    
+    
+    @IBAction func profileBtn(_ sender: Any) {
+        self.openCamer()
+    }
+    
+
+    func openCamer() {
+        
+        let imagesource = UIAlertController(title: "Image source", message: "", preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Take Picture", style: .default) { (ale) in
+            self.setimage = true
+                let main = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+                main.type = "profile"
+                self.navigationController?.pushViewController(main, animated: true)
+                
+                      
+            
+        }
+        let media = UIAlertAction(title: "Media", style: .default) { (ale) in
+            guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+                //Show error to user?
+                return
+            }
+//            self.images.removeLast()
+            //Example Instantiating OpalImagePickerController with Closures
+            let imagePicker = OpalImagePickerController()
+            imagePicker.imagePickerDelegate = self
+            imagePicker.allowedMediaTypes = Set([.image ])
+            
+            imagePicker.maximumSelectionsAllowed = 1
+            
+            self.present(imagePicker, animated: true, completion: nil)
+            
+            
+         
+        }
+        let cancle = UIAlertAction(title: "Cancel", style: .cancel ) { (ale) in
+            
+        }
+        imagesource.addAction(camera)
+        imagesource.addAction(media)
+        imagesource.addAction(cancle)
+        
+        
+        if let popoverController = imagesource.popoverPresentationController {
+                 popoverController.sourceView = self.view
+                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                 popoverController.permittedArrowDirections = []
+               }
+        
+        self.present(imagesource, animated: true, completion: nil)
+        
+    }
+        
+        
+        
+    func imagePickerDidCancel(_ picker: OpalImagePickerController) {
+        //Cancel action?
+        print("adsasd")
+    }
+    
+    func imagePicker(_ picker: OpalImagePickerController, didFinishPickingImages images: [UIImage]) {
+    
+//            self.images.removeLast()
+//            print(images.count)
+//            for img in images{
+//                self.images.append(img)
+//            }
+//            self.images.append(UIImage(named: "addimage")!)
+//            self.collectionview.reloadData()
+        self.profileImage.image = images[0]
+        self.UpdateProfileCall()
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerNumberOfExternalItems(_ picker: OpalImagePickerController) -> Int {
+        return 1
+    }
+    
+    func imagePickerTitleForExternalItems(_ picker: OpalImagePickerController) -> String {
+        return NSLocalizedString("External", comment: "External (title for UISegmentedControl)")
+    }
+    
+    func imagePicker(_ picker: OpalImagePickerController, imageURLforExternalItemAtIndex index: Int) -> URL? {
+        return URL(string: "https://placeimg.com/500/500/nature")
+    }
     
     @objc func buttonAction(_ sender:UIButton!)
     {

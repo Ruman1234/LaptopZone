@@ -208,7 +208,9 @@ class accountViewController: UIViewController,ChangePasswordViewDelegate ,UIText
     }
      func UpdateProfileCall()  {
             SVProgressHUD.show(withStatus: "Loading..")
-        NetworkManager.SharedInstance.UpdateProfile(name: self.profileNAme.text!, email: self.profileEmail.text!, phone: self.profilePhoneNumber.text!, success: { (res) in
+        
+        let pra = ["name" :self.profileNAme.text!,"email":self.profileEmail.text!, "phone" : self.profilePhoneNumber.text! ]
+        NetworkManager.SharedInstance.UpdateProfile(pra : pra, success: { (res) in
                   print(res)
     //            SVProgressHUD.show(withStatus: "Loading..")
                 SVProgressHUD.dismiss()

@@ -13,7 +13,8 @@ import AVFoundation
 
 
 @available(iOS 13.0, *)
-class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDataSource{
+class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+   
 
     
     @IBOutlet var menuBtn: UIBarButtonItem!
@@ -23,7 +24,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     
     @IBOutlet weak var requestView: UIView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    
+    var hotItemModel = [HotItemModel]()
     
     var AllProducts = [RequestStatusModel]()
     var appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -33,7 +37,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
     
     let imageView = UIImageView(image: UIImage(named: "no_net (1)"))
     let button = UIButton(type: UIButton.ButtonType.system) as UIButton
-    
+    private let spacing:CGFloat = 10.0
     override var preferredStatusBarStyle : UIStatusBarStyle {
         
         return UIStatusBarStyle.lightContent
@@ -47,13 +51,19 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
         
         socketdata()
         
-        self.tableView.tableFooterView = UIView()
+//        self.tableView.tableFooterView = UIView()
         
 //        self.getAllProductList()
         
         requestView.layer.cornerRadius = 8
         self.menuBtn.target = self.revealViewController()
         self.menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
+        
+        let layout = UICollectionViewFlowLayout()
+             layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+             layout.minimumLineSpacing = spacing
+             layout.minimumInteritemSpacing = spacing
+             self.collectionView?.collectionViewLayout = layout
 //        self.upperView.applyGradient(colours: [
 //            UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
 //          UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
@@ -82,7 +92,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
 //         self.hidesBottomBarWhenPushed = false
         
         if Utilites.isInternetAvailable() {
-           self.getAllProductList()
+//           self.getAllProductList()
+            getHotItems()
         }else{
            self.netCheck(button: button, imageView: imageView)
            button.addTarget(self, action: #selector(HomeViewController.buttonAction(_:)), for: .touchUpInside)
@@ -152,39 +163,130 @@ class HomeViewController: UIViewController ,UITableViewDelegate , UITableViewDat
         
     }
     
-    func getAllProductList() {
-       SVProgressHUD.show(withStatus: "Loading..")
-       NetworkManager.SharedInstance.AllProductsRequest( success: { (response) in
-           SVProgressHUD.dismiss()
-           self.AllProducts = response
-           self.tableView.reloadData()
-       }) { (err) in
-           SVProgressHUD.dismiss()
-           Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
-       }
-    }
+//    func getAllProductList() {
+//       SVProgressHUD.show(withStatus: "Loading..")
+//       NetworkManager.SharedInstance.AllProductsRequest( success: { (response) in
+//           SVProgressHUD.dismiss()
+//           self.AllProducts = response
+//           self.tableView.reloadData()
+//       }) { (err) in
+//           SVProgressHUD.dismiss()
+//           Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
+//       }
+//    }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return self.AllProducts.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let product = self.AllProducts[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
-        cell.productName.text = product.title
-        if (product.cover != nil) {
-          cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
-        }else{
-          cell.productImage.image = UIImage(named: "placeholder.png")
-        }
-        cell.statusLbl.text = product.status
-
-        cell.selectionStyle = .none
+    
+    func getHotItems() {
+         SVProgressHUD.show(withStatus: "Loading..")
         
-        return cell
+        NetworkManager.SharedInstance.GETHotItem(success: { (res) in
+            SVProgressHUD.dismiss()
+            self.hotItemModel = res
+            self.collectionView.reloadData()
+            
+        }) { (err) in
+            SVProgressHUD.dismiss()
+            Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
+                     
+        }
+        
+//        NetworkManager.SharedInstance.GETHotItem(success: { (res) in
+//            SVProgressHUD.dismiss()
+//
+//
+//        }, failure: { (err) in
+//            SVProgressHUD.dismiss()
+//            Utilites.ShowAlert(title: "Error!!!", message: "Something went wrong", view: self)
+//        }
+//            )( success: { (response) in
+//             SVProgressHUD.dismiss()
+//             self.AllProducts = response
+//             self.tableView.reloadData()
+//         }) { (err) in
+//             SVProgressHUD.dismiss()
+//             Utilites.ShowAlert(title: "Error!!", message: "something went wrong", view: self)
+//         }
     }
       
+
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//          return self.AllProducts.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let product = self.AllProducts[indexPath.row]
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
+//        cell.productName.text = product.title
+//        if (product.cover != nil) {
+//          cell.productImage.sd_setImage(with: URL(string: product.cover!), placeholderImage: UIImage(named: "placeholder.png"))
+//        }else{
+//          cell.productImage.image = UIImage(named: "placeholder.png")
+//        }
+//        cell.statusLbl.text = product.status
+//
+//        cell.selectionStyle = .none
+//
+//        return cell
+//    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return hotItemModel.count
+   }
+       
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let data = self.hotItemModel[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hotItemCell", for: indexPath) as! RepairingBrandCollectionViewCell
+        cell.imageView.sd_setImage(with: URL(string: data.MODEL_LOGO!), placeholderImage: UIImage(named: "placeholder.png"))
+        cell.brandName.text = Double(data.OFFER_PRICE!)?.dollarString
+        return cell
+    }
+       
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+          let numberOfItemsPerRow:CGFloat = 3
+          let spacingBetweenCells:CGFloat = 10
+          
+          
+          let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+          
+          if let collection = self.collectionView{
+              let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+    //            self.height.constant = width
+    //            self.width.constant = width
+              
+              return CGSize(width: width, height: width)
+              
+          }else{
+              return CGSize(width: 0, height: 0)
+          }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let data = self.hotItemModel[indexPath.row]
+        
+        Constants.productName = data.PRODUCT_ID!
+        
+        Constants.brand_name = data.BRAND_ID!
+        Constants.series_name = data.SERIES_ID!
+        Constants.model_name = data.MODEL_ID!
+        Constants.carrier_name = data.CARRIER_ID!
+        Constants.storage_name = data.STORAGE_ID!
+        
+        let main = self.storyboard?.instantiateViewController(identifier: "GiveOfferScreenViewController") as! GiveOfferScreenViewController
+        main.price = data.OFFER_PRICE!
+        self.navigationController?.pushViewController(main, animated: true)
+        
+//               let parameters = ["product_name" : Constants.productName,
+//                          "brand_name" : Constants.brand_name,
+//                          "series_name" : Constants.series_name,
+//                          "model_name" : Constants.model_name,
+//                          "carrier_name" : Constants.carrier_name,
+//                          "storage_name" : Constants.storage_name]
+    }
     
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

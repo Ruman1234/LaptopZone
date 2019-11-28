@@ -24,6 +24,7 @@ struct ProfileModel : Mappable {
     var phone : String?
     var created_at : Int?
     var updated_at : String?
+    var thumbnail : String?
     var requests_count : Int?
     
     init?(map: Map) {
@@ -35,6 +36,7 @@ struct ProfileModel : Mappable {
         id <- map["id"]
         name <- map["name"]
         avatar <- map["avatar"]
+        thumbnail <- map["thumbnail"]
         email <- map["email"]
         paypal <- map["paypal"]
         email_verified <- map["email_verified"]

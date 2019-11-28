@@ -45,6 +45,7 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
     var contactDetailsViewController = ContactDetailsViewController()
     var uploadViewController = UploadViewController()
     var chatViewController = ChatViewController()
+    var profileViewController = ProfileViewController()
     
     var count = Int()
 //    var dekitiewController = De_KittingViewController()
@@ -76,6 +77,10 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
         }else if self.type == "message"{
             let a = self.navigationController?.viewControllers[count] as! ChatViewController
             chatViewController = a
+            
+        }else if self.type == "profile"{
+            let a = self.navigationController?.viewControllers[1] as! ProfileViewController
+            profileViewController = a
             
         }else{
             let a = self.navigationController?.viewControllers[1] as! ProductDetailViewController
@@ -376,12 +381,17 @@ class CameraViewController: UIViewController ,AVCapturePhotoCaptureDelegate,UIGe
                 self.navigationController?.popViewController(animated: true)
 //            }
             
-        }else {
-             productDetailViewController.images.append(image!)
-            if self.productDetailViewController.images.count >= 20{
-                self.navigationController?.popViewController(animated: true)
-            }
+        }else if type == "profile" {
             
+            profileViewController.img = image!
+            self.navigationController?.popViewController(animated: true)
+                    
+        }else {
+            productDetailViewController.images.append(image!)
+            if self.productDetailViewController.images.count >= 20{
+            self.navigationController?.popViewController(animated: true)
+            }
+
         }
         
         

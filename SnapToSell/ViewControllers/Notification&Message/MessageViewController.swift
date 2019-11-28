@@ -61,7 +61,9 @@ class MessageViewController: UIViewController  ,UITableViewDelegate , UITableVie
  
         let view = UIView()
         view.layer.masksToBounds = true
-        view.frame = CGRect(x: 0, y: 15, width: (navigationController?.navigationBar.frame.width)!, height: 50)
+        let bonds = self.navigationController!.navigationBar.bounds
+        view.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: (navigationController?.navigationBar.frame.width)!, height: bonds.height )
+//        self.navigationItem.titleView = view
         self.view.addSubview(view)
 //
         view.applyGradient(colours: [

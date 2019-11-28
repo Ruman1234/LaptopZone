@@ -104,6 +104,7 @@
 		18F8D762235DA35F00E4E1C4 /* shipmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F8D760235DA35F00E4E1C4 /* shipmentTableViewCell.xib */; };
 		18FF112D2374177F003206F2 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF112B2374177F003206F2 /* ChangePasswordView.swift */; };
 		18FF112E2374177F003206F2 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FF112C2374177F003206F2 /* ChangePasswordView.xib */; };
+		18FF99B2238FB93F00C14AC4 /* HotItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF99B1238FB93F00C14AC4 /* HotItemModel.swift */; };
 		91D26C2959DD7859038D66C0 /* Pods_LaptopZone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26031A5E9F6A79470D2E3695 /* Pods_LaptopZone.framework */; };
 		B2965BFC6F43C2E7C96D49DA /* Pods_LaptopZoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC7DC702F0ADAB25C9924B6 /* Pods_LaptopZoneTests.framework */; };
 		CEA6B8ADB61D32D4A280C1B4 /* Pods_LaptopZoneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B40506B308C83083B1506E /* Pods_LaptopZoneUITests.framework */; };
@@ -237,6 +238,7 @@
 		18F8D760235DA35F00E4E1C4 /* shipmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = shipmentTableViewCell.xib; sourceTree = "<group>"; };
 		18FF112B2374177F003206F2 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		18FF112C2374177F003206F2 /* ChangePasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordView.xib; sourceTree = "<group>"; };
+		18FF99B1238FB93F00C14AC4 /* HotItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotItemModel.swift; sourceTree = "<group>"; };
 		26031A5E9F6A79470D2E3695 /* Pods_LaptopZone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LaptopZone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2644BFCF25292A54318D0F07 /* Pods-LaptopZoneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaptopZoneUITests.release.xcconfig"; path = "Target Support Files/Pods-LaptopZoneUITests/Pods-LaptopZoneUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2A90739AD36AC95FD5093009 /* Pods-LaptopZone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LaptopZone.release.xcconfig"; path = "Target Support Files/Pods-LaptopZone/Pods-LaptopZone.release.xcconfig"; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				18E8D441232A117700CD8110 /* Snap&Sell */,
 				18E8D43E232A114200CD8110 /* Repairing */,
 				18421E92238CF02000A8EAA1 /* NotificationModel.swift */,
+				18FF99B1238FB93F00C14AC4 /* HotItemModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				18E849662317E91300A52C62 /* processedDescriptionViewController.swift in Sources */,
 				18E8D447232A253C00CD8110 /* ProblemViewController.swift in Sources */,
 				18A7B2FC2345C1F400282904 /* HomeViewController.swift in Sources */,
+				18FF99B2238FB93F00C14AC4 /* HotItemModel.swift in Sources */,
 				18F0726E2319434800E8F8CB /* ShipmentRatesTableViewCell.swift in Sources */,
 				185F45932362E68500A7B25F /* MessageViewController.swift in Sources */,
 				1809DA5E232F6DBF002D260D /* ProfileModel.swift in Sources */,

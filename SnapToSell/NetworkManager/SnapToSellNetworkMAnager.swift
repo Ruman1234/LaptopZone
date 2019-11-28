@@ -700,6 +700,35 @@ extension NetworkManager{
     }
     
     
+    func GETHotItem(
+       
+        success : @escaping([HotItemModel]) -> Void ,
+        failure : @escaping(NSError) -> Void)  {
+//        http://71.78.236.20/laptopzone/reactcontroller/c_react/lzw_hot_items
+        
+        self.request2(url: "lzw_hot_items"  , method: .get, parameters:nil, encoding: JSONEncoding.default, header: nil) { (response) in
+            print(response)
+            
+            
+            guard (response.response?.statusCode) != nil else{
+                failure(NSError())
+                return
+            }
+            
+            if response.response!.statusCode >= 200 && response.response!.statusCode < 300{
+                print(response)
+                if let value = response.result.value{
+    //                    success(Mapper<RequestStatusModel>().map(JSON: value as! [String : Any])!)
+                     success(Mapper<HotItemModel>().mapArray(JSONObject: value)!)
+                }
+            }else{
+                failure(NSError())
+            }
+        }
+        
+    }
+        
+    
     func getSingalRequest(
         request_id : String ,
         
@@ -755,14 +784,13 @@ extension NetworkManager{
    
     
      func UpdateProfile(
-        name:String,
-        email:String,
-        phone:String,
+        
+        pra : Parameters,
          success : @escaping(ProfileModel) -> Void ,
          failure : @escaping(NSError) -> Void)  {
          
          
-        self.request(url: Constants.PROFILE   , method: .post, parameters:["name" :name,"email":email, "phone" : phone ], encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
+        self.request(url: Constants.PROFILE   , method: .post, parameters:pra, encoding: JSONEncoding.default, header: ["Accept": "application/json" , "Authorization": "Bearer \(CustomUserDefaults.Token.value!)"]) { (response) in
              print(response)
              guard (response.response?.statusCode) != nil else{
                  failure(NSError())

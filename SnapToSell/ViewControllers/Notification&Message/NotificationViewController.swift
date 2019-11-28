@@ -28,8 +28,10 @@ class NotificationViewController: UIViewController  ,UITableViewDelegate , UITab
         super.viewDidLoad()
         
         self.addBG()
-        self.searchBar.tintColor = UIColor.white
         self.searchBar.delegate = self
+        self.searchBar.tintColor = UIColor.white
+        
+        
         self.navigationItem.leftBarButtonItem = self.menuBTn
         self.navigationItem.rightBarButtonItem = self.searchBtn
         // Do any additional setup after loading the view.
@@ -47,10 +49,11 @@ class NotificationViewController: UIViewController  ,UITableViewDelegate , UITab
         
          let view = UIView()
                 view.layer.masksToBounds = true
-                view.frame = CGRect(x: 0, y: 15, width: (navigationController?.navigationBar.frame.width)!, height: 50)
+                let bonds = self.navigationController!.navigationBar.bounds
+                view.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: (navigationController?.navigationBar.frame.width)!, height: bonds.height )
                 self.view.addSubview(view)
         //
-                view.applyGradient(colours: [
+               view.applyGradient(colours: [
                     UIColor(red: 0.99, green: 0.17, blue: 0.03, alpha: 1),
                   UIColor(red: 1, green: 0.49, blue: 0, alpha: 1)
                 ], locations: [0.12, 1], startPoint: CGPoint(x:0.00, y: 0.1), endPoint: CGPoint(x: 1, y: 1))
